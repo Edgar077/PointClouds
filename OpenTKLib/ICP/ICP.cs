@@ -567,7 +567,7 @@ namespace ICPLib
 
                    // iteratorFile--;
                 }
-                if(iteratorFile == (files.Length - 2))
+                if(pTarget != null && iteratorFile == (files.Length - 2))
                 {
                     numberOfCloudsResult++;
                     pTarget.ToObjFile(pathResult + "\\Result" + numberOfCloudsResult.ToString() + ".obj");
@@ -578,6 +578,9 @@ namespace ICPLib
                 {
                     //pTarget = PointCloud.FromObjFile(files[iteratorFile]);
                     pTarget = PointCloud.FromObjFile(files[files.Length - iteratorFile -1]);
+//                    pTarget = PointCloud.RemoveDuplicates(pTarget);
+
+
 
                 }
                 

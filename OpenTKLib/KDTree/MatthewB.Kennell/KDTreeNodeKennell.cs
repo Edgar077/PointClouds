@@ -89,6 +89,8 @@ namespace OpenTKExtension
                 // That, we recompute ourself.
                 //
                 int c = -1;
+                //int c = 0;
+
                 float maxspread = 0.0F;
                 int mEndIndexToBuild;
                 for (int i = 0; i < 3; i++)
@@ -109,6 +111,12 @@ namespace OpenTKExtension
                     }
                 }
 
+                if(c == -1)
+                {
+                    System.Windows.Forms.MessageBox.Show("Error in building the tree: The point cloud contains duplicates. Please remove the duplicates (see help)");
+                    return null;
+
+                }
                 float sum;
                 float average;
 
@@ -129,6 +137,10 @@ namespace OpenTKExtension
                 node.endIndex = endIndex;
                 node.ChildLeft = build_tree_for_range(startIndex, mEndIndexToBuild, node);
                 node.ChildRight = build_tree_for_range(mEndIndexToBuild + 1, endIndex, node);
+                if (node.ChildRight == null && node.ChildLeft == null)
+                {
+                    System.Windows.Forms.MessageBox.Show("Error in building tree");
+                }
                 if (node.ChildRight == null)
                 {
                     for (int i = 0; i < 3; i++)

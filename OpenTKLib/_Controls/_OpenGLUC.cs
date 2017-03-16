@@ -495,10 +495,12 @@ namespace OpenTKExtension
         }
         private void testClouds_SecondIteration()
         {
+            
+
             this.Cursor = Cursors.WaitCursor;
 
             ICPLib.IterativeClosestPointTransform icp = new ICPLib.IterativeClosestPointTransform();
-            pTarget = icp.AlignCloudsFromDirectory(GLSettings.Path + GLSettings.PathModels + "\\Nick\\Result", 2);
+            pTarget = icp.AlignCloudsFromDirectory(GLSettings.Path + GLSettings.PathModels + "\\Nick\\Result1", 2);
             SaveResultCloudAndShow(pTarget);
 
             this.Cursor = Cursors.Default;

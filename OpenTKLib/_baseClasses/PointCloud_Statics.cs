@@ -467,8 +467,38 @@ namespace OpenTKExtension
             PointCloud pcNew = PointCloud.SubtractVector(pointsSource, Centroid);
             return pcNew;
         }
+        public static PointCloud RemoveDuplicates(PointCloud pc)
+        {
+            List<Vector3> listV = new List<Vector3>(pc.Vectors);
+            List<Vector3> listC = new List<Vector3>(pc.Colors);
 
-   
-     
+           
+
+            for (int i = (listV.Count - 1); i >= 0; i--)
+            {
+                Vector3 vi = listV[i];
+                for (int j = 0; j < i; j++)
+                {
+                    Vector3 vj = listV[j];
+                    if (vi.X == vj.X && vi.Y == vj.Y && vi.Z == vj.Z)
+                    {
+                        listV.RemoveAt(i);
+                        break;
+
+                    }
+                }
+            }
+            PointCloud pcNew = new PointCloud();
+            pcNew.Vectors = listV.ToArray();
+            pcNew.Colors = listC.ToArray();
+            int removedN = pc.Vectors.Length - pcNew.Vectors.Length;
+            System.Diagnostics.Debug.WriteLine("Number of duplicates removed: " + removedN.ToString() + " - out of " + pc.Vectors.Length.ToString());
+
+            return pcNew;
+        }
+
+
+
+
     }
 }
