@@ -54,34 +54,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FaceMatcher.cs" />
+    <Compile Include="BOs\FaceMatcher.cs" />
     <Compile Include="Engines\skeleton_engine.cs" />
-    <Compile Include="Humanoid_Extensions.cs" />
-    <Compile Include="ModelAdjust.cs">
+    <Compile Include="BOs\Humanoid_Extensions.cs" />
+    <Compile Include="Forms\ModelAdjust.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ModelAdjust.Designer.cs">
+    <Compile Include="Forms\ModelAdjust.Designer.cs">
       <DependentUpon>ModelAdjust.cs</DependentUpon>
     </Compile>
-    <Compile Include="UpdateMode.cs" />
+    <Compile Include="BOs\UpdateMode.cs" />
     <Compile Include="Engines\morph_engine.cs" />
-    <Compile Include="Humanoid.cs" />
-    <Compile Include="CharactersBO.cs" />
-    <Compile Include="CharacterCreatorTest.cs">
+    <Compile Include="BOs\Humanoid.cs" />
+    <Compile Include="BOs\CharactersBO.cs" />
+    <Compile Include="Forms\CharacterCreatorTest.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CharacterCreatorTest.Designer.cs">
+    <Compile Include="Forms\CharacterCreatorTest.Designer.cs">
       <DependentUpon>CharacterCreatorTest.cs</DependentUpon>
     </Compile>
-    <Compile Include="JsonSerializer.cs" />
+    <Compile Include="BOs\JsonSerializer.cs" />
     <Compile Include="Morphing\BoundingBox.cs" />
     <Compile Include="Morphing\HumanModifier.cs" />
     <Compile Include="Morphing\HumanCategory.cs" />
     <Compile Include="Morphing\MeasureData.cs" />
     <Compile Include="Morphing\Morph.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="tester.cs" />
-    <Compile Include="Utils.cs" />
+    <Compile Include="BOs\tester.cs" />
+    <Compile Include="BOs\Utils.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OpenTKLib\OpenTK.Extension.csproj">
@@ -94,10 +94,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="CharacterCreatorTest.resx">
+    <EmbeddedResource Include="Forms\CharacterCreatorTest.resx">
       <DependentUpon>CharacterCreatorTest.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ModelAdjust.resx">
+    <EmbeddedResource Include="Forms\ModelAdjust.resx">
       <DependentUpon>ModelAdjust.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
