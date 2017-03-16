@@ -1,0 +1,15 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:ScannerWPF" x:Class="ScannerWPF.MainWindow"
+        Title="Scanner Point Cloud" Height="678.508" Width="1505.074" Loaded="Window_Loaded" Closed="Window_Closed">
+    <Grid>
+        <Canvas x:Name="canvas" Margin="0,0,-153,-75" HorizontalAlignment="Left" />
+        <local:PointCloudUC x:Name="PointCloudUC" Margin="46,10,62,30"/>
+        <Grid Margin="55,235,998,357">
+            
+
+        </Grid>
+
+    </Grid>
+</Window>

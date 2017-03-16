@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6AF79162-C28E-4251-9DBB-5A37E58F33B4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>UnitTestsOpenTK</RootNamespace>
+    <AssemblyName>UnitTestsOpenTK</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="nunit.framework, Version=3.0.5797.27550, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\binExtern\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\binExtern\OpenTK.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK.GLControl, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\binExtern\OpenTK.GLControl.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ICP\ExpectedError\ICPTest10_Cube.cs" />
+    <Compile Include="ICP\ExpectedError\ICPTest5_Cube_ExpectedError.cs" />
+    <Compile Include="ICP\ExpectedError\ICPTest6_Bunny_ExpectedError.cs" />
+    <Compile Include="ICP\InWork\ICPTest_2D.cs" />
+    <Compile Include="ICP\InWork\ICPTest13_Chair_Angles.cs" />
+    <Compile Include="ICP\InWork\ICPTest12_Person_4_Angles.cs" />
+    <Compile Include="ICP\InWork\ICPTest11_Person.cs" />
+    <Compile Include="ICP\InWork\ICPTest5_Cube.cs" />
+    <Compile Include="ICP\InWork\ICPTest8_Outliers.cs" />
+    <Compile Include="ICP\ExpectedError\ICPTest9_Face_ExpectedError.cs" />
+    <Compile Include="ICP\InWork\ICPTest9_Face.cs" />
+    <Compile Include="ICP\InWork\ICPTest10_Cube.cs" />
+    <Compile Include="ICP\UI\ICPTest10_Cube.cs" />
+    <Compile Include="ICP\UI\ICPTest5_Cube.cs" />
+    <Compile Include="ICP\UI\ICPTest6_Bunny.cs" />
+    <Compile Include="ICP\UI\ICPTest8_RealSense.cs" />
+    <Compile Include="InterpolateHead\HeadTest.cs" />
+    <Compile Include="KdTree\AxisAlignedBoundingBoxTest.cs" />
+    <Compile Include="KdTree\BoundingSphereTest.cs" />
+    <Compile Include="KdTree\MyKDTreeTest.cs" />
+    <Compile Include="KdTree\AlglibTest.cs" />
+    <Compile Include="KdTree\KDTreeRednaxelaTest.cs" />
+    <Compile Include="KdTree\KDTreeTestBase.cs" />
+    <Compile Include="Math_LinearAlgebra\MaNet\CholeskyDecomposition_Tests.cs" />
+    <Compile Include="Math_LinearAlgebra\MaNet\EigenvalueDecomposition_Tests.cs" />
+    <Compile Include="Math_LinearAlgebra\MaNet\LUDecomposition_Tests.cs" />
+    <Compile Include="Math_LinearAlgebra\MaNet\Matrix_IOTests.cs" />
+    <Compile Include="Math_LinearAlgebra\MaNet\Matrix_Tests2.cs" />
+    <Compile Include="Math_LinearAlgebra\MaNet\QRDecomposition_Tests.cs" />
+    <Compile Include="Math_LinearAlgebra\MaNet\SingularValueDecomposition_Tests.cs" />
+    <Compile Include="Math_LinearAlgebra\MaNet\StandardMatrixTests.cs" />
+    <Compile Include="Math_LinearAlgebra\MathTest.cs" />
+    <Compile Include="Math_LinearAlgebra\MatrixOperationsTest.cs" />
+    <Compile Include="Math_LinearAlgebra\NLinearTest.cs" />
+    <Compile Include="Models\ExampleModelsFromDisk.cs" />
+    <Compile Include="Models\ExampleModelsOpenGL4.cs" />
+    <Compile Include="Models\GeometricModelsTest.cs" />
+    <Compile Include="Models\GeometricObjectsTest.cs" />
+    <Compile Include="Obsolete\TriangulationORourke.cs" />
+    <Compile Include="Obsolete\TriangulationORourke_Cube.cs" />
+    <Compile Include="OpenGL Base\TextureTest.cs" />
+    <Compile Include="PCA\AlignToCenter.cs" />
+    <Compile Include="PCA\AlignTwoDifferentScans.cs" />
+    <Compile Include="PCA\Cube.cs" />
+    <Compile Include="PCA\CubeShowAxes.cs" />
+    <Compile Include="PCA\Face_VMode.cs" />
+    <Compile Include="PCA\Obsolete\PCAAlignPerson.cs" />
+    <Compile Include="PCA\PCA2D.cs" />
+    <Compile Include="PCA\PCANormalsModels.cs" />
+    <Compile Include="PCA\PCANormalsSimpleTest.cs" />
+    <Compile Include="PCA\Persons.cs" />
+    <Compile Include="PCA\ProjectedPoints.cs" />
+    <Compile Include="Triangulation\TriangulateNEW.cs" />
+    <Compile Include="Triangulation\TriangulateKDTree.cs" />
+    <Compile Include="_baseClasses\TestBaseICP.cs" />
+    <Compile Include="ICP_Triangulation\KDTreeTest.cs" />
+    <Compile Include="ICP\UI\ICPTest7_Face_KnownTransformation.cs" />
+    <Compile Include="ICP\InWork\ICPTest9_Inhomogenous.cs" />
+    <Compile Include="ICP\InWork\ICPTestOld.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Triangulation\ConvexHullTest.cs" />
+    <Compile Include="Triangulation\MarchingCubesTest.cs" />
+    <Compile Include="Triangulation\MIConvexHullTest.cs" />
+    <Compile Include="Triangulation\NormalsKDTree.cs" />
+    <Compile Include="Triangulation\TriangulateFortuneVoronoi.cs" />
+    <Compile Include="_baseClasses\PCABase.cs" />
+    <Compile Include="_baseClasses\TestBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OpenTKLib\OpenTK.Extension.csproj">
+      <Project>{df1f2330-134c-4ec6-a97c-3011d3072f0a}</Project>
+      <Name>OpenTK.Extension</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

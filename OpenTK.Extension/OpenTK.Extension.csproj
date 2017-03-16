@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CC6ED7C1-4F07-4BF5-8895-B4E74602C736}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OpenTK.Extension</RootNamespace>
+    <AssemblyName>OpenTK.Extension</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Constructs\Billboard.cs" />
+    <Compile Include="Constructs\BitmapFont.cs" />
+    <Compile Include="Constructs\FBO.cs" />
+    <Compile Include="Constructs\Geometry.cs" />
+    <Compile Include="Constructs\GlslLexer.cs" />
+    <Compile Include="Constructs\Texture.cs" />
+    <Compile Include="Forms\AboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AboutForm.Designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\OpenTKForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\OpenTKForm.Designer.cs">
+      <DependentUpon>OpenTKForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SettingsForm.Designer.cs">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Control\FramesPerSecondCalc.cs" />
+    <Compile Include="_RenderableObjects\Grid.cs" />
+    <Compile Include="Control\Control\OpenGLContext.cs" />
+    <Compile Include="Control\Control\OpenGLControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\Control\OpenGLTextWriter.cs" />
+    <Compile Include="Control\Control\TextRendererAdapted.cs" />
+    <Compile Include="Control\UserControl\UC_BusinessLogic.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\UserControl\UC_Display.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\UserControl\UC_Model.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\UserControl\UC_PointCloud.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\UserControl\_OpenGLUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\UserControl\_OpenGLUserControl.Designer.cs">
+      <DependentUpon>_OpenGLUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Core\Gl.cs" />
+    <Compile Include="Core\GlCore.cs" />
+    <Compile Include="Core\GlDelegates.cs" />
+    <Compile Include="Core\GlEnum.cs" />
+    <Compile Include="Core\GlMethods.cs" />
+    <Compile Include="Core\GlReload.cs" />
+    <Compile Include="Extensions\Matrix4Extensions.cs" />
+    <Compile Include="Extensions\Vector3Extensions.cs" />
+    <Compile Include="General\GLSettings.cs" />
+    <Compile Include="_RenderableObjects\Axes.cs" />
+    <Compile Include="Control\Control\Camera.cs" />
+    <Compile Include="Others\GlobalVariables.cs" />
+    <Compile Include="Others\IOUtils.cs" />
+    <Compile Include="Control\Control\Model.cs" />
+    <Compile Include="Others\PointCloudGL.cs" />
+    <Compile Include="Others\PointCloudIO.cs" />
+    <Compile Include="_RenderableObjects\PointCloudRenderable.cs" />
+    <Compile Include="Others\QuaternionNew.cs" />
+    <Compile Include="_RenderableObjects\Cube.cs" />
+    <Compile Include="_RenderableObjects\RenderableObject.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Shaders\Font.cs" />
+    <Compile Include="Shaders\ShaderParam.cs" />
+    <Compile Include="Shaders\Shader.cs" />
+    <Compile Include="Shaders\ShaderProgram.cs" />
+    <Compile Include="VAO_VBO\GenericVAO.cs" />
+    <Compile Include="VAO_VBO\VAO.cs" />
+    <Compile Include="VAO_VBO\VBO.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\OpenTK\Source\GLControl\OpenTK.GLControl.csproj">
+      <Project>{a625be88-0000-0000-0000-000000000000}</Project>
+      <Name>OpenTK.GLControl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\OpenTK\Source\OpenTK\OpenTK.csproj">
+      <Project>{a37a7e14-0000-0000-0000-000000000000}</Project>
+      <Name>OpenTK</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Forms\AboutForm.resx">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OpenTKForm.resx">
+      <DependentUpon>OpenTKForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SettingsForm.resx">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\UserControl\_OpenGLUserControl.resx">
+      <DependentUpon>_OpenGLUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

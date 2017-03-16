@@ -1,0 +1,26 @@
+Version 1- March 2009
+Version 1.2 - April 2009
+	Added Focus Rectangle
+	Separated the Label into its own Rectangle area for better layout and sizing
+	General Layout Fixes
+Version 1.3 - April 2009
+	Handles Negative ranges
+Version 1.4 - July 2010
+	Added Image Slider
+	Added UpDownShow to Hide and turn off the Up/Down buttons
+	Added Timer for changing the value (after a short delay) until the mouse is released
+Version 1.5 - July 2011
+	added JumpToMouse
+	Fixed Tick alignment issue when Label shown
+	Added SnapToValue property
+Version 1.6 - September 2011
+	Added ValueDivisor and ValueAdjusted to allow decimal values
+	Fixed Vertical version when minimum is greater than 0
+Version 1.7 - February 2012
+	Combined Up, Down, and Hover Color Properties to seperate ColorPack Class
+	Added default values to properties
+Version 1.8 - April 2012 
+	ColorLinearGradient Class for coloring the slider lines
+	Fix some layout bugs
+	
+	
