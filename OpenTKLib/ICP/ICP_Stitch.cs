@@ -264,7 +264,7 @@ namespace ICPLib
                        // this.MeanDistance = totaldist / Convert.ToSingle(pointsTargetTrial.Count);
 
 
-                        DebugWriteUtils.WriteTestOutputVector3("Iteration " + iPoint.ToString(),  myMatrix, pointsSourceTrial, myPointsTransformed, pointsTargetTrial);
+                        //DebugWriteUtils.WriteTestOutputVector3("Iteration " + iPoint.ToString(),  myMatrix, pointsSourceTrial, myPointsTransformed, pointsTargetTrial);
 
                         //could also remove this check...
                         if (Math.Abs(oldMeanDistance - this.MeanDistance) < ICPSettings.ThresholdOutlier)

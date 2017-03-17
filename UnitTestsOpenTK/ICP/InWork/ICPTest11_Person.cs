@@ -21,7 +21,7 @@ namespace UnitTestsOpenTK.InWork
         public void Person_TwoClouds_PCA_ICP()
         {
            
-            this.icp.Settings_Reset_RealData();
+            this.icp.Reset_RealData();
 
             Model model3DTarget = new Model(pathUnitTests + "\\2.obj");
             this.pointCloudTarget = model3DTarget.PointCloud;
@@ -43,7 +43,7 @@ namespace UnitTestsOpenTK.InWork
         public void Person_TwoClouds_ICP()
         {
            
-            this.icp.Settings_Reset_RealData();
+            this.icp.Reset_RealData();
 
             Model model3DTarget = new Model(pathUnitTests + "\\2.obj");
             this.pointCloudTarget = model3DTarget.PointCloud;
@@ -65,7 +65,7 @@ namespace UnitTestsOpenTK.InWork
         public void Person_ICP()
         {
            
-            this.icp.Settings_Reset_RealData();
+            this.icp.Reset_RealData();
 
             IterativeClosestPointTransform.Instance.ICPSettings.ICPVersion = ICP_VersionUsed.Zinsser;
 
@@ -79,7 +79,7 @@ namespace UnitTestsOpenTK.InWork
         public void Person_PCA_ICP()
         {
            
-            this.icp.Settings_Reset_RealData();
+            this.icp.Reset_RealData();
 
             IterativeClosestPointTransform.Instance.ICPSettings.ICPVersion = ICP_VersionUsed.Zinsser;
 

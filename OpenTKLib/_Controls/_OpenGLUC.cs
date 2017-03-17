@@ -472,23 +472,13 @@ namespace OpenTKExtension
             //registrationMatrix = this.OGLControl.CalculateRegistrationMatrix();
 
         }
-        private void toolStripLoadTwoPCL_Click(object sender, EventArgs e)
-        {
-            this.Cursor = Cursors.WaitCursor;
-
-            testClouds();
-
-            //LoadTwoClouds();
-            DisplaySourceAndTargetClouds(true);
-
-            this.Cursor = Cursors.Default;
-        }
+      
         private void testClouds_FirstIteration()
         {
             this.Cursor = Cursors.WaitCursor;
 
             ICPLib.IterativeClosestPointTransform icp = new ICPLib.IterativeClosestPointTransform();
-            icp.AlignCloudsFromDirectory(GLSettings.Path + GLSettings.PathModels + "\\Nick", 10);
+            pTarget = icp.AlignCloudsFromDirectory(GLSettings.Path + GLSettings.PathModels + "\\Nick", 100);
             SaveResultCloudAndShow(pTarget);
 
             this.Cursor = Cursors.Default;
@@ -500,58 +490,14 @@ namespace OpenTKExtension
             this.Cursor = Cursors.WaitCursor;
 
             ICPLib.IterativeClosestPointTransform icp = new ICPLib.IterativeClosestPointTransform();
-            pTarget = icp.AlignCloudsFromDirectory(GLSettings.Path + GLSettings.PathModels + "\\Nick\\Result1", 2);
+            pTarget = icp.AlignCloudsFromDirectory(GLSettings.Path + GLSettings.PathModels + "\\Nick\\Result", 10);
             SaveResultCloudAndShow(pTarget);
 
             this.Cursor = Cursors.Default;
         }
 
 
-        private void testClouds()
-        {
-
-
-            ICPLib.IterativeClosestPointTransform icp = new ICPLib.IterativeClosestPointTransform();
-
-            pTarget = null;
-       
-            for (int i = 1; i < 5; i++)
-            {
-               
-                //first iteration
-                if(pTarget == null)
-                {
-                    pTarget = PointCloud.FromObjFile(GLSettings.Path + GLSettings.PathModels, "Nick\\PointCloudSequence#" + (i).ToString() + ".obj");
-                    
-                }
-
-                
-          
-                pSource = PointCloud.FromObjFile(GLSettings.Path + GLSettings.PathModels, "Nick\\PointCloudSequence#" + (i + 1).ToString() + ".obj");
-             
-                //------------------
-                //ICP
-                
-                icp.Settings_Reset_RealData();
-                //icp.ICPSettings.ThresholdMergedPoints = 0f;
-                icp.ICPSettings.MaximumNumberOfIterations = 15;
-
-
-                pTarget = icp.PerformICP(pSource, this.pTarget);
-                System.Diagnostics.Debug.WriteLine("###### ICP for point cloud: " + pTarget.Name + " - points added: " + icp.PointsAdded.ToString());
-
-
-                //   this.registrationMatrix = icp.Matrix;
-                //   registrationMatrix.Save(GLSettings.Path + GLSettings.PathModels, "registrationMatrix.txt");
-
-
-            }
-            GlobalVariables.ShowLastTimeSpan("--> Time for ICP ");
-
-            SaveResultCloudAndShow(pTarget);
-         
-        }
-      
+     
 
         private void toolStripPCA_Axes_Click(object sender, EventArgs e)
         {
@@ -709,7 +655,7 @@ namespace OpenTKExtension
             //------------------
             //ICP
             ICPLib.IterativeClosestPointTransform icp = new ICPLib.IterativeClosestPointTransform();
-            icp.Settings_Reset_RealData();
+            icp.Reset_RealData();
 
             icp.ICPSettings.ICPVersion = ICP_VersionUsed.Zinsser;
             icp.ICPSettings.MaximumNumberOfIterations = 50;
@@ -734,23 +680,72 @@ namespace OpenTKExtension
 
             return true;
         }
-        private void toolStripTest1_Click(object sender, EventArgs e)
+        private void testClouds()
         {
 
 
+            ICPLib.IterativeClosestPointTransform icp = new ICPLib.IterativeClosestPointTransform();
+
+            pTarget = null;
+
+            for (int i = 0; i < 10; i++)
+            {
+
+                //first iteration
+                if (pTarget == null)
+                {
+                    pTarget = PointCloud.FromObjFile(GLSettings.Path + GLSettings.PathModels, "Nick\\PointCloudSequence#" + (i).ToString() + ".obj");
+
+                }
+
+
+
+                pSource = PointCloud.FromObjFile(GLSettings.Path + GLSettings.PathModels, "Nick\\PointCloudSequence#" + (i + 1).ToString() + ".obj");
+
+                //------------------
+                //ICP
+
+                icp.Reset_RealData();
+                //icp.ICPSettings.ThresholdMergedPoints = 0f;
+                icp.ICPSettings.MaximumNumberOfIterations = 15;
+
+
+                pTarget = icp.PerformICP(pSource, this.pTarget);
+                System.Diagnostics.Debug.WriteLine("###### ICP for point cloud: " + pTarget.Name + " - points added: " + icp.PointsAdded.ToString());
+
+
+                //   this.registrationMatrix = icp.Matrix;
+                //   registrationMatrix.Save(GLSettings.Path + GLSettings.PathModels, "registrationMatrix.txt");
+
+
+            }
+            GlobalVariables.ShowLastTimeSpan("--> Time for ICP ");
+
+            SaveResultCloudAndShow(pTarget);
+
+        }
+
+        private void toolStripTest1_Click(object sender, EventArgs e)
+        {
+
             testClouds_FirstIteration();
             
-
-            // pSource.SetColor(new Vector3(1, 0, 0));
-            // pTarget.SetColor(new Vector3(0, 1, 0));
-
-            //DisplaySourceAndTargetClouds(false);
-
             return;
         }
         private void toolStripTest2_Click(object sender, EventArgs e)
         {
             testClouds_SecondIteration();
+        }
+        private void toolStripLoadTwoPCL_Click(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.WaitCursor;
+
+            testClouds();
+
+            //LoadTwoClouds();
+            //DisplaySourceAndTargetClouds(true);
+
+            this.Cursor = Cursors.Default;
         }
     }
 }

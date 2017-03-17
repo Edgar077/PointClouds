@@ -146,13 +146,10 @@ namespace OpenTKExtension
         {
            
             this.Build(target);
-
-
             TakenAlgorithm = takenAlgorithm;
            
             result = FindClosestPointCloud_Parallel(source);
-            //GlobalVariables.ShowLastTimeSpan("Search Kennell");
-
+        
             return result;
 
         }
@@ -160,13 +157,10 @@ namespace OpenTKExtension
         {
           
             this.Build(target);
-
-
+            
             TakenAlgorithm = takenAlgorithm;
 
             result = FindClosestPointCloud_NotParallel(source);
-            //GlobalVariables.ShowLastTimeSpan("Search Kennell");
-
             return result;
 
         }

@@ -21,7 +21,7 @@ namespace UnitTestsOpenTK.InWork
         public void Person_4_Angles()
         {
            
-            this.icp.Settings_Reset_RealData();
+            this.icp.Reset_RealData();
 
             Model model3DTarget = new Model(pathUnitTests + "\\C1.obj");
             this.pointCloudTarget = model3DTarget.PointCloud;

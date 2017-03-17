@@ -19,7 +19,7 @@ namespace UnitTestsOpenTK.InWork
         public void Du()
         {
            
-            this.icp.Settings_Reset_RealData();
+            this.icp.Reset_RealData();
             IterativeClosestPointTransform.Instance.ICPSettings.MaximumNumberOfIterations = 100;
             IterativeClosestPointTransform.Instance.ICPSettings.ICPVersion = ICP_VersionUsed.Du;
            
@@ -34,7 +34,7 @@ namespace UnitTestsOpenTK.InWork
         public void Umeyama_SA()
         {
            
-            this.icp.Settings_Reset_RealData();
+            this.icp.Reset_RealData();
 
             IterativeClosestPointTransform.Instance.ICPSettings.ICPVersion = ICP_VersionUsed.Umeyama;
             IterativeClosestPointTransform.Instance.ICPSettings.SimulatedAnnealing = true;

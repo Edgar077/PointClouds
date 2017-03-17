@@ -19,11 +19,10 @@ namespace ICPLib
 
     public partial class IterativeClosestPointTransform
     {
-        public IKDTree KDTree;
-
-
+        
         #region public members
 
+        public IKDTree KDTree;
         public SettingsICP ICPSettings = new SettingsICP();
 
         public int NumberOfIterations;
@@ -60,12 +59,12 @@ namespace ICPLib
         private static IterativeClosestPointTransform instance;
 
         #endregion
+
         public IterativeClosestPointTransform()//:base(PointerUtils.GetIntPtr(new float[3]), true, true)
         {
-            //KDTree = new KDTreeJeremyC();
+           
             KDTree = new KDTreeKennell();
             //KDTree = new KDTreeJeremyC();
-
             //KDTree = new KDTreeBruteForce();
 
             Reset();
@@ -81,10 +80,10 @@ namespace ICPLib
         }
 
 
-        public void Settings_Reset_RealData()
+        public void Reset_RealData()
         {
 
-            ICPSettings.MaximumNumberOfIterations = 10;
+            ICPSettings.MaximumNumberOfIterations = 15;
             ICPSettings.FixedTestPoints = false;
             ICPSettings.Normal_RemovePoints = false;
             ICPSettings.Normal_SortPoints = false;
@@ -115,7 +114,7 @@ namespace ICPLib
             this.ICPSettings.Normal_SortPoints = false;
 
             this.ICPSettings.FixedTestPoints = false;
-            this.ICPSettings.MaximumNumberOfIterations = 100;
+            this.ICPSettings.MaximumNumberOfIterations = 50;
             this.ICPSettings.ResetVector3ToOrigin = true;
             this.ICPSettings.DistanceOptimization = false;
             this.ICPSettings.MaximumMeanDistance = 1.0e-3f;
@@ -188,19 +187,12 @@ namespace ICPLib
             }
             else
             {
-                //if(this.MeanDistance > 1)
-                //    this.MeanDistance = 0.1f;
-                
+              
                 if(ICPSettings.IgnoreFarPoints)
                     myMatrix = SVD.FindTransformationMatrix_MinimumDistance(pointsSource, resultKDTree, ICPSettings.ICPVersion, this.MeanDistance).ToMatrix4();
                 else
                     myMatrix = SVD.FindTransformationMatrix(pointsSource, resultKDTree, ICPSettings.ICPVersion).ToMatrix4();
-                    
-                //myMatrix = SVD.FindTransformationMatrix_MinimumDistance(pointsSource, resultKDTree, ICPSettings.ICPVersion, 0.05f).ToMatrix4();
-
-
-                //myMatrix = SVD_Float.FindTransformationMatrix(pointsSource, pointsTarget, ICPSettings.ICPVersion);
-                //myMatrix = SVD.FindTransformationMatrix(pointsSource, pointsTarget, ICPSettings.ICPVersion).ToMatrix4();
+                   
 
             }
             return myMatrix;
@@ -282,7 +274,7 @@ namespace ICPLib
                 {
                     SetNewSet();
                 }
-                //this.MeanDistance = PointCloud.MeanDistance(pointsTarget, myPointsTransformed);
+               
                 this.MeanDistance = PointCloud.MeanDistance(pointsSource, PointsResultKDTree);
                 if (MeanDistance < ICPSettings.MaximumMeanDistance) //< Math.Abs(MeanDistance - oldMeanDistance) < this.MaximumMeanDistance)
                     return ;
@@ -306,7 +298,7 @@ namespace ICPLib
         private void CheckDuplicates_SetInteractionSet()
         {
 
-            //in some cases, the pointsTarget contain point duplicates
+            //in some cases, the pointsTarget contain ONLY the same point
             //check if at least 3 points are different
             List<int> indexToCheck = new List<int>() { 0, pointsTarget.Count - 1, (pointsTarget.Count - 1) / 2 };
             bool duplicates = false;
@@ -413,7 +405,7 @@ namespace ICPLib
 
                     Single_ICP_Iteration(angleThreshold);
 
-                    Debug.WriteLine("--------------Iteration: " + NumberOfIterations.ToString() + " : Mean Distance: " + MeanDistance.ToString("0.00000000000") );
+                    //Debug.WriteLine("--------------Iteration: " + NumberOfIterations.ToString() + " : Mean Distance: " + MeanDistance.ToString("0.00000000000") );
                     if (ICPSettings.LogLevel > 0)
                         GlobalVariables.ShowLastTimeSpan("Iteration ");
                     if (MeanDistance < ICPSettings.ThresholdConvergence)
@@ -427,7 +419,7 @@ namespace ICPLib
 
                 }
 
-                Debug.WriteLine("--------****** Solution of ICP after : " + NumberOfIterations.ToString() + " iterations, and Mean Distance: " + MeanDistance.ToString("0.00000000000"));
+               
             
                 //shuffle effect - set points source to other order
                 //PS = pointsSource;//reordered for shuffle effect
@@ -454,7 +446,9 @@ namespace ICPLib
 
                 //DebugWriteUtils.WriteTestOutputVector3("Solution of ICP", Matrix, this.PSource, PTransformed, PTarget);
                 if (this.pointsTransformed != null)
-                    DebugWriteUtils.WriteTestOutputVector3("Solution of ICP", Matrix, pointsSource, pointsTransformed, pointsTarget);
+                {
+                    //DebugWriteUtils.WriteTestOutputVector3("Solution of ICP", Matrix, pointsSource, pointsTransformed, pointsTarget);
+                }
                 else
                 {
                     //no convergence - write matrix
@@ -466,13 +460,6 @@ namespace ICPLib
                 if (ICPSettings.SingleSourceTargetMatching)
                 {
                     PointsTransformed = this.PointsResultKDTree;// this.pointsTransformed;
-                    //for (int i = 0; i < this.pointsSource.Count; i++)
-                    //{
-                    //    if (this.pointsSource.Vectors[i].Distance(PointsTransformed.Vectors[i]) > thresh)
-                    //    {
-                    //        PointsTransformed.Vectors[i] = pointsSource.Vectors[i];
-                    //    }
-                    //}
                     PointCloud.AddVector3(PointsTransformed, centroidSource);
 
 
@@ -480,10 +467,9 @@ namespace ICPLib
                 else
                 {
                     PointsTransformed = PointCloud.CalculateMergedPoints(this.pointsTransformed, this.pointsTarget, this.KDTree, false, ICPSettings.ThresholdMergedPoints, out PointsAdded);
-                   
-                    //PointsTransformed = PointCloud.CalculateMergedPoints(this.pointsTransformed, this.pointsTarget);
                     PointCloud.AddVector3(PointsTransformed, centroidSource);
                 }
+                Debug.WriteLine("--------****** Solution of ICP after : " + NumberOfIterations.ToString() + " iterations, Mean Distance: " + MeanDistance.ToString("0.00000000000") + " - points added : " + PointsAdded.ToString());
 
                 //not the best solution but ...
                 PointsTransformed.SetDefaultIndices();
@@ -535,7 +521,7 @@ namespace ICPLib
                     this.KDTree.TakenAlgorithm = value;
             }
         }
-        public PointCloud AlignCloudsFromDirectory(string directory, int numberOfCloudPairs)
+        public PointCloud AlignCloudsFromDirectory_StartFromLast(string directory, int numberOfCloudPairs)
         {
             
             GlobalVariables.ResetTime();
@@ -578,10 +564,6 @@ namespace ICPLib
                 {
                     //pTarget = PointCloud.FromObjFile(files[iteratorFile]);
                     pTarget = PointCloud.FromObjFile(files[files.Length - iteratorFile -1]);
-//                    pTarget = PointCloud.RemoveDuplicates(pTarget);
-
-
-
                 }
                 
 
@@ -594,9 +576,8 @@ namespace ICPLib
                 //------------------
                 //ICP
 
-                Settings_Reset_RealData();
-                //icp.ICPSettings.ThresholdMergedPoints = 0f;
-                //icp.ICPSettings.MaximumNumberOfIterations = 50;
+                Reset_RealData();
+
 
 
                 pTarget = PerformICP(pSource, pTarget);
@@ -606,6 +587,64 @@ namespace ICPLib
                 //   this.registrationMatrix = icp.Matrix;
                 //   registrationMatrix.Save(GLSettings.Path + GLSettings.PathModels, "registrationMatrix.txt");
 
+
+            }
+            GlobalVariables.ShowLastTimeSpan("--> Time for ICP ");
+
+            return pTarget;
+
+        }
+        public PointCloud AlignCloudsFromDirectory(string directory, int numberOfCloudPairs)
+        {
+
+            GlobalVariables.ResetTime();
+
+            PointCloud pSource;
+            PointCloud pTarget = null;
+
+
+            string[] files = System.IO.Directory.GetFiles(directory, "*.obj");
+            string pathResult = directory + "\\result";
+
+            if (!System.IO.Directory.Exists(pathResult))
+                System.IO.Directory.CreateDirectory(pathResult);
+
+            int numberOfCloudsCurrent = 0;
+            int numberOfCloudsResult = -1;
+
+            int iteratorFile = -1;
+            for (int i = 0; i < 1000; i++)//maximum 1000 files, should be enough
+            {
+                numberOfCloudsCurrent++;
+                iteratorFile++;
+
+                if (numberOfCloudsCurrent == numberOfCloudPairs) //write result, start new loop
+                {
+                    numberOfCloudsCurrent = 1;
+                    numberOfCloudsResult++;
+                    pTarget.ToObjFile(pathResult + "\\Result" + numberOfCloudsResult.ToString() + ".obj");
+                    
+                }
+                if (pTarget != null && iteratorFile == (files.Length - 2))//write result - got to end - return
+                {
+                    numberOfCloudsResult++;
+                    pTarget.ToObjFile(pathResult + "\\Result" + numberOfCloudsResult.ToString() + ".obj");
+                    GlobalVariables.ShowLastTimeSpan("--> Time for ICP ");
+                    return pTarget;
+                }
+                if (numberOfCloudsCurrent == 1)//new pairs 
+                {
+                    pTarget = PointCloud.FromObjFile(files[iteratorFile]);
+                }
+
+
+                pSource = PointCloud.FromObjFile(files[iteratorFile + 1]);
+
+                //perform ICP:
+                Reset_RealData();
+                pTarget = PerformICP(pSource, pTarget);
+                System.Diagnostics.Debug.WriteLine("###### ICP for point cloud: " + pSource.Name + " - points added: " + PointsAdded.ToString());
+                
 
             }
             GlobalVariables.ShowLastTimeSpan("--> Time for ICP ");

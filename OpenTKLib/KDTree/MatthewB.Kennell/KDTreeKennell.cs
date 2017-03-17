@@ -203,7 +203,7 @@ namespace OpenTKExtension
             result = PointCloud.FromListVertexKDTree(resultList);
             
             //shuffle back
-            //float f = PointCloud.MeanDistance(sourceShuffled, pcResult);
+            
             PointCloud pcResultShuffledBack;
             if (this.TakenAlgorithm)
             {

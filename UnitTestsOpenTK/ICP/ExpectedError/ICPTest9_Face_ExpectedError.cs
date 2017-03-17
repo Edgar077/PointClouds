@@ -20,7 +20,7 @@ namespace UnitTestsOpenTK.ExpectedError
         public void Horn()
         {
            
-            this.icp.Settings_Reset_RealData();
+            this.icp.Reset_RealData();
             //as it does not converge anyway, keep the iteration number low
             IterativeClosestPointTransform.Instance.ICPSettings.MaximumNumberOfIterations = 10;
 
@@ -37,7 +37,7 @@ namespace UnitTestsOpenTK.ExpectedError
         public void Umeyama()
         {
            
-            this.icp.Settings_Reset_RealData();
+            this.icp.Reset_RealData();
             
             IterativeClosestPointTransform.Instance.ICPSettings.ICPVersion = ICP_VersionUsed.Umeyama;
            

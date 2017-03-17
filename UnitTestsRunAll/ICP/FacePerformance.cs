@@ -46,7 +46,7 @@ namespace UnitTestsOpenTK.ICP
         {
 
            
-            this.icp.Settings_Reset_RealData();
+            this.icp.Reset_RealData();
             icp.ICPSettings.MaximumNumberOfIterations = 43;
            
 
@@ -66,7 +66,7 @@ namespace UnitTestsOpenTK.ICP
         {
 
            
-            this.icp.Settings_Reset_RealData();
+            this.icp.Reset_RealData();
 
            
 
@@ -92,7 +92,7 @@ namespace UnitTestsOpenTK.ICP
         {
 
            
-            this.icp.Settings_Reset_RealData();
+            this.icp.Reset_RealData();
 
 
             meanDistance = ICPTestData.Test7_Face_KnownTransformation_PCA_55000(ref pointCloudTarget, ref pointCloudSource, ref pointCloudResult);

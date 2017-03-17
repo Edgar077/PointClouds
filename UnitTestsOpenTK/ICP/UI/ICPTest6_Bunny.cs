@@ -19,7 +19,7 @@ namespace UnitTestsOpenTK.UI
         public void Horn()
         {
            
-            this.icp.Settings_Reset_RealData();
+            this.icp.Reset_RealData();
 
             IterativeClosestPointTransform.Instance.ICPSettings.ICPVersion = ICP_VersionUsed.Horn;
             
@@ -35,7 +35,7 @@ namespace UnitTestsOpenTK.UI
         {
 
            
-            this.icp.Settings_Reset_RealData();
+            this.icp.Reset_RealData();
             IterativeClosestPointTransform.Instance.ICPSettings.ICPVersion = ICP_VersionUsed.Umeyama;
             
             meanDistance = ICPTestData.Test6_Bunny(ref pointCloudTarget, ref pointCloudSource, ref pointCloudResult);
@@ -50,7 +50,7 @@ namespace UnitTestsOpenTK.UI
         {
 
            
-            this.icp.Settings_Reset_RealData();
+            this.icp.Reset_RealData();
             IterativeClosestPointTransform.Instance.ICPSettings.ICPVersion = ICP_VersionUsed.Du;
             
             meanDistance = ICPTestData.Test6_Bunny(ref pointCloudTarget, ref pointCloudSource, ref pointCloudResult);
@@ -65,7 +65,7 @@ namespace UnitTestsOpenTK.UI
         {
 
            
-            this.icp.Settings_Reset_RealData();
+            this.icp.Reset_RealData();
             IterativeClosestPointTransform.Instance.ICPSettings.ICPVersion = ICP_VersionUsed.Zinsser;
             
 

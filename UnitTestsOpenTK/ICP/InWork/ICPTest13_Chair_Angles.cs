@@ -21,7 +21,7 @@ namespace UnitTestsOpenTK.InWork
         public void Chair_Angles()
         {
            
-            this.icp.Settings_Reset_RealData();
+            this.icp.Reset_RealData();
 
             Model model3DTarget = new Model(pathUnitTests + "\\G1.obj");
             this.pointCloudTarget = model3DTarget.PointCloud;

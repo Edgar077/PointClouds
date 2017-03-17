@@ -206,7 +206,9 @@ namespace OpenTKExtension
             KDTreeKennell kdTreeKennell = kdTree as KDTreeKennell;
             PointCloud pcToAdd = kdTreeKennell.RemoveDuplicates(result, threshold);
             pointsAdded = pcToAdd.Vectors.Length;
-            System.Diagnostics.Debug.WriteLine("target points added : " + pcToAdd.Vectors.Length.ToString() + " - outof " + result.Vectors.Length.ToString());
+            //System.Diagnostics.Debug.WriteLine("target points added : " + pcToAdd.Vectors.Length.ToString() + " - outof " + result.Vectors.Length.ToString());
+            
+
             if (changeColorOfNewPoints)
                 pcToAdd.SetColor(new Vector3(0, 1, 1));
 

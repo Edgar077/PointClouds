@@ -21,7 +21,7 @@ namespace UnitTestsOpenTK.UI
         public void Stitch1()
         {
            
-            this.icp.Settings_Reset_RealData();
+            this.icp.Reset_RealData();
 
             Model model3DTarget = new Model(pathUnitTests + "\\Stitch1\\0.obj");
             this.pointCloudTarget = model3DTarget.PointCloud;
