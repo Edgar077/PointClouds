@@ -125,7 +125,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OpenTKLib\OpenTK.Extension.csproj">
+    <ProjectReference Include="..\OpenTK.Extension\OpenTK.Extension.csproj">
       <Project>{df1f2330-134c-4ec6-a97c-3011d3072f0a}</Project>
       <Name>OpenTK.Extension</Name>
     </ProjectReference>

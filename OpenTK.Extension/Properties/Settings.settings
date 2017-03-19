@@ -1,57 +1,66 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="OpenTK.Extension.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="OpenTKExtension.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
+    <Setting Name="PointSize" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
     <Setting Name="ShowAxes" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="ShowGrid" Type="System.Boolean" Scope="User">
+    <Setting Name="ViewMode" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Points</Value>
+    </Setting>
+    <Setting Name="PointSizeAxis" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="PointCloudCentered" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="PointSize" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">2</Value>
-    </Setting>
-    <Setting Name="PointSizeAxis" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">2</Value>
-    </Setting>
-    <Setting Name="ViewMode" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="BackColor" Type="System.Drawing.Color" Scope="User">
-      <Value Profile="(Default)">DarkBlue</Value>
-    </Setting>
-    <Setting Name="ColorModels" Type="System.Drawing.Color" Scope="User">
-      <Value Profile="(Default)">White</Value>
+    <Setting Name="ShowModelAxes" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="ShowAxesLabels" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="ShowModelAxes" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+    <Setting Name="ColorModels" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">White</Value>
+    </Setting>
+    <Setting Name="BackColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">100, 100, 255</Value>
     </Setting>
     <Setting Name="Height" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">600</Value>
     </Setting>
     <Setting Name="Width" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">1000</Value>
+      <Value Profile="(Default)">400</Value>
     </Setting>
     <Setting Name="Fill" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="PointCloudCentered" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
-    <Setting Name="Lighting" Type="System.Boolean" Scope="User">
+    <Setting Name="ShowGrid" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="NormalMapping" Type="System.Boolean" Scope="User">
+    <Setting Name="ShowCameraFOV" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="OpenGL_FaceCull" Type="System.Boolean" Scope="User">
+    <Setting Name="FilePointCloudLast1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">PointCloudLast1.obj</Value>
+    </Setting>
+    <Setting Name="FilePointCloudLast2" Type="System.String" Scope="User">
+      <Value Profile="(Default)">PointCloudLast2.obj</Value>
+    </Setting>
+    <Setting Name="FilePointCloudLast3" Type="System.String" Scope="User">
+      <Value Profile="(Default)">PointCloudLast3.obj</Value>
+    </Setting>
+    <Setting Name="FilePointCloudLast4" Type="System.String" Scope="User">
+      <Value Profile="(Default)">PointCloudLast4.obj</Value>
+    </Setting>
+    <Setting Name="BoundingBoxLeftStartsAt000" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="PointCloudResize" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+    <Setting Name="ShowPointCloudAsTexture" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

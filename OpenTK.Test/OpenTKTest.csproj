@@ -72,7 +72,7 @@
       <Project>{7b3ae269-1fd3-492f-bd23-d47d46f30ee8}</Project>
       <Name>CharacterCreator</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpenTKLib\OpenTK.Extension.csproj">
+    <ProjectReference Include="..\OpenTK.Extension\OpenTK.Extension.csproj">
       <Project>{df1f2330-134c-4ec6-a97c-3011d3072f0a}</Project>
       <Name>OpenTK.Extension</Name>
     </ProjectReference>

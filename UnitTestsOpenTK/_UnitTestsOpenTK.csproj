@@ -127,13 +127,13 @@
     <Compile Include="_baseClasses\TestBase.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OpenTKLib\OpenTK.Extension.csproj">
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OpenTK.Extension\OpenTK.Extension.csproj">
       <Project>{df1f2330-134c-4ec6-a97c-3011d3072f0a}</Project>
       <Name>OpenTK.Extension</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
