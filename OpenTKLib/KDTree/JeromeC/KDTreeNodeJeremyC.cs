@@ -1,18 +1,8 @@
-﻿//A kd-tree implementation in C++ (and Fortran) by Matthew B. Kennel
-//Article: https://arxiv.org/abs/physics/0408067
-//ported to C+ by Jeff Hodges: 
+﻿//
 //
-//The KDTREE2 software is licensed under the terms of the Academic Free
-//Software License, listed herein.  In addition, users of this software
-//must give appropriate citation in relevant technical documentation or
-//journal paper to the author, Matthew B. Kennel, Institute For
-//Nonlinear Science, preferably via a reference to the www.arxiv.org
-//repository of this document, {\tt www.arxiv.org e-print:
-//physics/0408067}.  This requirement will be deemed to be advisory and
-//not mandatory as is necessary to permit the free inclusion of the
-//present software with any software licensed under the terms of any
-//version of the GNU General Public License, or GNU Library General
-//Public License.
+// KD Tree in C# by Jeremy C.
+//https://github.com/Jerdak/KDTree2
+// lincensed under GNU LESSER GENERAL PUBLIC LICENSE ,Version 3, 29 June 2007
 
 using System;
 using System.Collections.Generic;

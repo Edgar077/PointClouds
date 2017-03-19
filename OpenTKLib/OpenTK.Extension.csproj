@@ -639,7 +639,6 @@
     <Compile Include="ExternalComponents\Hull_ORourke\Sphere.cs" />
     <Compile Include="ExternalComponents\Hull_ORourke\Template.cs" />
     <Compile Include="KDTree\Rednaxela\EllipseWrapper.cs" />
-    <Compile Include="KDTree\old\KDTree_Stark.cs" />
     <Compile Include="Geometry\Triangle.cs" />
     <Compile Include="KDTree\Rednaxela\IDistanceFunction.cs" />
     <Compile Include="KDTree\Rednaxela\IntervalHeap.cs" />
@@ -688,7 +687,6 @@
     <Compile Include="_baseClasses\Camera.cs" />
     <Compile Include="_baseClasses\IOUtils.cs" />
     <Compile Include="ExternalComponents\Numerics\Hull\HullVoronoi.cs" />
-    <Compile Include="KDTree\old\KDTree_Numerics.cs" />
     <Compile Include="ExternalComponents\Numerics\Hull\HullFrameVoronoi.cs" />
     <Compile Include="ExternalComponents\Numerics\Hull\VertexHull.cs" />
     <Compile Include="Extensions\TextRenderer.cs" />

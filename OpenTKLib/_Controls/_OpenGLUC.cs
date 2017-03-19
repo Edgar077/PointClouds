@@ -478,7 +478,7 @@ namespace OpenTKExtension
             this.Cursor = Cursors.WaitCursor;
 
             ICPLib.IterativeClosestPointTransform icp = new ICPLib.IterativeClosestPointTransform();
-            pTarget = icp.AlignCloudsFromDirectory(GLSettings.Path + GLSettings.PathModels + "\\Nick", 100);
+            pTarget = icp.AlignCloudsFromDirectory(GLSettings.Path + GLSettings.PathModels + "\\Nick", 30);
             SaveResultCloudAndShow(pTarget);
 
             this.Cursor = Cursors.Default;

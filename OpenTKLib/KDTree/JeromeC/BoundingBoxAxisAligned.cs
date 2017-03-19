@@ -1,10 +1,8 @@
-﻿
-//The KDTREE2 software is licensed under the terms of the Academic Free
-//Software License, listed herein.  In addition, users of this software
-//must give appropriate citation in relevant technical documentation or
-//journal paper to the author, Matthew B. Kennel, Institute For
-//Nonlinear Science, preferably via a reference to the www.arxiv.org
-//repository of this document  www.arxiv.org e-print://physics/0408067}
+﻿//
+//
+// KD Tree in C# by Jeremy C.
+//https://github.com/Jerdak/KDTree2
+// lincensed under GNU LESSER GENERAL PUBLIC LICENSE ,Version 3, 29 June 2007
 
 using System;
 using System.Collections.Generic;
@@ -17,13 +15,7 @@ namespace OpenTKExtension
 {
 	public class BoundingBoxAxisAligned : IIntersector
 	{
-        //Vector3 minV = new Vector3();
-        //Vector3 maxV = new Vector3();
-
-        //Vector3 centerV;
-        //Vector3 half_sizeV = new Vector3();
-
-        //Vector3 size = new Vector3();
+       
 
         Vector3 minV;
         Vector3 maxV ;

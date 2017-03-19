@@ -1,4 +1,10 @@
-﻿using System;
+﻿//
+//
+// KD Tree in C# by Jeremy C.
+//https://github.com/Jerdak/KDTree2
+// lincensed under GNU LESSER GENERAL PUBLIC LICENSE ,Version 3, 29 June 2007
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

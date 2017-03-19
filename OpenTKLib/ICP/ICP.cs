@@ -469,8 +469,8 @@ namespace ICPLib
                     PointsTransformed = PointCloud.CalculateMergedPoints(this.pointsTransformed, this.pointsTarget, this.KDTree, false, ICPSettings.ThresholdMergedPoints, out PointsAdded);
                     PointCloud.AddVector3(PointsTransformed, centroidSource);
                 }
-                Debug.WriteLine("--------****** Solution of ICP after : " + NumberOfIterations.ToString() + " iterations, Mean Distance: " + MeanDistance.ToString("0.00000000000") + " - points added : " + PointsAdded.ToString());
-
+                Debug.WriteLine("--------****** Solution of ICP after : " + NumberOfIterations.ToString() + " iterations, Mean Distance: " + MeanDistance.ToString("0.00000000000") + " Matrix trace : " + this.Matrix.Trace.ToString("0.00") + " - points added : " + PointsAdded.ToString());
+                
                 //not the best solution but ...
                 PointsTransformed.SetDefaultIndices();
 
