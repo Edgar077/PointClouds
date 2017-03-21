@@ -472,32 +472,117 @@ namespace OpenTKExtension
             //registrationMatrix = this.OGLControl.CalculateRegistrationMatrix();
 
         }
-      
+
+        private void toolStripTree_Click(object sender, EventArgs e)
+        {
+            // RemoveOutliersKDTree();
+            ClearAllClouds();
+        }
+
+        private void RemoveOutliersKDTree()
+        {
+            string fileName1 = "PointCloudSequence#0.obj";
+            string fileName2 = "PointCloudSequence#1.obj";
+
+            Model myModel1 = new Model(GLSettings.Path + GLSettings.PathModels, fileName1);
+            Model myModel2 = new Model(GLSettings.Path + GLSettings.PathModels, fileName2);
+
+            PointCloud pcSource = myModel1.PointCloud;
+            PointCloud pcSecond = myModel2.PointCloud;
+
+            pcSource.Name = fileName1;
+            pcSource.Path = GLSettings.Path + GLSettings.PathModels;
+            pcSource.FileNameLong = pcSource.Path + "\\" + pcSource.Name;
+
+            KDTreeKennell tree = new KDTreeKennell();
+            tree.Build(pcSource);
+            PointCloud pointCloudResult = tree.RemoveOutliers(pcSource, 1e-5f);
+            pointCloudResult.FileNameLong = pcSource.Path + "\\" + pcSource.Name;
+            pointCloudResult.Path = GLSettings.Path + GLSettings.PathModels;
+            SaveResultCloudAndShow(pointCloudResult);
+        }
+
+        private void ClearAllClouds()
+        {
+            string directory = GLSettings.Path + GLSettings.PathModels + "\\Nick";
+            string pathResult = directory + "\\clean";
+            string[] dirtyModels = System.IO.Directory.GetFiles(directory, "*.obj");
+            if (!System.IO.Directory.Exists(pathResult))
+                System.IO.Directory.CreateDirectory(pathResult);
+
+            for (int i = 0; i < dirtyModels.Length; i++)
+            {
+                PointCloud PointCloudDirty = PointCloud.FromObjFile(dirtyModels[i]);
+
+                KDTreeKennell tree = new KDTreeKennell();
+                tree.Build(PointCloudDirty);
+                PointCloud pointCloudClean = tree.RemoveOutliers(PointCloudDirty, 1e-5f);
+
+                pointCloudClean.ToObjFile(pathResult + "\\CleanPointCloudSequence#" + i.ToString() + ".obj");
+            }
+        }
+
         private void testClouds_FirstIteration()
         {
             this.Cursor = Cursors.WaitCursor;
 
             ICPLib.IterativeClosestPointTransform icp = new ICPLib.IterativeClosestPointTransform();
-            pTarget = icp.AlignCloudsFromDirectory(GLSettings.Path + GLSettings.PathModels + "\\Nick", 30);
-            SaveResultCloudAndShow(pTarget);
+            icp.AlignCloudsFromDirectory3(GLSettings.Path + GLSettings.PathModels + "\\Nick\\clean", 11);
+            //SaveResultCloudAndShow(pTarget);
 
             this.Cursor = Cursors.Default;
         }
         private void testClouds_SecondIteration()
         {
-            
-
             this.Cursor = Cursors.WaitCursor;
 
             ICPLib.IterativeClosestPointTransform icp = new ICPLib.IterativeClosestPointTransform();
-            pTarget = icp.AlignCloudsFromDirectory(GLSettings.Path + GLSettings.PathModels + "\\Nick\\Result", 10);
+            pTarget = icp.AlignCloudsFromDirectory2(GLSettings.Path + GLSettings.PathModels + "\\Nick\\Result", 2);
             SaveResultCloudAndShow(pTarget);
 
             this.Cursor = Cursors.Default;
         }
 
+        private void testClouds_ThirdIteration()
+        {
+            this.Cursor = Cursors.WaitCursor;
 
-     
+            ICPLib.IterativeClosestPointTransform icp = new ICPLib.IterativeClosestPointTransform();
+            pTarget = icp.AlignCloudsFromDirectory2(GLSettings.Path + GLSettings.PathModels + "\\Nick\\Result\\Result", 2);
+            SaveResultCloudAndShow(pTarget);
+
+            this.Cursor = Cursors.Default;
+
+        }
+
+        private void testClouds_FourthIteration()
+        {
+            this.Cursor = Cursors.WaitCursor;
+
+            ICPLib.IterativeClosestPointTransform icp = new ICPLib.IterativeClosestPointTransform();
+            pTarget = icp.AlignCloudsFromDirectory2(GLSettings.Path + GLSettings.PathModels + "\\Nick\\Result\\Result\\Result", 2);
+            SaveResultCloudAndShow(pTarget);
+
+            this.Cursor = Cursors.Default;
+
+        }
+
+        private void testClouds_OtherIterations()
+        {
+            this.Cursor = Cursors.WaitCursor;
+
+            ICPLib.IterativeClosestPointTransform icp = new ICPLib.IterativeClosestPointTransform();
+            icp.AlignCloudsFromDirectory2(GLSettings.Path + GLSettings.PathModels + "\\Nick\\Result\\Result\\Result\\Result", 2);
+            icp.AlignCloudsFromDirectory2(GLSettings.Path + GLSettings.PathModels + "\\Nick\\Result\\Result\\Result\\Result\\Result", 2);
+            icp.AlignCloudsFromDirectory2(GLSettings.Path + GLSettings.PathModels + "\\Nick\\Result\\Result\\Result\\Result\\Result\\Result", 2);
+            icp.AlignCloudsFromDirectory2(GLSettings.Path + GLSettings.PathModels + "\\Nick\\Result\\Result\\Result\\Result\\Result\\Result\\Result", 2);
+            icp.AlignCloudsFromDirectory2(GLSettings.Path + GLSettings.PathModels + "\\Nick\\Result\\Result\\Result\\Result\\Result\\Result\\Result\\Result", 2);
+            SaveResultCloudAndShow(pTarget);
+
+            this.Cursor = Cursors.Default;
+
+        }
+
 
         private void toolStripPCA_Axes_Click(object sender, EventArgs e)
         {
@@ -729,13 +814,31 @@ namespace OpenTKExtension
         {
 
             testClouds_FirstIteration();
-            
+
             return;
         }
         private void toolStripTest2_Click(object sender, EventArgs e)
         {
             testClouds_SecondIteration();
         }
+
+        private void toolStripTest3_Click(object sender, EventArgs e)
+        {
+            testClouds_ThirdIteration();
+        }
+
+        private void toolStripTest4_Click(object sender, EventArgs e)
+        {
+            testClouds_FourthIteration();
+        }
+
+        private void toolStripTest5_Click(object sender, EventArgs e)
+        {
+            testClouds_OtherIterations();
+        }
+
+
+
         private void toolStripLoadTwoPCL_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;

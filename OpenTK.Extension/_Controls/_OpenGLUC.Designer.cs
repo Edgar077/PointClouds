@@ -31,9 +31,13 @@ namespace OpenTKExtension
         /// </summary>
         private void InitializeComponent()
         {
+            this.toolStripTree = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripTest = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripTest1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripTest2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripTest3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripTest4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripTest5 = new System.Windows.Forms.ToolStripMenuItem();
 
             this.toolStripLoadTwoPCL = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripPCAAxes = new System.Windows.Forms.ToolStripMenuItem();
@@ -102,7 +106,7 @@ namespace OpenTKExtension
             this.toolStripTools,
             this.toolStripTest,
             this.aboutToolStripMenuItem});
-          
+
 
             // 
             // toolStripLoadTwoPCL
@@ -270,11 +274,23 @@ namespace OpenTKExtension
             // toolStriptest
             // 
             this.toolStripTest.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripTree,
             this.toolStripTest1,
-            this.toolStripTest2});
+            this.toolStripTest2,
+            this.toolStripTest3,
+            this.toolStripTest4,
+            this.toolStripTest5});
             this.toolStripTest.Name = "Test";
             this.toolStripTest.Size = new System.Drawing.Size(37, 20);
             this.toolStripTest.Text = "Test";
+
+            // 
+            // 
+            // 
+            this.toolStripTree.Name = "RemoveOutliersKDTree";
+            this.toolStripTree.Size = new System.Drawing.Size(340, 22);
+            this.toolStripTree.Text = "Remove Outliers";
+            this.toolStripTree.Click += new System.EventHandler(this.toolStripTree_Click);
 
             // 
             // 
@@ -292,6 +308,29 @@ namespace OpenTKExtension
             this.toolStripTest2.Text = "Test2";
             this.toolStripTest2.Click += new System.EventHandler(this.toolStripTest2_Click);
 
+            //
+            //
+            //
+            this.toolStripTest3.Name = "Test3";
+            this.toolStripTest3.Size = new System.Drawing.Size(340, 22);
+            this.toolStripTest3.Text = "Test3";
+            this.toolStripTest3.Click += new System.EventHandler(this.toolStripTest3_Click);
+
+            //
+            //
+            //
+            this.toolStripTest4.Name = "Test4";
+            this.toolStripTest4.Size = new System.Drawing.Size(340, 22);
+            this.toolStripTest4.Text = "Test4";
+            this.toolStripTest4.Click += new System.EventHandler(this.toolStripTest4_Click);
+
+            //
+            //
+            //
+            this.toolStripTest5.Name = "Test5";
+            this.toolStripTest5.Size = new System.Drawing.Size(340, 22);
+            this.toolStripTest5.Text = "Other iters";
+            this.toolStripTest5.Click += new System.EventHandler(this.toolStripTest5_Click);
 
             // 
             // 
@@ -477,10 +516,13 @@ namespace OpenTKExtension
         private System.Windows.Forms.ToolStripMenuItem toolStripSavePointCloud;
         private System.Windows.Forms.ToolStripMenuItem toolStripSavePointCloudAs;
         private System.Windows.Forms.ToolStripMenuItem toolStripChangeColor;
+        private System.Windows.Forms.ToolStripMenuItem toolStripTree;
         private System.Windows.Forms.ToolStripMenuItem toolStripTest;
         private System.Windows.Forms.ToolStripMenuItem toolStripTest1;
         private System.Windows.Forms.ToolStripMenuItem toolStripTest2;
-
+        private System.Windows.Forms.ToolStripMenuItem toolStripTest3;
+        private System.Windows.Forms.ToolStripMenuItem toolStripTest4;
+        private System.Windows.Forms.ToolStripMenuItem toolStripTest5;
 
     }
 }

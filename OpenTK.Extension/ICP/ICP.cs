@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Diagnostics;
 using OpenTK;
 using OpenTKExtension;
+using System.Text.RegularExpressions;
+using System.Linq;
 
 namespace ICPLib
 {
@@ -594,6 +596,7 @@ namespace ICPLib
             return pTarget;
 
         }
+
         public PointCloud AlignCloudsFromDirectory(string directory, int numberOfCloudPairs)
         {
 
@@ -623,7 +626,7 @@ namespace ICPLib
                     numberOfCloudsCurrent = 1;
                     numberOfCloudsResult++;
                     pTarget.ToObjFile(pathResult + "\\Result" + numberOfCloudsResult.ToString() + ".obj");
-                    
+
                 }
                 if (pTarget != null && iteratorFile == (files.Length - 2))//write result - got to end - return
                 {
@@ -644,7 +647,7 @@ namespace ICPLib
                 Reset_RealData();
                 pTarget = PerformICP(pSource, pTarget);
                 System.Diagnostics.Debug.WriteLine("###### ICP for point cloud: " + pSource.Name + " - points added: " + PointsAdded.ToString());
-                
+
 
             }
             GlobalVariables.ShowLastTimeSpan("--> Time for ICP ");
@@ -653,6 +656,180 @@ namespace ICPLib
 
         }
 
+        public PointCloud AlignCloudsFromDirectory2(string directory, int numberOfCloudPairs)
+        {
+
+            GlobalVariables.ResetTime();
+
+            PointCloud pSource;
+            PointCloud pTarget = null;
+
+
+            string[] filesUnsorted = System.IO.Directory.GetFiles(directory, "*.obj");
+            var listFilesUnsorted = new List<string>(filesUnsorted);
+            var listFilesSorted = listFilesUnsorted.OrderBy(x => x, new NaturalStringComparer());
+            var files = listFilesSorted.ToArray();
+
+            string pathResult = directory + "\\result";
+
+            if (!System.IO.Directory.Exists(pathResult))
+                System.IO.Directory.CreateDirectory(pathResult);
+
+            int numberOfCloudsCurrent = 0;
+            int numberOfCloudsResult = -1;
+
+            int iteratorFile = -1;
+            for (int i = 0; i < 1000; i++)
+            {
+                numberOfCloudsCurrent++;
+                iteratorFile++;
+
+                if (numberOfCloudsCurrent == numberOfCloudPairs && iteratorFile != (files.Length - 1))
+                {
+                    numberOfCloudsCurrent = 1;
+                    numberOfCloudsResult++;
+                    pTarget.ToObjFile(pathResult + "\\Result" + numberOfCloudsResult.ToString() + ".obj");
+                    //System.Diagnostics.Debug.WriteLine("=====Saved pair " + files[files.Length - iteratorFile - 1]);
+                }
+
+                if (pTarget != null && iteratorFile == (files.Length - 1))
+                {
+                    numberOfCloudsResult++;
+                    pTarget.ToObjFile(pathResult + "\\Result" + numberOfCloudsResult.ToString() + ".obj");
+                    //System.Diagnostics.Debug.WriteLine("=====Saved last pair " + files[files.Length - iteratorFile - 1]);
+                    return pTarget;
+                }
+
+                //System.Diagnostics.Debug.WriteLine("====Solving for : " + files[files.Length - iteratorFile - 1] + " and " + files[files.Length - iteratorFile - 2]);
+
+                //first iteration
+                if (numberOfCloudsCurrent == 1)
+                {
+                    pTarget = PointCloud.FromObjFile(files[files.Length - iteratorFile - 1]);
+                }
+
+                pSource = PointCloud.FromObjFile(files[files.Length - iteratorFile - 2]);
+
+
+                Reset_RealData();
+
+                pTarget = PerformICP(pSource, pTarget);
+
+                System.Diagnostics.Debug.WriteLine("###### ICP for point cloud: " + pSource.Name + " - points added: " + PointsAdded.ToString());
+            }
+
+            GlobalVariables.ShowLastTimeSpan("--> Time for ICP ");
+
+            return pTarget;
+        }
+
+        public PointCloud AlignCloudsFromDirectory3(string directory, int numberOfCloudPairs)
+        {
+
+            GlobalVariables.ResetTime();
+
+            PointCloud pSource;
+            PointCloud pTarget = null;
+
+
+            string[] filesUnsorted = System.IO.Directory.GetFiles(directory, "*.obj");
+            var listFilesUnsorted = new List<string>(filesUnsorted);
+            var listFilesSorted = listFilesUnsorted.OrderBy(x => x, new NaturalStringComparer());
+            var files = listFilesSorted.ToArray();
+
+            string pathResult = directory + "\\result";
+
+            if (!System.IO.Directory.Exists(pathResult))
+                System.IO.Directory.CreateDirectory(pathResult);
+
+            int numberOfCloudsCurrent = 0;
+            int numberOfCloudsResult = -1;
+
+            int iteratorFile = -1;
+            for (int i = 0; i < 1000; i++)
+            {
+                numberOfCloudsCurrent++;
+                iteratorFile++;
+
+                if (numberOfCloudsCurrent == numberOfCloudPairs && iteratorFile != (files.Length - 1))
+                {
+                    numberOfCloudsCurrent = 1;
+                    numberOfCloudsResult++;
+                    pTarget.ToObjFile(pathResult + "\\Result" + numberOfCloudsResult.ToString() + ".obj");
+                    //System.Diagnostics.Debug.WriteLine("=====Saved pair " + files[files.Length - iteratorFile - 1]);
+                    //exit ater stitching first pair
+                    return pTarget;
+                }
+
+                if (pTarget != null && iteratorFile == (files.Length - 1))
+                {
+                    numberOfCloudsResult++;
+                    pTarget.ToObjFile(pathResult + "\\Result" + numberOfCloudsResult.ToString() + ".obj");
+                    //System.Diagnostics.Debug.WriteLine("=====Saved last pair " + files[files.Length - iteratorFile - 1]);
+                    return pTarget;
+                }
+
+                //System.Diagnostics.Debug.WriteLine("====Solving for : " + files[files.Length - iteratorFile - 1] + " and " + files[files.Length - iteratorFile - 2]);
+
+                //first iteration
+                if (numberOfCloudsCurrent == 1)
+                {
+                    pTarget = PointCloud.FromObjFile(files[files.Length - iteratorFile - 1]);
+                }
+
+                pSource = PointCloud.FromObjFile(files[files.Length - iteratorFile - 2]);
+
+
+                //Reset_RealData();
+                Reset();
+
+                pTarget = PerformICP(pSource, pTarget);
+
+                // remove outliers after each iter
+                /*KDTreeKennell tree = new KDTreeKennell();
+                tree.Build(pTarget);
+                pTarget = tree.RemoveOutliers(pTarget, 1e-5f);
+                */
+                System.Diagnostics.Debug.WriteLine("###### ICP for point cloud: " + pSource.Name + " - points added: " + PointsAdded.ToString());
+            }
+
+            GlobalVariables.ShowLastTimeSpan("--> Time for ICP ");
+
+            return pTarget;
+        }
+    }
+
+    public class NaturalStringComparer : IComparer<string>
+    {
+        private static readonly Regex _re = new Regex(@"(?<=\D)(?=\d)|(?<=\d)(?=\D)", RegexOptions.Compiled);
+
+        public int Compare(string x, string y)
+        {
+            x = x.ToLower();
+            y = y.ToLower();
+            if (string.Compare(x, 0, y, 0, Math.Min(x.Length, y.Length)) == 0)
+            {
+                if (x.Length == y.Length) return 0;
+                return x.Length < y.Length ? -1 : 1;
+            }
+            var a = _re.Split(x);
+            var b = _re.Split(y);
+            int i = 0;
+            while (true)
+            {
+                int r = PartCompare(a[i], b[i]);
+                if (r != 0) return r;
+                ++i;
+            }
+        }
+
+        private static int PartCompare(string x, string y)
+        {
+            int a, b;
+            if (int.TryParse(x, out a) && int.TryParse(y, out b))
+                return a.CompareTo(b);
+            return x.CompareTo(y);
+        }
     }
 
 }

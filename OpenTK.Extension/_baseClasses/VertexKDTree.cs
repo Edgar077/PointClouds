@@ -72,7 +72,12 @@ namespace OpenTKExtension
             return v;
 
         }
-     
+
+        public VertexKDTree(Vector3 v, Vector3 c, int index) : this(v, index)
+        {
+            this.Color = c;
+        }
+
         public override string ToString()
         {
             return this.Vector.ToString() + " -i: " + this.Index.ToString();// + " -l: " + this.Length.ToString("G2");

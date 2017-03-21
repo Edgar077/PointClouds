@@ -114,7 +114,81 @@ namespace OpenTKExtension
             return v;
         }
 
-     
+        public VertexKDTree FindClosestPointOutliers(VertexKDTree vertex, ref float nearestDistance, ref int nearest_index)
+        {
+            VertexKDTree v = new VertexKDTree();
+            //4 15-6f looks good
+            ListKDTreeResultVectors listResult = r_nearest_out(vertex.Vector, 4, 15e-6f);
+
+            if (listResult != null && listResult.Count > 0)
+            {
+
+
+                for (int i = 0; i < listResult.Count; i++)
+                {
+                    //Debug.WriteLine("d[" + i + "] = {0:F10}", listResult[i].Distance);
+
+                    //if (listResult[i].Distance < threshold)
+                    //{
+                    //Debug.WriteLine("d[" + i + "] = {0:F10}", listResult[i].Distance);
+                    nearest_index = Convert.ToInt32(listResult[i].IndexNeighbour);
+                    nearestDistance = listResult[i].Distance;
+                    v = this.TreeVectors[Convert.ToInt32(listResult[i].IndexNeighbour)];
+                    //return v;
+                    //}
+                }
+            }
+
+            return v;
+        }
+
+        public PointCloud RemoveOutliers(PointCloud source, float threshold)
+        {
+            PointCloud pcResult = new PointCloud();
+
+            VertexKDTree[] resultArray = new VertexKDTree[source.Count];
+
+            try
+            {
+                List<Vector3> listV = new List<Vector3>();
+                List<Vector3> listC = new List<Vector3>();
+
+                System.Threading.Tasks.Parallel.For(0, source.Count, i =>
+                {
+                    VertexKDTree vSource = new VertexKDTree(source.Vectors[i], source.Colors[i], i);
+                    int nearest_index = 0;
+                    float nearest_distance = 0f;
+
+                    VertexKDTree vTargetFound = FindClosestPointOutliers(vSource, ref nearest_distance, ref nearest_index);
+
+                    //System.Diagnostics.Debug.WriteLine("nearest_distance between two closest pts: " + nearest_distance);
+
+                    if (nearest_distance > threshold)
+                    {
+                        resultArray[i] = vSource;
+                    }
+                });
+
+                for (int i = 0; i < source.Count; i++)
+                {
+                    if (resultArray[i] != null)
+                    {
+                        listV.Add(resultArray[i].Vector);
+                        listC.Add(resultArray[i].Color);
+                    }
+                }
+
+                pcResult.Vectors = listV.ToArray();
+                pcResult.Colors = listC.ToArray();
+            }
+            catch (Exception err)
+            {
+                System.Windows.Forms.MessageBox.Show("Error in KDTreeKennnellRemoveDuplicates: " + err.Message);
+            }
+
+            return pcResult;
+        }
+
         public PointCloud RemoveDuplicates(PointCloud source, float threshold)
         {
             PointCloud pcResult = new PointCloud();
@@ -402,6 +476,29 @@ namespace OpenTKExtension
             root.search(sr);
             return sr.SearchResult;
         }
+
+        public ListKDTreeResultVectors r_nearest_out(Vector3 qv, int numberOfNeighbours, float r2)
+        {
+            // search for all within a ball of a certain radius
+            //ListKDTreeResultVectors result = new ListKDTreeResultVectors();
+
+            SearchRecord sr = new SearchRecord(qv);
+
+            // Vector3 vdiff = new Vector3();
+
+            sr.NumberOfNeighbours = numberOfNeighbours;
+            sr.Ballsize = r2;
+
+            root.search(sr);
+
+            //if (sort_results)
+            //{
+            //    sort(result.begin(), result.end());
+            //}
+
+            return sr.SearchResult;
+        }
+
         public ListKDTreeResultVectors n_nearest_around_point(int idxin, int correltime, int numberOfNeighbours)
         {
 
