@@ -786,10 +786,10 @@ namespace ICPLib
                 pTarget = PerformICP(pSource, pTarget);
 
                 // remove outliers after each iter
-                /*KDTreeKennell tree = new KDTreeKennell();
+                KDTreeKennell tree = new KDTreeKennell();
                 tree.Build(pTarget);
                 pTarget = tree.RemoveOutliers(pTarget, 1e-5f);
-                */
+                
                 System.Diagnostics.Debug.WriteLine("###### ICP for point cloud: " + pSource.Name + " - points added: " + PointsAdded.ToString());
             }
 

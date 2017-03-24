@@ -114,15 +114,79 @@ namespace OpenTKExtension
             return v;
         }
 
-        public VertexKDTree FindClosestPointOutliers(VertexKDTree vertex, ref float nearestDistance, ref int nearest_index)
+        public VertexKDTree FindClosestPointOutliersGaussian(VertexKDTree vertex, ref float nearestDistance, ref int nearest_index)
         {
+            /*
+              For each point, we compute the mean distance from it to all its neighbors.
+              By assuming that the resulted distribution is Gaussian with a mean and a standard deviation, 
+              all points whose mean distances are outside an interval defined by the global distances mean and 
+              standard deviation can be considered as outliers and trimmed from the dataset.
+              */
             VertexKDTree v = new VertexKDTree();
-            //4 15-6f looks good
-            ListKDTreeResultVectors listResult = r_nearest_out(vertex.Vector, 4, 15e-6f);
 
+            // For point find all neighbors
+            ListKDTreeResultVectors listResult = Find_N_Nearest(vertex.Vector, 100);
+
+            int numberOfNeighbors = listResult.Count;
+            double[] meanDistance = new double[listResult.Count];
+            Vector3 main = vertex.Vector;
+            double globalDistancesMean = 2e-4f;
             if (listResult != null && listResult.Count > 0)
             {
 
+                double totaldist = 0f;
+                for (int i = 0; i < listResult.Count; i++)
+                {
+                    // Compute the mean distance from point to all its neighbors
+
+                    Vector3 neighbor = this.TreeVectors[Convert.ToInt32(listResult[i].IndexNeighbour)].Vector;
+                    // Assuming that the resulted distribution is Gaussian 
+                    meanDistance[i] = Vector3.Subtract(main, neighbor).Length;
+
+                    // Compute mean and a standard deviation
+                    totaldist += meanDistance[i];
+                }
+
+                double meanDeviation = totaldist / Convert.ToSingle(numberOfNeighbors);
+                double standartDeviation = 0f;
+                double standartDeviationNumerator = 0f;
+                for (int i = 0; i < listResult.Count; i++)
+                {
+                    standartDeviationNumerator += Math.Pow((meanDistance[i] - meanDeviation), 2);
+                }
+
+                standartDeviation = standartDeviationNumerator / Convert.ToSingle(numberOfNeighbors - 1);
+
+
+                /* remove all points whose mean distances are outside an interval 
+                * defined by the global distances mean and standard deviation
+                */
+                
+                for (int i = 0; i < listResult.Count; i++)
+                {
+                    //System.Diagnostics.Debug.WriteLine("{0:F10}", "standartDeviation vs meanDistance[" + i + "]: " + standartDeviation + " vs " + meanDistance[i]);
+                    if (meanDistance[i] < standartDeviation && meanDistance[i] < globalDistancesMean)
+                    {
+                        nearest_index = Convert.ToInt32(listResult[i].IndexNeighbour);
+                        nearestDistance = listResult[i].Distance;
+                        v = this.TreeVectors[Convert.ToInt32(listResult[i].IndexNeighbour)];
+                    }
+                }
+            }
+
+            return v;
+        }
+
+        public VertexKDTree FindClosestPointOutliersNeghbourCount(VertexKDTree vertex, ref float nearestDistance, ref int nearest_index)
+        {
+            VertexKDTree v = new VertexKDTree();
+
+            ListKDTreeResultVectors listResult = r_nearest_out(vertex.Vector, 15e-5f);
+            int neighboursCount = 4;
+
+           // System.Diagnostics.Debug.WriteLine(listResult.Count);
+            if (listResult != null && listResult.Count > neighboursCount)
+            {
 
                 for (int i = 0; i < listResult.Count; i++)
                 {
@@ -152,22 +216,27 @@ namespace OpenTKExtension
             {
                 List<Vector3> listV = new List<Vector3>();
                 List<Vector3> listC = new List<Vector3>();
-
+                //for (int i = 0; i < source.Count; i++)
                 System.Threading.Tasks.Parallel.For(0, source.Count, i =>
                 {
                     VertexKDTree vSource = new VertexKDTree(source.Vectors[i], source.Colors[i], i);
                     int nearest_index = 0;
                     float nearest_distance = 0f;
 
-                    VertexKDTree vTargetFound = FindClosestPointOutliers(vSource, ref nearest_distance, ref nearest_index);
+                   
+
+                    VertexKDTree vTargetFound = FindClosestPointOutliersGaussian(vSource, ref nearest_distance, ref nearest_index);
+
+                    VertexKDTree vTargetFoundMod = new VertexKDTree(source.Vectors[nearest_index], source.Colors[nearest_index], nearest_index);
 
                     //System.Diagnostics.Debug.WriteLine("nearest_distance between two closest pts: " + nearest_distance);
 
-                    if (nearest_distance > threshold)
-                    {
-                        resultArray[i] = vSource;
-                    }
-                });
+                    //if (nearest_distance > threshold)
+                    //{
+                    resultArray[i] = vTargetFound;
+                    //}
+                     });
+                //}
 
                 for (int i = 0; i < source.Count; i++)
                 {
@@ -477,7 +546,7 @@ namespace OpenTKExtension
             return sr.SearchResult;
         }
 
-        public ListKDTreeResultVectors r_nearest_out(Vector3 qv, int numberOfNeighbours, float r2)
+        public ListKDTreeResultVectors r_nearest_out(Vector3 qv, float r2)
         {
             // search for all within a ball of a certain radius
             //ListKDTreeResultVectors result = new ListKDTreeResultVectors();
@@ -486,7 +555,6 @@ namespace OpenTKExtension
 
             // Vector3 vdiff = new Vector3();
 
-            sr.NumberOfNeighbours = numberOfNeighbours;
             sr.Ballsize = r2;
 
             root.search(sr);

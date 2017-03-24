@@ -73,7 +73,7 @@ namespace PointCloudScanner
             this.splitContainerRight = new System.Windows.Forms.SplitContainer();
             this.tabControlImages = new System.Windows.Forms.TabControl();
             this.tabPage3D = new System.Windows.Forms.TabPage();
-          
+            this.openGLUC = new OpenTKExtension.OpenGLUC();
             this.tabPageDepth = new System.Windows.Forms.TabPage();
             this.pictureBoxDepth = new System.Windows.Forms.PictureBox();
             this.tabPageRGB2D = new System.Windows.Forms.TabPage();
@@ -105,7 +105,6 @@ namespace PointCloudScanner
             this.trackBarCutoffNear = new VBControls.gTrackBar();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.buttonSaveAll = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerUC)).BeginInit();
             this.splitContainerUC.Panel1.SuspendLayout();
             this.splitContainerUC.Panel2.SuspendLayout();
@@ -167,7 +166,6 @@ namespace PointCloudScanner
             // 
             // splitContainerLeft.Panel1
             // 
-            this.splitContainerLeft.Panel1.Controls.Add(this.buttonSaveAll);
             this.splitContainerLeft.Panel1.Controls.Add(this.numericUpDownSave);
             this.splitContainerLeft.Panel1.Controls.Add(this.button2);
             this.splitContainerLeft.Panel1.Controls.Add(this.buttonSavePC);
@@ -424,7 +422,7 @@ namespace PointCloudScanner
             // 
             // tabPage3D
             // 
-            
+            this.tabPage3D.Controls.Add(this.openGLUC);
             this.tabPage3D.Location = new System.Drawing.Point(4, 19);
             this.tabPage3D.Name = "tabPage3D";
             this.tabPage3D.Padding = new System.Windows.Forms.Padding(3);
@@ -435,7 +433,11 @@ namespace PointCloudScanner
             // 
             // openGLUC
             // 
-     
+            this.openGLUC.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.openGLUC.Location = new System.Drawing.Point(3, 3);
+            this.openGLUC.Name = "openGLUC";
+            this.openGLUC.Size = new System.Drawing.Size(1202, 415);
+            this.openGLUC.TabIndex = 0;
             // 
             // tabPageDepth
             // 
@@ -898,16 +900,6 @@ namespace PointCloudScanner
             this.contextMenuStrip.Name = "contextMenuStrip";
             this.contextMenuStrip.Size = new System.Drawing.Size(61, 4);
             // 
-            // buttonSaveAll
-            // 
-            this.buttonSaveAll.Location = new System.Drawing.Point(72, 229);
-            this.buttonSaveAll.Name = "buttonSaveAll";
-            this.buttonSaveAll.Size = new System.Drawing.Size(75, 23);
-            this.buttonSaveAll.TabIndex = 15;
-            this.buttonSaveAll.Text = "Save All";
-            this.buttonSaveAll.UseVisualStyleBackColor = true;
-            this.buttonSaveAll.Click += new System.EventHandler(this.buttonSaveAll_Click);
-            // 
             // ScannerUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1007,12 +999,11 @@ namespace PointCloudScanner
         private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem captureToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveDialogToolStripMenuItem;
-       
+
         private System.Windows.Forms.Button buttonSavePC;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.NumericUpDown numericUpDownSave;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private OpenTKExtension.OpenGLUC openGLUC;
-        private System.Windows.Forms.Button buttonSaveAll;
     }
 }

@@ -510,7 +510,7 @@ namespace OpenTKExtension
             if (!System.IO.Directory.Exists(pathResult))
                 System.IO.Directory.CreateDirectory(pathResult);
 
-            for (int i = 0; i < dirtyModels.Length; i++)
+            for (int i = 1; i < 2; i++)
             {
                 PointCloud PointCloudDirty = PointCloud.FromObjFile(dirtyModels[i]);
 
@@ -527,7 +527,7 @@ namespace OpenTKExtension
             this.Cursor = Cursors.WaitCursor;
 
             ICPLib.IterativeClosestPointTransform icp = new ICPLib.IterativeClosestPointTransform();
-            icp.AlignCloudsFromDirectory3(GLSettings.Path + GLSettings.PathModels + "\\Nick\\clean", 11);
+            icp.AlignCloudsFromDirectory2(GLSettings.Path + GLSettings.PathModels + "\\Nick", 11);
             //SaveResultCloudAndShow(pTarget);
 
             this.Cursor = Cursors.Default;
