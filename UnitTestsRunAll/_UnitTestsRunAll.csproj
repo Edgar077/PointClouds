@@ -88,6 +88,7 @@
     <Compile Include="ICP\FacePerformance.cs" />
     <Compile Include="ICP\Outliers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Triangulate\TriangulateDelaunay.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CharacterCreator\CharacterCreator.csproj">
@@ -112,7 +113,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Performance\" />
-    <Folder Include="Triangulate\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

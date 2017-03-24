@@ -24,7 +24,7 @@ namespace ToDo.ICP
             if (!LoadObjFiles_ResizeAndSort("Head\\HeadFront.obj", "Head\\Head.obj", true))
                 return;
 
-            icp.ICPSettings.ChangeColorOfMergedPoints = false;
+           
             pointCloudSource.RotateDegrees(0, 180, 0);
 
             icp.TakenAlgorithm = true;

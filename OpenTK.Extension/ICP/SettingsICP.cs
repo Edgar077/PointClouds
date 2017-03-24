@@ -18,9 +18,10 @@ namespace ICPLib
     public class SettingsICP
     {
         public ICP_VersionUsed ICPVersion = ICP_VersionUsed.Umeyama;
-
-        public float ThresholdMergedPoints = Convert.ToSingle(1E-3);
+        public bool ChangeColorsOfMergedPoints = true;
+        public float ThresholdMergedPoints = Convert.ToSingle(5E-5);
         public float ThresholdConvergence = Convert.ToSingle(1E-5);
+        public float ThresholdIgnoreICP = Convert.ToSingle(5E-3);
 
         public int MaxNumberSolutions = 10;
         public int NumberOfStartTrialPoints = 100000;
@@ -40,7 +41,7 @@ namespace ICPLib
         public float ThresholdOutlier = 10;
         public bool IgnoreFarPoints;
 
-        public bool ChangeColorOfMergedPoints = true;
+        
 
         public bool SingleSourceTargetMatching = false;
 

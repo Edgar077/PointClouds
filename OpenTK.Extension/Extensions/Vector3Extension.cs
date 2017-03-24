@@ -597,6 +597,40 @@ namespace OpenTKExtension
 
             return true;
         }
+        public static bool Collinear2D(this Vector3 p1, Vector3 p2, Vector3 p3)
+        {
+            return (p1.X * (p2.Y - p3.Y) + p2.X * (p3.Y - p1.Y) + p3.X * (p1.Y - p2.Y) == 0);
+        }
+        public static int CompareTo2D(this Vector3 p1, Vector3 p)
+        {
+            if (p1.X > p.X)
+                return 1;
+            else if (p1.X == p.X)
+                if (p1.Y > p.Y)
+                    return 1;
+                else if (p1.Y < p.Y)
+                    return -1;
+                //else if (p1.Z < p.Z)
+                //    return -1;
+
+                else
+                    return 0;
+            else
+                return -1;
+        }
+        public static bool ContainedInList(this Vector3 v, List<Vector3> listV)
+        {
+            for (int i = 0; i < listV.Count; i++)
+            {
+                if (listV[i].Equals(v))
+                {
+                    return true;
+
+                }
+            }
+            return false;
+
+        }
 
     }
 

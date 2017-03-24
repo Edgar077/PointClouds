@@ -185,15 +185,15 @@ namespace OpenTKExtension
         /// <summary>
         /// mergedPoints
         /// </summary>
-        /// <param name="result"></param>
+        /// <param name="pointsTransformed"></param>
         /// <param name="pointsTarget"></param>
         /// <param name="kdTree"></param>
         /// <param name="meanDistance"></param>
         /// <returns></returns>
-        public static PointCloud CalculateMergedPoints(PointCloud result, PointCloud pointsTarget, IKDTree kdTree, bool changeColorOfNewPoints, float threshold, out int pointsAdded)
+        public static PointCloud CalculateMergedPoints(PointCloud pointsTransformed, PointCloud pointsTarget, IKDTree kdTree, float threshold, out int pointsAdded, bool changeColorsOfMergedPoints)
         {
-            if (result.Colors == null || result.Colors.Length != result.Vectors.Length)
-                result.Colors = new Vector3[result.Vectors.Length];
+            if (pointsTransformed.Colors == null || pointsTransformed.Colors.Length != pointsTransformed.Vectors.Length)
+                pointsTransformed.Colors = new Vector3[pointsTransformed.Vectors.Length];
 
             if (pointsTarget.Colors == null || pointsTarget.Colors.Length != pointsTarget.Vectors.Length)
                 pointsTarget.Colors = new Vector3[pointsTarget.Vectors.Length];
@@ -204,12 +204,12 @@ namespace OpenTKExtension
 
            // PointCloud resultKDTree = kdTree.FindClosestPointCloud_Parallel(result);
             KDTreeKennell kdTreeKennell = kdTree as KDTreeKennell;
-            PointCloud pcToAdd = kdTreeKennell.RemoveDuplicates(result, threshold);
+            PointCloud pcToAdd = kdTreeKennell.RemoveDuplicates(pointsTransformed, threshold);
             pointsAdded = pcToAdd.Vectors.Length;
             //System.Diagnostics.Debug.WriteLine("target points added : " + pcToAdd.Vectors.Length.ToString() + " - outof " + result.Vectors.Length.ToString());
             
 
-            if (changeColorOfNewPoints)
+            if (changeColorsOfMergedPoints)
                 pcToAdd.SetColor(new Vector3(0, 1, 1));
 
             List<Vector3> listV = pointsTarget.ListVectors;

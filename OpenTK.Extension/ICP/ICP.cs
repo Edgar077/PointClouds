@@ -83,7 +83,7 @@ namespace ICPLib
         public void Reset_RealData()
         {
 
-            ICPSettings.MaximumNumberOfIterations = 15;
+            ICPSettings.MaximumNumberOfIterations = 100;
             ICPSettings.FixedTestPoints = false;
             ICPSettings.Normal_RemovePoints = false;
             ICPSettings.Normal_SortPoints = false;
@@ -420,7 +420,8 @@ namespace ICPLib
                 }
 
                
-            
+
+
                 //shuffle effect - set points source to other order
                 //PS = pointsSource;//reordered for shuffle effect
                 //this.PSource = pointsSource;
@@ -437,14 +438,14 @@ namespace ICPLib
                     PointsTransformed = MathUtilsVTK.TransformPoints(this.PSource, Matrix);
                 }
 
-                ////re-reset vector 
-                //if (ICPSettings.ResetVector3ToOrigin)
-                //{
-                //    PointCloud.AddVector3(PTransformed, centroidTarget);
+                //ignore ICP result if the convergence results is bad
+                if (MeanDistance > ICPSettings.ThresholdIgnoreICP)
+                {
+                    Debug.WriteLine("ICP RESULT IGNORED - TOO BAD " + this.MeanDistance.ToString("0.0000"));
+                    return this.PTarget;
 
-                //}
+                }
 
-                //DebugWriteUtils.WriteTestOutputVector3("Solution of ICP", Matrix, this.PSource, PTransformed, PTarget);
                 if (this.pointsTransformed != null)
                 {
                     //DebugWriteUtils.WriteTestOutputVector3("Solution of ICP", Matrix, pointsSource, pointsTransformed, pointsTarget);
@@ -466,7 +467,7 @@ namespace ICPLib
                 }
                 else
                 {
-                    PointsTransformed = PointCloud.CalculateMergedPoints(this.pointsTransformed, this.pointsTarget, this.KDTree, false, ICPSettings.ThresholdMergedPoints, out PointsAdded);
+                    PointsTransformed = PointCloud.CalculateMergedPoints(this.pointsTransformed, this.pointsTarget, this.KDTree, ICPSettings.ThresholdMergedPoints, out PointsAdded, this.ICPSettings.ChangeColorsOfMergedPoints);
                     PointCloud.AddVector3(PointsTransformed, centroidSource);
                 }
                 Debug.WriteLine("--------****** Solution of ICP after : " + NumberOfIterations.ToString() + " iterations, Mean Distance: " + MeanDistance.ToString("0.00000000000") + " Matrix trace : " + this.Matrix.Trace.ToString("0.00") + " - points added : " + PointsAdded.ToString());
@@ -625,7 +626,7 @@ namespace ICPLib
                     pTarget.ToObjFile(pathResult + "\\Result" + numberOfCloudsResult.ToString() + ".obj");
                     
                 }
-                if (pTarget != null && iteratorFile == (files.Length - 2))//write result - got to end - return
+                if (pTarget != null && iteratorFile >= (files.Length - 1))//write result - got to end - return
                 {
                     numberOfCloudsResult++;
                     pTarget.ToObjFile(pathResult + "\\Result" + numberOfCloudsResult.ToString() + ".obj");

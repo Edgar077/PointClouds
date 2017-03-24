@@ -528,6 +528,13 @@
     <Compile Include="LinearAlgebra\Math.cs" />
     <Compile Include="LinearAlgebra\SVD.cs" />
     <Compile Include="LinearAlgebra\SVD_Float.cs" />
+    <Compile Include="Triangulation\DelaunayVoronoiSimple\Circle.cs" />
+    <Compile Include="Triangulation\DelaunayVoronoiSimple\ConvexHull.cs" />
+    <Compile Include="Triangulation\DelaunayVoronoiSimple\Line.cs" />
+    <Compile Include="Triangulation\DelaunayVoronoiSimple\Delaunay.cs" />
+    <Compile Include="Triangulation\DelaunayVoronoiSimple\TriangleVectors.cs" />
+    <Compile Include="Triangulation\DelaunayVoronoiSimple\Tester.cs" />
+    <Compile Include="Triangulation\DelaunayVoronoiSimple\Voronoi.cs" />
     <Compile Include="Triangulation\DelaunayVoronoi\Context.cs" />
     <Compile Include="Triangulation\DelaunayVoronoi\DelaunayVoronoi.cs" />
     <Compile Include="Triangulation\DelaunayVoronoi\Mesh.cs" />

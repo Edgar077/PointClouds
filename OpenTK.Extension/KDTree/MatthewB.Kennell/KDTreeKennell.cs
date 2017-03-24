@@ -138,7 +138,7 @@ namespace OpenTKExtension
                     }
 
                 });
-
+                //add only the non null list items
                 for(int i = 0; i < source.Count; i++ )
                 {
                     if(resultArray[i] != null)
