@@ -49,7 +49,7 @@ namespace ICPLib
                 float[] distances = new float[source.Count];
 
 
-                //1. mean distance of one point to his next "numberOfNeighbours" neigbhours - stored in list distances
+                //1. mean distance of one point to his next "numberOfNeighbours" neigbhours - stored in the "distances" array
                 for (int i = 0; i < source.Count; i++)
                 {
                     VertexKDTree vSource = new VertexKDTree(source.Vectors[i], source.Colors[i], i);
@@ -57,13 +57,13 @@ namespace ICPLib
                     ListKDTreeResultVectors listResult = kdTree.Find_N_Nearest(vSource.Vector, numberOfNeighbours);
 
                     float distSum = 0f;
-                    for (int k = 1; k < listResult.Count; ++k)  // k = 0 is the query point
-                        distSum = listResult[k].Distance;
+                    for (int k = 0; k < listResult.Count; ++k)  // k = 0 is the query point
+                        distSum += listResult[k].Distance;
 
                     distances[i] = (distSum / listResult.Count);
                     
                 }
-                //2. mean distance of ALL points 
+                //2. calculate the mean distance of ALL points 
                 
                 float meanOverall = 0;
 
@@ -87,7 +87,7 @@ namespace ICPLib
                 float distanceThreshold = meanOverall + deviation;
 
 
-                //5. remove all points distance threshold: Subtract the deviation from the overall mean distance
+                //5. remove all points according to the distance threshold
                 for (int i = 0; i < source.Count; i++)
                 {
                     VertexKDTree vSource = new VertexKDTree(source.Vectors[i], source.Colors[i], i);
