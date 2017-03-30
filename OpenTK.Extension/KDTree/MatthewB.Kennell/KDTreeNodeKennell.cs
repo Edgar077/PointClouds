@@ -358,7 +358,7 @@ namespace OpenTKExtension
                     ncloser.search(sr);
                 }
 
-                if ((nfarther != null) && (extra * extra < sr.Ballsize))
+                if ((nfarther != null) && (extra * extra < sr.Radius))
                 {
                     // first cut
                     if (nfarther.box_in_search_range(sr))
@@ -396,7 +396,7 @@ namespace OpenTKExtension
 
 
             float dis2 = 0.0F;
-            float ballsize = sr.Ballsize;
+            float ballsize = sr.Radius;
             for (int i = 0; i < 3; i++)
             {
                 float f = dis_from_bnd(sr.VectorTarget[i], box[i].lower, box[i].upper);
@@ -437,7 +437,7 @@ namespace OpenTKExtension
         public void process_leaf_node(SearchRecord sr)
         {
            
-            float ballsize = sr.Ballsize;
+            float ballsize = sr.Radius;
             //
             bool rearrange = sr.rearrange;
            
@@ -525,13 +525,13 @@ namespace OpenTKExtension
                     break;
 
             } // main loop
-            sr.Ballsize = ballsize;
+            sr.Radius = ballsize;
         }
 
         public void process_leaf_node_fixedball(SearchRecord sr)
         {
          
-            float ballsize = sr.Ballsize;
+            float ballsize = sr.Radius;
             //
             bool rearrange = sr.rearrange;
 

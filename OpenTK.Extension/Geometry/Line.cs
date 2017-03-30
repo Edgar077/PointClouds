@@ -63,6 +63,39 @@ namespace OpenTKExtension
 
 
         }
-        
+        public Vector3 MiddleVector3()
+        {
+            return new Vector3((this.PStart.X + this.PEnd.X) / 2, (this.PStart.Y + this.PEnd.Y) / 2, (this.PStart.Z + this.PEnd.Z) / 2);
+        }
+        public double SlopeXY
+        {
+            get
+            {
+                double d = PEnd.X - PStart.X;
+
+                if (d == 0)
+                {
+                    return 1000; //very large value
+                    //throw new LineIsVerticalException("The line passing through listVectors " + P1.ToString() + " and " + P2.ToString() + " is vertical.");
+                }
+                return (PEnd.Y - PStart.Y) / (PEnd.X - PStart.X);
+            }
+        }
+        public static Vector3 GetYFromVector(Vector3 p, double slope, double x)
+        {
+            double y = (x - p.X) * slope + p.Y;
+
+            return new Vector3(x, y, 0);
+        }
+
+        public static Vector3 GetXFromVector(Vector3 p, double slope, double y)
+        {
+            if (slope == 0)
+                return new Vector3(y, y, 0);
+
+            double x = (y - p.Y) / slope + p.X;
+
+            return new Vector3(x, y, 0);
+        }
     }
 }

@@ -23,17 +23,17 @@ namespace OpenTKExtension
     public class Vertex : List<float>, IVector
     {
         public Vector3 Vector;
-        public int Index;
+        public uint Index;
         public Vector3 Color;
         public List<int> IndexTriangles;
        // private float length;
 
         public Vertex()
         { }
-        public Vertex(Vector3 v, int i)
+        public Vertex(Vector3 v, uint index)
         {
             this.Vector = v;
-            this.Index = i;
+            this.Index = index;
 
 
         }
@@ -42,18 +42,10 @@ namespace OpenTKExtension
 
             Vector = v;
             this.Color = color;
-            //this.Index = Convert.ToInt32(index);
-            this.Index = Convert.ToInt32(index);
-
-        }
-        public Vertex(Vector3 v, Vector3 color, int index)
-        {
-
-            Vector = v;
-            this.Color = color;
             this.Index = index;
 
         }
+       
         public Vertex(Vector3 v, Color color)
         {
 
@@ -72,7 +64,7 @@ namespace OpenTKExtension
 
         }
 
-        public Vertex(Vector3 v, Color color, int index)
+        public Vertex(Vector3 v, Color color, uint index)
         {
 
             Vector = v;
@@ -85,7 +77,7 @@ namespace OpenTKExtension
         {
             get
             {
-                return new Vertex(Vector3.Zero, -1);
+                return new Vertex(Vector3.Zero, uint.MaxValue);
             }
         }
         public override string ToString()
@@ -113,24 +105,24 @@ namespace OpenTKExtension
         public static Vertex operator -(Vertex v1, Vertex v2)
         {
             Vector3 v = v1.Vector - v2.Vector;
-            return new Vertex(v, -1);
+            return new Vertex(v, 0);
         }
         public static Vertex operator +(Vertex v1, Vertex v2)
         {
             Vector3 v = v1.Vector + v2.Vector;
-            return new Vertex(v, -1);
+            return new Vertex(v, 0);
         }
         public static Vertex operator /(Vertex v1, Vertex v2)
         {
 
             Vector3 v = new Vector3(v1.Vector.X / v2.Vector.X, v1.Vector.Y / v2.Vector.Y, v1.Vector.Z / v2.Vector.Z);
-            return new Vertex(v, -1);
+            return new Vertex(v, 0);
         }
         public static Vertex operator /(Vertex v1, float f)
         {
 
             Vector3 v = new Vector3(v1.Vector.X / f, v1.Vector.Y / f, v1.Vector.Z / f);
-            return new Vertex(v, -1);
+            return new Vertex(v, 0);
         }
         public Vertex Clone()
         {

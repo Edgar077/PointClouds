@@ -35,6 +35,13 @@ namespace OpenTKExtension
             this.toolStripTest1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripTest2 = new System.Windows.Forms.ToolStripMenuItem();
 
+            this.toolStripTriangulation = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripOutliers = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripOutliersBatch = new System.Windows.Forms.ToolStripMenuItem();
+            
+
+
+
             this.toolStripLoadTwoPCL = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripPCAAxes = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripICP = new System.Windows.Forms.ToolStripMenuItem();
@@ -271,7 +278,7 @@ namespace OpenTKExtension
             // 
             this.toolStripTest.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripTest1,
-            this.toolStripTest2});
+            this.toolStripTest2, toolStripOutliersBatch, toolStripTriangulation, toolStripOutliers});
             this.toolStripTest.Name = "Test";
             this.toolStripTest.Size = new System.Drawing.Size(37, 20);
             this.toolStripTest.Text = "Test";
@@ -287,10 +294,37 @@ namespace OpenTKExtension
             // 
             // 
             // 
+            this.toolStripTriangulation.Name = "Triangulate";
+            this.toolStripTriangulation.Size = new System.Drawing.Size(340, 22);
+            this.toolStripTriangulation.Text = "Triangulate";
+            this.toolStripTriangulation.Click += new System.EventHandler(this.toolStripTriangulate_Click);
+
+            // 
+            // 
+            // 
+            this.toolStripOutliers.Name = "toolStripOutliers";
+            this.toolStripOutliers.Size = new System.Drawing.Size(340, 22);
+            this.toolStripOutliers.Text = "Outliers";
+            this.toolStripOutliers.Click += new System.EventHandler(this.toolStripOutliers_Click);
+
+
+            // 
+            // 
+            // 
+            this.toolStripOutliersBatch.Name = "toolStripOutliersBatch";
+            this.toolStripOutliersBatch.Size = new System.Drawing.Size(340, 22);
+            this.toolStripOutliersBatch.Text = "Outliers Batch";
+            this.toolStripOutliersBatch.Click += new System.EventHandler(this.toolStripOutliersBatch_Click);
+
+            // 
+            // 
+            // 
             this.toolStripTest2.Name = "Test2";
             this.toolStripTest2.Size = new System.Drawing.Size(340, 22);
             this.toolStripTest2.Text = "Test2";
             this.toolStripTest2.Click += new System.EventHandler(this.toolStripTest2_Click);
+
+
 
 
             // 
@@ -480,6 +514,11 @@ namespace OpenTKExtension
         private System.Windows.Forms.ToolStripMenuItem toolStripTest;
         private System.Windows.Forms.ToolStripMenuItem toolStripTest1;
         private System.Windows.Forms.ToolStripMenuItem toolStripTest2;
+        private System.Windows.Forms.ToolStripMenuItem toolStripOutliersBatch;
+        
+        private System.Windows.Forms.ToolStripMenuItem toolStripTriangulation;
+        private System.Windows.Forms.ToolStripMenuItem toolStripOutliers;
+
 
 
     }

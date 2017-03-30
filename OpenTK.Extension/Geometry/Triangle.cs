@@ -69,7 +69,14 @@ namespace OpenTKExtension
             this.IndVertices.Add(Convert.ToUInt32(k));
             //Normal = new Vector3();
         }
-       
+        public Triangle(uint i, uint j, uint k) : this()
+        {
+            this.IndVertices.Add(i);
+            this.IndVertices.Add(j);
+            this.IndVertices.Add(k);
+            //Normal = new Vector3();
+        }
+
         /// <summary>
         /// 
         /// </summary>

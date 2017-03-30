@@ -452,7 +452,21 @@ namespace OpenTKExtension
             
 
         }
-       
+        public static List<Vertex> ToListVertices(PointCloud pc)
+        {
+            List<Vertex> vList = new List<Vertex>();
+             int notSet = 0;
+            for (int i = 0; i < pc.Vectors.Length; i++)
+            {
+                Vertex v = new Vertex(pc.Vectors[i], pc.Colors[i], pc.Indices[i]);
+                vList.Add(v);
+
+
+            }
+            
+            return vList;
+        }
+
         public void ToObjFile(string path, string fileName)
         {
             if (GLSettings.ShowPointCloudAsTexture)
@@ -775,7 +789,29 @@ namespace OpenTKExtension
 
 
         }
+        public void CreateIndicesFromTriangles(List<TriangleVectors> listTriangleVectors)
+        {
+            List<Triangle> listTriangles = new List<Triangle>();
 
+
+            for (int i = 0; i < listTriangleVectors.Count; i++)
+            {
+
+                TriangleVectors tv = listTriangleVectors[i];
+                Triangle t = new Triangle(tv.A.Index, tv.B.Index, tv.C.Index);
+
+                listTriangles.Add(t);
+
+
+            }
+
+
+
+            this.Triangles = listTriangles;
+            this.CreateIndicesFromTriangles();
+
+        }
+          
    
         public void CreateIndicesFromTriangles()
         {
@@ -785,16 +821,54 @@ namespace OpenTKExtension
                 int ind = 0;
                 foreach (Triangle t in this.Triangles)
                 {
-
-                    //this.Indices[ind++] = t.IndVertices[0] + 1;
-                    //this.Indices[ind++] = t.IndVertices[1] + 1;
-                    //this.Indices[ind++] = t.IndVertices[2] + 1;
                     this.Indices[ind++] = t.IndVertices[0];
                     this.Indices[ind++] = t.IndVertices[1];
                     this.Indices[ind++] = t.IndVertices[2];
 
                 }
             }
+
+            ////in case there are more vectors than indices
+            //if (this.Indices.Length < this.Vectors.Length)
+            //{
+            //    for (int i = this.Indices.Length; i < this.Vectors.Length; i++)
+            //    {
+            //        this.Indices[i] = Convert.ToUInt32(i);
+
+            //    }
+            //}
+        }
+        public static PointCloud FromTriangleVectors(List<TriangleVectors> listTriangleVectors)
+        {
+            List<Triangle> listTriangles = new List<Triangle>();
+            List<Vector3> newVectors = new List<Vector3>();
+
+            for (int i = 0; i < listTriangleVectors.Count; i++)
+            {
+                Triangle t = new Triangle(newVectors.Count, newVectors.Count + 1, newVectors.Count + 2);
+                TriangleVectors tv = listTriangleVectors[i];
+
+                listTriangles.Add(t);
+                //if(!newVectors.Contains(tv.A))
+                //    newVectors.Add(tv.A);
+                //if (!newVectors.Contains(tv.B))
+                //    newVectors.Add(tv.B);
+                //if (!newVectors.Contains(tv.C))
+                //    newVectors.Add(tv.C);
+
+                newVectors.Add(tv.A.Vector);
+                newVectors.Add(tv.B.Vector);
+                newVectors.Add(tv.C.Vector);
+
+            }
+
+
+            PointCloud pcNew = PointCloud.FromListVector3(newVectors);
+            pcNew.Triangles = listTriangles;
+            pcNew.CreateIndicesFromTriangles();
+
+            return pcNew;
+
         }
         public void CreateIndicesDefault()
         {
@@ -811,26 +885,26 @@ namespace OpenTKExtension
             }
         }
 
-        public void CreateIndicesFromNewTriangles(List<OpenTKExtension.Triangulation.Triangle> listTriangles)
-        {
-            if (listTriangles != null)
-            {
-                this.Indices = new uint[listTriangles.Count * 3];
-                int ind = 0;
-                Triangles = new List<Triangle>();
-                foreach (OpenTKExtension.Triangulation.Triangle t in listTriangles)
-                {
+        //public void CreateIndicesFromNewTriangles(List<OpenTKExtension.TriangleVectors> listTriangles)
+        //{
+        //    if (listTriangles != null)
+        //    {
+        //        this.Indices = new uint[listTriangles.Count * 3];
+        //        int ind = 0;
+        //        Triangles = new List<Triangle>();
+        //        foreach (OpenTKExtension.TriangleVectors t in listTriangles)
+        //        {
 
-                    this.Indices[ind++] = Convert.ToUInt32(t.A_Index);
-                    this.Indices[ind++] = Convert.ToUInt32(t.B_Index);
-                    this.Indices[ind++] = Convert.ToUInt32(t.C_Index);
-                    Triangles.Add(new Triangle(Convert.ToInt32(t.A_Index), Convert.ToInt32(t.B_Index), Convert.ToInt32(t.C_Index)));
-                }
-            }
-        }
+        //            this.Indices[ind++] = Convert.ToUInt32(t.A_Index);
+        //            this.Indices[ind++] = Convert.ToUInt32(t.B_Index);
+        //            this.Indices[ind++] = Convert.ToUInt32(t.C_Index);
+        //            Triangles.Add(new Triangle(Convert.ToInt32(t.A_Index), Convert.ToInt32(t.B_Index), Convert.ToInt32(t.C_Index)));
+        //        }
+        //    }
+        //}
 
      
-        private List<List<VertexKDTree>> OrderVectorsWithIndex()
+        private List<List<VertexKDTree>> SortVectorsWithIndex()
         {
             List<List<VertexKDTree>> listNew = new List<List<VertexKDTree>>();
 

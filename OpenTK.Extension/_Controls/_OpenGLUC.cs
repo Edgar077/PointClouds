@@ -749,5 +749,73 @@ namespace OpenTKExtension
 
             this.Cursor = Cursors.Default;
         }
+        private void toolStripTriangulate_Click(object sender, EventArgs e)
+        {
+
+            //testClouds_FirstIteration();
+
+            return;
+        }
+        private void toolStripOutliers_Click(object sender, EventArgs e)
+        {
+
+            if(this.glControl1.GLrender.RenderableObjects.Count > 0)
+            {
+                PointCloud pc = this.glControl1.GLrender.RenderableObjects[0].PointCloud;
+                int thresholdNeighboursCount = 10;
+                float thresholdDistance = 4e-4f;
+
+                PointCloud pcWithOutliersMarkedRed;
+                PointCloud pointCloudClean = ICPLib.Outliers.ByStandardDeviation(pc, thresholdNeighboursCount, thresholdDistance, out pcWithOutliersMarkedRed);
+
+
+                RemoveAllModels();
+                this.glControl1.GLrender.ClearAllObjects();
+                ShowPointCloud(pcWithOutliersMarkedRed);
+              
+
+            }
+
+          
+
+            // tweaks
+
+            //PointCloud pointCloudClean = tree.RemoveOutliersNeighbour(PointCloudDirty, thresholdDistance, thresholdNeighboursCount);
+
+            //pointCloudClean.ToObjFile(pathResult + "\\CleanPointCloudSequence#" + i.ToString() + ".obj");
+
+        }
+        private void toolStripOutliersBatch_Click(object sender, EventArgs e)
+        {
+            string directory = GLSettings.Path + GLSettings.PathModels + "\\Nick";
+            string pathResult = directory + "\\clean";
+            string[] dirtyModels = System.IO.Directory.GetFiles(directory, "*.obj");
+            if (!System.IO.Directory.Exists(pathResult))
+                System.IO.Directory.CreateDirectory(pathResult);
+
+            for (int i = 0; i < 1; i++)
+            {
+                PointCloud pointCloudDirty = PointCloud.FromObjFile(dirtyModels[i]);
+
+             
+
+                int thresholdNeighboursCount = 10;
+                float thresholdDistance = 4e-4f;
+
+                PointCloud pcOutliers;
+                PointCloud pointCloudClean = ICPLib.Outliers.ByStandardDeviation(pointCloudDirty, thresholdNeighboursCount, thresholdDistance, out pcOutliers);
+
+                // tweaks
+
+                //PointCloud pointCloudClean = tree.RemoveOutliersNeighbour(PointCloudDirty, thresholdDistance, thresholdNeighboursCount);
+
+                pointCloudClean.ToObjFile(pathResult + "\\CleanPointCloudSequence#" + i.ToString() + ".obj");
+            }
+
+            //testClouds_FirstIteration();
+
+            return;
+        }
+
     }
 }

@@ -56,7 +56,7 @@ namespace OpenTKExtension
 
 
                 this.ModelViewMode = ModelViewMode.Camera;
-
+                
             }
             catch(Exception err)
             {
@@ -141,21 +141,25 @@ namespace OpenTKExtension
             if (!GLSettings.DesignMode)
             //if (!DesignMode)
             {
-                this.GLrender.Camera.PerspectiveUpdate(this.Width, this.Height);
-                //program["projection_matrix"].SetValue(p);
-
-                if (this.GLrender.GLContextInitialized)
+                //sometimes this is called during constructor
+                if (GLrender != null)
                 {
+                    this.GLrender.Camera.PerspectiveUpdate(this.Width, this.Height);
+                    //program["projection_matrix"].SetValue(p);
 
-                    if (this.Width < 0)
-                        this.Width = 1;
-                    if (this.Height < 0)
-                        this.Height = 1;
-                    this.MakeCurrent();
-                    GL.Viewport(0, 0, this.Width, this.Height);
-                    this.Invalidate();
+                    if (this.GLrender.GLContextInitialized)
+                    {
+
+                        if (this.Width < 0)
+                            this.Width = 1;
+                        if (this.Height < 0)
+                            this.Height = 1;
+                        this.MakeCurrent();
+                        GL.Viewport(0, 0, this.Width, this.Height);
+                        this.Invalidate();
 
 
+                    }
                 }
             }
 

@@ -105,7 +105,7 @@ namespace OpenTKExtension
 
         public bool rearrange;
         public int NumberOfNeighbours; // , nfound;
-        public float Ballsize;
+        public float Radius;
       
         public ListKDTreeResultVectors SearchResult = new ListKDTreeResultVectors(); // results
        
@@ -115,7 +115,7 @@ namespace OpenTKExtension
        {
             this.VectorTarget = qv_in;
           
-            Ballsize = float.MaxValue;
+            Radius = float.MaxValue;
             NumberOfNeighbours = 0;
         }
 

@@ -1,9 +1,9 @@
 ﻿///////////////////////////////////////////////////////////////////////////////
 //
-//  Mesh.cs
-//
+// Bowyer–Watson algorithm for Delaunay triangulation
+//  https://en.wikipedia.org/wiki/Bowyer–Watson_algorithm
 //  By Philip R. Braica (HoshiKata@aol.com, VeryMadSci@gmail.com)
-//
+// from https://www.codeproject.com/Articles/492435/Delaunay-Triangulation-For-Fast-Mesh-Generation
 //  Distributed under the The Code Project Open License (CPOL)
 //  http://www.codeproject.com/info/cpol10.aspx
 ///////////////////////////////////////////////////////////////////////////////
@@ -22,9 +22,12 @@ namespace OpenTKExtension.Triangulation
     /// <summary>
     /// Mesh generation.
     /// </summary>
+    /// 
+
     public class Mesh
     {
-        private PointCloud pointCloud;
+        //private PointCloud pointCloud;
+
         #region Protected data
         /// <summary>
         /// Recursion limit.
@@ -34,12 +37,12 @@ namespace OpenTKExtension.Triangulation
         /// <summary>
         /// The points.
         /// </summary>
-        protected List<Vector3> vertices = new List<Vector3>();
+        public List<Vertex> Vertices;
 
         /// <summary>
         /// The facets.
         /// </summary>
-        protected List<Triangle> triangles = new List<Triangle>();
+        public List<TriangleVectors> Triangles = new List<TriangleVectors>();
 
         /// <summary>
         /// Bounds
@@ -48,23 +51,7 @@ namespace OpenTKExtension.Triangulation
         #endregion
 
         #region Properties: Points, Facets, Bounds, Recursion.
-        /// <summary>
-        /// The points.
-        /// </summary>
-        public List<Vector3> Vertices
-        {
-            get { return vertices; }
-            set { vertices = value; }
-        }
-
-        /// <summary>
-        /// The facets.
-        /// </summary>
-        public List<Triangle> Triangles
-        {
-            get { return triangles; }
-            set { triangles = value; }
-        }
+      
 
         ///// <summary>
         ///// Bounds.
@@ -86,27 +73,40 @@ namespace OpenTKExtension.Triangulation
 
         #endregion
 
-   
+        public static Mesh Triangulate(PointCloud pointCloud, int recursion)
+        {
+            Mesh m = new Mesh();
+            m.Recursion = recursion;
+            System.DateTime start = System.DateTime.Now;
 
+            m.ComputeMesh(pointCloud);
+
+            return m;
+        }
+      
         /// <summary>
         /// Compute.
         /// </summary>
         /// <param name="set"></param>
         /// <param name="bounds"></param>
-        public void Compute(PointCloud mypointCloud)
+        public void ComputeMesh (PointCloud mypointCloud)
         {
-            pointCloud = mypointCloud;
-            List<Vector3> cornerVectors = AddCornerTriangles();
-            Triangle t1 = new Triangle();
-            t1.A = mypointCloud.Vectors[0];
-            t1.B = mypointCloud.Vectors[1];
-            t1.C = mypointCloud.Vectors[2];
-            Triangles.Add(t1);
+            this.Vertices = PointCloud.ToListVertices(mypointCloud);
+
             
-            for (int i = 0; i < mypointCloud.Vectors.Length; i++)
+            List<Vertex> cornerVectors = AddCornerTriangles(mypointCloud);
+
+            TriangleVectors t1 = new TriangleVectors(this.Vertices[0], this.Vertices[1], this.Vertices[2]);
+
+            //t1.A = mypointCloud.Vectors[0];
+            //t1.B = mypointCloud.Vectors[1];
+            //t1.C = mypointCloud.Vectors[2];
+            Triangles.Add(t1);
+
+            for (int i = 0; i < Vertices.Count; i++)
             {
                 //System.Diagnostics.Debug.WriteLine("In Loop: " + i.ToString() + " : From " + mypointCloud.Vectors.Length.ToString());
-                Append(mypointCloud.Vectors[i]);
+                Append(Vertices[i]);
             }
 
             //for (int i = Triangles.Count - 1; i >= 0; i-- )
@@ -117,7 +117,12 @@ namespace OpenTKExtension.Triangulation
             //        Triangles.RemoveAt(i);
             //    }
             //}
-                AdjustPointCloud(cornerVectors);
+
+            //remove triangles containing the corners
+
+            RemoveTriangles(cornerVectors);
+           
+            //AddCornersToPointCloud(cornerVectors);
 
         }
 
@@ -125,7 +130,7 @@ namespace OpenTKExtension.Triangulation
         /// Append point.
         /// </summary>
         /// <param name="v"></param>
-        public void Append(Vector3 v)
+        public void Append(Vertex v)
         {
             // Find a triangle containing v.
             for (int i = 0; i < Triangles.Count; i++)
@@ -138,151 +143,121 @@ namespace OpenTKExtension.Triangulation
 
 
         }
+        /// <summary>
+        /// Append point.
+        /// </summary>
+        /// <param name="v"></param>
+        public void RemoveTriangles(List<Vertex> cornerVectors)
+        {
+            int iRemoved = 0;
+            for (int iCorner = 0; iCorner < cornerVectors.Count; iCorner++)
+            {
+                Vertex v = cornerVectors[iCorner];
+                // Find a triangle containing v.
+                for (int i = Triangles.Count - 1; i >= 0; i--)
+                {
+                    if (Triangles[i].A.Equals(v) || Triangles[i].B.Equals(v) || Triangles[i].C.Equals(v))
+                    //    if (Triangles[i].Contains(v))
+                    {
+                        iRemoved++;
+                        Triangles.RemoveAt(i);
+                        //Insert(v, Triangles[i]);
+                    }
+                }
+            }
+
+            System.Diagnostics.Debug.WriteLine("Removed " + iRemoved.ToString());
+
+        }
 
         /// <summary>
         /// Setup.
         /// </summary>
         /// <param name="bounds"></param>
-        public List<Vector3> AddCornerTriangles()
+        public List<Vertex> AddCornerTriangles(PointCloud pc)
         {
-            Triangle.ResetIndex();
-            Triangles.Clear();
-            Vertices.Clear();
+            TriangleVectors.ResetIndex();
+            Triangles = new List<TriangleVectors>();
+            //Vertices.Clear();
 
-            Vector3[] corners = pointCloud.BoundingBox.GetCorners();
+            Vector3[] corners = pc.BoundingBox.GetCorners();
 
             Vector3 tl = corners[0];// new Vector3(Bounds.Left, Bounds.Top, 0);
-            
             Vector3 tr = corners[1];// new Vector3(Bounds.Right, Bounds.Top, 0);
-            
             Vector3 br = corners[2];//new Vector3(Bounds.Right, Bounds.Bottom, 0);
-            
             Vector3 bl = corners[3];//new Vector3(Bounds.Left, Bounds.Bottom, 0);
 
-           
-            Triangle t1 = new Triangle();
-            Triangle t2 = new Triangle();
-            t1.A = bl;
-            t1.B = tr;
-            t1.C = tl;
-            t2.A = bl;
-            t2.B = br;
-            t2.C = tr;
+            Vertex vtl = new Vertex(tl, Convert.ToUInt32(this.Vertices.Count));
+            this.Vertices.Add(vtl);
+            Vertex vtr = new Vertex(tr, Convert.ToUInt32(this.Vertices.Count));
+            this.Vertices.Add(vtr);
+            Vertex vbr = new Vertex(br, Convert.ToUInt32(this.Vertices.Count));
+            this.Vertices.Add(vbr);
+            Vertex vbl = new Vertex(bl, Convert.ToUInt32(this.Vertices.Count));
+            this.Vertices.Add(vbl);
+
+
+
+
+            TriangleVectors t1 = new TriangleVectors(vbl, vtr, vtl);
+            TriangleVectors t2 = new TriangleVectors(vbl, vbr, vtr);
+
+            //TriangleVectors t2 = new TriangleVectors();
+
+            //t1.A = bl; t1.A_Index = Convert.ToUInt32(this.Vertices.Count);
+
+            //t1.B = tr;
+            //t1.C = tl;
+            //t2.A = bl;
+            //t2.B = br;
+            //t2.C = tr;
             t1.AB = t2;
             t2.CA = t1;
             Triangles.Add(t1);
             Triangles.Add(t2);
 
 
-            List<Vector3> listVectors = new List<Vector3>();
-            listVectors.Add(tl);
-            listVectors.Add(tr);
-            listVectors.Add(br);
-            listVectors.Add(bl);
+            List<Vertex> listVectors = new List<Vertex>();
+            listVectors.Add(vtl);
+            listVectors.Add(vtr);
+            listVectors.Add(vbr);
+            listVectors.Add(vbl);
 
             return listVectors;
 
         }
-        private void AdjustPointCloud(List<Vector3> vToAdd)
-        {
-            //EDGAR INDEX
-            if (vToAdd.Count > 0)
-            {
-                //extend point cloud
-                List<Vector3> listVectors = new List<Vector3>(pointCloud.Vectors);
-                List<Vector3> listColors = new List<Vector3>(pointCloud.Colors);
-
-                for (int i = 0; i < vToAdd.Count; i++)
-                {
-                    listVectors.Add(vToAdd[i]);
-                    listColors.Add(Vector3.Zero);
-                }
-                
-              
-
-                this.pointCloud.Vectors = listVectors.ToArray();
-                this.pointCloud.Colors = listColors.ToArray();
-            }
-        }
-
-        /// <summary>
-        /// Draw the mesh.
-        /// </summary>
-        /// <param name="g"></param>
-        /// <param name="minx"></param>
-        /// <param name="miny"></param>
-        /// <param name="maxx"></param>
-        /// <param name="maxy"></param>
-        public void Draw(System.Drawing.Graphics g, int minx, int miny, int maxx, int maxy)
-        {
-            System.Drawing.Pen[] pens = { 
-                System.Drawing.Pens.Red, 
-                System.Drawing.Pens.Green,
-                System.Drawing.Pens.Blue, 
-                System.Drawing.Pens.Orange,
-                System.Drawing.Pens.Purple, 
-                System.Drawing.Pens.Brown,
-                System.Drawing.Pens.Violet, 
-                System.Drawing.Pens.Lime,
-                System.Drawing.Pens.DarkBlue, 
-                System.Drawing.Pens.Magenta,
-                System.Drawing.Pens.Cyan, 
-                System.Drawing.Pens.DarkRed};
-
-            maxx -= 2;
-            maxy -= 2;
-            for (int i = 0; i < Triangles.Count; i++)
-            {
-                float x = Triangles[i].OpositeOfEdge(0).X;
-                float y = Triangles[i].OpositeOfEdge(0).Y;
-                int k = i % pens.Length;
-                for (int j = 1; j < 4; j++)
-                {
-                    x = x < minx ? minx : x;
-                    y = y < miny ? miny : y;
-                    x = x > maxx ? maxx : x;
-                    y = y > maxy ? maxy : y;
-
-                    float nx = Triangles[i].OpositeOfEdge(j).X;
-                    float ny = Triangles[i].OpositeOfEdge(j).Y;
-                    nx = nx < minx ? minx : nx;
-                    ny = ny < miny ? miny : ny;
-                    nx = nx > maxx ? maxx : nx;
-                    ny = ny > maxy ? maxy : ny;
-                    g.DrawLine(pens[k], x, y, nx, ny);
-                    x = nx;
-                    y = ny;
-                }
-            }
-
-        }
+      
    
         /// <summary>
         /// Insert.
         /// </summary>
         /// <param name="v"></param>
         /// <param name="old"></param>
-        protected void Insert(Vector3 v, Triangle old)
+        protected void Insert(Vertex v, TriangleVectors old)
         {
             // Avoid duplicates, if this facet contains v as a Vector3,
             // just return.
-            if ((old.A.X == v.X) && (old.A.Y == v.Y)) return;
-            if ((old.B.X == v.X) && (old.B.Y == v.Y)) return;
-            if ((old.C.X == v.X) && (old.C.Y == v.Y)) return;
+            if ((old.A.Vector.X == v.Vector.X) && (old.A.Vector.Y == v.Vector.Y))
+                return;
+            if ((old.B.Vector.X == v.Vector.X) && (old.B.Vector.Y == v.Vector.Y))
+                return;
+            if ((old.C.Vector.X == v.Vector.X) && (old.C.Vector.Y == v.Vector.Y))
+                return;
 
-            vertices.Add(v);
+            //Vertex.Add(v);
 
             // Split old into 3 triangles,
             // Because old is counter clockwise, when duplicated,
             // ab, bc, ca is counter clockwise.
             // By changing one point and keeping to the commutation, 
             // they remain counter clockwise.
-            Triangle ab = new Triangle(old); // contains old ab, v is new C.
-            Triangle bc = new Triangle(old); // contains old bc, v is new A.
-            Triangle ca = new Triangle(old); // contains old ca, v is new B.
+            TriangleVectors ab = new TriangleVectors(old); // contains old ab, v is new C.
+            TriangleVectors bc = new TriangleVectors(old); // contains old bc, v is new A.
+            TriangleVectors ca = new TriangleVectors(old); // contains old ca, v is new B.
+
             ab.C = v;
-            bc.A = v;
-            ca.B = v;
+            bc.A = v; 
+            ca.B = v; 
 
             // This also makes assigning the sides easy.
             ab.BC = bc;
@@ -306,8 +281,8 @@ namespace OpenTKExtension.Triangulation
             // This is faster, null check is once per edge, and default logic
             // reduces the compares by one. Instead of 3*3*2 comparisons = 18,
             // Worst case is 3*3 = 9, Average is 2+3+3=8.
-            Triangle[] ta = { ab.AB, bc.BC, ca.CA };
-            Triangle[] tb = { ab, bc, ca };
+            TriangleVectors[] ta = { ab.AB, bc.BC, ca.CA };
+            TriangleVectors[] tb = { ab, bc, ca };
             for (int j = 0; j < 3; j++)
             {
                 if (ta[j] == null) continue;
@@ -350,7 +325,7 @@ namespace OpenTKExtension.Triangulation
         /// <param name="a"></param>
         /// <param name="b"></param>
         /// <param name="depth"></param>
-        protected void flipIfNeeded(Triangle a, Triangle b, int depth)
+        protected void flipIfNeeded(TriangleVectors a, TriangleVectors b, int depth)
         {
             if (depth <= 0) return;
             if (a == null) return;
@@ -395,15 +370,15 @@ namespace OpenTKExtension.Triangulation
             // Replace a and b, flipping replacements as needed.
             // opposite and next of opposite remains as an edge in each, and the oposites switch!
 
-            Triangle[] ts = { a.Edge(0), a.Edge(1), a.Edge(2), b.Edge(0), b.Edge(1), b.Edge(2) };
+            TriangleVectors[] ts = { a.Edge(0), a.Edge(1), a.Edge(2), b.Edge(0), b.Edge(1), b.Edge(2) };
 
             // The oposite is simple, if the edges are 0=AB, 1=BC, 2=CA, then 
             // the oposites are C, A, B (counter clockwise conjugate). 
-            Vector3 aOp = a.OpositeOfEdge(ai);
-            Vector3 bOp = b.OpositeOfEdge(bi);
+            Vertex aOp = a.OppositeOfEdge(ai);
+            Vertex bOp = b.OppositeOfEdge(bi);
 
-            a.SetVector3(ai + 1, bOp);
-            b.SetVector3(bi + 1, aOp);
+            a.SetVector(ai + 1, bOp);
+            b.SetVector(bi + 1, aOp);
 
             a.AB = null;
             a.BC = null;

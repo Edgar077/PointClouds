@@ -293,18 +293,17 @@ namespace OpenTKExtension
                 }
 
                 GL.PolygonMode(MaterialFace.FrontAndBack, myPolygonMode);
-                
-                //GL.PolygonMode(MaterialFace.Front, myPolygonMode);
-                if (this.PointCloud.Indices != null && this.PointCloud.Indices.Length == 0)
+                if (this.PointCloud.Indices == null || this.PointCloud.Indices.Length == 0)
                 {
                     System.Windows.Forms.MessageBox.Show("SW Error: Indices of PointCloud are not set, cannot draw in OpenGL");
-
                 }
                 else
                 {
                     GL.DrawElements(myRenderMode, this.PointCloud.Indices.Length, DrawElementsType.UnsignedInt, 0);
                     //GL.DrawArrays(myRenderMode, 0, this.PointCloud.Indices.Length);
                 }
+               
+                
 
                
 

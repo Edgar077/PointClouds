@@ -16,32 +16,30 @@ using System.Text;
 using OpenTKExtension;
 using OpenTK;
 
-namespace OpenTKExtension.Triangulation
+namespace OpenTKExtension
 {
 
     /// <summary>
     /// Triangle class.
     /// </summary>
-    public class Triangle
+    public class TriangleVectors
     {
         // Vector3es.
-        protected Vector3 m_a = Vector3.Zero;
-        protected Vector3 m_b = Vector3.Zero;
-        protected Vector3 m_c = Vector3.Zero;
+        protected Vertex a;//= Vector3.Zero;
+        protected Vertex b;// = Vector3.Zero;
+        protected Vertex c;// = Vector3.Zero;
 
-        public uint A_Index;
-        public uint B_Index;
-        public uint C_Index;
+      
 
 
 
         // Lengths.
-        protected float m_abLen = 0;
-        protected float m_bcLen = 0;
-        protected float m_caLen = 0;
-        protected bool m_abLenCalcd = false;
-        protected bool m_bcLenCalcd = false;
-        protected bool m_caLenCalcd = false;
+        protected float abLen = 0;
+        protected float bcLen = 0;
+        protected float caLen = 0;
+        protected bool abLenCalcd = false;
+        protected bool bcLenCalcd = false;
+        protected bool caLenCalcd = false;
 
         // Side determinations.
         protected bool m_abDet = false;
@@ -57,9 +55,9 @@ namespace OpenTKExtension.Triangulation
         protected static int m_index = 0;
 
         // Sides
-        protected Triangle m_ab = null;
-        protected Triangle m_bc = null;
-        protected Triangle m_ca = null;
+        //protected TriangleVectors m_ab = null;
+        //protected TriangleVectors m_bc = null;
+        //protected TriangleVectors m_ca = null;
 
         // Center
         protected bool m_centerComputed = false;
@@ -81,11 +79,11 @@ namespace OpenTKExtension.Triangulation
         public int RegionCode { get; set; }
 
 
-        #region Construcors: (), (Triangle src), (Vector3 a, Vector3 b, Vector3 c)
+        #region Construcors
         /// <summary>
         /// Constructor.
         /// </summary>
-        public Triangle() 
+        public TriangleVectors() 
         {
             Index = m_index;
             m_index++;
@@ -95,11 +93,14 @@ namespace OpenTKExtension.Triangulation
         /// Copy constructor.
         /// </summary>
         /// <param name="src"></param>
-        public Triangle(Triangle src)
+        public TriangleVectors(TriangleVectors src)
         {
             A = src.A;
             B = src.B;
             C = src.C;
+
+          
+
             AB = src.AB;
             BC = src.BC;
             CA = src.CA;
@@ -107,13 +108,44 @@ namespace OpenTKExtension.Triangulation
             m_index++;
         }
 
+        ///// <summary>
+        ///// Constructor by Vector3.
+        ///// </summary>
+        ///// <param name="a"></param>
+        ///// <param name="b"></param>
+        ///// <param name="c"></param>
+        //public TriangleVectors(Vector3 a, Vector3 b, Vector3 c)
+        //{
+        //    A = a;
+        //    B = b;
+        //    C = c;
+        //    Index = m_index;
+        //    m_index++;
+        //}
         /// <summary>
         /// Constructor by Vector3.
         /// </summary>
         /// <param name="a"></param>
         /// <param name="b"></param>
         /// <param name="c"></param>
-        public Triangle(Vector3 a, Vector3 b, Vector3 c)
+        public TriangleVectors(Vertex a, Vertex b, Vertex c)
+        {
+            A = a;
+            B = b;
+            C = c;
+
+            
+
+            Index = m_index;
+            m_index++;
+        }
+        /// <summary>
+        /// Constructor by Vector3.
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <param name="c"></param>
+        public TriangleVectors(Vertex a, Vertex b, Vertex c, uint aIndex, uint bIndex, uint cIndex )
         {
             A = a;
             B = b;
@@ -123,8 +155,8 @@ namespace OpenTKExtension.Triangulation
         }
         #endregion
 
-   
-   
+
+
         /// <summary>
         /// To string.
         /// </summary>
@@ -143,14 +175,14 @@ namespace OpenTKExtension.Triangulation
             {
                 if (m_centerComputed) return m_center;
                 m_center = new Vector3(
-                    (A.X + B.X + C.X) / 3f,
-                    (A.Y + B.Y + C.Y) / 3f,
-                    (A.Z + B.Z + C.Z) / 3f);
+                    (A.Vector.X + B.Vector.X + C.Vector.X) / 3f,
+                    (A.Vector.Y + B.Vector.Y + C.Vector.Y) / 3f,
+                    (A.Vector.Z + B.Vector.Z + C.Vector.Z) / 3f);
 
-                float delta = m_center.DeltaSquaredXY(A);
-                float tmp = m_center.DeltaSquaredXY(B);
+                float delta = m_center.DeltaSquaredXY(A.Vector);
+                float tmp = m_center.DeltaSquaredXY(B.Vector);
                 delta = delta > tmp ? delta : tmp;
-                tmp = m_center.DeltaSquaredXY(C);
+                tmp = m_center.DeltaSquaredXY(C.Vector);
                 delta = delta > tmp ? delta : tmp;
                 FarthestFromCenter = delta;
                 m_centerComputed = true;
@@ -167,71 +199,72 @@ namespace OpenTKExtension.Triangulation
         /// <summary>
         /// Vector3 A
         /// </summary>
-        public Vector3 A
+        public Vertex A
         {
-            get { return m_a; }
+            get { return a; }
             set 
             {
-                if (m_a == value) return;
+                if (a == value)
+                    return;
                 m_abDetCalcd = false;
                 m_caDetCalcd = false;
-                m_abLenCalcd = false;
-                m_caLenCalcd = false;
+                abLenCalcd = false;
+                caLenCalcd = false;
                 m_centerComputed = false;
-                m_a = value;
+                a = value;
             }
         }
 
         /// <summary>
         /// Vector3 B
         /// </summary>
-        public Vector3 B
+        public Vertex B
         {
-            get { return m_b; }
+            get { return b; }
             set
             {
-                if (m_b == value) return;
+                if (b == value) return;
                 m_abDetCalcd = false;
                 m_bcDetCalcd = false;
-                m_abLenCalcd = false;
-                m_bcLenCalcd = false;
+                abLenCalcd = false;
+                bcLenCalcd = false;
                 m_centerComputed = false;
-                m_b = value;
+                b = value;
             }
         }
 
         /// <summary>
         /// Vector3 C
         /// </summary>
-        public Vector3 C
+        public Vertex C
         {
-            get { return m_c; }
+            get { return c; }
             set
             {
-                if (m_c == value) return;
+                if (c == value) return;
                 m_caDetCalcd = false;
                 m_bcDetCalcd = false;
-                m_caLenCalcd = false;
-                m_bcLenCalcd = false;
+                caLenCalcd = false;
+                bcLenCalcd = false;
                 m_centerComputed = false;
-                m_c = value;
+                c = value;
             }
         }
 
         /// <summary>
         /// Triangle AB shares side AB.
         /// </summary>
-        public Triangle AB { get { return m_ab; } set { m_ab = value; } }
+        public TriangleVectors AB;
 
         /// <summary>
         /// Triangle BC shares side BC.
         /// </summary>
-        public Triangle BC { get { return m_bc; } set { m_bc = value; } }
+        public TriangleVectors BC;
 
         /// <summary>
         /// Triangle CA shares side CA.
         /// </summary>
-        public Triangle CA { get { return m_ca; } set { m_ca = value; } }
+        public TriangleVectors CA;
 
 
         /// <summary>
@@ -243,7 +276,7 @@ namespace OpenTKExtension.Triangulation
             {
                 if (!m_abDetCalcd)
                 {
-                    m_abDet = Vector3Test(A, B, C);
+                    m_abDet = sidednessTest(A, B, C);
                 }
                 return m_abDet;
             }
@@ -258,7 +291,7 @@ namespace OpenTKExtension.Triangulation
             {
                 if (!m_bcDetCalcd)
                 {
-                    m_bcDet = Vector3Test(B, C, A);
+                    m_bcDet = sidednessTest(B, C, A);
                 }
                 return m_bcDet;
             }
@@ -273,7 +306,7 @@ namespace OpenTKExtension.Triangulation
             {
                 if (!m_caDetCalcd)
                 {
-                    m_caDet = Vector3Test(C, A, B);
+                    m_caDet = sidednessTest(C, A, B);
                 }
                 return m_caDet;
             }
@@ -286,38 +319,55 @@ namespace OpenTKExtension.Triangulation
         /// <param name="lb"></param>
         /// <param name="t"></param>
         /// <returns></returns>
-        protected bool Vector3Test(Vector3 la, Vector3 lb, Vector3 t)
+        protected bool sidednessTest(Vertex la, Vertex lb, Vertex t)
         {
             // y = mx + b
-            if (la.X == lb.X)
+            if (la.Vector.X == lb.Vector.X)
             {
                 // Vertical at X.
-                return t.X > la.X;
+                return t.Vector.X > la.Vector.X;
             }
-            if (la.Y == lb.Y)
+            if (la.Vector.Y == lb.Vector.Y)
             {
-                return t.Y > la.Y;
+                return t.Vector.Y > la.Vector.Y;
             }
-            float m = (la.Y - lb.Y)/(la.X - lb.X);
-            float b = la.Y - (m * la.X);
-            return (m * t.X + b - t.Y) > 0;
+            float m = (la.Vector.Y - lb.Vector.Y)/(la.Vector.X - lb.Vector.X);
+            float b = la.Vector.Y - (m * la.Vector.X);
+            return (m * t.Vector.X + b - t.Vector.Y) > 0;
         }
 
+        ///// <summary>
+        ///// Does this contain t.
+        ///// </summary>
+        ///// <param name="v"></param>
+        ///// <returns></returns>
+        //public bool Contains(Vector3 v)
+        //{
+        //    float delta = v.DeltaSquaredXY(Center);
+        //    if (delta > FarthestFromCenter) return false;
+        //    if (abDet != sidednessTest(A, B, v)) return false;
+        //    if (bcDet != sidednessTest(B, C, v)) return false;
+        //    if (caDet != sidednessTest(C, A, v)) return false;
+        //    return true;
+        //}
         /// <summary>
         /// Does this contain t.
         /// </summary>
         /// <param name="v"></param>
         /// <returns></returns>
-        public bool Contains(Vector3 v)
+        public bool Contains(Vertex v)
         {
-            float delta = v.DeltaSquaredXY(Center);
+            float delta = v.Vector.DeltaSquaredXY(Center);
             if (delta > FarthestFromCenter) return false;
-            if (abDet != Vector3Test(A, B, v)) return false;
-            if (bcDet != Vector3Test(B, C, v)) return false;
-            if (caDet != Vector3Test(C, A, v)) return false;
+            if (abDet != sidednessTest(A, B, v))
+                return false;
+            if (bcDet != sidednessTest(B, C, v))
+                return false;
+            if (caDet != sidednessTest(C, A, v))
+                return false;
             return true;
         }
-      
+
 
         /// <summary>
         /// Length of AB, cached and lazy calculated.
@@ -326,14 +376,14 @@ namespace OpenTKExtension.Triangulation
         {
             get
             {
-                if (m_abLenCalcd == true)
+                if (abLenCalcd == true)
                 {
-                    return m_abLen;
+                    return abLen;
                 }
                 if ((A == null) || (B == null)) return -1;
-                m_abLen = A.DeltaSquaredXY(B);
-                m_abLenCalcd = true;
-                return m_abLen;
+                abLen = A.Vector.DeltaSquaredXY(B.Vector);
+                abLenCalcd = true;
+                return abLen;
             }
         }
 
@@ -344,14 +394,14 @@ namespace OpenTKExtension.Triangulation
         {
             get
             {
-                if (m_bcLenCalcd == true)
+                if (bcLenCalcd == true)
                 {
-                    return m_bcLen;
+                    return bcLen;
                 }
                 if ((B == null) || (C == null)) return -1;
-                m_bcLen = B.DeltaSquaredXY(C);
-                m_bcLenCalcd = true;
-                return m_bcLen;
+                bcLen = B.Vector.DeltaSquaredXY(C.Vector);
+                bcLenCalcd = true;
+                return bcLen;
             }
         }
 
@@ -362,14 +412,14 @@ namespace OpenTKExtension.Triangulation
         {
             get
             {
-                if (m_caLenCalcd == true)
+                if (caLenCalcd == true)
                 {
-                    return m_caLen;
+                    return caLen;
                 }
                 if ((C == null) || (A == null)) return -1;
-                m_caLen = C.DeltaSquaredXY(A);
-                m_caLenCalcd = true;
-                return m_caLen;
+                caLen = C.Vector.DeltaSquaredXY(A.Vector);
+                caLenCalcd = true;
+                return caLen;
             }
         }
 
@@ -409,7 +459,7 @@ namespace OpenTKExtension.Triangulation
         /// </summary>
         /// <param name="i"></param>
         /// <returns></returns>
-        public Vector3 OpositeOfEdge(int i)
+        public Vertex OppositeOfEdge(int i)
         {
             i = i < 0 ? i + 3 : i > 2 ? i - 3 : i;
             return i == 0 ? C : i == 1 ? A : B;
@@ -420,7 +470,7 @@ namespace OpenTKExtension.Triangulation
         /// </summary>
         /// <param name="i"></param>
         /// <param name="v"></param>
-        public void SetVector3(int i, Vector3 v)
+        public void SetVector(int i, Vertex v)
         {
             i = i < 0 ? i + 3 : i > 2 ? i - 3 : i;
             if (i == 0) A = v;
@@ -442,26 +492,26 @@ namespace OpenTKExtension.Triangulation
             float dy2 = 0;
             if (i == 0)
             {
-                dx1 = B.X - A.X;
-                dy1 = B.Y - A.Y;
-                dx2 = C.X - A.X;
-                dy2 = C.Y - A.Y;
+                dx1 = B.Vector.X - A.Vector.X;
+                dy1 = B.Vector.Y - A.Vector.Y;
+                dx2 = C.Vector.X - A.Vector.X;
+                dy2 = C.Vector.Y - A.Vector.Y;
             }
             else
             {
                 if (i == 1)
                 {
-                    dx1 = C.X - B.X;
-                    dy1 = C.Y - B.Y;
-                    dx2 = A.X - B.X;
-                    dy2 = A.Y - B.Y;
+                    dx1 = C.Vector.X - B.Vector.X;
+                    dy1 = C.Vector.Y - B.Vector.Y;
+                    dx2 = A.Vector.X - B.Vector.X;
+                    dy2 = A.Vector.Y - B.Vector.Y;
                 }
                 else
                 {
-                    dx1 = A.X - C.X;
-                    dy1 = A.Y - C.Y;
-                    dx2 = B.X - C.X;
-                    dy2 = B.Y - C.Y;
+                    dx1 = A.Vector.X - C.Vector.X;
+                    dy1 = A.Vector.Y - C.Vector.Y;
+                    dx2 = B.Vector.X - C.Vector.X;
+                    dy2 = B.Vector.Y - C.Vector.Y;
                 }
             }
             float mag1 = (dx1 * dx1) + (dy1 * dy1);
@@ -491,9 +541,9 @@ namespace OpenTKExtension.Triangulation
         /// <returns></returns>
         public bool Inside(System.Drawing.RectangleF region)
         {
-            if (!A.InsideXY(region)) return false;
-            if (!B.InsideXY(region)) return false;
-            if (!C.InsideXY(region)) return false;
+            if (!A.Vector.InsideXY(region)) return false;
+            if (!B.Vector.InsideXY(region)) return false;
+            if (!C.Vector.InsideXY(region)) return false;
             return true;
         }
 
@@ -502,7 +552,7 @@ namespace OpenTKExtension.Triangulation
         /// </summary>
         /// <param name="a"></param>
         /// <returns></returns>
-        public void RepairEdges(Triangle a)
+        public void RepairEdges(TriangleVectors a)
         {
             // Check if a.AB is in this.
             if (this.Index == a.Index) return;
@@ -519,7 +569,7 @@ namespace OpenTKExtension.Triangulation
         /// <param name="a"></param>
         /// <param name="b"></param>
         /// <returns></returns>
-        protected bool bothIn(Triangle t, Vector3 a, Vector3 b)
+        protected bool bothIn(TriangleVectors t, Vertex a, Vertex b)
         {
             if (a == A) 
             {
@@ -544,7 +594,7 @@ namespace OpenTKExtension.Triangulation
         /// </summary>
         /// <param name="i"></param>
         /// <returns></returns>
-        public Vector3 GetVector3(int i)
+        public Vertex GetVertex(int i)
         {
             i = i < 0 ? i + 3 : i > 2 ? i - 3 : i;
             if (i == 0) return A;
@@ -557,7 +607,7 @@ namespace OpenTKExtension.Triangulation
         /// </summary>
         /// <param name="i"></param>
         /// <param name="t"></param>
-        public void SetEdge(int i, Triangle t)
+        public void SetEdge(int i, TriangleVectors t)
         {
             i = i < 0 ? i + 3 : i > 2 ? i - 3 : i;
             if (i == 0) AB = t;
@@ -570,7 +620,7 @@ namespace OpenTKExtension.Triangulation
         /// </summary>
         /// <param name="i"></param>
         /// <returns></returns>
-        public Triangle Edge(int i)
+        public TriangleVectors Edge(int i)
         {
             return i == 0 ? AB : i == 1 ? BC : CA;
         }

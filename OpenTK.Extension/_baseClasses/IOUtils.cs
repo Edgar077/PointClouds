@@ -93,7 +93,7 @@ namespace OpenTKExtension
         {
             PointCloud myPCL = new PointCloud();
             string line = string.Empty;
-            int indexInModel = -1;
+            uint indexInModel = 0;
             try
             {
 
@@ -123,8 +123,8 @@ namespace OpenTKExtension
                                 //    break;
                                 case "v"://Vertex
                                     vertex = HelperReadVertex(strArrayRead);
-                                    indexInModel++;
                                     vertex.Index = indexInModel;
+                                    indexInModel++;
                                     myPCL.Add(vertex);
                                     break;
                            

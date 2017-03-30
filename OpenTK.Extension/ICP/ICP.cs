@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,6 +11,7 @@ using System.Windows.Media;
 using System.Diagnostics;
 using OpenTK;
 using OpenTKExtension;
+using System.Linq;
 
 namespace ICPLib
 {
@@ -604,7 +604,12 @@ namespace ICPLib
             PointCloud pTarget = null;
 
 
-            string[] files = System.IO.Directory.GetFiles(directory, "*.obj");
+            string[] filesUnsorted = System.IO.Directory.GetFiles(directory, "*.obj");
+            
+            var listFilesUnsorted = new List<string>(filesUnsorted);
+            var listFilesSorted = listFilesUnsorted.OrderBy(x => x, new NaturalStringComparer());
+            string[] files = listFilesSorted.ToArray();
+
             string pathResult = directory + "\\result";
 
             if (!System.IO.Directory.Exists(pathResult))

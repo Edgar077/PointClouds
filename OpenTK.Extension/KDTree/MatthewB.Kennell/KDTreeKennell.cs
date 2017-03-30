@@ -362,36 +362,29 @@ namespace OpenTKExtension
         {
             root = null;
         }
-      
+
         #endregion
 
 
 
-     
+        public void FindClosestPoints_Radius(VertexKDTree vertex, float radius, ref int neighboursCount)
+        {
+            // search for all within a ball of a certain radius
+            //ListKDTreeResultVectors result = new ListKDTreeResultVectors();
 
-        //public ListKDTreeResultVectors n_nearest_brute_force(List<float> qv, int nn)
-        //{
-        //    ListKDTreeResultVectors result = new ListKDTreeResultVectors();
+            SearchRecord sr = new SearchRecord(vertex.Vector);
 
-        //    for (int i = 0; i < TreeVectors.Count; i++)
-        //    {
-        //        float dis = 0.0F;
-                
-        //        for (int j = 0; j < 3; j++)
-        //        {
-        //            float f = TreeVectors[i].Vector[j] - qv[j];
-        //            dis += f * f;
-        //        }
-        //        KDTreeResult e = new KDTreeResult(Convert.ToUInt32(i), dis);
-              
-        //        result.Add(e);
-        //    }
+            // Vector3 vdiff = new Vector3();
 
-        //    result.Sort();
-        //    //sort(result.begin(), result.end());
+            sr.Radius = radius;
 
-        //    return result;
-        //}
+            root.search(sr);
+
+            ListKDTreeResultVectors listResult = sr.SearchResult;
+
+            neighboursCount = listResult.Count;
+
+        }
         public ListKDTreeResultVectors Find_N_Nearest(Vector3 qv, int numberOfNeighbours)
         {
             
@@ -441,7 +434,7 @@ namespace OpenTKExtension
 
           
             sr.NumberOfNeighbours = 0;
-            sr.Ballsize = r2;
+            sr.Radius = r2;
 
             root.search(sr);
 
@@ -488,7 +481,7 @@ namespace OpenTKExtension
             SearchRecord sr = new SearchRecord(qv);
             // construct the search record.
          
-            sr.Ballsize = r2;
+            sr.Radius = r2;
             sr.NumberOfNeighbours = 0;
             root.search(sr);
 

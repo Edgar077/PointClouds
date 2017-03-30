@@ -18,7 +18,7 @@ namespace OpenTKExtension
         {
             this.Triangles = new List<Triangle>();
             float distMin = 0.01f;
-            List<List<VertexKDTree>> listNew = OrderVectorsWithIndex();
+            List<List<VertexKDTree>> listNew = SortVectorsWithIndex();
             for (int i = listNew.Count - 1; i > 0; i--)
             {
                 List<VertexKDTree> columnx = listNew[i];

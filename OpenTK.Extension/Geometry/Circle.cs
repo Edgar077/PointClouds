@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using OpenTK;
 using OpenTKExtension;
 
-namespace OpenTKExtension.DelaunayVoronoi
+namespace OpenTKExtension
 {
     public class Circle
     {
@@ -28,7 +28,7 @@ namespace OpenTKExtension.DelaunayVoronoi
         }
 
         public Circle(TriangleVectors t)
-            : this(t.P1, t.P2, t.P3)
+            : this(t.A.Vector, t.B.Vector, t.C.Vector)
         {
 
         }
@@ -72,14 +72,14 @@ namespace OpenTKExtension.DelaunayVoronoi
                 Line l1 = new Line(p1, p2);
                 Line l2 = new Line(p2, p3);
 
-                double m1 = l1.Slope;
-                double m2 = l2.Slope;
+                double m1 = l1.SlopeXY;
+                double m2 = l2.SlopeXY;
 
                 double x = (m1 * m2 * (p1.Y - p3.Y) + m2 * (p1.X + p2.X) - m1 * (p2.X + p3.X)) / (2 * (m2 - m1));
 
                 Line l = m1 != 0 ? l1 : l2;
 
-                Vector3 p = Line.GetYFromVector3(l.MiddleVector3(), -1 / l.Slope, x);
+                Vector3 p = Line.GetYFromVector(l.MiddleVector3(), -1 / l.SlopeXY, x);
 
                 this.Center = p;
                 Vector3 vDist = Vector3.Subtract(p1, this.Center);

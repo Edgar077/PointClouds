@@ -137,6 +137,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ExternalComponents\DotNetMatrix\GeneralMatrix.cs" />
+    <Compile Include="ICP\Outliers.cs" />
     <Compile Include="IO\Collada1\Collada_B_Rep\Curves\Grendgine_Collada_Circle.cs" />
     <Compile Include="IO\Collada1\Collada_B_Rep\Curves\Grendgine_Collada_Curve.cs" />
     <Compile Include="IO\Collada1\Collada_B_Rep\Curves\Grendgine_Collada_Curves.cs" />
@@ -528,17 +529,9 @@
     <Compile Include="LinearAlgebra\Math.cs" />
     <Compile Include="LinearAlgebra\SVD.cs" />
     <Compile Include="LinearAlgebra\SVD_Float.cs" />
-    <Compile Include="Triangulation\DelaunayVoronoiSimple\Circle.cs" />
-    <Compile Include="Triangulation\DelaunayVoronoiSimple\ConvexHull.cs" />
-    <Compile Include="Triangulation\DelaunayVoronoiSimple\Line.cs" />
-    <Compile Include="Triangulation\DelaunayVoronoiSimple\Delaunay.cs" />
-    <Compile Include="Triangulation\DelaunayVoronoiSimple\TriangleVectors.cs" />
-    <Compile Include="Triangulation\DelaunayVoronoiSimple\Tester.cs" />
-    <Compile Include="Triangulation\DelaunayVoronoiSimple\Voronoi.cs" />
-    <Compile Include="Triangulation\DelaunayVoronoi\Context.cs" />
-    <Compile Include="Triangulation\DelaunayVoronoi\DelaunayVoronoi.cs" />
-    <Compile Include="Triangulation\DelaunayVoronoi\Mesh.cs" />
-    <Compile Include="Triangulation\DelaunayVoronoi\Triangle.cs" />
+    <Compile Include="Geometry\Circle.cs" />
+    <Compile Include="Triangulation\Delaunay\Mesh.cs" />
+    <Compile Include="Geometry\TriangleVectors.cs" />
     <Compile Include="Triangulation\FortuneVoronoi\Voronoi.cs" />
     <Compile Include="Triangulation\FortuneVoronoi\Fortune.cs" />
     <Compile Include="Triangulation\FortuneVoronoi\PriorityQueue.cs" />
@@ -792,6 +785,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="KDTree\Bitbucket\" />
+    <Folder Include="Triangulation\DelaunayVoronoiJunk\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
