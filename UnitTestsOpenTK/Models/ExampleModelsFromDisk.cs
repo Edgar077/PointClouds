@@ -82,7 +82,7 @@ namespace UnitTestsOpenTK.Models
 
             this.pointCloudSource = PointCloud.FromObjFile(fileNameLong);
             GLSettings.ShowPointCloudAsTexture = true;
-            this.pointCloudSource.Triangulate25D();
+            this.pointCloudSource.Triangulate25D(0.01f);
 
             this.pointCloudSource.ToObjFile(pathUnitTests + "\\fileWithTexture.obj");
 

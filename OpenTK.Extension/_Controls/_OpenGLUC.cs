@@ -803,7 +803,7 @@ namespace OpenTKExtension
                 float thresholdDistance = 4e-4f;
 
                 PointCloud pcWithOutliersMarkedRed;
-                PointCloud pointCloudClean = ICPLib.Outliers.ByStandardDeviation(pc, thresholdNeighboursCount, thresholdDistance, out pcWithOutliersMarkedRed);
+                PointCloud pointCloudClean = OpenTKExtension.Outliers.ByStandardDeviation(pc, thresholdNeighboursCount, thresholdDistance, out pcWithOutliersMarkedRed);
 
 
                 RemoveAllModels();
@@ -840,7 +840,7 @@ namespace OpenTKExtension
                 float thresholdDistance = 4e-4f;
 
                 PointCloud pcOutliers;
-                PointCloud pointCloudClean = ICPLib.Outliers.ByStandardDeviation(pointCloudDirty, thresholdNeighboursCount, thresholdDistance, out pcOutliers);
+                PointCloud pointCloudClean = OpenTKExtension.Outliers.ByStandardDeviation(pointCloudDirty, thresholdNeighboursCount, thresholdDistance, out pcOutliers);
 
                 // tweaks
 

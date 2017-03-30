@@ -10,15 +10,82 @@ using System.Globalization;
 using System.Windows.Media;
 using System.Diagnostics;
 using OpenTK;
-using OpenTKExtension;
 using System.Linq;
 
-namespace ICPLib
+namespace OpenTKExtension
 {
 
 
     public class Outliers
     {
+        public static void StandardDeviation(PointCloud source, int numberOfNeighbours, out float meanDistance, out float standardDeviation, out float[] distances)
+        {
+            meanDistance = 0;
+            standardDeviation = 0f;
+            distances = new float[source.Count];
+
+            KDTreeKennell kdTree = new KDTreeKennell();
+            kdTree.Build(source);
+
+
+            PointCloud pcResult = new PointCloud();
+           
+            
+            VertexKDTree[] resultArray = new VertexKDTree[source.Count];
+            VertexKDTree[] outliers = new VertexKDTree[source.Count];
+
+            try
+            {
+
+                List<Vector3> listV = new List<Vector3>();
+                List<Vector3> listC = new List<Vector3>();
+                
+
+
+                //1. mean distance of one point to his next "numberOfNeighbours" neighbours - stored in the "distances" array
+                for (int i = 0; i < source.Count; i++)
+                {
+                    VertexKDTree vSource = new VertexKDTree(source.Vectors[i], source.Colors[i], i);
+
+                    ListKDTreeResultVectors listResult = kdTree.Find_N_Nearest(vSource.Vector, numberOfNeighbours);
+
+                    float distSum = 0f;
+                    for (int k = 1; k < listResult.Count; ++k)  // k = 0 is the query point
+                        distSum += listResult[k].Distance;
+
+                    distances[i] = (distSum / (listResult.Count - 1));
+
+                }
+                //2. calculate the mean distance of ALL points 
+
+                
+
+                for (int i = 0; i < distances.Length; ++i)
+                {
+                    meanDistance += distances[i];
+                }
+                meanDistance /= distances.Length;
+
+                //3. calculate the deviation of each data point from the mean, and square the result of each
+               
+                for (int i = 0; i < distances.Length; i++)
+                {
+                    float dev = distances[i] - meanDistance;
+                    dev *= dev;
+                    standardDeviation += dev;
+                }
+                standardDeviation /= distances.Length;
+                standardDeviation = Convert.ToSingle(Math.Sqrt(standardDeviation));
+            }
+            catch (Exception err)
+            {
+                System.Windows.Forms.MessageBox.Show("Error in KDTreeKennnellRemoveDuplicates: " + err.Message);
+            }
+
+
+        }
+
+
         /// <summary>
         /// tree.RemoveOutliersByDeviation(PointCloudDirty, 10, 1.3f);
         /// </summary>
@@ -29,13 +96,17 @@ namespace ICPLib
         public static PointCloud ByStandardDeviation(PointCloud source, int numberOfNeighbours, float stdDeviationMultiplier, out PointCloud pcOutliersMarkedRed)
         {
 
-            KDTreeKennell kdTree = new KDTreeKennell();
-            kdTree.Build(source);
-
 
             PointCloud pcResult = new PointCloud();
+
             //the outliers are marked red
             pcOutliersMarkedRed = source.Clone();
+
+            float meanDistance, standardDeviation;
+            float[] distances;
+            //1. get standard deviation, meanDistance and array of distances
+            StandardDeviation(source, numberOfNeighbours, out meanDistance, out standardDeviation, out distances);
+
 
             int numberRemoved = 0;
             VertexKDTree[] resultArray = new VertexKDTree[source.Count];
@@ -43,51 +114,16 @@ namespace ICPLib
 
             try
             {
-               
+                
+
                 List<Vector3> listV = new List<Vector3>();
                 List<Vector3> listC = new List<Vector3>();
-                float[] distances = new float[source.Count];
+               
+                //2. distance threshold: deviation plus the overall mean distance
+                float distanceThreshold = meanDistance + standardDeviation;
 
 
-                //1. mean distance of one point to his next "numberOfNeighbours" neigbhours - stored in the "distances" array
-                for (int i = 0; i < source.Count; i++)
-                {
-                    VertexKDTree vSource = new VertexKDTree(source.Vectors[i], source.Colors[i], i);
-
-                    ListKDTreeResultVectors listResult = kdTree.Find_N_Nearest(vSource.Vector, numberOfNeighbours);
-
-                    float distSum = 0f;
-                    for (int k = 0; k < listResult.Count; ++k)  // k = 0 is the query point
-                        distSum += listResult[k].Distance;
-
-                    distances[i] = (distSum / listResult.Count);
-                    
-                }
-                //2. calculate the mean distance of ALL points 
-                
-                float meanOverall = 0;
-
-                for (int i = 0; i < distances.Length; ++i)
-                {
-                    meanOverall += distances[i];
-                }
-                meanOverall /= distances.Length;
-
-                //3. calculate the deviation of each data point from the mean, and square the result of each
-                float deviation = 0f;
-                for (int i = 0; i < distances.Length; i++)
-                {
-                    float dev = distances[i] - meanOverall;
-                    dev *= dev;
-                    deviation += dev;
-                }
-                deviation /= distances.Length;
-                deviation = Convert.ToSingle(Math.Sqrt(deviation));
-                //4. distance threshold: deviation plus the overall mean distance
-                float distanceThreshold = meanOverall + deviation;
-
-
-                //5. remove all points according to the distance threshold
+                //3. remove all points according to the distance threshold
                 for (int i = 0; i < source.Count; i++)
                 {
                     VertexKDTree vSource = new VertexKDTree(source.Vectors[i], source.Colors[i], i);
@@ -121,7 +157,7 @@ namespace ICPLib
                 pcResult.Colors = listC.ToArray();
                 pcResult.SetDefaultIndices();
 
-                System.Diagnostics.Debug.WriteLine("Outliers: Mean distance---" +  meanOverall.ToString("G") + " ---- standard deviation ---" + deviation .ToString("G") + "---Number of outliers: " + numberRemoved.ToString());
+                System.Diagnostics.Debug.WriteLine("Outliers: Mean distance---" + meanDistance.ToString("G") + " ---- standard deviation ---" + standardDeviation.ToString("G") + "---Number of outliers: " + numberRemoved.ToString());
 
             }
             catch (Exception err)

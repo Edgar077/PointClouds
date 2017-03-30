@@ -827,7 +827,10 @@ namespace OpenTKExtension
 
                 }
             }
-
+            else
+            {
+                CreateIndicesDefault();
+            }
             ////in case there are more vectors than indices
             //if (this.Indices.Length < this.Vectors.Length)
             //{

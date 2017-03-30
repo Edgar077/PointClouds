@@ -16,6 +16,13 @@ namespace OpenTKExtension
         //assumes a 2.5 D point cloud (i.e. for a given x,y there is only ONE z value
         public void Triangulate25D(float distMin)
         {
+            float meanDistance, standardDeviation;
+            float[] distances;
+            //1. get standard deviation, meanDistance and array of distances
+            Outliers.StandardDeviation(this, 10, out meanDistance, out standardDeviation, out distances);
+
+            distMin = meanDistance * 100;
+
             this.Triangles = new List<Triangle>();
            
             List<List<VertexKDTree>> listNew = SortVectorsWithIndex();
