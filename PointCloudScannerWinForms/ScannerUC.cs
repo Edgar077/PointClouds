@@ -835,11 +835,10 @@ namespace PointCloudScanner
             this.OglControl.SaveSelectedModelAs();
             
         }
-    
-      
+       
+       
 
-    
-   
+
         private void captureToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try

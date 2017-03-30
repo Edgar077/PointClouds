@@ -119,7 +119,6 @@
     <Compile Include="ICP\InWork\ICPTestOld.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Triangulation\ConvexHullTest.cs" />
-    <Compile Include="Triangulation\MarchingCubesTest.cs" />
     <Compile Include="Triangulation\MIConvexHullTest.cs" />
     <Compile Include="Triangulation\NormalsKDTree.cs" />
     <Compile Include="Triangulation\TriangulateFortuneVoronoi.cs" />

@@ -25,6 +25,7 @@ using System.IO;
 using System.Reflection;
 using OpenTK;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace OpenTKExtension
 {
@@ -530,6 +531,19 @@ namespace OpenTKExtension
 
 
         }
+        public static string[] FileNamesSorted(string directory, string extension)
+        {
+            string[] filesUnsorted = System.IO.Directory.GetFiles(directory, extension);
+
+          
+            var listFilesUnsorted = new List<string>(filesUnsorted);
+            var listFilesSorted = listFilesUnsorted.OrderBy(x => x, new NaturalStringComparer());
+            string[] files = listFilesSorted.ToArray();
+            return files;
+
+
+        }
+
     }
     public struct triangleInd
     {

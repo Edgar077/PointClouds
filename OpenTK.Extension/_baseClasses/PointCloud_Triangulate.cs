@@ -14,10 +14,10 @@ namespace OpenTKExtension
     public partial class PointCloud 
     {
         //assumes a 2.5 D point cloud (i.e. for a given x,y there is only ONE z value
-        public void Triangulate25D()
+        public void Triangulate25D(float distMin)
         {
             this.Triangles = new List<Triangle>();
-            float distMin = 0.01f;
+           
             List<List<VertexKDTree>> listNew = SortVectorsWithIndex();
             for (int i = listNew.Count - 1; i > 0; i--)
             {
@@ -26,18 +26,21 @@ namespace OpenTKExtension
                 for (int j = 1; j < columnx.Count; j++)
                 {
                     VertexKDTree vx = columnx[j];
-                    foreach (VertexKDTree vy in columny)
+                    float dist_x = columnx[j - 1].Vector.Distance(vx.Vector);
+                    if (dist_x < distMin)
                     {
-                        if (vx.Vector.Distance(vy.Vector) < distMin)
+                        foreach (VertexKDTree vy in columny)
                         {
-
-                            Triangles.Add(new Triangle(columnx[j - 1].Index, vx.Index, vy.Index));
+                            float dist_xy = vx.Vector.Distance(vy.Vector);
+                            if (dist_xy < distMin)
+                            {
+                                Triangles.Add(new Triangle(columnx[j - 1].Index, vx.Index, vy.Index));
+                            }
                         }
                     }
-
                 }
             }
-
+            CreateIndicesFromTriangles();
         }
 
         /// <summary>
@@ -93,27 +96,37 @@ namespace OpenTKExtension
         //    return listTriangles;
         //}
 
-        //public void TriangulateVertices_Rednaxela(float maxDistance)
-        //{
+        public void Triangulate_KDTree(int numberNeighbours)
+        {
 
-        //    //PointCloud pointCloud = myModel.PointCloud;
-        //    KDTreeVertex kv = new KDTreeVertex();
-        //    PointCloud vertices = this;
+            KDTreeKennell kdTree = new KDTreeKennell();
+            kdTree.Build(this);
 
-        //    kv.NumberOfNeighboursToSearch = 6;
-        //    kv.BuildKDTree_Rednaxela(vertices);
-        //    kv.ResetVerticesSearchResult(vertices);
+            List<Triangle> listTriangles = new List<Triangle>();
+
+            for (int i = 0; i < this.Vectors.Length; i++)
+            {
+                VertexKDTree vSource = new VertexKDTree(this.Vectors[i], this.Colors[i], i);
+                uint indexI = Convert.ToUInt32(i);
+
+                ListKDTreeResultVectors listResult = kdTree.Find_N_Nearest(vSource.Vector, numberNeighbours);
+                for(int j = 1; j < listResult.Count; j++ )
+                {
+                    for (int k = j + 1; k < listResult.Count; k++)
+                    {
+                        Triangle t = new Triangle(indexI, listResult[j].IndexNeighbour, listResult[k].IndexNeighbour);
+                        listTriangles.Add(t);
+                    }
+
+                }
+               
+
+            }
+            this.Triangles = listTriangles;
 
 
-        //    kv.FindNearest_NormalsCheck_Rednaxela(vertices, false, true, maxDistance);
-        //  // kv.FindNearest_Rednaxela(vertices, vertices, true);
+            CreateIndicesFromTriangles();
 
-        //  //  kv.FindNearest_Rednaxela_Parallel(ref pointsSource, pointsTarget, angleThreshold);
-
-
-        //    Triangles = CreateTrianglesByNearestVertices(vertices);
-        //    CreateIndicesFromTriangles();
-
-        //}
+        }
     }
 }

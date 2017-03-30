@@ -26,7 +26,7 @@ namespace ICPLib
         /// <param name="numberOfNeighbours"></param>
         /// <param name="stdMultiplier"></param>
         /// <returns></returns>
-        public static PointCloud ByStandardDeviation(PointCloud source, int numberOfNeighbours, double stdMultiplier, out PointCloud pcOutliersMarkedRed)
+        public static PointCloud ByStandardDeviation(PointCloud source, int numberOfNeighbours, float stdDeviationMultiplier, out PointCloud pcOutliersMarkedRed)
         {
 
             KDTreeKennell kdTree = new KDTreeKennell();

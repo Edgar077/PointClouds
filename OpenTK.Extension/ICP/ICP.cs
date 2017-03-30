@@ -595,7 +595,64 @@ namespace ICPLib
             return pTarget;
 
         }
-        public PointCloud AlignCloudsFromDirectory(string directory, int numberOfCloudPairs)
+        public PointCloud AlignCloudsFromDirectory_StartLast(string directory, int numberOfCloudPairs)
+        {
+
+            GlobalVariables.ResetTime();
+
+            PointCloud pSource;
+            PointCloud pTarget = null;
+            
+            string[] files = IOUtils.FileNamesSorted(directory, "*.obj");
+            string pathResult = directory + "\\result";
+
+            if (!System.IO.Directory.Exists(pathResult))
+                System.IO.Directory.CreateDirectory(pathResult);
+
+            int numberOfCloudsCurrent = 0;
+            int numberOfCloudsResult = -1;
+
+            int iteratorFile = files.Length;
+            for (int i = 0; i < 1000; i++)//maximum 1000 files, should be enough
+            {
+                numberOfCloudsCurrent++;
+                iteratorFile--;
+
+                if (numberOfCloudsCurrent == numberOfCloudPairs) //write result, start new loop
+                {
+                    numberOfCloudsCurrent = 1;
+                    numberOfCloudsResult++;
+                    pTarget.ToObjFile(pathResult + "\\Result" + numberOfCloudsResult.ToString() + ".obj");
+                    
+                }
+                if (pTarget != null && iteratorFile < 1 )//write result - got to end - return
+                {
+                    numberOfCloudsResult++;
+                    pTarget.ToObjFile(pathResult + "\\Result" + numberOfCloudsResult.ToString() + ".obj");
+                    GlobalVariables.ShowLastTimeSpan("--> Time for ICP ");
+                    return pTarget;
+                }
+                if (numberOfCloudsCurrent == 1)//new pairs 
+                {
+                    pTarget = PointCloud.FromObjFile(files[iteratorFile]);
+                }
+
+
+                pSource = PointCloud.FromObjFile(files[iteratorFile - 1]);
+
+                //perform ICP:
+                Reset_RealData();
+                pTarget = PerformICP(pSource, pTarget);
+                System.Diagnostics.Debug.WriteLine("###### ICP for point cloud: " + pSource.Name + " - points added: " + PointsAdded.ToString());
+                
+
+            }
+            GlobalVariables.ShowLastTimeSpan("--> Time for ICP ");
+
+            return pTarget;
+
+        }
+        public PointCloud AlignCloudsFromDirectory_StartFirst(string directory, int numberOfCloudPairs)
         {
 
             GlobalVariables.ResetTime();
@@ -603,13 +660,7 @@ namespace ICPLib
             PointCloud pSource;
             PointCloud pTarget = null;
 
-
-            string[] filesUnsorted = System.IO.Directory.GetFiles(directory, "*.obj");
-            
-            var listFilesUnsorted = new List<string>(filesUnsorted);
-            var listFilesSorted = listFilesUnsorted.OrderBy(x => x, new NaturalStringComparer());
-            string[] files = listFilesSorted.ToArray();
-
+            string[] files = IOUtils.FileNamesSorted(directory, "*.obj");
             string pathResult = directory + "\\result";
 
             if (!System.IO.Directory.Exists(pathResult))
@@ -629,7 +680,7 @@ namespace ICPLib
                     numberOfCloudsCurrent = 1;
                     numberOfCloudsResult++;
                     pTarget.ToObjFile(pathResult + "\\Result" + numberOfCloudsResult.ToString() + ".obj");
-                    
+
                 }
                 if (pTarget != null && iteratorFile >= (files.Length - 1))//write result - got to end - return
                 {
@@ -650,7 +701,7 @@ namespace ICPLib
                 Reset_RealData();
                 pTarget = PerformICP(pSource, pTarget);
                 System.Diagnostics.Debug.WriteLine("###### ICP for point cloud: " + pSource.Name + " - points added: " + PointsAdded.ToString());
-                
+
 
             }
             GlobalVariables.ShowLastTimeSpan("--> Time for ICP ");

@@ -479,7 +479,7 @@ namespace OpenTKExtension
 
             ICPLib.IterativeClosestPointTransform icp = new ICPLib.IterativeClosestPointTransform();
             //pTarget = icp.AlignCloudsFromDirectory(GLSettings.Path + GLSettings.PathModels + "\\Nick", 30);
-            pTarget = icp.AlignCloudsFromDirectory(GLSettings.Path + GLSettings.PathModels + "\\Nick", 10);
+            pTarget = icp.AlignCloudsFromDirectory_StartLast(GLSettings.Path + GLSettings.PathModels + "\\Nick", 10);
 
             SaveResultCloudAndShow(pTarget);
 
@@ -492,7 +492,7 @@ namespace OpenTKExtension
             this.Cursor = Cursors.WaitCursor;
 
             ICPLib.IterativeClosestPointTransform icp = new ICPLib.IterativeClosestPointTransform();
-            pTarget = icp.AlignCloudsFromDirectory(GLSettings.Path + GLSettings.PathModels + "\\Nick\\Result", 10);
+            pTarget = icp.AlignCloudsFromDirectory_StartFirst(GLSettings.Path + GLSettings.PathModels + "\\Nick\\Result", 10);
             SaveResultCloudAndShow(pTarget);
 
             this.Cursor = Cursors.Default;
@@ -749,20 +749,57 @@ namespace OpenTKExtension
 
             this.Cursor = Cursors.Default;
         }
-        private void toolStripTriangulate_Click(object sender, EventArgs e)
+        private void toolStripTriangulate_Delaunay_Click(object sender, EventArgs e)
         {
 
-            //testClouds_FirstIteration();
+            if (this.glControl1.GLrender.RenderableObjects.Count > 0)
+            {
+                PointCloud pc = this.glControl1.GLrender.RenderableObjects[0].PointCloud;
+                OpenTKExtension.Triangulation.Mesh m = OpenTKExtension.Triangulation.Mesh.Triangulate(pc, 6);
+                pc.CreateIndicesFromTriangles(m.Triangles);
+
+                RemoveAllModels();
+                this.glControl1.GLrender.ClearAllObjects();
+                ShowPointCloud(pc);
+
+
+            }
+       
 
             return;
         }
+        /// <summary>
+        /// KDTree triangulation
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolStripTriangulate_Click(object sender, EventArgs e)
+        {
+
+            if (this.glControl1.GLrender.RenderableObjects.Count > 0)
+            {
+                PointCloud pc = this.glControl1.GLrender.RenderableObjects[0].PointCloud;
+                //pc.Triangulate_KDTree(10);
+                pc.Triangulate25D(0.01f);
+                
+                RemoveAllModels();
+                this.glControl1.GLrender.ClearAllObjects();
+                ShowPointCloud(pc);
+
+
+            }
+
+
+            return;
+        }
+       
         private void toolStripOutliers_Click(object sender, EventArgs e)
         {
 
             if(this.glControl1.GLrender.RenderableObjects.Count > 0)
             {
                 PointCloud pc = this.glControl1.GLrender.RenderableObjects[0].PointCloud;
-                int thresholdNeighboursCount = 10;
+                int thresholdNeighboursCount = 20;
                 float thresholdDistance = 4e-4f;
 
                 PointCloud pcWithOutliersMarkedRed;
@@ -789,15 +826,15 @@ namespace OpenTKExtension
         {
             string directory = GLSettings.Path + GLSettings.PathModels + "\\Nick";
             string pathResult = directory + "\\clean";
-            string[] dirtyModels = System.IO.Directory.GetFiles(directory, "*.obj");
+
+            string[] files = IOUtils.FileNamesSorted(directory, "*.obj");
+            
             if (!System.IO.Directory.Exists(pathResult))
                 System.IO.Directory.CreateDirectory(pathResult);
 
-            for (int i = 0; i < 1; i++)
+            for (int i = 0; i < files.Length; i++)
             {
-                PointCloud pointCloudDirty = PointCloud.FromObjFile(dirtyModels[i]);
-
-             
+                PointCloud pointCloudDirty = PointCloud.FromObjFile(files[i]);
 
                 int thresholdNeighboursCount = 10;
                 float thresholdDistance = 4e-4f;
