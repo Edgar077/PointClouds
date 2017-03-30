@@ -496,9 +496,15 @@ namespace OpenTKExtension
 
             KDTreeKennell tree = new KDTreeKennell();
             tree.Build(pcSource);
-            PointCloud pointCloudResult = tree.RemoveOutliers(pcSource, 1e-5f);
+
+            // tweaks
+            int thresholdNeighboursCount = 10;
+            float thresholdDistance = 15e-5f;
+
+            PointCloud pointCloudResult = tree.RemoveOutliersNeighbour(pcSource, thresholdDistance, thresholdNeighboursCount);
             pointCloudResult.FileNameLong = pcSource.Path + "\\" + pcSource.Name;
             pointCloudResult.Path = GLSettings.Path + GLSettings.PathModels;
+
             SaveResultCloudAndShow(pointCloudResult);
         }
 
@@ -510,13 +516,19 @@ namespace OpenTKExtension
             if (!System.IO.Directory.Exists(pathResult))
                 System.IO.Directory.CreateDirectory(pathResult);
 
-            for (int i = 1; i < 2; i++)
+            for (int i = 0; i < 1; i++)
             {
                 PointCloud PointCloudDirty = PointCloud.FromObjFile(dirtyModels[i]);
 
                 KDTreeKennell tree = new KDTreeKennell();
                 tree.Build(PointCloudDirty);
-                PointCloud pointCloudClean = tree.RemoveOutliers(PointCloudDirty, 1e-5f);
+                
+                PointCloud pointCloudClean = tree.RemoveOutliersByDeviation(PointCloudDirty, 10, 1.3f);
+                
+                // tweaks
+                int thresholdNeighboursCount = 10;
+                float thresholdDistance = 4e-4f;
+                //PointCloud pointCloudClean = tree.RemoveOutliersNeighbour(PointCloudDirty, thresholdDistance, thresholdNeighboursCount);
 
                 pointCloudClean.ToObjFile(pathResult + "\\CleanPointCloudSequence#" + i.ToString() + ".obj");
             }
