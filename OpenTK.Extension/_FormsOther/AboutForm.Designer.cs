@@ -87,6 +87,7 @@
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 16;
             this.listBox1.Items.AddRange(new object[] {
             "Pogramming",
             "",
@@ -98,14 +99,16 @@
                 "tify.",
             "     ",
             "     Edgar Maass, email: 1154-114@onlinehome.de"});
-            this.listBox1.Location = new System.Drawing.Point(42, 12);
+            this.listBox1.Location = new System.Drawing.Point(56, 15);
+            this.listBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(485, 95);
+            this.listBox1.Size = new System.Drawing.Size(645, 116);
             this.listBox1.TabIndex = 25;
             // 
             // listBox2
             // 
             this.listBox2.FormattingEnabled = true;
+            this.listBox2.ItemHeight = 16;
             this.listBox2.Items.AddRange(new object[] {
             "DISCLAIMER: Users rely upon this software at their own risk, ",
             "and assume the responsibility for the results. Should this ",
@@ -118,17 +121,19 @@
             "claims, suits or causes of action involving alleged infringement ",
             "of copyrights, patents, trademarks, trade secrets, or unfair ",
             "competition. "});
-            this.listBox2.Location = new System.Drawing.Point(570, 12);
+            this.listBox2.Location = new System.Drawing.Point(760, 15);
+            this.listBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(358, 173);
+            this.listBox2.Size = new System.Drawing.Size(476, 212);
             this.listBox2.TabIndex = 26;
             // 
             // buttonOK
             // 
             this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.buttonOK.Location = new System.Drawing.Point(319, 603);
+            this.buttonOK.Location = new System.Drawing.Point(425, 742);
+            this.buttonOK.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Size = new System.Drawing.Size(176, 23);
+            this.buttonOK.Size = new System.Drawing.Size(235, 28);
             this.buttonOK.TabIndex = 27;
             this.buttonOK.Text = "OK";
             this.buttonOK.UseVisualStyleBackColor = true;
@@ -137,25 +142,29 @@
             // listBox3
             // 
             this.listBox3.FormattingEnabled = true;
+            this.listBox3.ItemHeight = 16;
             this.listBox3.Items.AddRange(new object[] {
             "LICENSE:",
             "For the main implementation, see Disclaimer ",
             "",
             "For the other components, like Alglib, etc., different license models apply, ",
             "see the links in  \"Software used\" for more details"});
-            this.listBox3.Location = new System.Drawing.Point(42, 113);
+            this.listBox3.Location = new System.Drawing.Point(56, 139);
+            this.listBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.listBox3.Name = "listBox3";
-            this.listBox3.Size = new System.Drawing.Size(485, 108);
+            this.listBox3.Size = new System.Drawing.Size(645, 132);
             this.listBox3.TabIndex = 28;
             // 
             // listBox4
             // 
             this.listBox4.FormattingEnabled = true;
+            this.listBox4.ItemHeight = 16;
             this.listBox4.Items.AddRange(new object[] {
             "OpenTKExtension, Version: 0.9.0.10"});
-            this.listBox4.Location = new System.Drawing.Point(319, 553);
+            this.listBox4.Location = new System.Drawing.Point(425, 681);
+            this.listBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.listBox4.Name = "listBox4";
-            this.listBox4.Size = new System.Drawing.Size(159, 30);
+            this.listBox4.Size = new System.Drawing.Size(211, 36);
             this.listBox4.TabIndex = 29;
             // 
             // listView1
@@ -176,9 +185,10 @@
             listViewItem9,
             listViewItem10,
             listViewItem11});
-            this.listView1.Location = new System.Drawing.Point(42, 227);
+            this.listView1.Location = new System.Drawing.Point(56, 279);
+            this.listView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(886, 296);
+            this.listView1.Size = new System.Drawing.Size(1180, 363);
             this.listView1.TabIndex = 32;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -186,7 +196,7 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "Software used";
-            this.columnHeader1.Width = 110;
+            this.columnHeader1.Width = 129;
             // 
             // columnHeader3
             // 
@@ -200,15 +210,16 @@
             // 
             // AboutForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(940, 759);
+            this.ClientSize = new System.Drawing.Size(1253, 934);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.listBox4);
             this.Controls.Add(this.listBox3);
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.listBox2);
             this.Controls.Add(this.listBox1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "AboutForm";
             this.Text = "About";
             this.ResumeLayout(false);

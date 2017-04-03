@@ -479,7 +479,8 @@ namespace OpenTKExtension
 
             ICPLib.IterativeClosestPointTransform icp = new ICPLib.IterativeClosestPointTransform();
             //pTarget = icp.AlignCloudsFromDirectory(GLSettings.Path + GLSettings.PathModels + "\\Nick", 30);
-            pTarget = icp.AlignCloudsFromDirectory_StartLast(GLSettings.Path + GLSettings.PathModels + "\\Nick", 10);
+            //pTarget = icp.AlignCloudsFromDirectory_StartLast(GLSettings.Path + GLSettings.PathModels + "\\Nick", 10);
+            pTarget = icp.AlignCloudsFromDirectory_StartFirst(GLSettings.Path + GLSettings.PathModels + "\\Nick", 100);
 
             SaveResultCloudAndShow(pTarget);
 

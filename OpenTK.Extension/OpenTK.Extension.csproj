@@ -487,27 +487,27 @@
     <Compile Include="IO\Collada\Shaders\DefaultShader.cs" />
     <Compile Include="KDTree\IKDTree.cs" />
     <Compile Include="KDTree\old\KDTreeBruteForce.cs" />
-    <Compile Include="KDTree\JeromeC\BoundingBoxAxisAligned.cs" />
-    <Compile Include="KDTree\JeromeC\BoundingSphere.cs" />
-    <Compile Include="KDTree\JeromeC\IntersectionTypes.cs" />
-    <Compile Include="KDTree\JeromeC\KDTreeJeremyC.cs" />
-    <Compile Include="KDTree\JeromeC\KDTreeNodeJeremyC.cs" />
-    <Compile Include="FormsOther\AboutForm.cs">
+    <Compile Include="KDTree\JeremyC\BoundingBoxAxisAligned.cs" />
+    <Compile Include="KDTree\JeremyC\BoundingSphere.cs" />
+    <Compile Include="KDTree\JeremyC\IntersectionTypes.cs" />
+    <Compile Include="KDTree\JeremyC\KDTreeJeremyC.cs" />
+    <Compile Include="KDTree\JeremyC\KDTreeNodeJeremyC.cs" />
+    <Compile Include="_FormsOther\AboutForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormsOther\AboutForm.Designer.cs">
+    <Compile Include="_FormsOther\AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormsOther\SettingsForm.cs">
+    <Compile Include="_FormsOther\SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormsOther\SettingsForm.Designer.cs">
+    <Compile Include="_FormsOther\SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\MultipleOGLControls.cs">
+    <Compile Include="_Forms\MultipleOGLControls.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\MultipleOGLControls.Designer.cs">
+    <Compile Include="_Forms\MultipleOGLControls.Designer.cs">
       <DependentUpon>MultipleOGLControls.cs</DependentUpon>
     </Compile>
     <Compile Include="Geometry\Line.cs" />
@@ -557,16 +557,16 @@
       <SubType>usercontrol</SubType>
     </Compile>
     <Compile Include="_baseClasses\OpenGLContext.cs" />
-    <Compile Include="Forms\TestForm.cs">
+    <Compile Include="_Forms\TestForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\TestForm.Designer.cs">
+    <Compile Include="_Forms\TestForm.Designer.cs">
       <DependentUpon>TestForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\OpenTKFormAlternative.cs">
+    <Compile Include="_Forms\OpenTKFormAlternative.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\OpenTKFormAlternative.Designer.cs">
+    <Compile Include="_Forms\OpenTKFormAlternative.Designer.cs">
       <DependentUpon>OpenTKFormAlternative.cs</DependentUpon>
     </Compile>
     <Compile Include="Triangulation\TetrahedralMarcher\MarchingCubes.cs" />
@@ -734,22 +734,22 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FormsOther\AboutForm.resx">
+    <EmbeddedResource Include="_FormsOther\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormsOther\SettingsForm.resx">
+    <EmbeddedResource Include="_FormsOther\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\MultipleOGLControls.resx">
+    <EmbeddedResource Include="_Forms\MultipleOGLControls.resx">
       <DependentUpon>MultipleOGLControls.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\TestForm.resx">
+    <EmbeddedResource Include="_Forms\TestForm.resx">
       <DependentUpon>TestForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\OpenTKFormAlternative.resx">
+    <EmbeddedResource Include="_Forms\OpenTKFormAlternative.resx">
       <DependentUpon>OpenTKFormAlternative.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
