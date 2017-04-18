@@ -4,7 +4,6 @@ using System;
 using System.Windows.Forms;
 
 using OpenTKExtension;
-using CharacterCreator;
 using grendgine_collada;
 
 namespace OpenTKTest
