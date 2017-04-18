@@ -631,8 +631,24 @@ namespace OpenTKExtension
             return false;
 
         }
+        /// <summary>Transform a direction vector by the given Matrix
+        /// Assumes the matrix has a bottom row of (0,0,0,1), that is the translation part is ignored.
+        /// </summary>
+        /// <param name="vec">The vector to transform</param>
+        /// <param name="mat">The desired transformation</param>
+        /// <returns>The transformed vector</returns>
+        public static Vector3 MultiplyByMatrix(this Vector3 vec, Matrix3 mat)
+        {
+            //Vector3 vNew = new Vector3(mat.Row2);
+            //float val = Vector3.Dot(vNew, vec);
+
+            return new Vector3(
+                Vector3.Dot(new Vector3(mat.Row0), vec),
+                Vector3.Dot(new Vector3(mat.Row1), vec),
+                Vector3.Dot(new Vector3(mat.Row2), vec));
+        }
 
     }
-
+   
     public enum Axis { X, Y, Z };
 }

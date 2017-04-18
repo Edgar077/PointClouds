@@ -33,5 +33,5 @@ using System.Windows;
 )]
 
 
-[assembly: AssemblyVersion("0.9.0.10")]
-[assembly: AssemblyFileVersion("0.9.0.10")]
+[assembly: AssemblyVersion("0.9.0.11")]
+[assembly: AssemblyFileVersion("0.9.0.11")]

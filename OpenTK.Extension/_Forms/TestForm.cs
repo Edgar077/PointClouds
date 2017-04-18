@@ -93,19 +93,19 @@ namespace OpenTKExtension
 
            
         }
-        public void ShowModel(Model myModel)
-        {
-            this.OpenGL_UControl.ShowModel(myModel);
+        //public void ShowModel(Model myModel)
+        //{
+        //    this.OpenGL_UControl.ShowModel(myModel);
 
 
-        }
+        //}
 
         //public void ShowListOfVertices(PointCloud myPCLList)
         //{
         //    this.OpenGLControl.ShowPointCloud("Point Cloud", myPCLList);
 
         //}
-        public void ShowPointCloudOpenGL(PointCloud myP, bool removeOthers)
+        public void ShowPointCloud(PointCloud myP, bool removeOthers)
         {
             if (removeOthers)
                 this.OpenGL_UControl.RemoveAllModels();
@@ -138,7 +138,7 @@ namespace OpenTKExtension
                     mypointCloudTarget.Colors = ColorExtensions.ToVector3Array(mypointCloudTarget.Vectors.Length, 0, 255, 0);
                     
                 }
-                ShowPointCloudOpenGL(mypointCloudTarget, false);
+                ShowPointCloud(mypointCloudTarget, false);
 
             }
 
@@ -149,7 +149,7 @@ namespace OpenTKExtension
                 if (changeColor)
                     mypointCloudSource.Colors = ColorExtensions.ToVector3Array(mypointCloudSource.Vectors.Length, 255, 255, 255);
 
-                ShowPointCloudOpenGL(mypointCloudSource, false);
+                ShowPointCloud(mypointCloudSource, false);
 
             }
 
@@ -160,7 +160,7 @@ namespace OpenTKExtension
                 if (changeColor)
                     mypointCloudResult.Colors = ColorExtensions.ToVector3Array(mypointCloudResult.Vectors.Length, 255, 0, 0);
 
-                ShowPointCloudOpenGL(mypointCloudResult, false);
+                ShowPointCloud(mypointCloudResult, false);
 
                
 
@@ -172,7 +172,7 @@ namespace OpenTKExtension
         {
             for(int i = 0; i < pcs.Count; i++)
             {
-                ShowPointCloudOpenGL(pcs[i], false);
+                ShowPointCloud(pcs[i], false);
             }
            
 

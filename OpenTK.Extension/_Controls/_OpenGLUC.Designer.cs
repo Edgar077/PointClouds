@@ -48,7 +48,7 @@ namespace OpenTKExtension
             this.toolStripPCA = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStripMain = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripLoadModel = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripLoadPointCloud = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSavePointCloud = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSavePointCloudAs = new System.Windows.Forms.ToolStripMenuItem();
             this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -151,7 +151,7 @@ namespace OpenTKExtension
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripLoadModel,
+            this.toolStripLoadPointCloud,
             this.toolStripSavePointCloud,
             this.toolStripSavePointCloudAs,
             this.testToolStripMenuItem});
@@ -161,10 +161,10 @@ namespace OpenTKExtension
             // 
             // toolStripLoadModel
             // 
-            this.toolStripLoadModel.Name = "toolStripLoadModel";
-            this.toolStripLoadModel.Size = new System.Drawing.Size(178, 22);
-            this.toolStripLoadModel.Text = "Load Model";
-            this.toolStripLoadModel.Click += new System.EventHandler(this.toolStripLoadModel_Click);
+            this.toolStripLoadPointCloud.Name = "toolStripLoadModel";
+            this.toolStripLoadPointCloud.Size = new System.Drawing.Size(178, 22);
+            this.toolStripLoadPointCloud.Text = "Load Point Cloud";
+            this.toolStripLoadPointCloud.Click += new System.EventHandler(this.toolStripLoadPointCloud_Click);
             // 
             // toolStripSavePointCloud
             // 
@@ -478,7 +478,7 @@ namespace OpenTKExtension
         private System.Windows.Forms.MenuStrip menuStripMain;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolStripLoadModel;
+        private System.Windows.Forms.ToolStripMenuItem toolStripLoadPointCloud;
         private System.Windows.Forms.ToolStrip toolStripMain;
         private OGLControl glControl1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;

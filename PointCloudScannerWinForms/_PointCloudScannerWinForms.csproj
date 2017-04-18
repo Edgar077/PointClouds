@@ -111,18 +111,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewControl\ScannerUC_Entropy.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ViewControl\ScannerUC_Image.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ViewControl\ScannerUC_IO.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ViewControl\ScannerUC_Kinect.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="ViewControl\ScannerUC_Settings.cs">
       <SubType>UserControl</SubType>
     </Compile>

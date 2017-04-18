@@ -119,7 +119,7 @@ namespace PointCloudUtils
             colorPendingForSave = false;
             depthPendingForSave = false;
             //prepareSave = false;
-
+            isScanning = true;
             if (this.DevicesDepth.Count == 0)
             {
                 System.Windows.Forms.MessageBox.Show("No Scanner connected to computer");
@@ -162,7 +162,7 @@ namespace PointCloudUtils
         public override void StopScanner()
         {
             timer.Stop();
-
+            isScanning = false;
             if (videoSourcePlayerDepth != null)
             {
                 videoSourcePlayerDepth.SignalToStop();

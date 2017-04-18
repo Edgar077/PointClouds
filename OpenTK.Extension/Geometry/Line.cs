@@ -85,17 +85,17 @@ namespace OpenTKExtension
         {
             double y = (x - p.X) * slope + p.Y;
 
-            return new Vector3(x, y, 0);
+            return new Vector3((float)x, (float)y, 0f);
         }
 
         public static Vector3 GetXFromVector(Vector3 p, double slope, double y)
         {
             if (slope == 0)
-                return new Vector3(y, y, 0);
+                return new Vector3((float)y, (float)y, 0);
 
             double x = (y - p.Y) / slope + p.X;
 
-            return new Vector3(x, y, 0);
+            return new Vector3((float)x, (float)y, 0);
         }
     }
 }

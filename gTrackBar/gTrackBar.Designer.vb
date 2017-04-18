@@ -27,12 +27,12 @@ Partial Class gTrackBar
         '
         'gTrackBar
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
-        Me.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Name = "gTrackBar"
-        Me.Size = New System.Drawing.Size(300, 43)
+        Me.Size = New System.Drawing.Size(400, 53)
         Me.ResumeLayout(False)
 
     End Sub

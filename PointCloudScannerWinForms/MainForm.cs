@@ -22,7 +22,7 @@ namespace PointCloudScanner
             {
                 //OpenTK.Toolkit.Init();
                 InitializeComponent();
-                AddUserControl();
+                AddScannerControl();
             }
             catch(Exception ex)
             {
@@ -39,7 +39,7 @@ namespace PointCloudScanner
             //ScannerUC.ScannerTypeDisplayed = PointCloudScannerSettings.ScannerTypeDefault;
 
         }
-        private void AddUserControl()
+        private void AddScannerControl()
         {
             this.SuspendLayout();
           

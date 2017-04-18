@@ -30,6 +30,32 @@ namespace OpenTKExtension
     //Extensios attached to the object which folloes the "this" 
     public static class Matrix3Extension
     {
+
+        /// <summary>
+        /// Adds two instances.
+        /// </summary>
+        /// <param name="left">The left operand of the addition.</param>
+        /// <param name="right">The right operand of the addition.</param>
+        /// <returns>A new instance that is the result of the addition.</returns>
+        public static Matrix3 Add(this Matrix3 left, Matrix3 right)
+        {
+            Matrix3 result;
+            Add(left, right, out result);
+            return result;
+        }
+        /// <summary>
+        /// Adds two instances.
+        /// </summary>
+        /// <param name="left">The left operand of the addition.</param>
+        /// <param name="right">The right operand of the addition.</param>
+        /// <param name="result">A new instance that is the result of the addition.</param>
+        public static void Add(this Matrix3 left, Matrix3 right, out Matrix3 result)
+        {
+            Vector3.Add(ref left.Row0, ref right.Row0, out result.Row0);
+            Vector3.Add(ref left.Row1, ref right.Row1, out result.Row1);
+            Vector3.Add(ref left.Row2, ref right.Row2, out result.Row2);
+        }
+
         public static Matrix3 MultiplyScalar(this Matrix3 A, float val)
         {
             Matrix3 mReturn = new Matrix3();
@@ -1152,6 +1178,98 @@ namespace OpenTKExtension
             u[1] = y;
             u[2] = z;
             return u;
+        }
+        public static Matrix3 GetRotationMatrixX(float angle)
+        {
+            if (angle == 0.0)
+            {
+                return Matrix3.Identity;
+            }
+            float sin = (float)Math.Sin(angle);
+            float cos = (float)Math.Cos(angle);
+            return new Matrix3(
+         1, 0, 0,
+         0, cos, -sin,
+         0, sin, cos);
+         }
+
+
+        public static Matrix3 GetRotationMatrixY(float angle)
+        {
+            if (angle == 0.0)
+            {
+                return Matrix3.Identity;
+            }
+            float sin = (float)Math.Sin(angle);
+            float cos = (float)Math.Cos(angle);
+            return new Matrix3(
+        cos, 0, sin,
+        0, 1, 0,
+        -sin, 0, cos);
+       
+        }
+
+        public static Matrix3 GetRotationMatrixZ(float angle)
+        {
+            if (angle == 0.0)
+            {
+                return Matrix3.Identity;
+            }
+            float sin = (float)Math.Sin(angle);
+            float cos = (float)Math.Cos(angle);
+            return new Matrix3(
+         cos, -sin, 0,
+         sin, cos, 0,
+         0, 0, 1);
+        }
+
+        public static Matrix3 GetRotationMatrix(float ax, float ay, float az)
+        {
+            Matrix3 my = Matrix3.Identity;
+            Matrix3 mz = Matrix3.Identity;
+            Matrix3 result = Matrix3.Identity;
+            if (ax != 0.0)
+            {
+                result = GetRotationMatrixX(ax);
+            }
+            if (ay != 0.0)
+            {
+                my = GetRotationMatrixY(ay);
+            }
+            if (az != 0.0)
+            {
+                mz = GetRotationMatrixZ(az);
+            }
+            if (my != null)
+            {
+                if (result != null)
+                {
+                    result *= my;
+                }
+                else
+                {
+                    result = my;
+                }
+            }
+            if (mz != null)
+            {
+                if (result != null)
+                {
+                    result *= mz;
+                }
+                else
+                {
+                    result = mz;
+                }
+            }
+            if (result != null)
+            {
+                return result;
+            }
+            else
+            {
+                return Matrix3.Identity;
+            }
         }
 
     }

@@ -92,22 +92,38 @@ namespace OpenTKExtension
        
 
      
-        private void toolStripLoadModel_Click(object sender, EventArgs e)
+        private void toolStripLoadPointCloud_Click(object sender, EventArgs e)
         {
             string fileName = LoadFileDialog();
-            Model myModel = new Model(fileName);
-            pointCloudFirstAfterLoad = myModel.PointCloud;
-
-            ShowModel(myModel);
+            PointCloud pc = PointCloud.FromObjFile(fileName);
+            //Model myModel = new Model(fileName);
+            pointCloudFirstAfterLoad = pc;
+            //ShowPointCloud(pointCloudFirstAfterLoad);
+            ShowPointCloud_ClearAllOthers(pointCloudFirstAfterLoad);
+            //ShowModel(myModel);
             
         }
-        public void LoadModelFromFile(string fileName)
+        //public void LoadModelFromFile(string fileName)
+        //{
+        //    Model myModel = new Model(fileName);
+        //    ShowPointCloud(myModel.PointCloud);
+        //    //ShowModel(myModel);
+
+        //}
+        public void LoadPointCloudFromFile(string fileName, bool clearOthers)
         {
-            Model myModel = new Model(fileName);
-            ShowModel(myModel);
+            PointCloud pc = PointCloud.FromObjFile(fileName);
+
+            if (clearOthers)
+            {
+                ShowPointCloud_ClearAllOthers(pc);
+            }
+            else
+            {
+                ShowPointCloud(pc);
+            }
 
         }
-
 
 
 
@@ -728,13 +744,7 @@ namespace OpenTKExtension
 
         }
 
-        private void toolStripTest1_Click(object sender, EventArgs e)
-        {
-
-            testClouds_FirstIteration();
-            
-            return;
-        }
+      
         private void toolStripTest2_Click(object sender, EventArgs e)
         {
             testClouds_SecondIteration();
@@ -854,6 +864,34 @@ namespace OpenTKExtension
 
             return;
         }
+        private void toolStripTest1_Click_Old(object sender, EventArgs e)
+        {
+       
+            testClouds_FirstIteration();
+          
+            return;
+        }
+        private void toolStripTest1_Click(object sender, EventArgs e)
+        {
+            string directory = GLSettings.Path + GLSettings.PathModels + "\\Nick";
+          
+            string[] files = IOUtils.FileNamesSorted(directory, "*.obj");
 
+
+            for (int i = 0; i < files.Length; i++)
+            {
+                LoadPointCloudFromFile(files[i], true);
+                //LoadModelFromFile(files[i]);
+            }
+            //for (int i = 0; i < 100; i++)
+            //{
+            //    LoadPointCloudFromFile(files[i], true);
+            //    //LoadModelFromFile(files[i]);
+            //}
+
+          
+
+            return;
+        }
     }
 }

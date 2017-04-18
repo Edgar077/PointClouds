@@ -59,11 +59,11 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\binExtern\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="OpenTK, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="OpenTK, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\binExtern\OpenTK.dll</HintPath>
     </Reference>
-    <Reference Include="OpenTK.GLControl, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="OpenTK.GLControl, Version=2.0.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\binExtern\OpenTK.GLControl.dll</HintPath>
     </Reference>
@@ -90,7 +90,8 @@
     <Compile Include="Kinect\DepthMetaData_NotUsed.cs" />
     <Compile Include="Kinect\IRMetaData.cs" />
     <Compile Include="Kinect\MetaDataBase_NotUsed.cs" />
-    <Compile Include="Kinect\KinectSkeleton.cs" />
+    <Compile Include="Skeleton\BVHBone.cs" />
+    <Compile Include="Skeleton\KinectSkeleton.cs" />
     <Compile Include="ScannerBO\IScanner.cs" />
     <Compile Include="ScannerBO\KinectFaceBO.cs" />
     <Compile Include="ScannerBO\OpenGLPart.cs" />
@@ -115,6 +116,10 @@
     <Compile Include="Settings\DisplayType.cs" />
     <Compile Include="Settings\PointCloudSettings.cs" />
     <Compile Include="Settings\ScannerType.cs" />
+    <Compile Include="Skeleton\BVH_IO.cs" />
+    <Compile Include="Skeleton\BVHSkeleton.cs" />
+    <Compile Include="Skeleton\MathHelper.cs" />
+    <Compile Include="Skeleton\KinectSkeletonBVH.cs.cs" />
     <Compile Include="Skeleton\Skeleton.cs" />
   </ItemGroup>
   <ItemGroup>

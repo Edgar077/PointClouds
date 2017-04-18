@@ -488,7 +488,8 @@ Public Class gTrackBar
 
 #Region "Label"
 
-    Private _Label As String
+    Private _Label As String = "1000"
+
     <Category("Appearance Label")> _
     <Description("Text to appear as a label on the control")> _
     Public Property Label() As String

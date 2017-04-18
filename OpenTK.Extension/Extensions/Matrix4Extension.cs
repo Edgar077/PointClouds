@@ -1,18 +1,4 @@
-﻿// Pogramming by
-//     Douglas Andrade ( http://www.cmsoft.com.br, email: cmsoft@cmsoft.com.br)
-//               Implementation of most of the functionality
-//     Edgar Maass: (email: maass@logisel.de)
-//               Code adaption, changed to user control
-//
-//Software used: 
-//    OpenGL : http://www.opengl.org
-//    OpenTK : http://www.opentk.com
-//
-// DISCLAIMER: Users rely upon this software at their own risk, and assume the responsibility for the results. Should this software or program prove defective, 
-// users assume the cost of all losses, including, but not limited to, any necessary servicing, repair or correction. In no event shall the developers or any person 
-// be liable for any loss, expense or damage, of any type or nature arising out of the use of, or inability to use this software or program, including, but not
-// limited to, claims, suits or causes of action involving alleged infringement of copyrights, patents, trademarks, trade secrets, or unfair competition. 
-//
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +15,81 @@ namespace OpenTKExtension
     //Extensios attached to the object which folloes the "this" 
     public static class Matrix4Extension
     {
+        /// <summary>
+        /// Constructs a new instance.
+        /// </summary>
+        /// <param name="topLeft">The top left 3x3 of the matrix.</param>
+        public static Matrix4 FromMatrix3(this Matrix4 m, Matrix3 topLeft)
+        {
+            m.Row0.X = topLeft.Row0.X;
+            m.Row0.Y = topLeft.Row0.Y;
+            m.Row0.Z = topLeft.Row0.Z;
+            m.Row0.W = 0;
+            m.Row1.X = topLeft.Row1.X;
+            m.Row1.Y = topLeft.Row1.Y;
+            m.Row1.Z = topLeft.Row1.Z;
+            m.Row1.W = 0;
+            m.Row2.X = topLeft.Row2.X;
+            m.Row2.Y = topLeft.Row2.Y;
+            m.Row2.Z = topLeft.Row2.Z;
+            m.Row2.W = 0;
+            m.Row3.X = 0;
+            m.Row3.Y = 0;
+            m.Row3.Z = 0;
+            m.Row3.W = 1;
+            return m;
+
+        }
+        /// <summary>
+        /// Constructs a new instance.
+        /// </summary>
+        /// <param name="topLeft">The top left 3x3 of the matrix.</param>
+        public static Matrix4 FromMatrix3d(this Matrix4 m, Matrix3d topLeft)
+        {
+            m.Row0.X = (float)topLeft.Row0.X;
+            m.Row0.Y = (float)topLeft.Row0.Y;
+            m.Row0.Z = (float)topLeft.Row0.Z;
+            m.Row0.W = 0;
+            m.Row1.X = (float)topLeft.Row1.X;
+            m.Row1.Y = (float)topLeft.Row1.Y;
+            m.Row1.Z = (float)topLeft.Row1.Z;
+            m.Row1.W = 0;
+            m.Row2.X = (float)topLeft.Row2.X;
+            m.Row2.Y = (float)topLeft.Row2.Y;
+            m.Row2.Z = (float)topLeft.Row2.Z;
+            m.Row2.W = 0;
+            m.Row3.X = 0;
+            m.Row3.Y = 0;
+            m.Row3.Z = 0;
+            m.Row3.W = 1;
+            return m;
+
+        }
+        /// <summary>
+        /// Constructs a new instance.
+        /// </summary>
+        /// <param name="topLeft">The top left 3x3 of the matrix.</param>
+        public static Matrix4d FromMatrix3d(this Matrix4d m, Matrix3d topLeft)
+        {
+            m.Row0.X = topLeft.Row0.X;
+            m.Row0.Y = topLeft.Row0.Y;
+            m.Row0.Z = topLeft.Row0.Z;
+            m.Row0.W = 0;
+            m.Row1.X = topLeft.Row1.X;
+            m.Row1.Y = topLeft.Row1.Y;
+            m.Row1.Z = topLeft.Row1.Z;
+            m.Row1.W = 0;
+            m.Row2.X = topLeft.Row2.X;
+            m.Row2.Y = topLeft.Row2.Y;
+            m.Row2.Z = topLeft.Row2.Z;
+            m.Row2.W = 0;
+            m.Row3.X = 0;
+            m.Row3.Y = 0;
+            m.Row3.Z = 0;
+            m.Row3.W = 1;
+            return m;
+
+        }
         public static void Print(this Matrix4 m, string name)
         {
             
@@ -194,7 +255,8 @@ namespace OpenTKExtension
 
             //put the 4d matrix together
             Matrix3 r3D = Rotation.Clone();
-            Matrix4 myMatrix = new Matrix4(r3D);
+            Matrix4 myMatrix = new Matrix4();
+            myMatrix = myMatrix.FromMatrix3(r3D);
             myMatrix[0, 3] = T.X;
             myMatrix[1, 3] = T.Y;
             myMatrix[2, 3] = T.Z;
@@ -600,7 +662,27 @@ namespace OpenTKExtension
             }
             return myMatrix;
         }
+        public static float[] ToDegrees(this Matrix4 mat)
+        {
+            float[] value = new float[3];
+            //Quelle: http://social.msdn.microsoft.com/Forums/en-US/b644698d-bdec-47a2-867e-574cf84e5db7/what-is-the-default-sequence-of-hierarchical-rotation-matrix-eg-xyz-#b3946d0d-9658-4c2b-b14b-69e79070c7d2
+            // https://en.wikipedia.org/wiki/Euler_angles#Rotation_matrix
+            // Kinect Matrix hat die Tait-Bryan Convention mit Y1 X2 Z3 
+            // Problem: Es gibt immer 2 Möglichkeiten für Drehung im 3D Raum, weshalb die Gradwerte nicht immer den Quaternionenwerte entsprechen müssen!
+            // Drehung um y- Achse 
+            value[0] = (float)Math.Asin(-mat.M23);
+            // Drehung um x- Achse
+            value[1] = (float)Math.Atan2(mat.M13 / Math.Cos(value[0]), mat.M33 / Math.Cos(value[0]));
+            // Drehung um z- Achse
+            value[2] = (float)Math.Atan2(mat.M21 / Math.Cos(value[0]), mat.M22 / Math.Cos(value[0]));
 
-  
+
+            // Um auf die gleichen Winkel wie bei den Quaternionen zu kommen muss man die Winkel negieren
+            value[0] = value[0] * -(180 / (float)Math.PI);
+            value[1] = value[1] * -(180 / (float)Math.PI);
+            value[2] = value[2] * -(180 / (float)Math.PI);
+            return value;
+        }
+
     }
 }

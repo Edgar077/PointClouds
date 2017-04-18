@@ -31,24 +31,25 @@ namespace PointCloudScanner
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            VBControls.ColorPack colorPack1 = new VBControls.ColorPack();
-            VBControls.ColorPack colorPack2 = new VBControls.ColorPack();
-            VBControls.ColorPack colorPack3 = new VBControls.ColorPack();
-            VBControls.ColorPack colorPack4 = new VBControls.ColorPack();
-            VBControls.ColorPack colorPack5 = new VBControls.ColorPack();
-            VBControls.ColorPack colorPack6 = new VBControls.ColorPack();
-            VBControls.ColorPack colorPack7 = new VBControls.ColorPack();
-            VBControls.ColorPack colorPack8 = new VBControls.ColorPack();
-            VBControls.ColorPack colorPack9 = new VBControls.ColorPack();
-            VBControls.ColorPack colorPack10 = new VBControls.ColorPack();
-            VBControls.ColorPack colorPack11 = new VBControls.ColorPack();
-            VBControls.ColorPack colorPack12 = new VBControls.ColorPack();
-            VBControls.ColorPack colorPack13 = new VBControls.ColorPack();
-            VBControls.ColorPack colorPack14 = new VBControls.ColorPack();
-            VBControls.ColorPack colorPack15 = new VBControls.ColorPack();
+            VBControls.ColorPack colorPack76 = new VBControls.ColorPack();
+            VBControls.ColorPack colorPack77 = new VBControls.ColorPack();
+            VBControls.ColorPack colorPack78 = new VBControls.ColorPack();
+            VBControls.ColorPack colorPack79 = new VBControls.ColorPack();
+            VBControls.ColorPack colorPack80 = new VBControls.ColorPack();
+            VBControls.ColorPack colorPack81 = new VBControls.ColorPack();
+            VBControls.ColorPack colorPack82 = new VBControls.ColorPack();
+            VBControls.ColorPack colorPack83 = new VBControls.ColorPack();
+            VBControls.ColorPack colorPack84 = new VBControls.ColorPack();
+            VBControls.ColorPack colorPack85 = new VBControls.ColorPack();
+            VBControls.ColorPack colorPack86 = new VBControls.ColorPack();
+            VBControls.ColorPack colorPack87 = new VBControls.ColorPack();
+            VBControls.ColorPack colorPack88 = new VBControls.ColorPack();
+            VBControls.ColorPack colorPack89 = new VBControls.ColorPack();
+            VBControls.ColorPack colorPack90 = new VBControls.ColorPack();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.splitContainerUC = new System.Windows.Forms.SplitContainer();
             this.splitContainerLeft = new System.Windows.Forms.SplitContainer();
+            this.buttonSaveAll = new System.Windows.Forms.Button();
             this.numericUpDownSave = new System.Windows.Forms.NumericUpDown();
             this.button2 = new System.Windows.Forms.Button();
             this.buttonSavePC = new System.Windows.Forms.Button();
@@ -73,7 +74,7 @@ namespace PointCloudScanner
             this.splitContainerRight = new System.Windows.Forms.SplitContainer();
             this.tabControlImages = new System.Windows.Forms.TabControl();
             this.tabPage3D = new System.Windows.Forms.TabPage();
-          
+            this.openGLUC = new OpenTKExtension.OpenGLUC();
             this.tabPageDepth = new System.Windows.Forms.TabPage();
             this.pictureBoxDepth = new System.Windows.Forms.PictureBox();
             this.tabPageRGB2D = new System.Windows.Forms.TabPage();
@@ -105,7 +106,7 @@ namespace PointCloudScanner
             this.trackBarCutoffNear = new VBControls.gTrackBar();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.buttonSaveAll = new System.Windows.Forms.Button();
+            this.recordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerUC)).BeginInit();
             this.splitContainerUC.Panel1.SuspendLayout();
             this.splitContainerUC.Panel2.SuspendLayout();
@@ -136,15 +137,17 @@ namespace PointCloudScanner
             // splitter1
             // 
             this.splitter1.Location = new System.Drawing.Point(0, 0);
+            this.splitter1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 533);
+            this.splitter1.Size = new System.Drawing.Size(4, 928);
             this.splitter1.TabIndex = 1;
             this.splitter1.TabStop = false;
             // 
             // splitContainerUC
             // 
             this.splitContainerUC.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerUC.Location = new System.Drawing.Point(3, 0);
+            this.splitContainerUC.Location = new System.Drawing.Point(4, 0);
+            this.splitContainerUC.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.splitContainerUC.Name = "splitContainerUC";
             // 
             // splitContainerUC.Panel1
@@ -154,14 +157,16 @@ namespace PointCloudScanner
             // splitContainerUC.Panel2
             // 
             this.splitContainerUC.Panel2.Controls.Add(this.splitContainerRight);
-            this.splitContainerUC.Size = new System.Drawing.Size(1418, 533);
-            this.splitContainerUC.SplitterDistance = 198;
+            this.splitContainerUC.Size = new System.Drawing.Size(2066, 928);
+            this.splitContainerUC.SplitterDistance = 288;
+            this.splitContainerUC.SplitterWidth = 5;
             this.splitContainerUC.TabIndex = 2;
             // 
             // splitContainerLeft
             // 
             this.splitContainerLeft.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainerLeft.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerLeft.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.splitContainerLeft.Name = "splitContainerLeft";
             this.splitContainerLeft.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -180,13 +185,26 @@ namespace PointCloudScanner
             // splitContainerLeft.Panel2
             // 
             this.splitContainerLeft.Panel2.Controls.Add(this.button1);
-            this.splitContainerLeft.Size = new System.Drawing.Size(198, 533);
-            this.splitContainerLeft.SplitterDistance = 259;
+            this.splitContainerLeft.Size = new System.Drawing.Size(288, 928);
+            this.splitContainerLeft.SplitterDistance = 450;
+            this.splitContainerLeft.SplitterWidth = 5;
             this.splitContainerLeft.TabIndex = 0;
+            // 
+            // buttonSaveAll
+            // 
+            this.buttonSaveAll.Location = new System.Drawing.Point(112, 290);
+            this.buttonSaveAll.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonSaveAll.Name = "buttonSaveAll";
+            this.buttonSaveAll.Size = new System.Drawing.Size(100, 28);
+            this.buttonSaveAll.TabIndex = 15;
+            this.buttonSaveAll.Text = "Save All";
+            this.buttonSaveAll.UseVisualStyleBackColor = true;
+            this.buttonSaveAll.Click += new System.EventHandler(this.buttonSaveAll_Click);
             // 
             // numericUpDownSave
             // 
-            this.numericUpDownSave.Location = new System.Drawing.Point(148, 203);
+            this.numericUpDownSave.Location = new System.Drawing.Point(199, 258);
+            this.numericUpDownSave.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.numericUpDownSave.Maximum = new decimal(new int[] {
             4,
             0,
@@ -198,7 +216,7 @@ namespace PointCloudScanner
             0,
             0});
             this.numericUpDownSave.Name = "numericUpDownSave";
-            this.numericUpDownSave.Size = new System.Drawing.Size(34, 20);
+            this.numericUpDownSave.Size = new System.Drawing.Size(45, 22);
             this.numericUpDownSave.TabIndex = 14;
             this.numericUpDownSave.Value = new decimal(new int[] {
             1,
@@ -208,9 +226,10 @@ namespace PointCloudScanner
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(9, 200);
+            this.button2.Location = new System.Drawing.Point(28, 254);
+            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(123, 23);
+            this.button2.Size = new System.Drawing.Size(164, 28);
             this.button2.TabIndex = 13;
             this.button2.Text = "For alignment: Save #";
             this.button2.UseVisualStyleBackColor = true;
@@ -218,9 +237,10 @@ namespace PointCloudScanner
             // 
             // buttonSavePC
             // 
-            this.buttonSavePC.Location = new System.Drawing.Point(9, 171);
+            this.buttonSavePC.Location = new System.Drawing.Point(28, 218);
+            this.buttonSavePC.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonSavePC.Name = "buttonSavePC";
-            this.buttonSavePC.Size = new System.Drawing.Size(123, 23);
+            this.buttonSavePC.Size = new System.Drawing.Size(164, 28);
             this.buttonSavePC.TabIndex = 12;
             this.buttonSavePC.Text = "Save Point Cloud 1";
             this.buttonSavePC.UseVisualStyleBackColor = true;
@@ -229,9 +249,10 @@ namespace PointCloudScanner
             // labelRefreshRateOpenGL
             // 
             this.labelRefreshRateOpenGL.AutoSize = true;
-            this.labelRefreshRateOpenGL.Location = new System.Drawing.Point(6, 136);
+            this.labelRefreshRateOpenGL.Location = new System.Drawing.Point(24, 175);
+            this.labelRefreshRateOpenGL.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelRefreshRateOpenGL.Name = "labelRefreshRateOpenGL";
-            this.labelRefreshRateOpenGL.Size = new System.Drawing.Size(48, 13);
+            this.labelRefreshRateOpenGL.Size = new System.Drawing.Size(62, 17);
             this.labelRefreshRateOpenGL.TabIndex = 11;
             this.labelRefreshRateOpenGL.Text = "frames/s";
             this.labelRefreshRateOpenGL.Visible = false;
@@ -239,9 +260,10 @@ namespace PointCloudScanner
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(6, 111);
+            this.label11.Location = new System.Drawing.Point(24, 145);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(80, 13);
+            this.label11.Size = new System.Drawing.Size(108, 17);
             this.label11.TabIndex = 10;
             this.label11.Text = "3D refresh rate ";
             this.label11.Visible = false;
@@ -249,37 +271,43 @@ namespace PointCloudScanner
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(0, 49);
+            this.label10.Location = new System.Drawing.Point(16, 68);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(94, 13);
+            this.label10.Size = new System.Drawing.Size(124, 17);
             this.label10.TabIndex = 9;
             this.label10.Text = "Scanner scan rate";
             // 
             // labelFramesPerSecond
             // 
             this.labelFramesPerSecond.AutoSize = true;
-            this.labelFramesPerSecond.Location = new System.Drawing.Point(6, 76);
+            this.labelFramesPerSecond.Location = new System.Drawing.Point(24, 102);
+            this.labelFramesPerSecond.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelFramesPerSecond.Name = "labelFramesPerSecond";
-            this.labelFramesPerSecond.Size = new System.Drawing.Size(48, 13);
+            this.labelFramesPerSecond.Size = new System.Drawing.Size(62, 17);
             this.labelFramesPerSecond.TabIndex = 8;
             this.labelFramesPerSecond.Text = "frames/s";
             // 
             // menuStrip1
             // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.captureToolStripMenuItem,
             this.settingsToolStripMenuItem,
             this.dToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(198, 24);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(288, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // captureToolStripMenuItem
             // 
+            this.captureToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.captureToolStripMenuItem.ForeColor = System.Drawing.Color.DarkRed;
             this.captureToolStripMenuItem.Name = "captureToolStripMenuItem";
-            this.captureToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.captureToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
             this.captureToolStripMenuItem.Text = "Scan";
             this.captureToolStripMenuItem.Click += new System.EventHandler(this.captureToolStripMenuItem_Click);
             // 
@@ -290,42 +318,43 @@ namespace PointCloudScanner
             this.openGLSettingsToolStripMenuItem,
             this.settingsToolStripMenuItem1,
             this.saveDialogToolStripMenuItem,
+            this.recordToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(56, 24);
             this.settingsToolStripMenuItem.Text = "Tools";
             // 
             // cameraConfigToolStripMenuItem
             // 
             this.cameraConfigToolStripMenuItem.Name = "cameraConfigToolStripMenuItem";
-            this.cameraConfigToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.cameraConfigToolStripMenuItem.Size = new System.Drawing.Size(258, 26);
             this.cameraConfigToolStripMenuItem.Text = "Real Sense Camera Config";
             this.cameraConfigToolStripMenuItem.Click += new System.EventHandler(this.cameraConfigToolStripMenuItem_Click);
             // 
             // openGLSettingsToolStripMenuItem
             // 
             this.openGLSettingsToolStripMenuItem.Name = "openGLSettingsToolStripMenuItem";
-            this.openGLSettingsToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.openGLSettingsToolStripMenuItem.Size = new System.Drawing.Size(258, 26);
             this.openGLSettingsToolStripMenuItem.Text = "OpenGL Settings";
             this.openGLSettingsToolStripMenuItem.Click += new System.EventHandler(this.openGLSettingsToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem1
             // 
             this.settingsToolStripMenuItem1.Name = "settingsToolStripMenuItem1";
-            this.settingsToolStripMenuItem1.Size = new System.Drawing.Size(212, 22);
+            this.settingsToolStripMenuItem1.Size = new System.Drawing.Size(258, 26);
             this.settingsToolStripMenuItem1.Text = "Settings";
             this.settingsToolStripMenuItem1.Click += new System.EventHandler(this.settingsToolStripMenuItem1_Click);
             // 
             // saveDialogToolStripMenuItem
             // 
             this.saveDialogToolStripMenuItem.Name = "saveDialogToolStripMenuItem";
-            this.saveDialogToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.saveDialogToolStripMenuItem.Size = new System.Drawing.Size(258, 26);
             this.saveDialogToolStripMenuItem.Text = "Save Dialog";
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(258, 26);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -337,42 +366,43 @@ namespace PointCloudScanner
             this.saveAsToolStripMenuItem1,
             this.toolStripLineExtract});
             this.dToolStripMenuItem.Name = "dToolStripMenuItem";
-            this.dToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
-            this.dToolStripMenuItem.Text = "3D - Test";
+            this.dToolStripMenuItem.Size = new System.Drawing.Size(80, 24);
+            this.dToolStripMenuItem.Text = "3D Test";
             // 
             // openPointCloudToolStripMenuItem1
             // 
             this.openPointCloudToolStripMenuItem1.Name = "openPointCloudToolStripMenuItem1";
-            this.openPointCloudToolStripMenuItem1.Size = new System.Drawing.Size(216, 22);
+            this.openPointCloudToolStripMenuItem1.Size = new System.Drawing.Size(263, 26);
             this.openPointCloudToolStripMenuItem1.Text = "Open Point Cloud";
             this.openPointCloudToolStripMenuItem1.Click += new System.EventHandler(this.openPointCloudToolStripMenuItem1_Click);
             // 
             // savePointCloudToolStripMenuItem
             // 
             this.savePointCloudToolStripMenuItem.Name = "savePointCloudToolStripMenuItem";
-            this.savePointCloudToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.savePointCloudToolStripMenuItem.Size = new System.Drawing.Size(263, 26);
             this.savePointCloudToolStripMenuItem.Text = "Save Point Cloud";
             this.savePointCloudToolStripMenuItem.Click += new System.EventHandler(this.savePointCloudToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem1
             // 
             this.saveAsToolStripMenuItem1.Name = "saveAsToolStripMenuItem1";
-            this.saveAsToolStripMenuItem1.Size = new System.Drawing.Size(216, 22);
+            this.saveAsToolStripMenuItem1.Size = new System.Drawing.Size(263, 26);
             this.saveAsToolStripMenuItem1.Text = "Save As";
             this.saveAsToolStripMenuItem1.Click += new System.EventHandler(this.saveAsToolStripMenuItem1_Click);
             // 
             // toolStripLineExtract
             // 
             this.toolStripLineExtract.Name = "toolStripLineExtract";
-            this.toolStripLineExtract.Size = new System.Drawing.Size(216, 22);
+            this.toolStripLineExtract.Size = new System.Drawing.Size(263, 26);
             this.toolStripLineExtract.Text = "Line extraction from image";
             this.toolStripLineExtract.Click += new System.EventHandler(this.toolStripLineExtract_Click);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(6, 23);
+            this.button1.Location = new System.Drawing.Point(8, 28);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(68, 139);
+            this.button1.Size = new System.Drawing.Size(91, 171);
             this.button1.TabIndex = 14;
             this.button1.Text = "Start All Real Sense Cameras";
             this.button1.UseVisualStyleBackColor = true;
@@ -382,6 +412,7 @@ namespace PointCloudScanner
             // 
             this.splitContainerRight.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainerRight.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerRight.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.splitContainerRight.Name = "splitContainerRight";
             this.splitContainerRight.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -401,8 +432,9 @@ namespace PointCloudScanner
             this.splitContainerRight.Panel2.Controls.Add(this.trackBarCutoffFar);
             this.splitContainerRight.Panel2.Controls.Add(this.label1);
             this.splitContainerRight.Panel2.Controls.Add(this.trackBarCutoffNear);
-            this.splitContainerRight.Size = new System.Drawing.Size(1216, 533);
-            this.splitContainerRight.SplitterDistance = 444;
+            this.splitContainerRight.Size = new System.Drawing.Size(1773, 928);
+            this.splitContainerRight.SplitterDistance = 773;
+            this.splitContainerRight.SplitterWidth = 5;
             this.splitContainerRight.TabIndex = 0;
             // 
             // tabControlImages
@@ -416,33 +448,41 @@ namespace PointCloudScanner
             this.tabControlImages.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlImages.ItemSize = new System.Drawing.Size(71, 15);
             this.tabControlImages.Location = new System.Drawing.Point(0, 0);
+            this.tabControlImages.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabControlImages.Name = "tabControlImages";
             this.tabControlImages.SelectedIndex = 0;
-            this.tabControlImages.Size = new System.Drawing.Size(1216, 444);
+            this.tabControlImages.Size = new System.Drawing.Size(1773, 773);
             this.tabControlImages.TabIndex = 2;
             this.tabControlImages.SelectedIndexChanged += new System.EventHandler(this.tabControlImages_SelectedIndexChanged);
             // 
             // tabPage3D
             // 
-            
+            this.tabPage3D.Controls.Add(this.openGLUC);
             this.tabPage3D.Location = new System.Drawing.Point(4, 19);
+            this.tabPage3D.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabPage3D.Name = "tabPage3D";
-            this.tabPage3D.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3D.Size = new System.Drawing.Size(1208, 421);
+            this.tabPage3D.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage3D.Size = new System.Drawing.Size(1765, 750);
             this.tabPage3D.TabIndex = 1;
             this.tabPage3D.Text = "3D";
             this.tabPage3D.UseVisualStyleBackColor = true;
             // 
             // openGLUC
             // 
-     
+            this.openGLUC.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.openGLUC.Location = new System.Drawing.Point(4, 4);
+            this.openGLUC.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.openGLUC.Name = "openGLUC";
+            this.openGLUC.Size = new System.Drawing.Size(1757, 742);
+            this.openGLUC.TabIndex = 0;
             // 
             // tabPageDepth
             // 
             this.tabPageDepth.Controls.Add(this.pictureBoxDepth);
             this.tabPageDepth.Location = new System.Drawing.Point(4, 19);
+            this.tabPageDepth.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabPageDepth.Name = "tabPageDepth";
-            this.tabPageDepth.Size = new System.Drawing.Size(1208, 421);
+            this.tabPageDepth.Size = new System.Drawing.Size(1765, 750);
             this.tabPageDepth.TabIndex = 3;
             this.tabPageDepth.Text = "Depth";
             this.tabPageDepth.UseVisualStyleBackColor = true;
@@ -452,8 +492,9 @@ namespace PointCloudScanner
             this.pictureBoxDepth.BackColor = System.Drawing.Color.Olive;
             this.pictureBoxDepth.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBoxDepth.Location = new System.Drawing.Point(0, 0);
+            this.pictureBoxDepth.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBoxDepth.Name = "pictureBoxDepth";
-            this.pictureBoxDepth.Size = new System.Drawing.Size(1208, 421);
+            this.pictureBoxDepth.Size = new System.Drawing.Size(1765, 750);
             this.pictureBoxDepth.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxDepth.TabIndex = 1;
             this.pictureBoxDepth.TabStop = false;
@@ -462,9 +503,10 @@ namespace PointCloudScanner
             // 
             this.tabPageRGB2D.Controls.Add(this.pictureBoxColor);
             this.tabPageRGB2D.Location = new System.Drawing.Point(4, 19);
+            this.tabPageRGB2D.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabPageRGB2D.Name = "tabPageRGB2D";
-            this.tabPageRGB2D.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageRGB2D.Size = new System.Drawing.Size(1208, 421);
+            this.tabPageRGB2D.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPageRGB2D.Size = new System.Drawing.Size(1765, 750);
             this.tabPageRGB2D.TabIndex = 0;
             this.tabPageRGB2D.Text = "Color";
             this.tabPageRGB2D.UseVisualStyleBackColor = true;
@@ -473,9 +515,10 @@ namespace PointCloudScanner
             // 
             this.pictureBoxColor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.pictureBoxColor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBoxColor.Location = new System.Drawing.Point(3, 3);
+            this.pictureBoxColor.Location = new System.Drawing.Point(4, 4);
+            this.pictureBoxColor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBoxColor.Name = "pictureBoxColor";
-            this.pictureBoxColor.Size = new System.Drawing.Size(1202, 415);
+            this.pictureBoxColor.Size = new System.Drawing.Size(1757, 742);
             this.pictureBoxColor.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxColor.TabIndex = 1;
             this.pictureBoxColor.TabStop = false;
@@ -484,8 +527,9 @@ namespace PointCloudScanner
             // 
             this.tabPageIR.Controls.Add(this.pictureBoxIR);
             this.tabPageIR.Location = new System.Drawing.Point(4, 19);
+            this.tabPageIR.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabPageIR.Name = "tabPageIR";
-            this.tabPageIR.Size = new System.Drawing.Size(1208, 421);
+            this.tabPageIR.Size = new System.Drawing.Size(1613, 523);
             this.tabPageIR.TabIndex = 4;
             this.tabPageIR.Text = "Infrared";
             this.tabPageIR.UseVisualStyleBackColor = true;
@@ -495,8 +539,9 @@ namespace PointCloudScanner
             this.pictureBoxIR.BackColor = System.Drawing.Color.Olive;
             this.pictureBoxIR.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBoxIR.Location = new System.Drawing.Point(0, 0);
+            this.pictureBoxIR.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBoxIR.Name = "pictureBoxIR";
-            this.pictureBoxIR.Size = new System.Drawing.Size(1208, 421);
+            this.pictureBoxIR.Size = new System.Drawing.Size(1613, 523);
             this.pictureBoxIR.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxIR.TabIndex = 2;
             this.pictureBoxIR.TabStop = false;
@@ -516,8 +561,9 @@ namespace PointCloudScanner
             this.tabPageStatistics.Controls.Add(this.labelDepth4);
             this.tabPageStatistics.Controls.Add(this.labelDepth3);
             this.tabPageStatistics.Location = new System.Drawing.Point(4, 19);
+            this.tabPageStatistics.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabPageStatistics.Name = "tabPageStatistics";
-            this.tabPageStatistics.Size = new System.Drawing.Size(1208, 421);
+            this.tabPageStatistics.Size = new System.Drawing.Size(1613, 523);
             this.tabPageStatistics.TabIndex = 2;
             this.tabPageStatistics.Text = "Statistics";
             this.tabPageStatistics.UseVisualStyleBackColor = true;
@@ -525,18 +571,20 @@ namespace PointCloudScanner
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(152, 236);
+            this.label9.Location = new System.Drawing.Point(203, 290);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(77, 13);
+            this.label9.Size = new System.Drawing.Size(104, 17);
             this.label9.TabIndex = 11;
             this.label9.Text = "2 <= Error <= 2";
             // 
             // pictureBoxEntropy
             // 
             this.pictureBoxEntropy.BackColor = System.Drawing.Color.Yellow;
-            this.pictureBoxEntropy.Location = new System.Drawing.Point(535, 28);
+            this.pictureBoxEntropy.Location = new System.Drawing.Point(713, 34);
+            this.pictureBoxEntropy.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBoxEntropy.Name = "pictureBoxEntropy";
-            this.pictureBoxEntropy.Size = new System.Drawing.Size(370, 334);
+            this.pictureBoxEntropy.Size = new System.Drawing.Size(493, 411);
             this.pictureBoxEntropy.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxEntropy.TabIndex = 2;
             this.pictureBoxEntropy.TabStop = false;
@@ -544,18 +592,20 @@ namespace PointCloudScanner
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(152, 252);
+            this.label8.Location = new System.Drawing.Point(203, 310);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(80, 13);
+            this.label8.Size = new System.Drawing.Size(108, 17);
             this.label8.TabIndex = 10;
             this.label8.Text = "3 <= Error <= 6 ";
             // 
             // pictureBoxPolygon
             // 
             this.pictureBoxPolygon.BackColor = System.Drawing.Color.Yellow;
-            this.pictureBoxPolygon.Location = new System.Drawing.Point(35, 28);
+            this.pictureBoxPolygon.Location = new System.Drawing.Point(47, 34);
+            this.pictureBoxPolygon.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBoxPolygon.Name = "pictureBoxPolygon";
-            this.pictureBoxPolygon.Size = new System.Drawing.Size(200, 143);
+            this.pictureBoxPolygon.Size = new System.Drawing.Size(267, 176);
             this.pictureBoxPolygon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxPolygon.TabIndex = 1;
             this.pictureBoxPolygon.TabStop = false;
@@ -563,72 +613,80 @@ namespace PointCloudScanner
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(151, 281);
+            this.label7.Location = new System.Drawing.Point(201, 346);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(88, 13);
+            this.label7.Size = new System.Drawing.Size(112, 17);
             this.label7.TabIndex = 9;
             this.label7.Text = "Unknown Depth ";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(102, 221);
+            this.label5.Location = new System.Drawing.Point(136, 272);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(72, 13);
+            this.label5.Size = new System.Drawing.Size(98, 17);
             this.label5.TabIndex = 7;
             this.label5.Text = "Error <= 1 mm";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(151, 267);
+            this.label6.Location = new System.Drawing.Point(201, 329);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(50, 13);
+            this.label6.Size = new System.Drawing.Size(68, 17);
             this.label6.TabIndex = 8;
             this.label6.Text = "Error > 7 ";
             // 
             // labelDepth1
             // 
             this.labelDepth1.AutoSize = true;
-            this.labelDepth1.Location = new System.Drawing.Point(27, 221);
+            this.labelDepth1.Location = new System.Drawing.Point(36, 272);
+            this.labelDepth1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelDepth1.Name = "labelDepth1";
-            this.labelDepth1.Size = new System.Drawing.Size(10, 13);
+            this.labelDepth1.Size = new System.Drawing.Size(13, 17);
             this.labelDepth1.TabIndex = 2;
             this.labelDepth1.Text = "-";
             // 
             // labelDepth0
             // 
             this.labelDepth0.AutoSize = true;
-            this.labelDepth0.Location = new System.Drawing.Point(120, 281);
+            this.labelDepth0.Location = new System.Drawing.Point(160, 346);
+            this.labelDepth0.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelDepth0.Name = "labelDepth0";
-            this.labelDepth0.Size = new System.Drawing.Size(10, 13);
+            this.labelDepth0.Size = new System.Drawing.Size(13, 17);
             this.labelDepth0.TabIndex = 3;
             this.labelDepth0.Text = "-";
             // 
             // labelDepth2
             // 
             this.labelDepth2.AutoSize = true;
-            this.labelDepth2.Location = new System.Drawing.Point(120, 236);
+            this.labelDepth2.Location = new System.Drawing.Point(160, 290);
+            this.labelDepth2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelDepth2.Name = "labelDepth2";
-            this.labelDepth2.Size = new System.Drawing.Size(10, 13);
+            this.labelDepth2.Size = new System.Drawing.Size(13, 17);
             this.labelDepth2.TabIndex = 6;
             this.labelDepth2.Text = "-";
             // 
             // labelDepth4
             // 
             this.labelDepth4.AutoSize = true;
-            this.labelDepth4.Location = new System.Drawing.Point(120, 267);
+            this.labelDepth4.Location = new System.Drawing.Point(160, 329);
+            this.labelDepth4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelDepth4.Name = "labelDepth4";
-            this.labelDepth4.Size = new System.Drawing.Size(10, 13);
+            this.labelDepth4.Size = new System.Drawing.Size(13, 17);
             this.labelDepth4.TabIndex = 4;
             this.labelDepth4.Text = "-";
             // 
             // labelDepth3
             // 
             this.labelDepth3.AutoSize = true;
-            this.labelDepth3.Location = new System.Drawing.Point(120, 252);
+            this.labelDepth3.Location = new System.Drawing.Point(160, 310);
+            this.labelDepth3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelDepth3.Name = "labelDepth3";
-            this.labelDepth3.Size = new System.Drawing.Size(10, 13);
+            this.labelDepth3.Size = new System.Drawing.Size(13, 17);
             this.labelDepth3.TabIndex = 5;
             this.labelDepth3.Text = "-";
             // 
@@ -636,37 +694,38 @@ namespace PointCloudScanner
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(783, 16);
+            this.label12.Location = new System.Drawing.Point(1044, 20);
+            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(135, 15);
+            this.label12.Size = new System.Drawing.Size(165, 18);
             this.label12.TabIndex = 9;
             this.label12.Text = "3D Refresh at ... frames";
             // 
             // TrackBarOpenGLAt
             // 
-            colorPack1.Border = System.Drawing.Color.DarkRed;
-            colorPack1.Face = System.Drawing.Color.IndianRed;
-            colorPack1.Highlight = System.Drawing.Color.MistyRose;
-            this.TrackBarOpenGLAt.AButColor = colorPack1;
+            colorPack76.Border = System.Drawing.Color.DarkRed;
+            colorPack76.Face = System.Drawing.Color.IndianRed;
+            colorPack76.Highlight = System.Drawing.Color.MistyRose;
+            this.TrackBarOpenGLAt.AButColor = colorPack76;
             this.TrackBarOpenGLAt.BackColor = System.Drawing.SystemColors.Control;
             this.TrackBarOpenGLAt.BorderColor = System.Drawing.Color.DarkRed;
-            colorPack2.Border = System.Drawing.Color.Black;
-            colorPack2.Face = System.Drawing.Color.RoyalBlue;
-            colorPack2.Highlight = System.Drawing.Color.White;
-            this.TrackBarOpenGLAt.ColorHover = colorPack2;
-            colorPack3.Border = System.Drawing.Color.Firebrick;
-            colorPack3.Face = System.Drawing.Color.Firebrick;
-            colorPack3.Highlight = System.Drawing.Color.White;
-            this.TrackBarOpenGLAt.ColorUp = colorPack3;
+            colorPack77.Border = System.Drawing.Color.Black;
+            colorPack77.Face = System.Drawing.Color.RoyalBlue;
+            colorPack77.Highlight = System.Drawing.Color.White;
+            this.TrackBarOpenGLAt.ColorHover = colorPack77;
+            colorPack78.Border = System.Drawing.Color.Firebrick;
+            colorPack78.Face = System.Drawing.Color.Firebrick;
+            colorPack78.Highlight = System.Drawing.Color.White;
+            this.TrackBarOpenGLAt.ColorUp = colorPack78;
             this.TrackBarOpenGLAt.FloatValueFontColor = System.Drawing.Color.Red;
             this.TrackBarOpenGLAt.Label = null;
             this.TrackBarOpenGLAt.LabelAlighnment = System.Drawing.StringAlignment.Center;
-            this.TrackBarOpenGLAt.Location = new System.Drawing.Point(832, 34);
-            this.TrackBarOpenGLAt.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.TrackBarOpenGLAt.Location = new System.Drawing.Point(1109, 42);
+            this.TrackBarOpenGLAt.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TrackBarOpenGLAt.MaxValue = 30;
             this.TrackBarOpenGLAt.MinValue = 1;
             this.TrackBarOpenGLAt.Name = "TrackBarOpenGLAt";
-            this.TrackBarOpenGLAt.Size = new System.Drawing.Size(220, 39);
+            this.TrackBarOpenGLAt.Size = new System.Drawing.Size(293, 48);
             this.TrackBarOpenGLAt.SliderWidthHigh = 1F;
             this.TrackBarOpenGLAt.SliderWidthLow = 1F;
             this.TrackBarOpenGLAt.TabIndex = 8;
@@ -688,37 +747,38 @@ namespace PointCloudScanner
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(409, 53);
+            this.label4.Location = new System.Drawing.Point(545, 65);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(140, 15);
+            this.label4.Size = new System.Drawing.Size(172, 18);
             this.label4.TabIndex = 7;
             this.label4.Text = "Snapshot: No of pictures";
             // 
             // trackBarSnapshotNumber
             // 
-            colorPack4.Border = System.Drawing.Color.DarkRed;
-            colorPack4.Face = System.Drawing.Color.IndianRed;
-            colorPack4.Highlight = System.Drawing.Color.MistyRose;
-            this.trackBarSnapshotNumber.AButColor = colorPack4;
+            colorPack79.Border = System.Drawing.Color.DarkRed;
+            colorPack79.Face = System.Drawing.Color.IndianRed;
+            colorPack79.Highlight = System.Drawing.Color.MistyRose;
+            this.trackBarSnapshotNumber.AButColor = colorPack79;
             this.trackBarSnapshotNumber.BackColor = System.Drawing.SystemColors.Control;
             this.trackBarSnapshotNumber.BorderColor = System.Drawing.Color.DarkRed;
-            colorPack5.Border = System.Drawing.Color.Black;
-            colorPack5.Face = System.Drawing.Color.RoyalBlue;
-            colorPack5.Highlight = System.Drawing.Color.White;
-            this.trackBarSnapshotNumber.ColorHover = colorPack5;
-            colorPack6.Border = System.Drawing.Color.Firebrick;
-            colorPack6.Face = System.Drawing.Color.Firebrick;
-            colorPack6.Highlight = System.Drawing.Color.White;
-            this.trackBarSnapshotNumber.ColorUp = colorPack6;
+            colorPack80.Border = System.Drawing.Color.Black;
+            colorPack80.Face = System.Drawing.Color.RoyalBlue;
+            colorPack80.Highlight = System.Drawing.Color.White;
+            this.trackBarSnapshotNumber.ColorHover = colorPack80;
+            colorPack81.Border = System.Drawing.Color.Firebrick;
+            colorPack81.Face = System.Drawing.Color.Firebrick;
+            colorPack81.Highlight = System.Drawing.Color.White;
+            this.trackBarSnapshotNumber.ColorUp = colorPack81;
             this.trackBarSnapshotNumber.FloatValueFontColor = System.Drawing.Color.Red;
             this.trackBarSnapshotNumber.Label = null;
             this.trackBarSnapshotNumber.LabelAlighnment = System.Drawing.StringAlignment.Center;
-            this.trackBarSnapshotNumber.Location = new System.Drawing.Point(577, 42);
-            this.trackBarSnapshotNumber.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.trackBarSnapshotNumber.Location = new System.Drawing.Point(769, 52);
+            this.trackBarSnapshotNumber.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.trackBarSnapshotNumber.MaxValue = 20;
             this.trackBarSnapshotNumber.MinValue = 1;
             this.trackBarSnapshotNumber.Name = "trackBarSnapshotNumber";
-            this.trackBarSnapshotNumber.Size = new System.Drawing.Size(191, 39);
+            this.trackBarSnapshotNumber.Size = new System.Drawing.Size(255, 48);
             this.trackBarSnapshotNumber.SliderWidthHigh = 1F;
             this.trackBarSnapshotNumber.SliderWidthLow = 1F;
             this.trackBarSnapshotNumber.TabIndex = 6;
@@ -738,29 +798,29 @@ namespace PointCloudScanner
             // 
             // trackBarInterpolationNumber
             // 
-            colorPack7.Border = System.Drawing.Color.DarkRed;
-            colorPack7.Face = System.Drawing.Color.IndianRed;
-            colorPack7.Highlight = System.Drawing.Color.MistyRose;
-            this.trackBarInterpolationNumber.AButColor = colorPack7;
+            colorPack82.Border = System.Drawing.Color.DarkRed;
+            colorPack82.Face = System.Drawing.Color.IndianRed;
+            colorPack82.Highlight = System.Drawing.Color.MistyRose;
+            this.trackBarInterpolationNumber.AButColor = colorPack82;
             this.trackBarInterpolationNumber.BackColor = System.Drawing.SystemColors.Control;
             this.trackBarInterpolationNumber.BorderColor = System.Drawing.Color.DarkRed;
-            colorPack8.Border = System.Drawing.Color.Black;
-            colorPack8.Face = System.Drawing.Color.RoyalBlue;
-            colorPack8.Highlight = System.Drawing.Color.White;
-            this.trackBarInterpolationNumber.ColorHover = colorPack8;
-            colorPack9.Border = System.Drawing.Color.Firebrick;
-            colorPack9.Face = System.Drawing.Color.Firebrick;
-            colorPack9.Highlight = System.Drawing.Color.White;
-            this.trackBarInterpolationNumber.ColorUp = colorPack9;
+            colorPack83.Border = System.Drawing.Color.Black;
+            colorPack83.Face = System.Drawing.Color.RoyalBlue;
+            colorPack83.Highlight = System.Drawing.Color.White;
+            this.trackBarInterpolationNumber.ColorHover = colorPack83;
+            colorPack84.Border = System.Drawing.Color.Firebrick;
+            colorPack84.Face = System.Drawing.Color.Firebrick;
+            colorPack84.Highlight = System.Drawing.Color.White;
+            this.trackBarInterpolationNumber.ColorUp = colorPack84;
             this.trackBarInterpolationNumber.FloatValueFontColor = System.Drawing.Color.Red;
             this.trackBarInterpolationNumber.Label = null;
             this.trackBarInterpolationNumber.LabelAlighnment = System.Drawing.StringAlignment.Center;
-            this.trackBarInterpolationNumber.Location = new System.Drawing.Point(577, 6);
-            this.trackBarInterpolationNumber.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.trackBarInterpolationNumber.Location = new System.Drawing.Point(769, 7);
+            this.trackBarInterpolationNumber.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.trackBarInterpolationNumber.MaxValue = 30;
             this.trackBarInterpolationNumber.MinValue = 1;
             this.trackBarInterpolationNumber.Name = "trackBarInterpolationNumber";
-            this.trackBarInterpolationNumber.Size = new System.Drawing.Size(191, 39);
+            this.trackBarInterpolationNumber.Size = new System.Drawing.Size(255, 48);
             this.trackBarInterpolationNumber.SliderWidthHigh = 1F;
             this.trackBarInterpolationNumber.SliderWidthLow = 1F;
             this.trackBarInterpolationNumber.TabIndex = 5;
@@ -783,9 +843,10 @@ namespace PointCloudScanner
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(409, 16);
+            this.label3.Location = new System.Drawing.Point(545, 20);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(154, 15);
+            this.label3.Size = new System.Drawing.Size(185, 18);
             this.label3.TabIndex = 4;
             this.label3.Text = "Interpolation: No of images";
             // 
@@ -793,37 +854,38 @@ namespace PointCloudScanner
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(3, 53);
+            this.label2.Location = new System.Drawing.Point(4, 65);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(92, 15);
+            this.label2.Size = new System.Drawing.Size(114, 18);
             this.label2.TabIndex = 3;
             this.label2.Text = "Far Cutoff (mm)";
             // 
             // trackBarCutoffFar
             // 
-            colorPack10.Border = System.Drawing.Color.DarkRed;
-            colorPack10.Face = System.Drawing.Color.IndianRed;
-            colorPack10.Highlight = System.Drawing.Color.MistyRose;
-            this.trackBarCutoffFar.AButColor = colorPack10;
+            colorPack85.Border = System.Drawing.Color.DarkRed;
+            colorPack85.Face = System.Drawing.Color.IndianRed;
+            colorPack85.Highlight = System.Drawing.Color.MistyRose;
+            this.trackBarCutoffFar.AButColor = colorPack85;
             this.trackBarCutoffFar.BackColor = System.Drawing.SystemColors.Control;
             this.trackBarCutoffFar.BorderColor = System.Drawing.Color.DarkRed;
-            colorPack11.Border = System.Drawing.Color.Black;
-            colorPack11.Face = System.Drawing.Color.RoyalBlue;
-            colorPack11.Highlight = System.Drawing.Color.White;
-            this.trackBarCutoffFar.ColorHover = colorPack11;
-            colorPack12.Border = System.Drawing.Color.Firebrick;
-            colorPack12.Face = System.Drawing.Color.Firebrick;
-            colorPack12.Highlight = System.Drawing.Color.White;
-            this.trackBarCutoffFar.ColorUp = colorPack12;
+            colorPack86.Border = System.Drawing.Color.Black;
+            colorPack86.Face = System.Drawing.Color.RoyalBlue;
+            colorPack86.Highlight = System.Drawing.Color.White;
+            this.trackBarCutoffFar.ColorHover = colorPack86;
+            colorPack87.Border = System.Drawing.Color.Firebrick;
+            colorPack87.Face = System.Drawing.Color.Firebrick;
+            colorPack87.Highlight = System.Drawing.Color.White;
+            this.trackBarCutoffFar.ColorUp = colorPack87;
             this.trackBarCutoffFar.FloatValueFontColor = System.Drawing.Color.Red;
             this.trackBarCutoffFar.Label = null;
             this.trackBarCutoffFar.LabelAlighnment = System.Drawing.StringAlignment.Center;
-            this.trackBarCutoffFar.Location = new System.Drawing.Point(123, 42);
-            this.trackBarCutoffFar.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.trackBarCutoffFar.Location = new System.Drawing.Point(164, 52);
+            this.trackBarCutoffFar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.trackBarCutoffFar.MaxValue = 7500;
             this.trackBarCutoffFar.MinValue = 500;
             this.trackBarCutoffFar.Name = "trackBarCutoffFar";
-            this.trackBarCutoffFar.Size = new System.Drawing.Size(263, 39);
+            this.trackBarCutoffFar.Size = new System.Drawing.Size(351, 48);
             this.trackBarCutoffFar.SliderWidthHigh = 1F;
             this.trackBarCutoffFar.SliderWidthLow = 1F;
             this.trackBarCutoffFar.TabIndex = 2;
@@ -845,37 +907,38 @@ namespace PointCloudScanner
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(2, 9);
+            this.label1.Location = new System.Drawing.Point(3, 11);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(101, 15);
+            this.label1.Size = new System.Drawing.Size(124, 18);
             this.label1.TabIndex = 1;
             this.label1.Text = "Near Cutoff (mm)";
             // 
             // trackBarCutoffNear
             // 
-            colorPack13.Border = System.Drawing.Color.DarkRed;
-            colorPack13.Face = System.Drawing.Color.IndianRed;
-            colorPack13.Highlight = System.Drawing.Color.MistyRose;
-            this.trackBarCutoffNear.AButColor = colorPack13;
+            colorPack88.Border = System.Drawing.Color.DarkRed;
+            colorPack88.Face = System.Drawing.Color.IndianRed;
+            colorPack88.Highlight = System.Drawing.Color.MistyRose;
+            this.trackBarCutoffNear.AButColor = colorPack88;
             this.trackBarCutoffNear.BackColor = System.Drawing.SystemColors.Control;
             this.trackBarCutoffNear.BorderColor = System.Drawing.Color.DarkRed;
-            colorPack14.Border = System.Drawing.Color.Black;
-            colorPack14.Face = System.Drawing.Color.RoyalBlue;
-            colorPack14.Highlight = System.Drawing.Color.White;
-            this.trackBarCutoffNear.ColorHover = colorPack14;
-            colorPack15.Border = System.Drawing.Color.Firebrick;
-            colorPack15.Face = System.Drawing.Color.Firebrick;
-            colorPack15.Highlight = System.Drawing.Color.White;
-            this.trackBarCutoffNear.ColorUp = colorPack15;
+            colorPack89.Border = System.Drawing.Color.Black;
+            colorPack89.Face = System.Drawing.Color.RoyalBlue;
+            colorPack89.Highlight = System.Drawing.Color.White;
+            this.trackBarCutoffNear.ColorHover = colorPack89;
+            colorPack90.Border = System.Drawing.Color.Firebrick;
+            colorPack90.Face = System.Drawing.Color.Firebrick;
+            colorPack90.Highlight = System.Drawing.Color.White;
+            this.trackBarCutoffNear.ColorUp = colorPack90;
             this.trackBarCutoffNear.FloatValueFontColor = System.Drawing.Color.Red;
             this.trackBarCutoffNear.Label = null;
             this.trackBarCutoffNear.LabelAlighnment = System.Drawing.StringAlignment.Center;
-            this.trackBarCutoffNear.Location = new System.Drawing.Point(123, 2);
-            this.trackBarCutoffNear.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.trackBarCutoffNear.Location = new System.Drawing.Point(164, 2);
+            this.trackBarCutoffNear.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.trackBarCutoffNear.MaxValue = 1500;
             this.trackBarCutoffNear.MinValue = 500;
             this.trackBarCutoffNear.Name = "trackBarCutoffNear";
-            this.trackBarCutoffNear.Size = new System.Drawing.Size(263, 39);
+            this.trackBarCutoffNear.Size = new System.Drawing.Size(351, 48);
             this.trackBarCutoffNear.SliderWidthHigh = 1F;
             this.trackBarCutoffNear.SliderWidthLow = 1F;
             this.trackBarCutoffNear.TabIndex = 0;
@@ -895,27 +958,26 @@ namespace PointCloudScanner
             // 
             // contextMenuStrip
             // 
+            this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip.Name = "contextMenuStrip";
             this.contextMenuStrip.Size = new System.Drawing.Size(61, 4);
             // 
-            // buttonSaveAll
+            // recordToolStripMenuItem
             // 
-            this.buttonSaveAll.Location = new System.Drawing.Point(72, 229);
-            this.buttonSaveAll.Name = "buttonSaveAll";
-            this.buttonSaveAll.Size = new System.Drawing.Size(75, 23);
-            this.buttonSaveAll.TabIndex = 15;
-            this.buttonSaveAll.Text = "Save All";
-            this.buttonSaveAll.UseVisualStyleBackColor = true;
-            this.buttonSaveAll.Click += new System.EventHandler(this.buttonSaveAll_Click);
+            this.recordToolStripMenuItem.Name = "recordToolStripMenuItem";
+            this.recordToolStripMenuItem.Size = new System.Drawing.Size(288, 26);
+            this.recordToolStripMenuItem.Text = "Record skeleton motion as bvh";
+            this.recordToolStripMenuItem.Click += new System.EventHandler(this.recordToolStripMenuItem_Click);
             // 
             // ScannerUC
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.splitContainerUC);
             this.Controls.Add(this.splitter1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ScannerUC";
-            this.Size = new System.Drawing.Size(1421, 533);
+            this.Size = new System.Drawing.Size(2070, 928);
             this.splitContainerUC.Panel1.ResumeLayout(false);
             this.splitContainerUC.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerUC)).EndInit();
@@ -1014,5 +1076,6 @@ namespace PointCloudScanner
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private OpenTKExtension.OpenGLUC openGLUC;
         private System.Windows.Forms.Button buttonSaveAll;
+        private System.Windows.Forms.ToolStripMenuItem recordToolStripMenuItem;
     }
 }

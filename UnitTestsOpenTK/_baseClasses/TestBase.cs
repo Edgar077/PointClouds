@@ -95,7 +95,7 @@ namespace UnitTestsOpenTK
         {
             TestForm fOTK = new TestForm();
 
-            fOTK.ShowModel(myModel);
+            fOTK.ShowPointCloud(myModel.PointCloud);
           
             GlobalVariables.ShowLastTimeSpan("Show Model");
             fOTK.ShowDialog();
@@ -112,7 +112,7 @@ namespace UnitTestsOpenTK
 
         }
 
-        protected void ShowVector3DInWindow(List<Vector3> listResult)
+        protected void ShowVector3InWindow(List<Vector3> listResult)
         {
 
             pointCloudSource = PointCloud.FromListVector3(listResult);
@@ -129,8 +129,8 @@ namespace UnitTestsOpenTK
             TestForm fOTK = new TestForm();
             
             
-            fOTK.ShowModel(myModel);
-
+           // fOTK.ShowModel(myModel);
+            fOTK.ShowPointCloud(myModel.PointCloud);
 
             GlobalVariables.ShowLastTimeSpan("Show Model");
             fOTK.ShowDialog();
@@ -141,8 +141,8 @@ namespace UnitTestsOpenTK
             TestForm fOTK = new TestForm();
 
             
-            fOTK.ShowModel(myModel);
-
+           
+            fOTK.ShowPointCloud(myModel.PointCloud);
 
             GlobalVariables.ShowLastTimeSpan("Show Model");
             fOTK.ShowDialog();
@@ -215,7 +215,7 @@ namespace UnitTestsOpenTK
             Model myModel = new Model();
 
             myModel.PointCloud = pointCloudSource;
-            myModel.Normals = normals;
+           // myModel.Normals = normals;
 
 
           
@@ -232,7 +232,7 @@ namespace UnitTestsOpenTK
             Model myModel = new Model();
 
             myModel.PointCloud = pointCloudSource;
-            myModel.Normals = normals;
+          //  myModel.Normals = normals;
 
 
           
@@ -487,7 +487,7 @@ namespace UnitTestsOpenTK
         {
 
             TestForm fOTK = new TestForm();
-            fOTK.ShowPointCloudOpenGL(pcl, true);
+            fOTK.ShowPointCloud(pcl, true);
             fOTK.ShowDialog();
 
         }

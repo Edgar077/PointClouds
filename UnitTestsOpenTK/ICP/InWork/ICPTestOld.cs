@@ -20,10 +20,10 @@ namespace UnitTestsOpenTK.InWork
             TestForm fOTK = new TestForm();
             fOTK.OpenGL_UControl.RemoveAllModels();
             string fileNameLong = pathUnitTests + "\\KinectFace_1_15000.obj";
-            fOTK.OpenGL_UControl.LoadModelFromFile(fileNameLong);
+            fOTK.OpenGL_UControl.LoadPointCloudFromFile(fileNameLong, false);
 
             fileNameLong = pathUnitTests + "\\transformed.obj";
-            fOTK.OpenGL_UControl.LoadModelFromFile(fileNameLong);
+            fOTK.OpenGL_UControl.LoadPointCloudFromFile(fileNameLong, false);
             fOTK.ICP_OnCurrentModels();
             fOTK.ShowDialog();
 

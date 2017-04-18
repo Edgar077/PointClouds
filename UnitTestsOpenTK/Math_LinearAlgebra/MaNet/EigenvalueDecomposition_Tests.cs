@@ -259,7 +259,7 @@ namespace UnitTestsOpenTK.LinearAlgebra
         {
             Rectangular rand = new Rectangular();
             Matrix3 A = rand.Randomfloat(n, n);
-            A = Matrix3.Add(A, Matrix3.Transpose(A));
+            A = A.Add(Matrix3.Transpose(A));
 
             /// Any matrix added to its transpose will be symetric
             Assert.That(StandardMatrixTests.IsSymetric(A), Is.True);

@@ -313,7 +313,7 @@ namespace OpenTKExtension
                 this.PointCloud = o.PointCloud;
 
                // if (clearPrevious)
-                    ClearAll();
+                //    ClearAll();
 
                 if (GLContextInitialized)
                 {
@@ -321,7 +321,9 @@ namespace OpenTKExtension
                     if (this.RenderableObjects.Count > 0)
                     {
                         RenderableObject oldObject = RenderableObjects[0];
+                        //oldObject.Dispose();
                         oldObject.PointCloud = o.PointCloud;
+                        //o.InitializeGL();
                     }
                     else
                     {

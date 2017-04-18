@@ -13,6 +13,7 @@ namespace UnitTestsOpenTK.LinearAlgebra
 {
   public static class StandardMatrixTests
     {
+        
         public static bool IsUpperTriangular(Matrix3 m)
         {
             for (int iRow = 0; iRow < m.RowLength(); iRow++)

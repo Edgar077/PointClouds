@@ -72,7 +72,7 @@ namespace UnitTestsOpenTK.PrincipalComponentAnalysis
             //}
 
 
-            // ShowVector3DInWindow(listResult);
+            // ShowVector3InWindow(listResult);
             this.pointCloudSource = PointCloud.FromListVector3(pointsSource);
             this.pointCloudTarget = pca.CalculatePCA(PointCloud.FromListVector3(pointsSource), 0);
 

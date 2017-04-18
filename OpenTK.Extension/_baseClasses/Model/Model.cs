@@ -95,17 +95,17 @@ namespace OpenTKExtension
 
 
         //}
-        public List<Vector3> Normals
-        {
-            get
-            {
-                return this.PointCloud.Normals.ToList<Vector3>();
-            }
-            set
-            {
-                this.PointCloud.Normals = value.ToArray();
-            }
-        }
+        //public List<Vector3> Normals
+        //{
+        //    get
+        //    {
+        //        return this.PointCloud.Normals.ToList<Vector3>();
+        //    }
+        //    set
+        //    {
+        //        this.PointCloud.Normals = value.ToArray();
+        //    }
+        //}
      
 
     }

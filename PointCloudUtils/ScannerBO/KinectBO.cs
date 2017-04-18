@@ -18,7 +18,8 @@ namespace PointCloudUtils
     public partial class KinectBO : ScannerBase
     {
 
-        
+        public BVH_IO BVHFile;
+
         Control parent;
         System.Windows.Forms.PictureBox pictureBoxColor;
         System.Windows.Forms.PictureBox pictureBoxDepth;
@@ -40,24 +41,21 @@ namespace PointCloudUtils
         private Image ImageScreenshot;
         BackgroundRemoval backgroundRemovalTool;
 
+        private System.Collections.ArrayList framesScanner;
+        private System.Collections.ArrayList framesOpenGL;
 
 
         bool disposed;
-
-        //--------
+        Ellipse ellipseFace;
+        float faceX = 0.1f;
+        float faceY = 0.15f;
 
         #region public properties
 
         public ColorMetaData ColorMetaData { get; set; }
         public BodyMetaData BodyMetaData { get; set; }
 
-        #endregion
-
-
-        private System.Collections.ArrayList framesScanner;
-        private System.Collections.ArrayList framesOpenGL;
-
-        
+        #endregion    
 
         #region Kinect stuff
         // open the reader for the body frames
@@ -91,19 +89,17 @@ namespace PointCloudUtils
         List<Vector3> pointsFace = new List<Vector3>();
         #endregion
 
-        Ellipse ellipseFace;
-        float faceX = 0.1f;
-        float faceY = 0.15f;
         public KinectBO()
         {
+            
             InitBitmaps();
-           
+          
 
         }
 
         public KinectBO(System.Windows.Forms.Control myParentControl, System.Windows.Forms.PictureBox myPictureBoxColor, System.Windows.Forms.PictureBox myPictureBoxDepth, System.Windows.Forms.PictureBox mypictureBoxIR, OGLControl myOpenGLControl,
-            System.Windows.Forms.PictureBox mypictureBoxEntropy, System.Windows.Forms.PictureBox mypictureBoxPolygon, 
-            System.Windows.Forms.Label mycameraFpsLabel, Label mylabelRefreshRateOpenGL, Label mylabelDepth1):this()
+            System.Windows.Forms.PictureBox mypictureBoxEntropy, System.Windows.Forms.PictureBox mypictureBoxPolygon,
+            System.Windows.Forms.Label mycameraFpsLabel, Label mylabelRefreshRateOpenGL, Label mylabelDepth1) : this()
         {
             openGLPart = new OpenGLPart(this, myParentControl, myOpenGLControl);
 
@@ -123,7 +119,7 @@ namespace PointCloudUtils
             InitPictureBoxesForUI();
             //try
             //{
-              
+
             //}
             //catch (Exception err)
             //{
@@ -142,9 +138,23 @@ namespace PointCloudUtils
 
         
         }
+        public void RecordBVH()
+        {
+            BVHFile = new BVH_IO("bvh", GLSettings.PathModels);
+
+            if (this.bodies == null || this.bodies.Length == 0 || this.bodies[0] == null)
+            {
+                System.Windows.Forms.MessageBox.Show("No body data - please enable skeleton grabbing in Tools- Options");
+                return;
+                
+            }
+            BVHFile = BVH_IO.Record_Start(this.bodies[0], "bfh", GLSettings.PathModels);
+
+        }
         public override bool StartScanner()
         {
             InitScanner();
+            isScanning = true;
             scannerSensor = KinectSensor.GetDefault();
             //scannerSensor.DepthFrameSource
             if (scannerSensor != null)
@@ -346,7 +356,7 @@ namespace PointCloudUtils
         //}
         public override void StopScanner()
         {
-           
+            isScanning = false; 
             if (scannerReader != null)
             {
                 scannerReader.Dispose();
@@ -363,6 +373,10 @@ namespace PointCloudUtils
             {
                 this.bodyFrameReader.Dispose();
                 bodyFrameReader = null;
+            }
+            if(BVHFile != null)
+            {
+                BVHFile.Close();
             }
             //if (_faceReader != null)
             //{
@@ -419,13 +433,22 @@ namespace PointCloudUtils
         }
         public override PointCloudRenderable ToPointCloudRenderable(bool resizeTo1)
         {
+            //string directory = GLSettings.Path + GLSettings.PathModels + "\\Nick";
+            //string[] files = IOUtils.FileNamesSorted(directory, "*.obj");
+
+
+            //PointCloud pc1 = PointCloud.FromObjFile(files[0]);
+            //PointCloudRenderable pcr1 = new PointCloudRenderable();
+            //pcr1.PointCloud = pc1;
+            //return pcr1;
+
+
             if (this.ColorMetaData != null && this.DepthMetaData != null)
             {
                 PointCloud pc = MetaDataBase.ToPointCloud(this.ColorMetaData, this.DepthMetaData, this.BodyMetaData, this.coordinateMapper);
-
-                PointCloud pgl = pc;
+                
                 PointCloudRenderable pcr = new PointCloudRenderable();
-                pcr.PointCloud = pgl;
+                pcr.PointCloud = pc;
 
                 return pcr;
             }
@@ -524,15 +547,21 @@ namespace PointCloudUtils
         }
         void Scanner_MultiSourceFrameArrived(object sender, MultiSourceFrameArrivedEventArgs e)
         {
-            MultiSourceFrame multiSourceFrame = e.FrameReference.AcquireFrame();
-            if (PointCloudScannerSettings.BackgroundRemoved)
+            try
             {
-                ProcessBodyFrame(multiSourceFrame);
-            }
-            else
-                ProcessDepthColorIR(multiSourceFrame);
-            
+                MultiSourceFrame multiSourceFrame = e.FrameReference.AcquireFrame();
+                if (PointCloudScannerSettings.BackgroundRemoved)
+                {
+                    ProcessBodyFrame(multiSourceFrame);
+                }
+                else
+                    ProcessDepthColorIR(multiSourceFrame);
 
+            }
+            catch(Exception err)
+            {
+                System.Windows.Forms.MessageBox.Show("SW Error acquiring scan data: " + err.Message);
+            }
            
 
         }
@@ -582,7 +611,7 @@ namespace PointCloudUtils
                         if (this.openGLPart.ShowingIn3DControl)
                         {
                             openGLCounter++;
-                            if (openGLCounter == this.openGLRefreshAt)
+                          //  if (openGLCounter == this.openGLRefreshAt)
                             {
                                 openGLCounter = 0;
                                 this.UpdateOpenGLControl();

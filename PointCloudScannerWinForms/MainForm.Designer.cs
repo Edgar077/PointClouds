@@ -2,7 +2,6 @@
 {
     partial class MainForm
     {
-        private System.Windows.Forms.MenuStrip menuStrip1;
         private ScannerUC scannerUC;
         /// <summary>
         /// Required designer variable.
@@ -31,31 +30,18 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            
             this.SuspendLayout();
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1403, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
-           
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1403, 675);
-            
-            this.Controls.Add(this.menuStrip1);
+            this.ClientSize = new System.Drawing.Size(1871, 831);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "MainForm";
             this.Text = "Point Cloud Scanner";
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

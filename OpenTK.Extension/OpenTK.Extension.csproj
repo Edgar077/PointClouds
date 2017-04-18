@@ -92,6 +92,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Extensions\Matrix4Extension.cs" />
+    <Compile Include="Extensions\QuaternionExtension.cs" />
     <Compile Include="Extensions\QuaternionNew.cs" />
     <Compile Include="Extensions\Vector3dExtension.cs">
       <SubType>Code</SubType>
@@ -563,25 +564,19 @@
     <Compile Include="_Forms\TestForm.Designer.cs">
       <DependentUpon>TestForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="_Forms\OpenTKFormAlternative.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="_Forms\OpenTKFormAlternative.Designer.cs">
-      <DependentUpon>OpenTKFormAlternative.cs</DependentUpon>
-    </Compile>
     <Compile Include="Triangulation\TetrahedralMarcher\MarchingCubes.cs" />
     <Compile Include="Triangulation\TetrahedralMarcher\TablesMarchingCube.cs" />
     <Compile Include="Triangulation\TetrahedralMarcher\TetrahedralMarcher.cs" />
-    <Compile Include="UserControl\UC_BusinessLogic.cs">
+    <Compile Include="_Controls\Specials\UC_BusinessLogic.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControl\UC_Display.cs">
+    <Compile Include="_Controls\Specials\UC_Display.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControl\UC_Model.cs">
+    <Compile Include="_Controls\Specials\UC_Model.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControl\UC_PointCloud.cs">
+    <Compile Include="_Controls\Specials\UC_PointCloud.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="_baseClasses\Camera\AbstractCamera.cs" />
@@ -747,10 +742,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="_Forms\TestForm.resx">
       <DependentUpon>TestForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="_Forms\OpenTKFormAlternative.resx">
-      <DependentUpon>OpenTKFormAlternative.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

@@ -22,6 +22,8 @@ namespace PointCloudUtils
         PointCloudRenderable ToPointCloudRenderable(bool resizeTo1);
         OpenGLPart OpenGLPart { get; }
         int OpenGLRefreshAt { get; set; }
+        bool IsScanning{ get; }
+
 
     }
 }

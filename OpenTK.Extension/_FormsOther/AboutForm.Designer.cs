@@ -160,7 +160,7 @@
             this.listBox4.FormattingEnabled = true;
             this.listBox4.ItemHeight = 16;
             this.listBox4.Items.AddRange(new object[] {
-            "OpenTKExtension, Version: 0.9.0.10"});
+            "OpenTKExtension, Version: 0.9.0.11"});
             this.listBox4.Location = new System.Drawing.Point(425, 681);
             this.listBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.listBox4.Name = "listBox4";

@@ -218,7 +218,6 @@ namespace PointCloudUtils
             try
             {
 
-                //for (int x = 0; x < DepthMetaData.XDepthMaxKinect; x++)
                 System.Threading.Tasks.Parallel.For(0, DepthMetaData.XDepthMaxKinect, x =>
                 {
                     for (int y = 0; y < DepthMetaData.YDepthMaxKinect; y++)

@@ -189,7 +189,7 @@ namespace MIConvexHull
         /// </summary>
         /// <param name="pointCloud"></param>
         /// <param name="normal"></param>
-        void FindNormalVector3D(VertexWrap[] pointCloud, float[] normal)
+        void FindNormalVector3(VertexWrap[] pointCloud, float[] normal)
         {
             SubtractFast(pointCloud[1].PositionData, pointCloud[0].PositionData, ntX);
             SubtractFast(pointCloud[2].PositionData, pointCloud[1].PositionData, ntY);
@@ -241,7 +241,7 @@ namespace MIConvexHull
             switch (Dimension)
             {
                 case 2: FindNormalVector2D(pointCloud, normalData); break;
-                case 3: FindNormalVector3D(pointCloud, normalData); break;
+                case 3: FindNormalVector3(pointCloud, normalData); break;
                 case 4: FindNormalVector4D(pointCloud, normalData); break;
                 default:
                     {

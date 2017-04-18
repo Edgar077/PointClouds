@@ -31,10 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\binExtern\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\binExtern\nunit.framework.dll</HintPath>
     </Reference>
@@ -60,8 +56,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CharacterCreator\CharacterTest.cs" />
-    <Compile Include="CharacterCreator\JsonTester.cs" />
     <Compile Include="KDTree\_KDTreeComparison.cs" />
     <Compile Include="ToDo\Nada.cs" />
     <Compile Include="ToDo\Cuboid_ExpectedNotWorking.cs" />
@@ -91,10 +85,6 @@
     <Compile Include="Triangulate\Triangulate.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CharacterCreator\CharacterCreator.csproj">
-      <Project>{7b3ae269-1fd3-492f-bd23-d47d46f30ee8}</Project>
-      <Name>CharacterCreator</Name>
-    </ProjectReference>
     <ProjectReference Include="..\OpenTK.Extension\OpenTK.Extension.csproj">
       <Project>{df1f2330-134c-4ec6-a97c-3011d3072f0a}</Project>
       <Name>OpenTK.Extension</Name>
@@ -111,9 +101,7 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Performance\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

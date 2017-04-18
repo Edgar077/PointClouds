@@ -38,7 +38,7 @@ namespace PointCloudScanner
             
             InitializeComponent();
 
-            AddOpenGLUserControl();
+ //           AddOpenGLUserControl();
             OglControl = this.openGLUC.OGLControl;
 
             if (!PointCloudScannerSettings.IsInitializedFromSettings)
@@ -58,21 +58,21 @@ namespace PointCloudScanner
             SwitchTabs();
            
         }
-        private void AddOpenGLUserControl()
-        {
-            this.SuspendLayout();
+        //private void AddOpenGLUserControl()
+        //{
+        //    this.SuspendLayout();
 
-            this.openGLUC = new OpenGLUC();
+        //    this.openGLUC = new OpenGLUC();
 
-            this.tabPage3D.Controls.Add(this.openGLUC);
-            this.openGLUC.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.openGLUC.Location = new System.Drawing.Point(3, 3);
-            this.openGLUC.Name = "openGLUC";
-            this.openGLUC.Size = new System.Drawing.Size(1202, 415);
-            this.openGLUC.TabIndex = 0;
+        //    this.tabPage3D.Controls.Add(this.openGLUC);
+        //    this.openGLUC.Dock = System.Windows.Forms.DockStyle.Fill;
+        //    this.openGLUC.Location = new System.Drawing.Point(3, 3);
+        //    this.openGLUC.Name = "openGLUC";
+        //    this.openGLUC.Size = new System.Drawing.Size(1202, 415);
+        //    this.openGLUC.TabIndex = 0;
 
-            this.ResumeLayout(false);
-        }
+        //    this.ResumeLayout(false);
+        //}
 
         public void InitKinectScanner()
         {
@@ -630,25 +630,7 @@ namespace PointCloudScanner
             InitRealSenseWindows();
         }
 
-        private void OpenFilesDialog_SinglePC()
-        {
-            OpenFileDialog openModel = new OpenFileDialog();
-            if (openModel.ShowDialog() != DialogResult.OK)
-                return;
-
-            tabControlImages.SelectTab(0);
-
-            Model myModel = new Model(openModel.FileName);
-            PointCloudRenderable pcr = new PointCloudRenderable();
-            pcr.PointCloud = myModel.PointCloud;
-            IOUtils.ExtractDirectoryAndNameFromFileName(openModel.FileName, out pcr.PointCloud.FileNameLong, out pcr.PointCloud.Path);
-
-
-            this.OglControl.GLrender.ReplaceRenderableObject(pcr, true);
-        }
-    
-
-   
+     
     
         //private void TestAlign()
         //{
@@ -721,11 +703,7 @@ namespace PointCloudScanner
         }
 
 
-        private void openPointCloudToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            OpenFilesDialog_MultiplePC();
-        }
-
+     
         private void savePointCloudToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
@@ -923,6 +901,49 @@ namespace PointCloudScanner
 
             
         }
-     
+
+      
+
+        private void recordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.Scanner == ScannerType.MicrosoftKinect && this.KinectBO != null && this.KinectBO.IsScanning)
+            {
+                this.KinectBO.RecordBVH();
+            }
+            else
+            {
+                System.Windows.Forms.MessageBox.Show("SW - Error - No BVH recording possible");
+            }
+            // BVH_IO bvhIO = new BVH_IO();
+
+        }
+        private void openPointCloudToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            OpenFilesDialog_SinglePC();
+            //OpenFilesDialog_MultiplePC();
+        }
+        private void OpenFilesDialog_SinglePC()
+        {
+            OpenFileDialog openModel = new OpenFileDialog();
+            if (openModel.ShowDialog() != DialogResult.OK)
+                return;
+
+            tabControlImages.SelectTab(0);
+            PointCloud pc = PointCloud.FromObjFile(openModel.FileName);
+
+           
+            PointCloudRenderable pcr = new PointCloudRenderable();
+            pcr.PointCloud = pc;
+            IOUtils.ExtractDirectoryAndNameFromFileName(openModel.FileName, out pc.FileNameLong, out pc.Path);
+            
+            this.openGLUC.ShowPointCloud_ClearAllOthers(pc);
+            this.Refresh();
+
+            //this.OglControl.GLrender.ReplaceRenderableObject(pcr, true);
+        }
+
+
+
+
     }
 }

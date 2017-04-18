@@ -183,7 +183,9 @@ namespace OpenTKExtension
 
             //put the 4d matrix together
             Matrix3d r3D = Rotation.Clone();
-            Matrix4d myMatrix = new Matrix4d(r3D);
+            Matrix4d myMatrix = new Matrix4d();
+            myMatrix = myMatrix.FromMatrix3d(r3D);
+
             myMatrix[0, 3] = T.X;
             myMatrix[1, 3] = T.Y;
             myMatrix[2, 3] = T.Z;

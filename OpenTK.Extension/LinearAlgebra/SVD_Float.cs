@@ -207,8 +207,11 @@ namespace OpenTKExtension
             Matrix3 R = FindRotationMatrix(pointsSource, pointsTarget, icpVersionUsed);
 
             //Vector3 T = new Vector3();
-            Matrix4 myMatrix = new Matrix4(R);
-            
+           
+
+            Matrix4 myMatrix = new Matrix4();
+            myMatrix = myMatrix.FromMatrix3(R);
+
             return myMatrix;
 
         }

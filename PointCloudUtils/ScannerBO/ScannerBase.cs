@@ -47,8 +47,9 @@ namespace PointCloudUtils
         protected Bitmap bitmapEntropy;//= new System.Drawing.Bitmap(DepthMetaData.XResDefault, DepthMetaData.YResDefault, System.Drawing.Imaging.PixelFormat.Format32bppRgb);
         protected Bitmap bitmapPolygon;//= new System.Drawing.Bitmap(DepthMetaData.XResDefault, DepthMetaData.YResDefault, System.Drawing.Imaging.PixelFormat.Format32bppRgb);
 
+        protected bool isScanning;
 
-      
+
 
         public OpenGLPart OpenGLPart
         {
@@ -105,7 +106,14 @@ namespace PointCloudUtils
         {
             throw new NotImplementedException();
         }
+        public bool IsScanning
+        {
+            get
+            {
+                return isScanning;
+            }
 
+        }
         protected void HelperInterpolation_Iteration1(int xMax, int yMax)
         {
             if (iFrameInterpolation == 1)

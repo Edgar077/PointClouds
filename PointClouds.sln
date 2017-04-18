@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.9
+VisualStudioVersion = 15.0.26403.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{96239FE9-353E-494A-8A9A-DD31CC652952}"
 EndProject
@@ -20,6 +20,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTK.Extension", "OpenTK.Extension\OpenTK.Extension.csproj", "{DF1F2330-134C-4EC6-A97C-3011D3072F0A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTKTest", "OpenTK.Test\OpenTKTest.csproj", "{546A9835-C8BC-4C43-A01C-C6603AF6674E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_UnitTestCharacterCreator", "UnitTestCharacterCreator\_UnitTestCharacterCreator.csproj", "{27EF8AA3-B3B3-4B35-9B49-0F1AA0662AAC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -268,6 +270,36 @@ Global
 		{546A9835-C8BC-4C43-A01C-C6603AF6674E}.Release-Signed|Mixed Platforms.Build.0 = Release|Any CPU
 		{546A9835-C8BC-4C43-A01C-C6603AF6674E}.Release-Signed|x64.ActiveCfg = Release|Any CPU
 		{546A9835-C8BC-4C43-A01C-C6603AF6674E}.Release-Signed|x64.Build.0 = Release|Any CPU
+		{27EF8AA3-B3B3-4B35-9B49-0F1AA0662AAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27EF8AA3-B3B3-4B35-9B49-0F1AA0662AAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27EF8AA3-B3B3-4B35-9B49-0F1AA0662AAC}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{27EF8AA3-B3B3-4B35-9B49-0F1AA0662AAC}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{27EF8AA3-B3B3-4B35-9B49-0F1AA0662AAC}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{27EF8AA3-B3B3-4B35-9B49-0F1AA0662AAC}.Debug|x64.Build.0 = Debug|Any CPU
+		{27EF8AA3-B3B3-4B35-9B49-0F1AA0662AAC}.Documentation|Any CPU.ActiveCfg = Debug|Any CPU
+		{27EF8AA3-B3B3-4B35-9B49-0F1AA0662AAC}.Documentation|Any CPU.Build.0 = Debug|Any CPU
+		{27EF8AA3-B3B3-4B35-9B49-0F1AA0662AAC}.Documentation|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{27EF8AA3-B3B3-4B35-9B49-0F1AA0662AAC}.Documentation|Mixed Platforms.Build.0 = Debug|Any CPU
+		{27EF8AA3-B3B3-4B35-9B49-0F1AA0662AAC}.Documentation|x64.ActiveCfg = Debug|Any CPU
+		{27EF8AA3-B3B3-4B35-9B49-0F1AA0662AAC}.Documentation|x64.Build.0 = Debug|Any CPU
+		{27EF8AA3-B3B3-4B35-9B49-0F1AA0662AAC}.Nsis|Any CPU.ActiveCfg = Release|Any CPU
+		{27EF8AA3-B3B3-4B35-9B49-0F1AA0662AAC}.Nsis|Any CPU.Build.0 = Release|Any CPU
+		{27EF8AA3-B3B3-4B35-9B49-0F1AA0662AAC}.Nsis|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{27EF8AA3-B3B3-4B35-9B49-0F1AA0662AAC}.Nsis|Mixed Platforms.Build.0 = Release|Any CPU
+		{27EF8AA3-B3B3-4B35-9B49-0F1AA0662AAC}.Nsis|x64.ActiveCfg = Release|Any CPU
+		{27EF8AA3-B3B3-4B35-9B49-0F1AA0662AAC}.Nsis|x64.Build.0 = Release|Any CPU
+		{27EF8AA3-B3B3-4B35-9B49-0F1AA0662AAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27EF8AA3-B3B3-4B35-9B49-0F1AA0662AAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27EF8AA3-B3B3-4B35-9B49-0F1AA0662AAC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{27EF8AA3-B3B3-4B35-9B49-0F1AA0662AAC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{27EF8AA3-B3B3-4B35-9B49-0F1AA0662AAC}.Release|x64.ActiveCfg = Release|Any CPU
+		{27EF8AA3-B3B3-4B35-9B49-0F1AA0662AAC}.Release|x64.Build.0 = Release|Any CPU
+		{27EF8AA3-B3B3-4B35-9B49-0F1AA0662AAC}.Release-Signed|Any CPU.ActiveCfg = Release|Any CPU
+		{27EF8AA3-B3B3-4B35-9B49-0F1AA0662AAC}.Release-Signed|Any CPU.Build.0 = Release|Any CPU
+		{27EF8AA3-B3B3-4B35-9B49-0F1AA0662AAC}.Release-Signed|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{27EF8AA3-B3B3-4B35-9B49-0F1AA0662AAC}.Release-Signed|Mixed Platforms.Build.0 = Release|Any CPU
+		{27EF8AA3-B3B3-4B35-9B49-0F1AA0662AAC}.Release-Signed|x64.ActiveCfg = Release|Any CPU
+		{27EF8AA3-B3B3-4B35-9B49-0F1AA0662AAC}.Release-Signed|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

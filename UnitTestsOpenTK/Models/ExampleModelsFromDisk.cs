@@ -14,11 +14,35 @@ namespace UnitTestsOpenTK.Models
     public class Example3DModelsFromDisk : TestBase
     {
         [Test]
+        public void Bunny_obj_Triangulated()
+        {
+            string fileNameLong = pathUnitTests + "\\Bunny.obj";
+            TestForm fOTK = new TestForm();
+            fOTK.OpenGL_UControl.LoadPointCloudFromFile(fileNameLong, false);
+            fOTK.ShowDialog();
+
+
+        }
+        [Test]
+        public void Bunny_Face()
+        {
+            string fileNameLong = pathUnitTests + "\\Bunny.obj";
+            TestForm fOTK = new TestForm();
+            fOTK.OpenGL_UControl.LoadPointCloudFromFile(fileNameLong, false);
+
+            fileNameLong = pathUnitTests + "\\KinectFace_1_15000.obj";
+            fOTK.OpenGL_UControl.LoadPointCloudFromFile(fileNameLong, false);
+
+            fOTK.ShowDialog();
+
+
+        }
+        [Test]
         public void KinectFace_ObjFile()
         {
             string fileNameLong = pathUnitTests + "\\KinectFace_1_15000.obj";
             TestForm fOTK = new TestForm();
-            fOTK.OpenGL_UControl.LoadModelFromFile(fileNameLong);
+            fOTK.OpenGL_UControl.LoadPointCloudFromFile(fileNameLong, false);
             fOTK.ShowDialog();
 
 
@@ -33,26 +57,7 @@ namespace UnitTestsOpenTK.Models
 
         }
    
-        [Test]
-        public void Bunny_obj_Triangulated()
-        {
-            string fileNameLong = pathUnitTests + "\\Bunny.obj";
-            TestForm fOTK = new TestForm();
-            fOTK.OpenGL_UControl.LoadModelFromFile(fileNameLong);
-            fOTK.ShowDialog();
-
-
-        }
-        [Test]
-        public void Bunny_xyz()
-        {
-            string fileNameLong = pathUnitTests + "\\Bunny.xyz";
-            TestForm fOTK = new TestForm();
-            fOTK.OpenGL_UControl.LoadModelFromFile(fileNameLong);
-            fOTK.ShowDialog();
-
-
-        }
+       
         public void ShowDialog()
         {
             TestForm fOTK = new TestForm();
@@ -60,20 +65,7 @@ namespace UnitTestsOpenTK.Models
 
         }
 
-        [Test]
-        public void Bunny_Face()
-        {
-            string fileNameLong = pathUnitTests + "\\Bunny.obj";
-            TestForm fOTK = new TestForm();
-            fOTK.OpenGL_UControl.LoadModelFromFile(fileNameLong);
-
-            fileNameLong = pathUnitTests + "\\KinectFace_1_15000.obj";
-            fOTK.OpenGL_UControl.LoadModelFromFile(fileNameLong);
-
-            fOTK.ShowDialog();
-
-
-        }
+       
         [Test]
         public void SaveAsTextureObj()
         {
@@ -89,10 +81,26 @@ namespace UnitTestsOpenTK.Models
             
 
             TestForm fOTK = new TestForm();
-            fOTK.OpenGL_UControl.LoadModelFromFile(pathUnitTests + "\\Face1.obj");
-            fOTK.OpenGL_UControl.LoadModelFromFile(pathUnitTests + "\\fileWithTexture.obj");
+            fOTK.OpenGL_UControl.LoadPointCloudFromFile(pathUnitTests + "\\Face1.obj", false);
+            fOTK.OpenGL_UControl.LoadPointCloudFromFile(pathUnitTests + "\\fileWithTexture.obj", false);
 
             fOTK.ShowDialog();
+
+
+        }
+        [Test]
+        public void Bunny_obj_Loop()
+        {
+            string fileNameLong = pathUnitTests + "\\Bunny.obj";
+            TestForm fOTK = new TestForm();
+            for(int i = 0; i < 1000; i++)
+                fOTK.OpenGL_UControl.LoadPointCloudFromFile(fileNameLong, false);
+            
+
+            fOTK.ShowDialog();
+            
+          
+
 
 
         }
