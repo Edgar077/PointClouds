@@ -126,6 +126,13 @@ namespace ICPLib
             this.PSource = mypointsSource;
             ResetToCenterOfMass();
 
+            if (this.ICPSettings.Prealign_PCA)
+            {
+                PCA pca = new PCA();
+                pca.MaxmimumIterations = 1;
+                pca.AxesRotateEffect = false;
+                this.PSource = pca.AlignPointClouds_SVD(this.PSource, this.PTarget);
+            }
             if (ICPSettings.ICPVersion == ICP_VersionUsed.UsingStitchData)
                 return PerformICP_Stitching();
             else if (ICPSettings.ICPVersion == ICP_VersionUsed.RandomPoints)
@@ -654,7 +661,7 @@ namespace ICPLib
         }
         public PointCloud AlignCloudsFromDirectory_StartFirst(string directory, int numberOfCloudPairs)
         {
-
+           
             GlobalVariables.ResetTime();
 
             PointCloud pSource;
@@ -670,6 +677,7 @@ namespace ICPLib
             int numberOfCloudsResult = -1;
 
             int iteratorFile = -1;
+            //for (int i = 0; i < 1000; i++)//maximum 1000 files, should be enough
             for (int i = 0; i < 1000; i++)//maximum 1000 files, should be enough
             {
                 numberOfCloudsCurrent++;
@@ -709,6 +717,7 @@ namespace ICPLib
             return pTarget;
 
         }
+    
 
     }
 

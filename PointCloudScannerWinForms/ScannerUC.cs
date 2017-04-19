@@ -834,7 +834,7 @@ namespace PointCloudScanner
             }
             catch (Exception err)
             {
-                System.Windows.Forms.MessageBox.Show("Error connecting Scanner: " + err.Message);
+                System.Windows.Forms.MessageBox.Show("Error connecting/disconnecting Scanner: " + err.Message);
             }
         }
 
@@ -912,7 +912,7 @@ namespace PointCloudScanner
             }
             else
             {
-                System.Windows.Forms.MessageBox.Show("SW - Error - No BVH recording possible");
+                System.Windows.Forms.MessageBox.Show("Please first start scanning using the Kinect");
             }
             // BVH_IO bvhIO = new BVH_IO();
 

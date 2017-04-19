@@ -41,7 +41,7 @@ namespace ICPLib
         public float ThresholdOutlier = 10;
         public bool IgnoreFarPoints;
 
-        
+        public bool Prealign_PCA = false;
 
         public bool SingleSourceTargetMatching = false;
 

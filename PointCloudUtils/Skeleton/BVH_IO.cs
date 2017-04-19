@@ -22,7 +22,8 @@ namespace PointCloudUtils
         StreamWriter file;
         private bool initializing = false;
         public int intializingCounter = 0;
-        string fileName;
+        string fileNameShort;
+        string fileNameWithPath;
         //TextFelder textFeld;
         Stopwatch sw = new Stopwatch();
 
@@ -37,8 +38,8 @@ namespace PointCloudUtils
 
         public BVH_IO(string fileName, string path)
         {
-            string fileNameWithPath = path + "\\" + fileName + ".bvh";
-            this.fileName = fileName;
+            fileNameWithPath = path + "\\" + fileName + ".bvh";
+            this.fileNameShort = fileName;
             KinectSkeletonBVH.AddKinectSkeleton(bvhSkeleton);
             initializing = true;
             tempOffsetMatrix = new float[3, bvhSkeleton.Bones.Count];
@@ -52,33 +53,42 @@ namespace PointCloudUtils
         }
 
 
-        public static BVH_IO Record_Start(Body body, string fileName, string path)
+        public static BVH_IO Record_Start(Body body, KinectSkeleton skel, string fileName, string path)
         {
-            int initFrames = 10;
-            KinectSkeleton skel = new KinectSkeleton();
-            BVH_IO bfhFile = new BVH_IO(fileName, path);
-
-            if (bfhFile != null)
+            try
             {
-                if (bfhFile.isRecording == true && bfhFile.isInitializing == true)
-                {
-                    bfhFile.Entry(skel);
+                int initFrames = 10;
 
-                    if (bfhFile.intializingCounter > initFrames)
+                BVH_IO bfhFile = new BVH_IO(fileName, path);
+
+                if (bfhFile != null)
+                {
+                    if (bfhFile.isRecording == true && bfhFile.isInitializing == true)
                     {
-                        bfhFile.startWritingEntry();
+                        bfhFile.Entry(skel);
+
+                        //if (bfhFile.intializingCounter > initFrames)
+                        //{
+                            bfhFile.startWritingEntry();
+                      //  }
+
                     }
 
+                    if (bfhFile.isRecording == true && bfhFile.isInitializing == false)
+                    {
+                        bfhFile.WriteMotions(skel, body);
+                        //this.textBox_sensorStatus.Text = "Record";
+                        //this.textBox_sensorStatus.BackColor = Color.Green;
+                    }
                 }
-
-                if (bfhFile.isRecording == true && bfhFile.isInitializing == false)
-                {
-                    bfhFile.writeMotions(skel, body);
-                    //this.textBox_sensorStatus.Text = "Record";
-                    //this.textBox_sensorStatus.BackColor = Color.Green;
-                }
+                return bfhFile;
             }
-            return bfhFile;
+            catch(Exception err)
+            {
+                System.Windows.Forms.MessageBox.Show("Error in BVH_IO.Record_Start: " + err.Message);
+                return null;
+            }
+
 
         }
         //private void Record_Stop(BVH_IO bfhFil)
@@ -106,9 +116,9 @@ namespace PointCloudUtils
             sw.Stop(); // Aufnahme beendet
             file.Flush();
             file.Close();
-            string text = File.ReadAllText(fileName);
+            string text = File.ReadAllText(this.fileNameWithPath);
             text = text.Replace("PLATZHALTERFRAMES", frameCounter.ToString());
-            File.WriteAllText(fileName, text);
+            File.WriteAllText(fileNameWithPath, text);
 
             recording = false;
         }
@@ -272,7 +282,7 @@ namespace PointCloudUtils
             bvhSkeletonWritten.copyParameters(bvhSkeleton);
         }
 
-        public void writeMotions(KinectSkeleton skel, Body body)
+        public void WriteMotions(KinectSkeleton skel, Body body)
         {
             sw.Start(); //Aufnahme der Bewegungen beginnt
 
@@ -323,6 +333,11 @@ namespace PointCloudUtils
             tempMotionVektor[1] = (float)Math.Round(skel.Joints[JointType.SpineMid].Y * 100, 2) + 120;
             tempMotionVektor[2] = 300 - (float)Math.Round(skel.Joints[JointType.SpineMid].Z * 100, 2);
 
+            for(int i = 0; i < 3; i++)
+            {
+                if (tempMotionVektor[i] == float.NaN)
+                    tempMotionVektor[i] = 0;
+            }
             writeMotion(tempMotionVektor);
             file.Flush();
 
@@ -344,9 +359,9 @@ namespace PointCloudUtils
                 file.WriteLine("Frames: PLATZHALTERFRAMES");
                 file.WriteLine("Frame Time: 0.0333333");
             }
-            foreach (var i in tempMotionVektor)
+            foreach (var vectorValue in tempMotionVektor)
             {
-                motionStringValues += (Math.Round(i, 4).ToString().Replace(",", ".") + " ");
+                motionStringValues += (Math.Round(vectorValue, 4).ToString().Replace(",", ".") + " ");
             }
 
             file.WriteLine(motionStringValues);

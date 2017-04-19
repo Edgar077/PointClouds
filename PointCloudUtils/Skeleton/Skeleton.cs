@@ -37,13 +37,18 @@ namespace PointCloudUtils
         }
         public Skeleton(List<Line> myLines) : this()
         {
-            lines = myLines;
+            Update(myLines);
+            //lines = myLines;
         }
         public Skeleton(Dictionary<JointType, Vector3> myjoints) : this()
         {
             joints = myjoints;
             CreateLinesFromJoints();
             updateModelExchangeSizes();
+        }
+        public void Update(List<Line> myLines) 
+        {
+            lines = myLines;
         }
         private void updateModelExchangeSizes()
         {

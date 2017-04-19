@@ -494,13 +494,18 @@ namespace OpenTKExtension
             this.Cursor = Cursors.WaitCursor;
 
             ICPLib.IterativeClosestPointTransform icp = new ICPLib.IterativeClosestPointTransform();
-            //pTarget = icp.AlignCloudsFromDirectory(GLSettings.Path + GLSettings.PathModels + "\\Nick", 30);
-            //pTarget = icp.AlignCloudsFromDirectory_StartLast(GLSettings.Path + GLSettings.PathModels + "\\Nick", 10);
+            icp.ICPSettings.Prealign_PCA = true;
+          
             pTarget = icp.AlignCloudsFromDirectory_StartFirst(GLSettings.Path + GLSettings.PathModels + "\\Nick", 100);
 
             SaveResultCloudAndShow(pTarget);
 
             this.Cursor = Cursors.Default;
+
+
+            //pTarget = icp.AlignCloudsFromDirectory(GLSettings.Path + GLSettings.PathModels + "\\Nick", 30);
+            //pTarget = icp.AlignCloudsFromDirectory_StartLast(GLSettings.Path + GLSettings.PathModels + "\\Nick", 10);
+
         }
         private void testClouds_SecondIteration()
         {
@@ -864,14 +869,14 @@ namespace OpenTKExtension
 
             return;
         }
-        private void toolStripTest1_Click_Old(object sender, EventArgs e)
+        private void toolStripTest1_Click(object sender, EventArgs e)
         {
        
             testClouds_FirstIteration();
           
             return;
         }
-        private void toolStripTest1_Click(object sender, EventArgs e)
+        private void toolStripTest1_Click_LoadCloud(object sender, EventArgs e)
         {
             string directory = GLSettings.Path + GLSettings.PathModels + "\\Nick";
           

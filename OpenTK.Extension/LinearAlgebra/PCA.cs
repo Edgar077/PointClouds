@@ -10,7 +10,7 @@ namespace OpenTKExtension
 
     public class PCA
     {
-        public IKDTree kdtree;
+        public IKDTree KDTree;
        
         public Matrix3 U;
         
@@ -48,8 +48,8 @@ namespace OpenTKExtension
        
         public PCA()
         {
-            kdtree = new KDTreeJeremyC();
-            
+            KDTree = new KDTreeKennell(); 
+          
         }
         public static PointCloud RotateToOriginAxes(PointCloud mypointCloudSource)
         {
@@ -109,8 +109,8 @@ namespace OpenTKExtension
 
 
             //--------------
-            pcTreeResult = kdtree.FindClosestPointCloud_Parallel(myResultPC);
-            meanDistance = kdtree.MeanDistance;
+            pcTreeResult = KDTree.FindClosestPointCloud_Parallel(myResultPC);
+            meanDistance = KDTree.MeanDistance;
 
           
             //PointCloud myPointCloudTargetTemp = kdtree.FindNearest_Rednaxela(ref myPointsResultTemp, pointCloudTargetCentered, -1);
@@ -162,28 +162,28 @@ namespace OpenTKExtension
 
 
             //--------------
-            pcTreeResult = kdtree.FindClosestPointCloud_Parallel(myResultPC);
-            meanDistance = kdtree.MeanDistance;
+            pcTreeResult = KDTree.FindClosestPointCloud_Parallel(myResultPC);
+            meanDistance = KDTree.MeanDistance;
 
-            pcTreeResult = kdtree.BuildAndFindClosestPoints(myResultPC, this.pcTargetCentered, false);
-            meanDistance = kdtree.MeanDistance;
+            pcTreeResult = KDTree.BuildAndFindClosestPoints(myResultPC, this.pcTargetCentered, false);
+            meanDistance = KDTree.MeanDistance;
 
-            pcTreeResult = kdtree.FindClosestPointCloud_Parallel(myResultPC);
-            meanDistance = kdtree.MeanDistance;
-
-
-
-            pcTreeResult = kdtree.BuildAndFindClosestPoints(this.pcTargetCentered, this.pcTargetCentered, false);
-            meanDistance = kdtree.MeanDistance;
+            pcTreeResult = KDTree.FindClosestPointCloud_Parallel(myResultPC);
+            meanDistance = KDTree.MeanDistance;
 
 
-            pcTreeResult = kdtree.BuildAndFindClosestPoints(this.pcSourceCentered, this.pcTargetCentered, false);
-            meanDistance = kdtree.MeanDistance;
+
+            pcTreeResult = KDTree.BuildAndFindClosestPoints(this.pcTargetCentered, this.pcTargetCentered, false);
+            meanDistance = KDTree.MeanDistance;
 
 
-            pcTreeResult = kdtree.BuildAndFindClosestPoints(myResultPC, this.pcTargetCentered, false);
+            pcTreeResult = KDTree.BuildAndFindClosestPoints(this.pcSourceCentered, this.pcTargetCentered, false);
+            meanDistance = KDTree.MeanDistance;
 
-            meanDistance = kdtree.MeanDistance;
+
+            pcTreeResult = KDTree.BuildAndFindClosestPoints(myResultPC, this.pcTargetCentered, false);
+
+            meanDistance = KDTree.MeanDistance;
 
 
 
@@ -313,12 +313,12 @@ namespace OpenTKExtension
                 //this.Matrix = AdjustSourceTargetByTranslation(Matrix, pointCloudSource, pointCloudTarget);
                 pcResult = Matrix.TransformPoints(pointCloudSource);
 
-                pcTreeResult = kdtree.FindClosestPointCloud_Parallel(pcResult);
-                MeanDistance = kdtree.MeanDistance;
+                pcTreeResult = KDTree.FindClosestPointCloud_Parallel(pcResult);
+                MeanDistance = KDTree.MeanDistance;
 
             
-                pcTreeResult = kdtree.FindClosestPointCloud_Parallel(pcResultBest);
-                MeanDistance = kdtree.MeanDistance;
+                pcTreeResult = KDTree.FindClosestPointCloud_Parallel(pcResultBest);
+                MeanDistance = KDTree.MeanDistance;
 
                 //"Shuffle" effect - the target points are in other order after kdtree search:
                 //The mean distance calculated again, as check (was calculated before in the kdTree routine)
@@ -438,10 +438,10 @@ namespace OpenTKExtension
             pcTargetCentered = CalculatePCA_Internal(pointCloudTarget);
            
             //kdtree = new KDTreeJeremyC();
-            kdtree = new KDTreeKennell();
+            KDTree = new KDTreeKennell();
 
             //kdtree.Build(pointCloudTarget);
-            kdtree.Build(pcTargetCentered);
+            KDTree.Build(pcTargetCentered);
 
             pcResult = null;
             pcTreeResult = null;

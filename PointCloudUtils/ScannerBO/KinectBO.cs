@@ -19,7 +19,7 @@ namespace PointCloudUtils
     {
 
         public BVH_IO BVHFile;
-
+        private bool isRecording;
         Control parent;
         System.Windows.Forms.PictureBox pictureBoxColor;
         System.Windows.Forms.PictureBox pictureBoxDepth;
@@ -32,7 +32,8 @@ namespace PointCloudUtils
         Label labelDepth1;
 
         PointCloud PointCloud;
-      
+
+        Skeleton skeleton;
         string lastFileOpened;
 
         int openGLCounter;
@@ -140,15 +141,16 @@ namespace PointCloudUtils
         }
         public void RecordBVH()
         {
-            BVHFile = new BVH_IO("bvh", GLSettings.PathModels);
-
+            
+            
             if (this.bodies == null || this.bodies.Length == 0 || this.bodies[0] == null)
             {
                 System.Windows.Forms.MessageBox.Show("No body data - please enable skeleton grabbing in Tools- Options");
                 return;
                 
             }
-            BVHFile = BVH_IO.Record_Start(this.bodies[0], "bfh", GLSettings.PathModels);
+            isRecording = true;
+            BVHFile = BVH_IO.Record_Start(this.bodies[0], this.kinectSkeleton,  "bvh", GLSettings.Path + GLSettings.PathModels);
 
         }
         public override bool StartScanner()
@@ -1082,9 +1084,18 @@ namespace PointCloudUtils
 
                     if (this.kinectSkeleton.BonesAsLines != null && this.kinectSkeleton.BonesAsLines.Count > 0)
                     {
-                        Skeleton sk = new Skeleton(kinectSkeleton.BonesAsLines);
-                        sk.InitializeGL();
-                        this.openGLControl.GLrender.AdditionalObjectsToDraw.Add(sk);
+                        if (skeleton == null)
+                        {
+                            skeleton = new Skeleton(kinectSkeleton.BonesAsLines);
+                            skeleton.InitializeGL();
+                        }
+                        else
+                        {
+                            skeleton.Update(kinectSkeleton.BonesAsLines);
+                            skeleton.FillPointCloud();
+
+                        }
+                        this.openGLControl.GLrender.AdditionalObjectsToDraw.Add(skeleton);
                     }
                     if (this.pointsFace != null && this.pointsFace.Count > 0)
                     {
@@ -1246,8 +1257,10 @@ namespace PointCloudUtils
                     {
                         
                         this.kinectSkeleton.Update(body, this.coordinateMapper);
-                        
-
+                        if (isRecording && this.BVHFile != null)
+                        {
+                            BVHFile.WriteMotions(kinectSkeleton, body);
+                        }
                     }
 
                 }
