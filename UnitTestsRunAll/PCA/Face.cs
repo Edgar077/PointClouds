@@ -28,7 +28,7 @@ namespace Automated.PrincipalComponentAnalysis
            
             //PointCloud.ResizeVerticesTo1(pointCloudSource);
             pca.PCA_OfPointCloud(pointCloudSource);
-            pointCloudSource = PCA.RotateToOriginAxes(pointCloudSource);
+            this.pointCloudResult = PCA.RotateToOriginAxes(pointCloudSource);
 
 
             //-----------Show in Window
@@ -48,8 +48,9 @@ namespace Automated.PrincipalComponentAnalysis
             double executionTime = Performance_Stop("Execution Time");//on i3_2121 (3.3 GHz)
             Assert.IsTrue(executionTime < 0.3);
 
-            float meanDistance = PointCloud.MeanDistance(expectedResultCloud, pointCloudSource.PCAAxesNormalized);
-            Assert.IsTrue(this.threshold > meanDistance);
+            Assert.IsTrue(PointCloud.CheckCloudAbs(expectedResultCloud, pointCloudResult.PCAAxesNormalized, this.threshold));
+
+         
 
         }
         [Test]
@@ -79,10 +80,7 @@ namespace Automated.PrincipalComponentAnalysis
             double executionTime = Performance_Stop("Execution Time");//on i3_2121 (3.3 GHz)
             //bool condition = true;
             Assert.LessOrEqual(executionTime, 0.25);
-
-            float meanDistance = PointCloud.MeanDistance(expectedResultCloud, pointCloudSource.PCAAxesNormalized);
-        
-            Assert.IsTrue(this.threshold > meanDistance);
+            Assert.IsTrue(PointCloud.CheckCloudAbs(expectedResultCloud, pointCloudResult.PCAAxesNormalized, this.threshold));
 
         }
         [Test]
@@ -107,10 +105,9 @@ namespace Automated.PrincipalComponentAnalysis
             expectedResultCloud.AddVector(new Vector3(0, 0, 1));
 
             //----------------check Result
-            double executionTime = Performance_Stop("Execution Time");//on i3_2121 (3.3 GHz)
-            Assert.IsTrue(executionTime < 3);
-            float meanDistance = PointCloud.MeanDistance(expectedResultCloud, pointCloudResult.PCAAxesNormalized);
-            Assert.IsTrue(this.threshold > meanDistance);
+            double executionTime = Performance_Stop("Execution Time");
+            Assert.IsTrue(executionTime < 0.4);//on i7 6700 (3.4 GHz, 8 cores)
+            Assert.IsTrue(PointCloud.CheckCloudAbs(expectedResultCloud, pointCloudResult.PCAAxesNormalized, this.threshold));
 
 
         }

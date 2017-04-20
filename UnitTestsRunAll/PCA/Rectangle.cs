@@ -133,12 +133,11 @@ namespace Automated.PrincipalComponentAnalysis
             expectedResultCloud.AddVector(new Vector3(0, 0, 0));
 
             //----------------check Result
-            float meanDistance = PointCloud.MeanDistance(expectedResultCloud, pointCloudSource.PCAAxesNormalized);
-            Assert.IsTrue(this.threshold > meanDistance);
-
+           
+            Assert.IsTrue(PointCloud.CheckCloudAbs(expectedResultCloud, pointCloudResult.PCAAxesNormalized, this.threshold));
 
             //----------------check Result
-           
+
         }
         [Test]
         public void Translate()

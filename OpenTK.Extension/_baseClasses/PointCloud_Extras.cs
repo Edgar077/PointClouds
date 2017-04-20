@@ -358,46 +358,99 @@ namespace OpenTKExtension
                  return false;
              return true;
          }
-         //public static bool CheckCloud(PointCloud mypointCloudTarget, PointCloud mypointCloudResult)
-         //{
-         //    if (mypointCloudResult == null || mypointCloudTarget == null)
-         //        return false;
+        public static bool CheckCloudAbs(PointCloud myPCLTarget, PointCloud myPCLResult, double threshold)
+        {
 
-         //    float meanDistance = PointCloud.MeanDistance(mypointCloudTarget, mypointCloudResult);
-         //    if (meanDistance > threshold)
-         //        return false;
-         //    return true;
-             
+            PointCloud pt = myPCLTarget.Clone();
+            PointCloud pr = myPCLResult.Clone();
+            for (int i = 0; i < myPCLTarget.Count; i++)
+            {
+                pt.Vectors[i].X = Math.Abs(pt.Vectors[i].X);
+                pt.Vectors[i].Y = Math.Abs(pt.Vectors[i].Y);
+                pt.Vectors[i].Z = Math.Abs(pt.Vectors[i].Z);
 
-         //    //float diffMax = float.MinValue;
-         //    //for (int i = 0; i < mypointCloudTarget.Count; i++)
-         //    //{
-         //    //    float dx = Math.Abs(mypointCloudTarget.Vectors[i].X - mypointCloudResult.Vectors[i].X);
-         //    //    float dy = Math.Abs(mypointCloudTarget.Vectors[i].Y - mypointCloudResult.Vectors[i].Y);
-         //    //    float dz = Math.Abs(mypointCloudTarget.Vectors[i].Z - mypointCloudResult.Vectors[i].Z);
-         //    //    if (dx > diffMax)
-         //    //        diffMax = dx;
-         //    //    if (dy > diffMax)
-         //    //        diffMax = dy;
-         //    //    if (dz > diffMax)
-         //    //        diffMax = dz;
-         //    //    if (float.IsNaN(dx) || float.IsNaN(dy) || float.IsNaN(dz))
-         //    //        return false;
-         //    //    if (dx > threshold || dy > threshold || dz > threshold)
-         //    //    {
-         //    //        System.Diagnostics.Debug.WriteLine("Check result - is : " + dx.ToString() + " : " + dy.ToString() + " : " + dz.ToString() + " : " + "--- Should be: " + threshold);
-         //    //        return false;
-         //    //    }
-         //    //    //needs a lot of exection time - only for error cases  
-         //    //    //Vector3 v = new Vector3(dx, dy, dz);
-         //    //    //Debug.WriteLine(i.ToString() + "Vector is OK, distance difference is: " + v.Length.ToString());
+                pr.Vectors[i].X = Math.Abs(pr.Vectors[i].X);
+                pr.Vectors[i].Y = Math.Abs(pr.Vectors[i].Y);
+                pr.Vectors[i].Z = Math.Abs(pr.Vectors[i].Z);
 
-         //    //}
-         //    //System.Diagnostics.Debug.WriteLine("---");
-         //    //System.Diagnostics.Debug.WriteLine("Check Cloud, difference: " + diffMax.ToString("G") + " :  allowed: " + threshold.ToString("G"));
-         //    return true;
-         //}
-         public static Matrix3 CovarianceMatrix(List<Vector3> a, bool normalsCovariance)
+            }
+            return PointCloud.CheckClouds(pt, pr, threshold);
+
+
+        }
+        public static bool CheckClouds(PointCloud myPCLTarget, PointCloud myPCLResult, double threshold)
+        {
+            if (myPCLResult == null || myPCLTarget == null)
+                return false;
+
+            double diffMax = double.MinValue;
+            for (int i = 0; i < myPCLTarget.Count; i++)
+            {
+                double dx = Math.Abs(myPCLTarget.Vectors[i].X - myPCLResult.Vectors[i].X);
+                double dy = Math.Abs(myPCLTarget.Vectors[i].Y - myPCLResult.Vectors[i].Y);
+                double dz = Math.Abs(myPCLTarget.Vectors[i].Z - myPCLResult.Vectors[i].Z);
+                if (dx > diffMax)
+                    diffMax = dx;
+                if (dy > diffMax)
+                    diffMax = dy;
+                if (dz > diffMax)
+                    diffMax = dz;
+                if (double.IsNaN(dx) || double.IsNaN(dy) || double.IsNaN(dz))
+                    return false;
+                if (dx > threshold || dy > threshold || dz > threshold)
+                {
+                    System.Diagnostics.Debug.WriteLine("Check result - is : " + dx.ToString() + " : " + dy.ToString() + " : " + dz.ToString() + " : " + "--- Should be: " + threshold);
+                    return false;
+                }
+                //needs a lot of exection time - only for error cases  
+                //Vector3d v = new Vector3d(dx, dy, dz);
+                //Debug.WriteLine(i.ToString() + "Vector is OK, distance difference is: " + v.Length.ToString());
+
+            }
+            System.Diagnostics.Debug.WriteLine("---");
+            System.Diagnostics.Debug.WriteLine("Check Cloud, difference: " + diffMax.ToString("G") + " :  allowed: " + threshold.ToString("G"));
+            return true;
+        }
+        //public static bool CheckCloud(PointCloud mypointCloudTarget, PointCloud mypointCloudResult)
+        //{
+        //    if (mypointCloudResult == null || mypointCloudTarget == null)
+        //        return false;
+
+        //    float meanDistance = PointCloud.MeanDistance(mypointCloudTarget, mypointCloudResult);
+        //    if (meanDistance > threshold)
+        //        return false;
+        //    return true;
+
+
+        //    //float diffMax = float.MinValue;
+        //    //for (int i = 0; i < mypointCloudTarget.Count; i++)
+        //    //{
+        //    //    float dx = Math.Abs(mypointCloudTarget.Vectors[i].X - mypointCloudResult.Vectors[i].X);
+        //    //    float dy = Math.Abs(mypointCloudTarget.Vectors[i].Y - mypointCloudResult.Vectors[i].Y);
+        //    //    float dz = Math.Abs(mypointCloudTarget.Vectors[i].Z - mypointCloudResult.Vectors[i].Z);
+        //    //    if (dx > diffMax)
+        //    //        diffMax = dx;
+        //    //    if (dy > diffMax)
+        //    //        diffMax = dy;
+        //    //    if (dz > diffMax)
+        //    //        diffMax = dz;
+        //    //    if (float.IsNaN(dx) || float.IsNaN(dy) || float.IsNaN(dz))
+        //    //        return false;
+        //    //    if (dx > threshold || dy > threshold || dz > threshold)
+        //    //    {
+        //    //        System.Diagnostics.Debug.WriteLine("Check result - is : " + dx.ToString() + " : " + dy.ToString() + " : " + dz.ToString() + " : " + "--- Should be: " + threshold);
+        //    //        return false;
+        //    //    }
+        //    //    //needs a lot of exection time - only for error cases  
+        //    //    //Vector3 v = new Vector3(dx, dy, dz);
+        //    //    //Debug.WriteLine(i.ToString() + "Vector is OK, distance difference is: " + v.Length.ToString());
+
+        //    //}
+        //    //System.Diagnostics.Debug.WriteLine("---");
+        //    //System.Diagnostics.Debug.WriteLine("Check Cloud, difference: " + diffMax.ToString("G") + " :  allowed: " + threshold.ToString("G"));
+        //    return true;
+        //}
+        public static Matrix3 CovarianceMatrix(List<Vector3> a, bool normalsCovariance)
          {
              //consists of elements
              //axbx axby axbz
