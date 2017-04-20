@@ -19,8 +19,8 @@ namespace UnitTestsOpenTK.PrincipalComponentAnalysis
         public void V_Rotate_NotWorking()
         {
             
-            Model model3DTarget = new Model(pathUnitTests + "\\KinectFace_1_15000.obj");
-            this.pointCloudTarget = model3DTarget.PointCloud;
+     
+            this.pointCloudTarget = new PointCloud(pathUnitTests + "\\KinectFace_1_15000.obj");
             //PointCloud.ResizeVerticesTo1(pointCloudTarget);
 
             this.pointCloudSource = PointCloud.CloneAll(pointCloudTarget);
@@ -43,8 +43,8 @@ namespace UnitTestsOpenTK.PrincipalComponentAnalysis
         public void V_RotateNotWorking()
         {
            
-            Model model3DTarget = new Model(pathUnitTests + "\\KinectFace_1_15000.obj");
-            this.pointCloudTarget = model3DTarget.PointCloud;
+       
+            this.pointCloudTarget = new PointCloud(pathUnitTests + "\\KinectFace_1_15000.obj");
             //PointCloud.ResizeVerticesTo1(pointCloudTarget);
 
             this.pointCloudSource = PointCloud.CloneAll(pointCloudTarget);

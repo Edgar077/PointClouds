@@ -24,7 +24,7 @@ namespace UnitTestsOpenTK
              icp = new IterativeClosestPointTransform();
              
 
-             pathUnitTests = AppDomain.CurrentDomain.BaseDirectory + "\\Models\\UnitTests";
+             pathUnitTests = AppDomain.CurrentDomain.BaseDirectory + GLSettings.PathUnitTests;
 
            
 

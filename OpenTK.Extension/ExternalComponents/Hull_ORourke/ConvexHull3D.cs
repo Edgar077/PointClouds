@@ -41,7 +41,7 @@ namespace OpenTKExtension
         protected bool Hull()
         {
 
-            ReadVertices_SetIndexInModel();
+            ReadVertices_SetIndexInPointCloud();
 
             if (floatTriangle())
             {
@@ -76,14 +76,14 @@ namespace OpenTKExtension
                 
         }
 
-        public void ReadVertices_SetIndexInModel()
+        public void ReadVertices_SetIndexInPointCloud()
         {
             cVertex v = Vertices.head;
             int vnum = -1;
             do
             {
                 vnum++;
-                v.IndexInModel = vnum;
+                v.IndexInPointCloud = vnum;
                 if ((Math.Abs(v.Point.X) > SAFE) || (Math.Abs(v.Point.Y) > SAFE)
           || (Math.Abs(v.Point.Z) > SAFE))
                 {
@@ -148,7 +148,7 @@ namespace OpenTKExtension
             System.Diagnostics.Debug.WriteLine("index:\tx\ty\tz");
             do
             {
-                System.Diagnostics.Debug.WriteLine(v.IndexInModel + ":\t" + v.Point.X + "\t" + v.Point.Y + "\t" + v.Point.Z + "");
+                System.Diagnostics.Debug.WriteLine(v.IndexInPointCloud + ":\t" + v.Point.X + "\t" + v.Point.Y + "\t" + v.Point.Z + "");
                 System.Diagnostics.Debug.WriteLine("newpath");
                 System.Diagnostics.Debug.WriteLine(v.Point.X + "\t" + v.Point.Y + " 2 0 360 arc");
                 System.Diagnostics.Debug.WriteLine("closepath stroke\n");
@@ -170,8 +170,8 @@ namespace OpenTKExtension
                 /* Print face only if it is lower */
                 if (f.lower)
                 {
-                    System.Diagnostics.Debug.WriteLine("vnums:  " + f.Vertices[0].IndexInModel + "  "
-                               + f.Vertices[1].IndexInModel + "  " + f.Vertices[2].IndexInModel);
+                    System.Diagnostics.Debug.WriteLine("vnums:  " + f.Vertices[0].IndexInPointCloud + "  "
+                               + f.Vertices[1].IndexInPointCloud + "  " + f.Vertices[2].IndexInPointCloud);
                     System.Diagnostics.Debug.WriteLine("newpath");
                     System.Diagnostics.Debug.WriteLine(f.Vertices[0].Point.X + "\t" + f.Vertices[0].Point.Y + "\tmoveto");
                     System.Diagnostics.Debug.WriteLine(f.Vertices[1].Point.X + "\t" + f.Vertices[1].Point.Y + "\tlineto");
@@ -186,9 +186,9 @@ namespace OpenTKExtension
             System.Diagnostics.Debug.WriteLine("\tv0\tv1\tv2\t(vertex indices)");
             do
             {
-                System.Diagnostics.Debug.WriteLine("\t" + f.Vertices[0].IndexInModel +
-                       "\t" + f.Vertices[1].IndexInModel +
-                       "\t" + f.Vertices[2].IndexInModel);
+                System.Diagnostics.Debug.WriteLine("\t" + f.Vertices[0].IndexInPointCloud +
+                       "\t" + f.Vertices[1].IndexInPointCloud +
+                       "\t" + f.Vertices[2].IndexInPointCloud);
                 f = f.next;
             } while (f != Faces.head);
 
@@ -920,7 +920,7 @@ namespace OpenTKExtension
         /*-------------------------------------------------------------------*/
         protected void PrintOut(cVertex v)
         {
-            System.Diagnostics.Debug.WriteLine("Head vertex " + v.IndexInModel + " =  " + v + "\t:");
+            System.Diagnostics.Debug.WriteLine("Head vertex " + v.IndexInPointCloud + " =  " + v + "\t:");
             PrintVertices();
             PrintEdges();
             PrintFaces();
@@ -936,7 +936,7 @@ namespace OpenTKExtension
             if (Vertices.head != null) do
                 {
                     System.Diagnostics.Debug.WriteLine("  addr " + Vertices.head + "\t");
-                    System.Diagnostics.Debug.WriteLine("  vnum " + Vertices.head.IndexInModel);
+                    System.Diagnostics.Debug.WriteLine("  vnum " + Vertices.head.IndexInPointCloud);
                     System.Diagnostics.Debug.WriteLine("   (" + Vertices.head.Point.X + ","
                            + Vertices.head.Point.Y + ","
                            + Vertices.head.Point.Z + ")");
@@ -964,7 +964,7 @@ namespace OpenTKExtension
                         System.Diagnostics.Debug.WriteLine(Edges.head.Adjface[i]);
                     System.Diagnostics.Debug.WriteLine("  endpts:");
                     for (i = 0; i < 2; ++i)
-                        System.Diagnostics.Debug.WriteLine(Edges.head.Endpts[i].IndexInModel);
+                        System.Diagnostics.Debug.WriteLine(Edges.head.Endpts[i].IndexInPointCloud);
                     System.Diagnostics.Debug.WriteLine("  del:" + Edges.head.delete + "\n");
                     Edges.head = Edges.head.next;
                 } while (Edges.head != temp);
@@ -987,7 +987,7 @@ namespace OpenTKExtension
                         System.Diagnostics.Debug.WriteLine(Faces.head.Edges[i]);
                     System.Diagnostics.Debug.WriteLine("  vert:");
                     for (i = 0; i < 3; ++i)
-                        System.Diagnostics.Debug.WriteLine(Faces.head.Vertices[i].IndexInModel);
+                        System.Diagnostics.Debug.WriteLine(Faces.head.Vertices[i].IndexInPointCloud);
                     System.Diagnostics.Debug.WriteLine("  vis: " + Faces.head.visible + "\n");
                     Faces.head = Faces.head.next;
                 } while (Faces.head != temp);

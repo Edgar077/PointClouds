@@ -154,7 +154,7 @@ namespace OpenTKExtension
         {
             resV.Point.X = x;
             resV.Point.Y = y;
-            resV.IndexInModel = vnum;
+            resV.IndexInPointCloud = vnum;
             resV.IsProcessed = mark;
         }
 
@@ -183,7 +183,7 @@ namespace OpenTKExtension
                 temp2.IsEar = temp1.IsEar;
                 temp2.Edge = temp1.Edge;
                 temp2.IsOnHull = temp1.IsOnHull;
-                temp2.IndexInModel = temp1.IndexInModel;
+                temp2.IndexInPointCloud = temp1.IndexInPointCloud;
                 list.InsertBeforeHead(temp2);
                 temp1 = temp1.NextVertex;
             } while (temp1 != head);
@@ -228,7 +228,7 @@ namespace OpenTKExtension
                 temp2 = new cVertex();
                 temp2.Point = temp1.Point;
                 temp2.IsProcessed = temp1.IsProcessed;
-                temp2.IndexInModel = temp1.IndexInModel;
+                temp2.IndexInPointCloud = temp1.IndexInPointCloud;
                 InsertBeforeHead(temp2);
                 temp1 = temp1.PrevVertex;
             } while (temp1 != listcopy.head.PrevVertex);
@@ -397,11 +397,11 @@ namespace OpenTKExtension
             cVertex temp;
 
             temp = new cVertex(first.Point.X, first.Point.Y);
-            temp.IndexInModel = first.IndexInModel;
+            temp.IndexInPointCloud = first.IndexInPointCloud;
             temp.IsProcessed = first.IsProcessed;
 
-            ResetVertex(first, second.Point.X, second.Point.Y, second.IndexInModel, second.IsProcessed);
-            ResetVertex(second, temp.Point.X, temp.Point.Y, temp.IndexInModel, temp.IsProcessed);
+            ResetVertex(first, second.Point.X, second.Point.Y, second.IndexInPointCloud, second.IsProcessed);
+            ResetVertex(second, temp.Point.X, temp.Point.Y, temp.IndexInPointCloud, temp.IsProcessed);
         }
 
         /* Function used for Sort2
@@ -502,7 +502,7 @@ namespace OpenTKExtension
             int i = 0;
             do
             {
-                System.Diagnostics.Debug.WriteLine("V" + i + ": primary=" + v.IsProcessed + " | vnum=" + v.IndexInModel);
+                System.Diagnostics.Debug.WriteLine("V" + i + ": primary=" + v.IsProcessed + " | vnum=" + v.IndexInPointCloud);
                 v.Point.PrintPoint();
                 v = v.NextVertex; i++;
             } while (v != head);

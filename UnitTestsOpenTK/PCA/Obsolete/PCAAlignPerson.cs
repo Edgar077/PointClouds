@@ -16,9 +16,9 @@ namespace UnitTestsOpenTK.PrincipalComponentAnalysis
         [Test]
         public void ScannerPerson_SVD_Rotate()
         {
-            Model model3DTarget = new Model(pathUnitTests + "\\1.obj");
-            this.pointCloudTarget = model3DTarget.PointCloud;
-            
+        
+            this.pointCloudTarget = new PointCloud(pathUnitTests + "\\1.obj");
+
             this.pointCloudSource = PointCloud.CloneAll(pointCloudTarget);
             PointCloud.RotateDegrees(pointCloudSource, 25, 10, 25);
             
@@ -31,8 +31,8 @@ namespace UnitTestsOpenTK.PrincipalComponentAnalysis
         [Test]
         public void ScannerPerson_V_Rotate()
         {
-            Model model3DTarget = new Model(pathUnitTests + "\\1.obj");
-            this.pointCloudTarget = model3DTarget.PointCloud;
+          
+            this.pointCloudTarget = new PointCloud(pathUnitTests + "\\1.obj");
             //PointCloud.ResizeVerticesTo1(pointCloudTarget);
 
             this.pointCloudSource = PointCloud.CloneAll(pointCloudTarget);
@@ -69,9 +69,9 @@ namespace UnitTestsOpenTK.PrincipalComponentAnalysis
         [Test]
         public void ScannerPerson_V_SVD_Rotate()
         {
-            Model model3DTarget = new Model(pathUnitTests + "\\1.obj");
-            this.pointCloudTarget = model3DTarget.PointCloud;
-           
+         
+            this.pointCloudTarget = new PointCloud(pathUnitTests + "\\1.obj");
+
             this.pointCloudSource = PointCloud.CloneAll(pointCloudTarget);
             //Vertices.TranslateVertices(pointCloudTarget, 0, -300, 0);
             PointCloud.RotateDegrees(pointCloudSource, 25, 10, 25);

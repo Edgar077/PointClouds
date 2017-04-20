@@ -13,17 +13,16 @@ namespace UnitTestsOpenTK.PrincipalComponentAnalysis
     public class AlignTwoDifferentScans : PCABase
     {
 
-        //Model3D model3DTarget = new Model3D(path + "\\KinectFace_1_15000.obj");
+        //Model3D model3DTarget = new PointCloud 3D(path + "\\KinectFace_1_15000.obj");
 
         [Test]
         public void Faces_SVD()
         {
-            Model model3DTarget = new Model(pathUnitTests + "\\KinectFace_2_15000.obj");
-            
-            this.pointCloudTarget = model3DTarget.PointCloud;
+         
+            this.pointCloudTarget = new PointCloud(pathUnitTests + "\\KinectFace_2_15000.obj");
             //PointCloud.ResizeVerticesTo1(pointCloudTarget);
-            Model model3DSource = new Model(pathUnitTests + "\\KinectFace_1_15000.obj");
-            this.pointCloudSource = model3DSource.PointCloud;
+            
+            this.pointCloudSource = new PointCloud(pathUnitTests + "\\KinectFace_1_15000.obj");
             //PointCloud.ResizeVerticesTo1(pointCloudSource);
 
             pca.MaxmimumIterations = 5;
@@ -35,12 +34,12 @@ namespace UnitTestsOpenTK.PrincipalComponentAnalysis
         [Test]
         public void Faces_AlignToOriginAxes()
         {
-            Model model3DTarget = new Model(pathUnitTests + "\\KinectFace_2_15000.obj");
-            this.pointCloudTarget = model3DTarget.PointCloud;
+           
+            this.pointCloudTarget = new PointCloud(pathUnitTests + "\\KinectFace_2_15000.obj");
             pointCloudTarget = PCA.RotateToOriginAxes(pointCloudTarget);
             //PointCloud.ResizeVerticesTo1(pointCloudTarget);
-            Model model3DSource = new Model(pathUnitTests + "\\KinectFace_1_15000.obj");
-            this.pointCloudSource = model3DSource.PointCloud;
+          
+            this.pointCloudSource = new PointCloud(pathUnitTests + "\\KinectFace_1_15000.obj");
             pointCloudSource = PCA.RotateToOriginAxes(pointCloudSource);
             PointCloud.RotateDegrees(pointCloudSource, 90, 0, 0);
 
@@ -56,11 +55,11 @@ namespace UnitTestsOpenTK.PrincipalComponentAnalysis
         [Test]
         public void Persons_SVD()
         {
-            Model model3DTarget = new Model(pathUnitTests + "\\2.obj");
-            this.pointCloudTarget = model3DTarget.PointCloud;
             
-            Model model3DSource = new Model(pathUnitTests + "\\1.obj");
-            this.pointCloudSource = model3DSource.PointCloud;
+            this.pointCloudTarget = new PointCloud(pathUnitTests + "\\2.obj");
+
+        
+            this.pointCloudSource = new PointCloud(pathUnitTests + "\\1.obj");
 
             this.pointCloudResult = pca.AlignPointClouds_SVD(this.pointCloudSource, this.pointCloudTarget);
 
@@ -70,12 +69,12 @@ namespace UnitTestsOpenTK.PrincipalComponentAnalysis
         [Test]
         public void Persons_SVD_XYZ()
         {
-            Model model3DTarget = new Model(pathUnitTests + "\\2.obj");
-            this.pointCloudTarget = model3DTarget.PointCloud;
+         
+            this.pointCloudTarget = new PointCloud(pathUnitTests + "\\2.obj");
             pointCloudTarget = PCA.RotateToOriginAxes(pointCloudTarget);
 
-            Model model3DSource = new Model(pathUnitTests + "\\1.obj");
-            this.pointCloudSource = model3DSource.PointCloud;
+        
+            this.pointCloudSource = new PointCloud(pathUnitTests + "\\1.obj");
             pointCloudSource = PCA.RotateToOriginAxes(pointCloudSource);
             pca.MaxmimumIterations = 1;
             this.pointCloudResult = pca.AlignPointClouds_SVD(this.pointCloudSource, this.pointCloudTarget);
@@ -86,12 +85,12 @@ namespace UnitTestsOpenTK.PrincipalComponentAnalysis
         [Test]
         public void Persons_V()
         {
-            Model model3DTarget = new Model(pathUnitTests + "\\2.obj");
-            this.pointCloudTarget = model3DTarget.PointCloud;
-            
-            Model model3DSource = new Model(pathUnitTests + "\\1.obj");
-            this.pointCloudSource = model3DSource.PointCloud;
-            
+       
+            this.pointCloudTarget = new PointCloud(pathUnitTests + "\\2.obj");
+
+         
+            this.pointCloudSource = new PointCloud(pathUnitTests + "\\1.obj");
+
             this.pointCloudResult = pca.AlignPointClouds_OneVector(this.pointCloudSource, this.pointCloudTarget, 0, 0);
 
 
@@ -106,13 +105,11 @@ namespace UnitTestsOpenTK.PrincipalComponentAnalysis
         [Test]
         public void Persons_V_4()
         {
-            Model model3DTarget = new Model(pathUnitTests + "\\2.obj");
-            this.pointCloudTarget = model3DTarget.PointCloud;
-            
+         
+            this.pointCloudTarget = new PointCloud(pathUnitTests + "\\2.obj");
 
-            Model model3DSource = new Model(pathUnitTests + "\\1.obj");
-            this.pointCloudSource = model3DSource.PointCloud;
-           
+            this.pointCloudSource = new PointCloud(pathUnitTests + "\\1.obj");
+
 
             this.pointCloudResult = pca.AlignPointClouds_OneVector(this.pointCloudSource, this.pointCloudTarget, 0, 0);
             this.pointCloudSource = PointCloud.CloneAll(pointCloudResult);

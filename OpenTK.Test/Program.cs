@@ -17,11 +17,11 @@ namespace OpenTKTest
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run((Form)new CharacterCreatorTest());
-            //string path = AppDomain.CurrentDomain.BaseDirectory + "Models\\Collada\\testLinq.dae";
+            //string path = AppDomain.CurrentDomain.BaseDirectory + GLSettings.PathPointClouds + "Collada\\testLinq.dae";
 
-            //string path = AppDomain.CurrentDomain.BaseDirectory + "Models\\Collada\\cube.dae";
-            //string path = AppDomain.CurrentDomain.BaseDirectory + "Models\\Collada\\crate.dae";
-            //string fileName = AppDomain.CurrentDomain.BaseDirectory + "Models\\Collada\\duck_triangulate.dae";
+            //string path = AppDomain.CurrentDomain.BaseDirectory + GLSettings.PathPointClouds + "Collada\\cube.dae";
+            //string path = AppDomain.CurrentDomain.BaseDirectory + GLSettings.PathPointClouds + "Collada\\crate.dae";
+            //string fileName = AppDomain.CurrentDomain.BaseDirectory+ GLSettings.PathPointClouds + "Collada\\duck_triangulate.dae";
             // string fileName = AppDomain.CurrentDomain.BaseDirectory + @"A:\Archiv\3D\_Jeannie\Models\MilaPartyBlack_blender.dae";
 
 
@@ -45,7 +45,7 @@ namespace OpenTKTest
 
          
 
-            //OpenTKExtension.Collada.ColladaModel cm = OpenTKExtension.Collada.ColladaLoader.LoadFile(path);
+            //OpenTKExtension.Collada.ColladaPointCloud cm = OpenTKExtension.Collada.ColladaLoader.LoadFile(path);
             TestForm tf = new TestForm();
             //tf.ShowPointClouds(cm.PointClouds);
             Application.Run((Form)tf);

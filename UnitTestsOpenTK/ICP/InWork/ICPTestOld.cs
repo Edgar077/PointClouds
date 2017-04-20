@@ -18,7 +18,7 @@ namespace UnitTestsOpenTK.InWork
         {
 
             TestForm fOTK = new TestForm();
-            fOTK.OpenGL_UControl.RemoveAllModels();
+            fOTK.OpenGL_UControl.RemoveAllPointClouds();
             string fileNameLong = pathUnitTests + "\\KinectFace_1_15000.obj";
             fOTK.OpenGL_UControl.LoadPointCloudFromFile(fileNameLong, false);
 

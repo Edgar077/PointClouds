@@ -13,7 +13,7 @@ using OpenTK;
 
 namespace OpenTKExtension
 {
-    public static class Example3DModels
+    public static class ExamplePointClouds
     {
         private static float rCyl = 1f;
         //private static float rCon = 1f;
@@ -24,35 +24,33 @@ namespace OpenTKExtension
         private static float[] CylFunction(float u, float v)
         {
             float[] listOfPoints = new float[6] { 0.0f, 0.0f, 0.0f, (float)Math.Cos((float)u), (float)Math.Sin((float)u), 0.0f };
-            listOfPoints[0] = Example3DModels.rCyl * listOfPoints[3];
-            listOfPoints[1] = Example3DModels.rCyl * listOfPoints[4];
+            listOfPoints[0] = ExamplePointClouds.rCyl * listOfPoints[3];
+            listOfPoints[1] = ExamplePointClouds.rCyl * listOfPoints[4];
             listOfPoints[2] = v;
             return listOfPoints;
         }
-        /// <summary>Generates a 3D Model for a cone.</summary>
+        /// <summary>Generates a 3D PointCloud for a cone.</summary>
      
 
         /// <summary>
-        /// Generates a 3D Model for a cuboid
+        /// Generates a 3D PointCloud for a cuboid
         /// </summary>
-        /// <param name="Name">Model name</param>
+        /// <param name="Name">PointCloud name</param>
         /// <param name="u">Length of the lower part</param>
         /// <param name="v">Length of the high part</param>
         /// <param name="numberOfPoints">Number of points to use in circumference</param>
         /// <param name="Color">Color vector</param>
         /// <param name="TextureBitmap">Texture bitmap. Null uses no texture</param>
         /// <returns></returns>
-        public static Model Cuboid(string Name, float u, float v, int numberOfPoints, System.Drawing.Color color, System.Drawing.Bitmap TextureBitmap)
+        public static PointCloud Cuboid(string Name, float u, float v, int numberOfPoints, System.Drawing.Color color, System.Drawing.Bitmap TextureBitmap)
         {
 
             PointCloud points = PointCloud.CreateCuboid(u, v, numberOfPoints);
             PointCloud.SetColorOfListTo(points, color);
 
-            Model myModel = new Model();
-            myModel.PointCloud = points;
-           
+          
 
-            return myModel;
+            return points;
 
         }
         public static Vector3[] Cuboid(int numberOfPoints, float u, float v)
@@ -61,17 +59,17 @@ namespace OpenTKExtension
             Vector3[] arr = new Vector3[numberOfPoints * 4];
 
             float v0 = 0f;
-            int indexInModel = 0;
+            int indexInPointCloud = 0;
             for (int i = 0; i < numberOfPoints; i++)
             {
 
-                arr[indexInModel] = new Vector3(0, v0, 0);
-                indexInModel++;
-                arr[indexInModel] = new Vector3(0, v0, u);
-                indexInModel++;
-                arr[indexInModel] = new Vector3(u, v0, u);
-                indexInModel++;
-                arr[indexInModel] = new Vector3(u, v0, 0);
+                arr[indexInPointCloud] = new Vector3(0, v0, 0);
+                indexInPointCloud++;
+                arr[indexInPointCloud] = new Vector3(0, v0, u);
+                indexInPointCloud++;
+                arr[indexInPointCloud] = new Vector3(u, v0, u);
+                indexInPointCloud++;
+                arr[indexInPointCloud] = new Vector3(u, v0, 0);
 
                 v0 += v / numberOfPoints;
 
@@ -81,9 +79,9 @@ namespace OpenTKExtension
 
         }
         /// <summary>
-        /// Generates a 3D Model for a cuboid
+        /// Generates a 3D PointCloud for a cuboid
         /// </summary>
-        /// <param name="Name">Model name</param>
+        /// <param name="Name">PointCloud name</param>
         /// <param name="u">Length of the lower part</param>
         /// <param name="v">Length of the high part</param>
         /// <param name="numberOfPoints">Number of points to use in circumference</param>
@@ -92,7 +90,7 @@ namespace OpenTKExtension
         public static PointCloud Cuboid(float u, float v, int numberOfPoints, System.Drawing.Color color)
         {
             PointCloud pcl = new PointCloud();
-            pcl.Vectors = Example3DModels.Cuboid(numberOfPoints, u, v);
+            pcl.Vectors = ExamplePointClouds.Cuboid(numberOfPoints, u, v);
             pcl.SetColor(new Vector3(color.R, color.G, color.B));
 
 
@@ -222,15 +220,15 @@ namespace OpenTKExtension
             return points;
         }
         /// <summary>
-        /// Generates a 3D Model for a cuboid, by setting all lines with points
+        /// Generates a 3D PointCloud for a cuboid, by setting all lines with points
         /// </summary>
-        /// <param name="Name">Model name</param>
+        /// <param name="Name">PointCloud name</param>
         /// <param name="u">Length of the lower part</param>
         /// <param name="v">Length of the high part</param>
         /// <param name="numberOfPoints">Number of points to use in circumference</param>
         /// <param name="Color">Color vector</param>
         /// <returns></returns>
-        public static Model Cuboid_AllLines(string Name, float u, float v, int numberOfPoints, System.Drawing.Color color)
+        public static PointCloud Cuboid_AllLines(string Name, float u, float v, int numberOfPoints, System.Drawing.Color color)
         {
 
             PointCloud points = new PointCloud();
@@ -261,14 +259,14 @@ namespace OpenTKExtension
             }
 
             
-            Model myModel = new Model();
-            myModel.PointCloud.Vectors = pointsList.ToArray();
-            myModel.PointCloud.CreateIndicesDefault();
-            return myModel;
+            PointCloud myPointCloud = new PointCloud();
+            myPointCloud.Vectors = pointsList.ToArray();
+            myPointCloud.CreateIndicesDefault();
+            return myPointCloud;
 
         }
-        /// <summary>Generates a 3D Model for a cylinder.</summary>
-        /// <param name="Name">Model name.</param>
+        /// <summary>Generates a 3D PointCloud for a cylinder.</summary>
+        /// <param name="Name">PointCloud name.</param>
         /// <param name="Radius">Cylinder radius.</param>
         /// <param name="Height">Cylinder height.</param>
         /// <param name="numPoints">Number of points for circular section.</param>
@@ -280,7 +278,7 @@ namespace OpenTKExtension
             float stepZ = zMax / pointsMaxZ;
 
             PointCloud pCloud = new PointCloud();
-            int indexInModel = -1;
+            int indexInPointCloud = -1;
             List<Vector3> pointsList = new List<Vector3>();
             for (int i = 0; i <= pointsMaxX; i++)
             {
@@ -288,7 +286,7 @@ namespace OpenTKExtension
                 {
                     for (int k = 0; k <= pointsMaxZ; k++)
                     {
-                        indexInModel++;
+                        indexInPointCloud++;
                         Vector3 v = new Vector3(i * stepX, j * stepY, k * stepZ);
                         pointsList.Add(v);
                     }
@@ -299,8 +297,8 @@ namespace OpenTKExtension
             pCloud.CreateIndicesDefault();
             return pCloud;
         }
-        /// <summary>Generates a 3D Model for a cuboid.</summary>
-        /// <param name="Name">Model name.</param>
+        /// <summary>Generates a 3D PointCloud for a cuboid.</summary>
+        /// <param name="Name">PointCloud name.</param>
         /// <param name="Radius">Cylinder radius.</param>
         /// <param name="Height">Cylinder height.</param>
         /// <param name="numPoints">Number of points for circular section.</param>
@@ -404,8 +402,8 @@ namespace OpenTKExtension
             return pCloud;
         }
 
-        /// <summary>Generates a 3D Model for a cylinder.</summary>
-        /// <param name="Name">Model name.</param>
+        /// <summary>Generates a 3D PointCloud for a cylinder.</summary>
+        /// <param name="Name">PointCloud name.</param>
         /// <param name="Radius">Cylinder radius.</param>
         /// <param name="Height">Cylinder height.</param>
         /// <param name="numPoints">Number of points for circular section.</param>
@@ -417,12 +415,12 @@ namespace OpenTKExtension
 
             PointCloud pCloud = new PointCloud();
             List<Vector3> pointsList = new List<Vector3>();
-            int indexInModel = -1;
+            int indexInPointCloud = -1;
             for (int i = 0; i < pointsMaxX; i++)
             {
                 for (int j = 0; j < pointsMaxY; j++)
                 {
-                    indexInModel++;
+                    indexInPointCloud++;
                     Vector3 v = new Vector3(i * stepX, j * stepY, 0);
                     pointsList.Add(v);
 

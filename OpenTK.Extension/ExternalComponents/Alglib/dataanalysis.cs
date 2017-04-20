@@ -13236,7 +13236,7 @@ public partial class alglib
 
 
         /*************************************************************************
-        Copying of LinearModel strucure
+        Copying of LinearPointCloud strucure
 
         INPUT PARAMETERS:
             LM1 -   original
@@ -23802,7 +23802,7 @@ public partial class alglib
 
 
         /*************************************************************************
-        Copying of LogitModel strucure
+        Copying of LogitPointCloud strucure
 
         INPUT PARAMETERS:
             LM1 -   original

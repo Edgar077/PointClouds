@@ -65,7 +65,43 @@ namespace OpenTKExtension
             Indices = new uint[dim];
 
         }
+        public PointCloud(string path, string fileName) : this(path + "\\" + fileName)
+        {
+            // this.Name = fileName;
 
+        }
+        public PointCloud(string fileName)
+        {
+            string str = System.IO.Path.GetExtension(fileName).ToLower();
+
+            //this.Name = IOUtils.ExtractFileNameShort(fileName);
+            //this.Name = IOUtils.ExtractFileNameWithoutExtension(this.Name);
+
+            if (str == ".obj")
+                UtilsPointCloudIO.PointCloudFromObjectFile(this, fileName);
+         
+            else
+            {
+                System.Windows.Forms.MessageBox.Show("SW Error - inconsistend use of constructor Model");
+                return;
+            }
+
+            if (GLSettings.PointCloudCentered)
+            {
+                if (!this.DisregardCenteredShowing)
+                    this.ResetCentroid(true);
+            }
+            if (GLSettings.BoundingBoxLeftStartsAt000)
+            {
+                if (this.DisregardCenteredShowing)
+                    this.Translate_StartAt_Y0();
+                //this.PointCloud.Translate_StartAtBoundingBox000();
+            }
+
+
+
+            this.Name = IOUtils.ExtractFileNameWithoutExtension(this.Name);
+        }
         public PointCloud(List<Vector3> vectors, List<Vector3> colors, List<Vector3> normals, List<uint> indices, List<uint> indicesNormals, List<Vector2> textures) :this()
         {
             AssignData(vectors, colors, normals, indices, indicesNormals, textures);
@@ -1091,8 +1127,7 @@ namespace OpenTKExtension
             {
                 this.Path = GLSettings.Path;
             }
-            //bitmapCustom.SaveImage(this.Path + "\\Models", "temp_", true);
-
+           
             this.Texture = new Texture((Bitmap)bitmapCustom, false);
 
 
@@ -1117,6 +1152,18 @@ namespace OpenTKExtension
             return true;
 
         }
-       
+        public void ShuffleVectors()
+        {
+            Random rng = new Random();
+            int n = this.Vectors.Length;
+            for(int i = n-1; i >= 0; i-- )
+            {
+                int k = rng.Next(i + 1);
+                Vector3 vec = this.Vectors[k];
+                Vectors[k] = Vectors[i];
+                Vectors[i] = vec;
+            }
+        }
+
     }
 }

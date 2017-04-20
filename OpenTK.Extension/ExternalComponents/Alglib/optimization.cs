@@ -19091,7 +19091,7 @@ public partial class alglib
 
 
         /*************************************************************************
-        Model value: f = 0.5*x'*A*x + b'*x
+        PointCloud value: f = 0.5*x'*A*x + b'*x
 
         INPUT PARAMETERS:
             A       -   convex quadratic model; only main quadratic term is used,
@@ -20490,7 +20490,7 @@ public partial class alglib
             // * State.XBase            - base point (unchanged)
             // * State.FBase            - F(XBase)
             // * State.GBase            - linear term
-            // * State.QuadraticModel   - quadratic term
+            // * State.QuadraticPointCloud   - quadratic term
             // * State.LambdaV          - current estimate for lambda
             //
             // We also clear DeltaXReady/DeltaFReady flags
@@ -20808,7 +20808,7 @@ public partial class alglib
             }
             
             //
-            // Model is fresh, we can rely on it and terminate algorithm
+            // PointCloud is fresh, we can rely on it and terminate algorithm
             //
             state.repterminationtype = 4;
             if( !state.xrep )
@@ -20833,7 +20833,7 @@ public partial class alglib
         lbl_43:
             
             //
-            // Model is not fresh, we should refresh it and test
+            // PointCloud is not fresh, we should refresh it and test
             // conditions once more
             //
             state.modelage = state.maxmodelage+1;

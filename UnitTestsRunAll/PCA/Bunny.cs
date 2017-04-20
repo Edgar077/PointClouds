@@ -48,8 +48,8 @@ namespace Automated.PrincipalComponentAnalysis
         {
 
 
-            Model model3DTarget = new Model(pathUnitTests + "\\bunny.obj");
-            this.pointCloudTarget = model3DTarget.PointCloud;
+           
+            this.pointCloudTarget = new PointCloud(pathUnitTests + "\\bunny.obj");
 
             this.pointCloudSource = PointCloud.CloneAll(pointCloudTarget);
 
@@ -68,8 +68,8 @@ namespace Automated.PrincipalComponentAnalysis
         public void Rotate_Custom()
         {
 
-            Model model3DTarget = new Model(pathUnitTests + "\\bunny.obj");
-            this.pointCloudTarget = model3DTarget.PointCloud;
+       
+            this.pointCloudTarget = new PointCloud(pathUnitTests + "\\bunny.obj");
 
             this.pointCloudSource = PointCloud.CloneAll(pointCloudTarget);
 

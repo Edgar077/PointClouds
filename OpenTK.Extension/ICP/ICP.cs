@@ -326,13 +326,13 @@ namespace ICPLib
         //private void CalculateNormals(PointCloud pointsSource, PointCloud pointsTarget)
         //{
 
-        //    Model myModelTarget = new Model("Target");
+        //    PointCloud myModelTarget = new PointCloud ("Target");
         //    myModelTarget.PointCloud = pointsTarget;
         //    myModelTarget.CalculateNormals_PCA();
         //    //myModelTarget.CalculateNormals_Triangulation();
 
 
-        //    Model myModelSource = new Model("Source");
+        //    PointCloud myModelSource = new PointCloud ("Source");
         //    myModelSource.PointCloud = pointsSource;
         //    //myModelSource.CalculateNormals_Triangulation();
         //    myModelSource.CalculateNormals_PCA();

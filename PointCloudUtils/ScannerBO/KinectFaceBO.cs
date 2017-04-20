@@ -70,7 +70,7 @@
 //        private HighDefinitionFaceFrameReader _faceReader = null;
 
 //        private FaceAlignment _faceAlignment = null;
-//        private FaceModel _faceModel = null;
+//        private FacePointCloud _facePointCloud = null;
 
 //        private Body[] bodies = null;
 
@@ -157,7 +157,7 @@
 //                    //_faceSource = new HighDefinitionFaceFrameSource(_sensor);
 //                    //_faceReader = _faceSource.OpenReader();
 //                    //_faceReader.FrameArrived += FaceReader_FrameArrived;
-//                    //_faceModel = new FaceModel();
+//                    //_facePointCloud = new FaceModel();
 //                    //_faceAlignment = new FaceAlignment();
 
 
@@ -172,7 +172,7 @@
 //                    //                                      FaceFrameFeatures.RightEyeClosed);
 //                    _faceReader = _faceSource.OpenReader();
 //                   _faceReader.FrameArrived += FaceReader_FrameArrived;
-//                    _faceModel = new FaceModel();
+//                    _facePointCloud = new FaceModel();
 //                    _faceAlignment = new FaceAlignment();
 
 //                }
@@ -212,7 +212,7 @@
 //        }
 //        private void UpdateFacePoints()
 //        {
-//            if (_faceModel == null) return;
+//            if (_facePointCloud == null) return;
 
 //            var vertices = _faceModel.CalculateVerticesForAlignment(_faceAlignment);
 //            pointsFace = new List<Vector3>();
@@ -366,10 +366,10 @@
 //            {
 //                _faceSource = null;
 //            }
-//            if (_faceModel != null)
+//            if (_facePointCloud != null)
 //            {
 //                _faceModel.Dispose();
-//                _faceModel = null;
+//                _facePointCloud = null;
 //            }
 //        }
 //        public override void ShowPointCloud()

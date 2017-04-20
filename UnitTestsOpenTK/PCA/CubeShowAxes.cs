@@ -20,7 +20,7 @@ namespace UnitTestsOpenTK.PrincipalComponentAnalysis
 
             
             
-            List<Vector3> listVectors = Example3DModels.Cuboid_Corners_CenteredAt0(1, 1, 1);
+            List<Vector3> listVectors = ExamplePointClouds.Cuboid_Corners_CenteredAt0(1, 1, 1);
             pointCloudSource = PointCloud.FromListVector3(listVectors);
             
             this.pointCloudSource = PointCloud.Clone(pointCloudSource);
@@ -48,10 +48,9 @@ namespace UnitTestsOpenTK.PrincipalComponentAnalysis
             float cubeSizeY = 2;
             int numberOfPoints = 3;
 
-            Model myModel = Example3DModels.Cuboid("Cuboid", cubeSizeX, cubeSizeY, numberOfPoints, System.Drawing.Color.White, null);
+         
 
-
-            this.pointCloudSource = myModel.PointCloud;
+            this.pointCloudSource = ExamplePointClouds.Cuboid("Cuboid", cubeSizeX, cubeSizeY, numberOfPoints, System.Drawing.Color.White, null);
             PointCloud.RotateDegrees(pointCloudSource, 45, 45, 45);
             pointCloudSource.ResizeVerticesTo1();
 
@@ -74,11 +73,8 @@ namespace UnitTestsOpenTK.PrincipalComponentAnalysis
             
             float cubeSizeY = 2;
             int numberOfPoints = 3;
-            Model myModel = Example3DModels.Cuboid("Cuboid", cubeSizeX, cubeSizeY, numberOfPoints, System.Drawing.Color.White, null);
-            
-
-
-            this.pointCloudSource = myModel.PointCloud;
+          
+            this.pointCloudSource = ExamplePointClouds.Cuboid("Cuboid", cubeSizeX, cubeSizeY, numberOfPoints, System.Drawing.Color.White, null);
             PointCloud.RotateDegrees(pointCloudSource, 45, 45, 45);
            
             pca.PCA_OfPointCloud(pointCloudSource);

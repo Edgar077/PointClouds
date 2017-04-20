@@ -22,10 +22,10 @@ namespace ToDo.ICP
         public void Cuboid_56_Rotate90()
         {
 
-            this.pointCloudTarget = Example3DModels.CuboidEmpty(2, 4, 1, 3, 3, 3);
+            this.pointCloudTarget = ExamplePointClouds.CuboidEmpty(2, 4, 1, 3, 3, 3);
             this.pointCloudTarget.SetColor(new Vector3(0, 1, 0));
 
-            //Example3DModels.CuboidEmpty(2, 4, 1, 3, 3, 3);
+            //ExamplePointClouds.CuboidEmpty(2, 4, 1, 3, 3, 3);
 
             this.pointCloudSource = pointCloudTarget.Clone();
             this.pointCloudSource.SetColor(new Vector3(1, 1, 1));
@@ -90,7 +90,7 @@ namespace ToDo.ICP
           public void Cuboid_10098_Rotate90_Taken()
           {
 
-              this.pointCloudTarget = Example3DModels.CuboidEmpty(2, 4, 1, 10, 10, 10);
+              this.pointCloudTarget = ExamplePointClouds.CuboidEmpty(2, 4, 1, 10, 10, 10);
               this.pointCloudTarget.SetColor(new Vector3(0, 1, 0));
 
               

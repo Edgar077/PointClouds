@@ -73,7 +73,7 @@ namespace PointCloudUtils
         //private HighDefinitionFaceFrameReader _faceReader = null;
 
         //private FaceAlignment _faceAlignment = null;
-        //private FaceModel _faceModel = null;
+        //private FacePointCloud _facePointCloud = null;
 
         private Body[] bodies = null;
 
@@ -132,7 +132,7 @@ namespace PointCloudUtils
         {
             this.framesScanner = new System.Collections.ArrayList();
             framesOpenGL = new System.Collections.ArrayList();
-            PathModels = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Models\\";
+            PathModels = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + GLSettings.PathPointClouds;
 
             PointCloudScannerSettings.CutFrames = true;//this setting is obsolete by using this project (relevant only for the WPF project)
 
@@ -150,7 +150,7 @@ namespace PointCloudUtils
                 
             }
             isRecording = true;
-            BVHFile = BVH_IO.Record_Start(this.bodies[0], this.kinectSkeleton,  "bvh", GLSettings.Path + GLSettings.PathModels);
+            BVHFile = BVH_IO.Record_Start(this.bodies[0], this.kinectSkeleton,  "bvh", GLSettings.Path + GLSettings.PathPointClouds);
 
         }
         public override bool StartScanner()
@@ -174,7 +174,7 @@ namespace PointCloudUtils
                 //    //_faceSource = new HighDefinitionFaceFrameSource(_sensor);
                 //    //_faceReader = _faceSource.OpenReader();
                 //    //_faceReader.FrameArrived += FaceReader_FrameArrived;
-                //    //_faceModel = new FaceModel();
+                //    //_facePointCloud = new FaceModel();
                 //    //_faceAlignment = new FaceAlignment();
 
 
@@ -189,7 +189,7 @@ namespace PointCloudUtils
                 //    //                                      FaceFrameFeatures.RightEyeClosed);
                 //    _faceReader = _faceSource.OpenReader();
                 //   _faceReader.FrameArrived += FaceReader_FrameArrived;
-                //    _faceModel = new FaceModel();
+                //    _facePointCloud = new FaceModel();
                 //    _faceAlignment = new FaceAlignment();
 
                 //}
@@ -232,7 +232,7 @@ namespace PointCloudUtils
         //}
         //private void UpdateFacePoints()
         //{
-        //    if (_faceModel == null) return;
+        //    if (_facePointCloud == null) return;
 
         //    var vertices = _faceModel.CalculateVerticesForAlignment(_faceAlignment);
         //    pointsFace = new List<Vector3>();
@@ -390,10 +390,10 @@ namespace PointCloudUtils
             //{
             //    _faceSource = null;
             //}
-            //if (_faceModel != null)
+            //if (_facePointCloud != null)
             //{
             //    _faceModel.Dispose();
-            //    _faceModel = null;
+            //    _facePointCloud = null;
             //}
         }
         public override void ShowPointCloud()
@@ -1064,13 +1064,13 @@ namespace PointCloudUtils
                 //this is the most time consuming part - mapping the color frame to depth
                 PointCloudRenderable pcr = this.ToPointCloudRenderable(false);
                 //filter out only calibration model
-                if(PointCloudScannerSettings.ShowOnlyCalibrationModel)
+                if(PointCloudScannerSettings.ShowOnlyCalibrationPointCloud)
                 {
                     pcr.PointCloud = pcr.PointCloud.ExtractCalibrationObject();
 
                 }
-                //show only face
-                if (PointCloudScannerSettings.ShowFaceScanEllipse)
+                else if//show only face
+                (PointCloudScannerSettings.ShowFaceScanEllipse)
                 {
                     pcr.PointCloud = pcr.PointCloud.ExtractFace(this.ellipseFace);
 
@@ -1092,15 +1092,12 @@ namespace PointCloudUtils
                         else
                         {
                             skeleton.Update(kinectSkeleton.BonesAsLines);
-                            skeleton.FillPointCloud();
-
                         }
                         this.openGLControl.GLrender.AdditionalObjectsToDraw.Add(skeleton);
                     }
                     if (this.pointsFace != null && this.pointsFace.Count > 0)
                     {
-                        Face f = new Face(pointsFace);
-                        f.InitializeGL();
+                        Face f = this.openGLControl.GLrender.UpdateFace(pointsFace);
                         this.openGLControl.GLrender.AdditionalObjectsToDraw.Add(f);
                     }
                     if (PointCloudScannerSettings.ShowFaceScanEllipse)
@@ -1278,7 +1275,7 @@ namespace PointCloudUtils
 
                 if (manual)
                 {
-                    //if(_faceModel != null)
+                    //if(_facePointCloud != null)
                     //    _faceModel.Dispose();
                     //if (GraphicsContext.CurrentContext != null)
                     //    GL.DeleteTexture(texture);

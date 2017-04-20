@@ -19,8 +19,8 @@
 //        {
 
             
-//            List<Vector3> listVectors = Example3DModels.Square(1, 1, 0);
-//            //listVectors.AddRange(Example3DModels.Square(1, 1.5, 0));
+//            List<Vector3> listVectors = ExamplePointClouds.Square(1, 1, 0);
+//            //listVectors.AddRange(ExamplePointClouds.Square(1, 1.5, 0));
 
 //            PointCloud pcl = PointCloud.FromVector3List(listVectors);
 //            pcl.TriangulateVertices_Rednaxela(0f);
@@ -52,7 +52,7 @@
 //        public void Cube_Corners()
 //        {
             
-//            List<Vector3> listVectors = Example3DModels.Cube_Corners(1, 1, 1);
+//            List<Vector3> listVectors = ExamplePointClouds.Cube_Corners(1, 1, 1);
 //            PointCloud pcl = PointCloud.FromVector3List(listVectors);
 //            pcl.TriangulateVertices_Rednaxela(0f);
 
@@ -66,7 +66,7 @@
 //        public void Cube_56()
 //        {
 
-//            PointCloud pcl =  Example3DModels.CreateCube_RegularGrid_Empty(1, 3);
+//            PointCloud pcl =  ExamplePointClouds.CreateCube_RegularGrid_Empty(1, 3);
 //            pcl.TriangulateVertices_Rednaxela(0f);
 //            ShowPointCloudForOpenGL(pcl);
 
@@ -77,7 +77,7 @@
 //        //{
 
             
-//        //    PointCloud pcl = Example3DModels.CreateCube_RegularGrid_Empty(1, 4);
+//        //    PointCloud pcl = ExamplePointClouds.CreateCube_RegularGrid_Empty(1, 4);
 //        //    pcl.TriangulateVertices_Rednaxela(0f);
 //        //    ShowPointCloudForOpenGL(pcl);
 

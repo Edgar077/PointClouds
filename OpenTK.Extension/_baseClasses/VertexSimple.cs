@@ -37,7 +37,7 @@ namespace OpenTKExtension
 
 
         //necessary for triangulation
-        public uint IndexInModel;
+        public uint IndexInPointCloud;
         public bool Marked;
     
         public VertexSimple()
@@ -52,7 +52,7 @@ namespace OpenTKExtension
 
             Vector = new Vector3(v.Vector.X, v.Vector.Y, v.Vector.Z);
 
-            this.IndexInModel = v.Index;
+            this.IndexInPointCloud = v.Index;
             this.Color = v.Color;
             
 
@@ -79,28 +79,28 @@ namespace OpenTKExtension
         }
         public VertexSimple(uint ind, Vector3 v, byte[] color)
         {
-            this.IndexInModel = ind;
+            this.IndexInPointCloud = ind;
             Vector = v;
             this.Color = Color.ColorVectorFromByteArray(color); 
            
         }
         public VertexSimple(uint ind, Vector3 v, Color color)
         {
-            this.IndexInModel = ind;
+            this.IndexInPointCloud = ind;
             Vector = v;
             this.Color = Color.ColorVectorFromColor(color);
 
         }
         public VertexSimple(uint myindexInModel, double x, double y, double z)
         {
-            IndexInModel = myindexInModel;
+            IndexInPointCloud = myindexInModel;
             Vector = new Vector3(Convert.ToSingle(x), Convert.ToSingle(y), Convert.ToSingle(z));
            
 
         }
         public VertexSimple(uint indexInModel, Vertex v)
         {
-            IndexInModel = indexInModel;
+            IndexInPointCloud = indexInModel;
             Vector = v.Vector;
             Color = v.Color;
            
@@ -108,7 +108,7 @@ namespace OpenTKExtension
 
         public VertexSimple(uint indexInModel, Vector3 v)
         {
-            IndexInModel = indexInModel;
+            IndexInPointCloud = indexInModel;
            
             Vector = v;
 

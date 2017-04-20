@@ -11,7 +11,7 @@ namespace UnitTestsOpenTK.Models
 {
     [TestFixture]
     [Category("UnitTest")]
-    public class Example3DModelsFromDisk : TestBase
+    public class ExamplePointCloudsFromDisk : TestBase
     {
         [Test]
         public void Bunny_obj_Triangulated()

@@ -17,9 +17,9 @@ namespace UnitTestsOpenTK.Models
         [Test]
         public void Cuboid_OldControl()
         {
-            Model myModel = Example3DModels.Cuboid("Cuboid", 20f, 40f, 100, System.Drawing.Color.White, null);
-            myModel.PointCloud.ResizeVerticesTo1();
-            ShowModel(myModel);
+            PointCloud pc = ExamplePointClouds.Cuboid("Cuboid", 20f, 40f, 100, System.Drawing.Color.White, null);
+            pc.ResizeVerticesTo1();
+            ShowPointCloud(pc);
         }
 
         [Test]
@@ -38,7 +38,7 @@ namespace UnitTestsOpenTK.Models
         public void Cube_Corners()
         {
             
-            List<Vector3> listVectors = Example3DModels.Cuboid_Corners_CenteredAt0(1, 1, 1);
+            List<Vector3> listVectors = ExamplePointClouds.Cuboid_Corners_CenteredAt0(1, 1, 1);
             PointCloud pcl = PointCloud.FromListVector3(listVectors);
             PointCloud.SetIndicesForCubeCorners(pcl);
 
@@ -52,7 +52,7 @@ namespace UnitTestsOpenTK.Models
         {
 
             
-            PointCloud pcl = Example3DModels.Cube_RegularGrid_Empty(1, 3);
+            PointCloud pcl = ExamplePointClouds.Cube_RegularGrid_Empty(1, 3);
             ShowPointCloudForOpenGL(pcl);
 
 

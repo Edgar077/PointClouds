@@ -94,7 +94,7 @@ namespace OpenTKExtension
         {
             PointCloud myPCL = new PointCloud();
             string line = string.Empty;
-            uint indexInModel = 0;
+            uint indexInPointCloud = 0;
             try
             {
 
@@ -124,8 +124,8 @@ namespace OpenTKExtension
                                 //    break;
                                 case "v"://Vertex
                                     vertex = HelperReadVertex(strArrayRead);
-                                    vertex.Index = indexInModel;
-                                    indexInModel++;
+                                    vertex.Index = indexInPointCloud;
+                                    indexInPointCloud++;
                                     myPCL.Add(vertex);
                                     break;
                            
@@ -338,7 +338,7 @@ namespace OpenTKExtension
         /// <param name="strArrayRead"></param>
         /// <param name="myNewModel"></param>
         /// <returns></returns>
-        //public static Triangle helper_ReadTriangle(string[] strArrayRead, Model myNewModel)
+        //public static Triangle helper_ReadTriangle(string[] strArrayRead, PointCloud myNewModel)
         //{
         //    try
         //    {

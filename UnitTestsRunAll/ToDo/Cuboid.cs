@@ -112,7 +112,7 @@ namespace ToDo.ICP
         public void Cuboid_26_Rotate90()
         {
 
-            this.pointCloudTarget = Example3DModels.CuboidEmpty(2, 4, 1, 2, 2, 2);
+            this.pointCloudTarget = ExamplePointClouds.CuboidEmpty(2, 4, 1, 2, 2, 2);
 
             this.pointCloudSource = pointCloudTarget.Clone();
             //CreateCuboid_AddPoints(2, 4, 1);
@@ -133,7 +133,7 @@ namespace ToDo.ICP
           public void Cuboid_56_Rotate90_Taken()
           {
 
-              this.pointCloudTarget = Example3DModels.CuboidEmpty(2, 4, 1, 3, 3, 3);
+              this.pointCloudTarget = ExamplePointClouds.CuboidEmpty(2, 4, 1, 3, 3, 3);
               this.pointCloudTarget.SetColor(new Vector3(0, 1, 0));
 
               this.pointCloudSource = pointCloudTarget.Clone();
@@ -156,10 +156,10 @@ namespace ToDo.ICP
           public void Cuboid_98_Rotate90_Taken()
           {
 
-              this.pointCloudTarget = Example3DModels.CuboidEmpty(2, 4, 1, 4, 4, 4);
+              this.pointCloudTarget = ExamplePointClouds.CuboidEmpty(2, 4, 1, 4, 4, 4);
               this.pointCloudTarget.SetColor(new Vector3(0, 1, 0));
 
-              //Example3DModels.CuboidEmpty(2, 4, 1, 3, 3, 3);
+              //ExamplePointClouds.CuboidEmpty(2, 4, 1, 3, 3, 3);
 
               this.pointCloudSource = pointCloudTarget.Clone();
               this.pointCloudSource.SetColor(new Vector3(1, 1, 1));
@@ -182,7 +182,7 @@ namespace ToDo.ICP
           public void Cuboid_600_Rotate90_Taken_NoScaling()
           {
 
-              this.pointCloudTarget = Example3DModels.CuboidEmpty(2, 4, 1, 10, 10, 10);
+              this.pointCloudTarget = ExamplePointClouds.CuboidEmpty(2, 4, 1, 10, 10, 10);
               this.pointCloudTarget.SetColor(new Vector3(0, 1, 0));
 
               this.pointCloudSource = pointCloudTarget.Clone();
@@ -204,7 +204,7 @@ namespace ToDo.ICP
           public void Cuboid_2400_Rotate90_Taken_NoScaling()
           {
 
-              this.pointCloudTarget = Example3DModels.CuboidEmpty(2, 4, 1, 20, 20, 20);
+              this.pointCloudTarget = ExamplePointClouds.CuboidEmpty(2, 4, 1, 20, 20, 20);
               this.pointCloudTarget.SetColor(new Vector3(0, 1, 0));
 
               this.pointCloudSource = pointCloudTarget.Clone();

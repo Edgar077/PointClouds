@@ -34,33 +34,31 @@ namespace OpenTKExtension
     public partial class OpenGLUC
     {
 
-        public OpenFileDialog openModel;
+        public OpenFileDialog openPointCloud;
 
 
-        public void ShowModel(Model myModel)
-        {
-            if (myModel != null)
-            {
-                this.comboModels.Items.Add(myModel.Name);
-                //this.comboModels.SelectedIndex = this.comboModels.Items.Count - 1;
+        //public void ShowModel(PointCloud myModel)
+        //{
+        //    if (myPointCloud != null)
+        //    {
+        //        this.comboModels.Items.Add(myModel.Name);
+        //        //this.comboModels.SelectedIndex = this.comboModels.Items.Count - 1;
 
-                this.OGLControl.GLrender.SelectedModelIndex = this.comboModels.Items.Count - 2;
-                this.glControl1.GLrender.AddModel(myModel);
-            }
+        //        this.OGLControl.GLrender.SelectedModelIndex = this.comboModels.Items.Count - 2;
+        //        this.glControl1.GLrender.AddModel(myModel);
+        //    }
 
-        }
+        //}
       
         public void ShowPointCloud(PointCloud pc)
         {
-            Model myModel = new Model();
-            myModel.PointCloud = pc;
+           
 
-
-            if (myModel != null)
+            if (pc != null)
             {
-                this.comboModels.Items.Add(myModel.Name);
+                this.comboModels.Items.Add(pc.Name);
                 this.OGLControl.GLrender.SelectedModelIndex = this.comboModels.Items.Count - 2;
-                this.glControl1.GLrender.AddModel(myModel);
+                this.glControl1.GLrender.AddPointCloud(pc);
             }
 
         }
@@ -93,26 +91,23 @@ namespace OpenTKExtension
         }
         public void ShowRenderableObject(RenderableObject ro)
         {
-            Model myModel = new Model();
-            
-            myModel.PointCloud = ro.PointCloud;
            
 
-            if (myModel != null)
+            if (ro.PointCloud != null)
             {
-                this.comboModels.Items.Add(myModel.PointCloud.Name);
+                this.comboModels.Items.Add(ro.PointCloud.Name);
                 this.OGLControl.GLrender.SelectedModelIndex = this.comboModels.Items.Count - 2;
-                this.glControl1.GLrender.AddModel(myModel);
+                this.glControl1.GLrender.AddPointCloud(ro.PointCloud);
             }
 
         }
         private string LoadFileDialog()
         {
-            this.openModel = new OpenFileDialog();
-            if (this.openModel.ShowDialog() != DialogResult.OK)
+            this.openPointCloud = new OpenFileDialog();
+            if (this.openPointCloud.ShowDialog() != DialogResult.OK)
                 return string.Empty;
 
-            return this.openModel.FileName;
+            return this.openPointCloud.FileName;
             
         }
 

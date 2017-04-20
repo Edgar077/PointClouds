@@ -28,7 +28,7 @@ namespace CharacterCreator
         public FaceMatcher()
         {
             Skeleton = new Skeleton();
-            //pathModels = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Models";
+           
         }
         public void LoadFace(string path, string fileName)
         {

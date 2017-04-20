@@ -27,10 +27,9 @@ namespace UnitTestsOpenTK.Triangulation
 
             ConvexHull3D convHull = new ConvexHull3D(myListVectors);
 
-            Model myModel = CreateModel("Convex Hull", pointCloudSource, convHull.Faces.ListFaces);
 
 
-            ShowModel(myModel);
+            ShowPointCloud(pointCloudSource);
             System.Diagnostics.Debug.WriteLine("Number of faces: " + convHull.Faces.ListFaces.Count.ToString());
 
         }
@@ -45,9 +44,9 @@ namespace UnitTestsOpenTK.Triangulation
 
             ConvexHull3D convHull = new ConvexHull3D(myListVectors);
 
-            Model myModel = CreateModel("Convex Hull", pointCloudSource, convHull.Faces.ListFaces);
 
-            ShowModel(myModel);
+
+            ShowPointCloud(pointCloudSource);
 
             System.Diagnostics.Debug.WriteLine("Number of faces: " + convHull.Faces.ListFaces.Count.ToString());
 
@@ -64,9 +63,9 @@ namespace UnitTestsOpenTK.Triangulation
 
             ConvexHull3D cHull = new ConvexHull3D(myListVectors);
 
-            Model myModel = CreateModel("Bunny Hull", pointCloudSource, cHull.Faces.ListFaces);
 
-            ShowModel(myModel);
+
+            ShowPointCloud(pointCloudSource);
 
         }
       

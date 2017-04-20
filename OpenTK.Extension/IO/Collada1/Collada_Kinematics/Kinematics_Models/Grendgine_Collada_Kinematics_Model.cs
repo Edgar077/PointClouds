@@ -17,7 +17,7 @@ namespace grendgine_collada
 		
 		
 		[XmlElement(ElementName = "technique_common")]
-		public Grendgine_Collada_Technique_Common_Kinematics_Model Technique_Common;
+		public Grendgine_Collada_Technique_Common_Kinematics_PointCloud Technique_Common;
 	    
 		[XmlElement(ElementName = "technique")]
 		public Grendgine_Collada_Technique[] Technique;			

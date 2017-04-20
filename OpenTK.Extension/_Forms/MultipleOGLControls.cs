@@ -82,12 +82,7 @@ namespace OpenTKExtension
             GLSettings.SaveSettings();
             base.OnClosed(e);
         }
-        public void AddVerticesAsModel(string name, PointCloud myPCLList)
-        {
-            this.OpenGLControl.AddVertexListAsModel(name, myPCLList);
-
-           
-        }
+      
        
 
         //public void ShowListOfVertices(PointCloud myPCLList)
@@ -98,12 +93,11 @@ namespace OpenTKExtension
         public void ShowPointCloudOpenGL(PointCloud myP, bool removeOthers)
         {
             if (removeOthers)
-                this.OpenGLControl.RemoveAllModels();
+                this.OpenGLControl.RemoveAllPointClouds();
             
-            Model myModel = new Model();
-            myModel.PointCloud = myP;
+          
 
-            this.OpenGLControl.OGLControl.GLrender.AddModel(myModel);
+            this.OpenGLControl.OGLControl.GLrender.AddPointCloud(myP);
 
         }
         /// <summary>
@@ -116,7 +110,7 @@ namespace OpenTKExtension
         public void Show3PointCloudOpenGL(PointCloud mypointCloudSource, PointCloud mypointCloudTarget, PointCloud mypointCloudResult, bool changeColor)
         {
 
-            this.OpenGLControl.RemoveAllModels();
+            this.OpenGLControl.RemoveAllPointClouds();
 
             //target in green
             
@@ -168,7 +162,7 @@ namespace OpenTKExtension
         public void Show3PointClouds(PointCloud mypointCloudSource, PointCloud mypointCloudTarget, PointCloud mypointCloudResult, bool changeColor)
         {
 
-            this.OpenGLControl.RemoveAllModels();
+            this.OpenGLControl.RemoveAllPointClouds();
             mypointCloudTarget.Name = "Target";
             mypointCloudSource.Name = "Source";
             mypointCloudResult.Name = "Result";
@@ -212,7 +206,7 @@ namespace OpenTKExtension
        
         public void ClearModels()
         {
-            OpenGLControl.RemoveAllModels();
+            OpenGLControl.RemoveAllPointClouds();
         }
        
         public bool UpdateFirstModel(PointCloud pc)
@@ -247,7 +241,7 @@ namespace OpenTKExtension
         public void IPCOnTwoPointClouds()
         {
 
-            this.OpenGLControl.RemoveAllModels();
+            this.OpenGLControl.RemoveAllPointClouds();
             //this.OpenGLControl.OpenTwoTrialPointClouds();
             ICP_OnCurrentModels();
 
@@ -265,7 +259,7 @@ namespace OpenTKExtension
             //else
             //{
             //    this.OpenGLControl.RemoveFirstModel(true);
-            //    Model3D myNewModel = new Model3D();
+            //    Model3D myNewPointCloud = new PointCloud 3D();
             //    myNewModel.Pointcloud = pc;
             //    //this.OpenGLControl.GLrender.Models3D[0].Pointcloud = pc;
             //    this.OpenGLControl.GLrender.Models3D.Add(myNewModel);
@@ -304,14 +298,14 @@ namespace OpenTKExtension
 
 
         }
-        //public void ShowModel(Model myModel, bool removeAllOthers)
+        //public void ShowModel(PointCloud myModel, bool removeAllOthers)
         //{
         //    if(removeAllOthers)
         //        this.OpenGLControl.RemoveAllModels();
         //    this.OpenGLControl.ShowModel(myModel);
 
 
-        //    Model myModel = new Model();
+        //    PointCloud myPointCloud = new PointCloud ();
         //    myModel.pointCloudGL = myModel.Pointcloud.ToPointCloudOpenGL();
 
         //    //this.glControl1.GLrender.AddModel(myModel);

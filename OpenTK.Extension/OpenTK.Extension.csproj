@@ -486,6 +486,14 @@
     <Compile Include="IO\Collada\Common\SourceLoader.cs" />
     <Compile Include="IO\Collada\Shaders\BaseShader.cs" />
     <Compile Include="IO\Collada\Shaders\DefaultShader.cs" />
+    <Compile Include="KDTree\EricRegina\BoundedPriorityList.cs" />
+    <Compile Include="KDTree\EricRegina\HyperRect.cs" />
+    <Compile Include="KDTree\EricRegina\KDTreeEricRegina.cs" />
+    <Compile Include="KDTree\EricRegina\KDTreeEricReginaGeneric.cs" />
+    <Compile Include="KDTree\EricRegina\UtilitiesRegina.cs" />
+    <Compile Include="KDTree\EricRegina\Utilities\BinaryTreeNavigation.cs" />
+    <Compile Include="KDTree\EricRegina\Utilities\BinaryTreeNavigator.cs" />
+    <Compile Include="KDTree\EricRegina\Utilities\BoundedPriorityListExtensions.cs" />
     <Compile Include="KDTree\IKDTree.cs" />
     <Compile Include="KDTree\old\KDTreeBruteForce.cs" />
     <Compile Include="KDTree\JeremyC\BoundingBoxAxisAligned.cs" />
@@ -493,6 +501,7 @@
     <Compile Include="KDTree\JeremyC\IntersectionTypes.cs" />
     <Compile Include="KDTree\JeremyC\KDTreeJeremyC.cs" />
     <Compile Include="KDTree\JeremyC\KDTreeNodeJeremyC.cs" />
+    <Compile Include="_baseClasses\Model\RenderMode.cs" />
     <Compile Include="_FormsOther\AboutForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -522,7 +531,7 @@
     <Compile Include="ICP\ICP_SA.cs" />
     <Compile Include="ICP\ICP_Stitch.cs" />
     <Compile Include="ICP\SettingsICP.cs" />
-    <Compile Include="KDTree\MatthewB.Kennell\KDTreeBase.cs" />
+    <Compile Include="KDTree\KDTreeBase.cs" />
     <Compile Include="KDTree\MatthewB.Kennell\ResultVector.cs" />
     <Compile Include="KDTree\MatthewB.Kennell\KDTreeNodeKennell.cs" />
     <Compile Include="KDTree\MatthewB.Kennell\KDTreeKennell.cs" />

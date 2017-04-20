@@ -34,24 +34,12 @@ namespace OpenTKExtension
     public partial class OpenGLUC
     {
       
-   
-        public void AddVertexListAsModel(string name, PointCloud myVertexList)
-        {
-            
-            Model myModel = new Model();
-            myModel.PointCloud = myVertexList;
-           
-           
-            this.glControl1.GLrender.AddModel(myModel);
-
-        }
-      
-        public void RemoveFirstModel(bool refresh)
+        public void RemoveFirstPointCloud(bool refresh)
         {
             //this.OGLControl.GLrender.RemoveAllModels();
             //this.Refresh();
 
-            //Model3D myModel = this.GLrender.Models3D[0];
+            //Model3D myPointCloud = this.GLrender.Models3D[0];
             //for (int index = 0; index < myModel.Parts.Count; ++index)
             //    GL.DeleteLists(myModel.Parts[index].GLListNumber, 1);
             
@@ -64,7 +52,11 @@ namespace OpenTKExtension
             //    this.glControl1.Refresh();
             //}
         }
-        public void RemoveAllModels()
+        public void AddPointCloud(string name, PointCloud pc)
+        {
+            this.glControl1.GLrender.AddPointCloud(pc);
+        }
+        public void RemoveAllPointClouds()
         {
             this.OGLControl.GLrender.ClearAllObjects();
             this.comboModels.Items.Clear();
@@ -92,13 +84,7 @@ namespace OpenTKExtension
 
 
         }
-        public void RemoveAllModelsSlow()
-        {
-            //for (int i = GLrender.Models3D.Count - 1; i >= 0; i--)
-            //{
-            //    RemoveModel(i);
-            //}
-        }
+    
      
 
 

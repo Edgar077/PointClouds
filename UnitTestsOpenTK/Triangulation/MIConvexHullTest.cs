@@ -73,20 +73,12 @@ namespace UnitTestsOpenTK.Triangulation.MIConvexHull
             }
 
             //-------------------
-            Model myModel = new Model();
-            myModel.PointCloud = pointCloudSource;
+            PointCloud myPointCloud = new PointCloud ();
+          
 
-            
-            //myModel.Triangles = listTriangle;
-            //myModel.PointCloud.CalculateCentroidBoundingBox();
 
-            //myModel.CalculateNormals_FromExistingTriangles();
-
-            
-           
-
-            myModel.PointCloud.ToObjFile(pathUnitTests, "1_triangulated.obj");
-            ShowModel(myModel);
+            pointCloudSource.ToObjFile(pathUnitTests, "1_triangulated.obj");
+            ShowPointCloud(pointCloudSource);
 
         }
 
@@ -118,9 +110,9 @@ namespace UnitTestsOpenTK.Triangulation.MIConvexHull
             {
                 Triangle t = new Triangle();
 
-                t.IndVertices.Add(Convert.ToUInt32(cell.Vertices[0].IndexInModel));
-                t.IndVertices.Add(Convert.ToUInt32(cell.Vertices[1].IndexInModel));
-                t.IndVertices.Add(Convert.ToUInt32(cell.Vertices[2].IndexInModel));
+                t.IndVertices.Add(Convert.ToUInt32(cell.Vertices[0].IndexInPointCloud));
+                t.IndVertices.Add(Convert.ToUInt32(cell.Vertices[1].IndexInPointCloud));
+                t.IndVertices.Add(Convert.ToUInt32(cell.Vertices[2].IndexInPointCloud));
                 listTriangle.Add(t);
                 //Vertex2D[] vert = cell.Vertices;
             }
@@ -135,17 +127,11 @@ namespace UnitTestsOpenTK.Triangulation.MIConvexHull
             //}
 
             //-------------------
-            Model myModel = new Model();
-            myModel.PointCloud = pointCloudSource;
-            //myModel.CalculateNormals_FromExistingTriangles();
+         
 
-            //myModel.Triangles = listTriangle;
-            //myModel.PointCloud.CalculateCentroidBoundingBox();
-
-
-            myModel.PointCloud.ToObjFile( pathUnitTests, "1_triangulated.obj");
-            ShowModel(myModel);
-
+            pointCloudSource.ToObjFile( pathUnitTests, "1_triangulated.obj");
+            
+            ShowPointCloud(pointCloudSource);
         }
         [Test]
         public void Face_Voronoi_TODO()
@@ -193,16 +179,8 @@ namespace UnitTestsOpenTK.Triangulation.MIConvexHull
             }
 
             //-------------------
-            Model myModel = new Model();
-            myModel.PointCloud = pointCloudSource;
+            ShowPointCloud(pointCloudSource);
 
-            //myModel.Triangles = listTriangle;
-            //myModel.PointCloud.CalculateCentroidBoundingBox();
-
-            myModel.PointCloud.ToObjFile(pathUnitTests, "1_triangulated.obj");
-
-            
-            ShowModel(myModel);
 
         }
 

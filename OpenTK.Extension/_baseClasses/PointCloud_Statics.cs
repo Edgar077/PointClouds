@@ -19,7 +19,7 @@ namespace OpenTKExtension
         }
         public static void CreateOutliers(PointCloud pointCloud, int numberOfOutliers)
         {
-            int indexInModel = pointCloud.Vectors.Length - 1;
+            int indexInPointCloud = pointCloud.Vectors.Length - 1;
             int numberIterate = 0;
             List<Vector3> listV = new List<Vector3>(pointCloud.Vectors);
             for (int i = pointCloud.Vectors.Length - 1; i >= 0; i--)
@@ -44,7 +44,7 @@ namespace OpenTKExtension
                 {
                     perturb.X *= 0.9f; perturb.Y *= 1.2f; perturb.Z *= 1.1f;
                 }
-                indexInModel++;
+                indexInPointCloud++;
                 listV.Add(perturb);
 
             }

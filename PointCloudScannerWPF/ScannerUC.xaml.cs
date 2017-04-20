@@ -50,7 +50,7 @@ namespace ScannerWPF
             
             Dispatcher.ShutdownStarted += Dispatcher_ShutdownStarted;
             this.frameListTimes = new System.Collections.ArrayList();
-            pathModels = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Models\\";
+            pathModels = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + GLSettings.PathPointClouds;
 
         }
         private void UpdateFramesPerSecond()

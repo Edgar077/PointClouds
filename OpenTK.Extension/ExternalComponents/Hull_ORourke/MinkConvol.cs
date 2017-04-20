@@ -94,7 +94,7 @@ namespace OpenTKExtension
             int i = 0;
             do
             {
-                v.IndexInModel = i++;
+                v.IndexInPointCloud = i++;
                 v.IsProcessed = true;
                 v = v.NextVertex;
             } while (v != P.head);
@@ -113,7 +113,7 @@ namespace OpenTKExtension
                 /* Reflect secondary polygon */
                 v.Point.X = -v.Point.X;
                 v.Point.Y = -v.Point.Y;
-                v.IndexInModel = i++;
+                v.IndexInPointCloud = i++;
                 v.IsProcessed = false;
                 v = v.NextVertex;
             } while (v != P.head);
@@ -239,7 +239,7 @@ namespace OpenTKExtension
             {
 
                 /* Advance around secondary edges until next j reached. */
-                while (!(v.IsProcessed && v.IndexInModel == j))
+                while (!(v.IsProcessed && v.IndexInPointCloud == j))
                 {
                     if (!v.IsProcessed)
                     {

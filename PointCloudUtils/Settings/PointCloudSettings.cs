@@ -43,7 +43,7 @@ namespace PointCloudUtils
         public static bool ShowFace;
         public static bool ShowFaceScanEllipse;
 
-        public static bool ShowOnlyCalibrationModel;
+        public static bool ShowOnlyCalibrationPointCloud;
       
 
         public static void InitFromSettings()
@@ -73,7 +73,7 @@ namespace PointCloudUtils
             Width = PointCloudUtils.Properties.Settings.Default.Width;
             ScanOnStartProgram = PointCloudUtils.Properties.Settings.Default.ScanOnStartProgram;
             OpenGLRefreshAt = PointCloudUtils.Properties.Settings.Default.OpenGLRefreshAt;
-            ShowOnlyCalibrationModel = PointCloudUtils.Properties.Settings.Default.ShowOnlyCalibrationModel;
+            ShowOnlyCalibrationPointCloud = PointCloudUtils.Properties.Settings.Default.ShowOnlyCalibrationPointCloud;
             ShowSkeleton = PointCloudUtils.Properties.Settings.Default.ShowSkeleton;
             ShowFace = PointCloudUtils.Properties.Settings.Default.ShowFace;
             ShowFaceScanEllipse = PointCloudUtils.Properties.Settings.Default.ShowFaceScanEllipse;
@@ -112,7 +112,7 @@ namespace PointCloudUtils
                 PointCloudUtils.Properties.Settings.Default.Width = Width;
                 PointCloudUtils.Properties.Settings.Default.ScanOnStartProgram = ScanOnStartProgram;
                 PointCloudUtils.Properties.Settings.Default.OpenGLRefreshAt = OpenGLRefreshAt ;
-                PointCloudUtils.Properties.Settings.Default.ShowOnlyCalibrationModel = ShowOnlyCalibrationModel;
+                PointCloudUtils.Properties.Settings.Default.ShowOnlyCalibrationPointCloud = ShowOnlyCalibrationPointCloud;
                 PointCloudUtils.Properties.Settings.Default.ShowSkeleton = ShowSkeleton ;
                 PointCloudUtils.Properties.Settings.Default.ShowFace = ShowFace;
                 PointCloudUtils.Properties.Settings.Default.ShowFaceScanEllipse = ShowFaceScanEllipse;
@@ -155,7 +155,7 @@ namespace PointCloudUtils
             Width = 1000;
             ScanOnStartProgram = false;
             OpenGLRefreshAt = 5;
-            ShowOnlyCalibrationModel = false;
+            ShowOnlyCalibrationPointCloud = false;
             ShowSkeleton = false;
             ShowFace = false;
             ShowFaceScanEllipse = false;

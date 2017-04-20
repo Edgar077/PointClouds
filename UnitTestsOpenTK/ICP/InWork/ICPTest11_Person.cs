@@ -23,12 +23,12 @@ namespace UnitTestsOpenTK.InWork
            
             this.icp.Reset_RealData();
 
-            Model model3DTarget = new Model(pathUnitTests + "\\2.obj");
-            this.pointCloudTarget = model3DTarget.PointCloud;
+           
+            this.pointCloudTarget = new PointCloud(pathUnitTests + "\\2.obj");
             pointCloudTarget = PCA.RotateToOriginAxes(pointCloudTarget);
 
-            Model model3DSource = new Model(pathUnitTests + "\\1.obj");
-            this.pointCloudSource = model3DSource.PointCloud;
+         
+            this.pointCloudSource = new PointCloud(pathUnitTests + "\\1.obj");
             pointCloudSource = PCA.RotateToOriginAxes(pointCloudSource);
 
             IterativeClosestPointTransform.Instance.ICPSettings.ICPVersion = ICP_VersionUsed.Zinsser;
@@ -45,12 +45,10 @@ namespace UnitTestsOpenTK.InWork
            
             this.icp.Reset_RealData();
 
-            Model model3DTarget = new Model(pathUnitTests + "\\2.obj");
-            this.pointCloudTarget = model3DTarget.PointCloud;
-            //pointCloudTarget = PCA.RotateToOriginAxes(pointCloudTarget);
-
-            Model model3DSource = new Model(pathUnitTests + "\\1.obj");
-            this.pointCloudSource = model3DSource.PointCloud;
+           
+            this.pointCloudTarget = new PointCloud(pathUnitTests + "\\2.obj");
+         
+            this.pointCloudSource = new PointCloud(pathUnitTests + "\\1.obj");
 
 
             IterativeClosestPointTransform.Instance.ICPSettings.ICPVersion = ICP_VersionUsed.Zinsser;
@@ -92,9 +90,9 @@ namespace UnitTestsOpenTK.InWork
         [Test]
         public void Person_PCA()
         {
-            Model model3DTarget = new Model(pathUnitTests + "\\2.obj");
-            this.pointCloudTarget = model3DTarget.PointCloud;
-            
+          
+            this.pointCloudTarget = new PointCloud(pathUnitTests + "\\2.obj");
+
             this.pointCloudSource = PointCloud.CloneAll(pointCloudTarget);
             PointCloud.RotateDegrees(pointCloudSource, 25, 10, 25);
 
@@ -115,12 +113,11 @@ namespace UnitTestsOpenTK.InWork
         [Test]
         public void Person_PCA_V_TwoClouds()
         {
-            Model model3DTarget = new Model(pathUnitTests + "\\2.obj");
-            this.pointCloudTarget = model3DTarget.PointCloud;
-           
-            Model model3DSource = new Model(pathUnitTests + "\\1.obj");
-            this.pointCloudSource = model3DSource.PointCloud;
-           
+         
+            this.pointCloudTarget = new PointCloud(pathUnitTests + "\\2.obj");
+                      
+            this.pointCloudSource = new PointCloud(pathUnitTests + "\\1.obj");
+
             PCA pca = new PCA();
             this.pointCloudResult = pca.AlignPointClouds_OneVector(this.pointCloudSource, this.pointCloudTarget, 0, 0);
             this.pointCloudResult = pca.AlignPointClouds_OneVector(this.pointCloudResult, this.pointCloudTarget, 1, 1);
@@ -139,12 +136,12 @@ namespace UnitTestsOpenTK.InWork
         [Test]
         public void Person_PCA_V_TwoClouds_XYZ()
         {
-            Model model3DTarget = new Model(pathUnitTests + "\\2.obj");
-            this.pointCloudTarget = model3DTarget.PointCloud;
+         
+            this.pointCloudTarget = new PointCloud(pathUnitTests + "\\2.obj");
             pointCloudTarget = PCA.RotateToOriginAxes(pointCloudTarget);
 
-            Model model3DSource = new Model(pathUnitTests + "\\1.obj");
-            this.pointCloudSource = model3DSource.PointCloud;
+       
+            this.pointCloudSource = new PointCloud(pathUnitTests + "\\1.obj");
             pointCloudSource = PCA.RotateToOriginAxes(pointCloudSource);
 
             PCA pca = new PCA();

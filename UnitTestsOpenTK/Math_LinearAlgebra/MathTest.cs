@@ -15,7 +15,7 @@ namespace UnitTestsOpenTK.LinearAlgebra
          private static string path;
          public MathTest()
         {
-            path = AppDomain.CurrentDomain.BaseDirectory + "\\Models\\UnitTests";
+            path = AppDomain.CurrentDomain.BaseDirectory + GLSettings.PathUnitTests;
             //string str = 
 
         }

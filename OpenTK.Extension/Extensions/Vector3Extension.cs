@@ -647,7 +647,19 @@ namespace OpenTKExtension
                 Vector3.Dot(new Vector3(mat.Row1), vec),
                 Vector3.Dot(new Vector3(mat.Row2), vec));
         }
+        public static float[][] VectorListToFloatArray(this Vector3 ve, List<Vector3> listV)
+        {
+            var data = new List<float[]>();
 
+
+            for (int i = 0; i < listV.Count; i++)
+            {
+                float[] array = new float[] { listV[i].X, listV[i].Y, listV[i].Z };
+                data.Add(array);
+            }
+
+            return data.ToArray();
+        }
     }
    
     public enum Axis { X, Y, Z };

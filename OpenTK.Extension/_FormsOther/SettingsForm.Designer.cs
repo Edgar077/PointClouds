@@ -184,7 +184,7 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(92, 13);
             this.label7.TabIndex = 41;
-            this.label7.Text = "Show Model Axes";
+            this.label7.Text = "Show PointCloud Axes";
             // 
             // label8
             // 

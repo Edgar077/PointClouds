@@ -502,7 +502,7 @@ namespace OpenTKExtension
         {
 
             SaveFileDialog sf = new SaveFileDialog();
-            sf.InitialDirectory = AppDomain.CurrentDomain.BaseDirectory + "Models";
+            sf.InitialDirectory = AppDomain.CurrentDomain.BaseDirectory + GLSettings.PathPointClouds;
 
             if (sf.ShowDialog() == DialogResult.OK)
             {

@@ -16,7 +16,7 @@ namespace PointCloudUtils
         public DepthMetaData DepthMetaData { get; set; }
         public IRMetaData IRMetadData { get; set; }
 
-        public static string PathModels = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Models";
+        public static string PathModels = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + GLSettings.PathPointClouds;
 
         protected int depthQuality;
 

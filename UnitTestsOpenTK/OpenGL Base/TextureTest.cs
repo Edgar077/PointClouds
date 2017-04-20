@@ -33,12 +33,12 @@ namespace UnitTestsOpenTK.TextureTest
             pointCloudSource.ResizeTo1();
             pointCloudSource.Translate_StartAt_000();
 
-            this.pointCloudSource.Texture = new Texture(path + "Models\\ModelWithTexture\\cubeCrate\\crate.png");
+            this.pointCloudSource.Texture = new Texture(path + GLSettings.PathPointClouds + "ModelWithTexture\\cubeCrate\\crate.png");
             //this.pointCloudSource.Texture = new Texture(path + "Textures\\crate.jpg");
             this.pointCloudSource.InitCubeUVs();
 
             
-            //this.pointCloudSource = Example3DModels.CuboidEmpty(1, 1, 1, 1, 1, 1);
+            //this.pointCloudSource = ExamplePointClouds.CuboidEmpty(1, 1, 1, 1, 1, 1);
 
             ShowPointCloud(pointCloudSource);
         
@@ -47,16 +47,16 @@ namespace UnitTestsOpenTK.TextureTest
         [Test]
         public void ShowCuboid_New()
         {
-            this.pointCloudSource = Example3DModels.CreateCube24();
+            this.pointCloudSource = ExamplePointClouds.CreateCube24();
 
 
             string path = AppDomain.CurrentDomain.BaseDirectory;
 
-            this.pointCloudSource.Texture = new Texture(path + "Models\\ModelWithTexture\\cubeBrick\\AlternatingBrick-ColorMap.png");
+            this.pointCloudSource.Texture = new Texture(path + GLSettings.PathPointClouds +  "ModelWithTexture\\cubeBrick\\AlternatingBrick-ColorMap.png");
             this.pointCloudSource.InitCubeUVs();
 
 
-            //this.pointCloudSource = Example3DModels.CuboidEmpty(1, 1, 1, 1, 1, 1);
+            //this.pointCloudSource = ExamplePointClouds.CuboidEmpty(1, 1, 1, 1, 1, 1);
 
             ShowPointCloud(pointCloudSource);
 
@@ -75,7 +75,7 @@ namespace UnitTestsOpenTK.TextureTest
             this.pointCloudSource.InitCubeUVs();
 
 
-            //this.pointCloudSource = Example3DModels.CuboidEmpty(1, 1, 1, 1, 1, 1);
+            //this.pointCloudSource = ExamplePointClouds.CuboidEmpty(1, 1, 1, 1, 1, 1);
 
             ShowPointCloud(pointCloudSource);
 

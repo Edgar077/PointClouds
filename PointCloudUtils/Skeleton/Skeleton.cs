@@ -37,8 +37,8 @@ namespace PointCloudUtils
         }
         public Skeleton(List<Line> myLines) : this()
         {
-            Update(myLines);
-            //lines = myLines;
+            
+            lines = myLines;
         }
         public Skeleton(Dictionary<JointType, Vector3> myjoints) : this()
         {
@@ -46,10 +46,7 @@ namespace PointCloudUtils
             CreateLinesFromJoints();
             updateModelExchangeSizes();
         }
-        public void Update(List<Line> myLines) 
-        {
-            lines = myLines;
-        }
+     
         private void updateModelExchangeSizes()
         {
             ModelExchangeDictionary[ModelExchangeSizes.buttock_height_Z] = this.buttock_height_Z;
@@ -136,7 +133,12 @@ namespace PointCloudUtils
 
             base.Dispose();
         }
-
+        public void Update(List<Line> myLines)
+        {
+            lines = myLines;
+            this.FillPointCloud();
+            FillIndexBuffer();
+        }
 
 
         public override void FillPointCloud()
@@ -206,7 +208,7 @@ namespace PointCloudUtils
         public void ToJsonFile(string fileNameShort)
         {
 
-            string pathModels = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Models";
+            string pathModels = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + GLSettings.PathPointClouds;
             string fileName = pathModels + "\\" + fileNameShort + ".json";
             Dictionary<string, float[]> jointVectorsToSerialize = JointsToSerializable(joints);
 

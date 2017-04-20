@@ -632,63 +632,31 @@ namespace PointCloudScanner
 
      
     
-        //private void TestAlign()
-        //{
-
-        //    string fileName1 = @"A:\Archiv\3D\_Models\_Kinect Nico Nonne\Person4Angles\C1.obj";
-        //    string fileName2 = @"A:\Archiv\3D\_Models\_Kinect Nico Nonne\Person4Angles\C2.obj";
-
-
-        //    tabControlImages.SelectTab(3);
-        //    //Model myModel = new Model(fileName1);
-        //    Model myModel = new Model(fileName1);
-        //    PCloud pcr = new PCloud();
-        //    pcr.PointCloudOpenGL = myModel.pointCloudGL;
-        //    pcr.PointCloudOpenGL.RotateDegrees(0f, 45f, 0f);
-        //    pcr.PointCloudOpenGL.Translate(1.7f, 0f, -2f);
-
-        //    IOUtils.ExtractDirectoryAndNameFromFileName(fileName1, ref pcr.PointCloudOpenGL.FileName, ref pcr.PointCloudOpenGL.Path);
-        //    this.OglControl1.GLrender.ReplaceRenderableObject(pcr, true);
-
-        //    Model myModel1 = new Model(fileName2);
-        //    pcr = new PCloud();
-        //    pcr.PointCloudOpenGL = myModel1.pointCloudGL;
-        //    IOUtils.ExtractDirectoryAndNameFromFileName(fileName2, ref pcr.PointCloudOpenGL.FileName, ref pcr.PointCloudOpenGL.Path);
-
-        //    pcr.PointCloudOpenGL.RotateDegrees(0f, -45f, 0f);
-        //    pcr.PointCloudOpenGL.Translate(-1.91f, -0.1f, -1.55f);
-        //    //pcr.PointCloudOpenGL.Translate(1.7f, 0f, -2f);
-
-        //    this.OglControl1.GLrender.AddRenderableObject(pcr);
-
-
-
-        //}
-
+      
 
         private void OpenFilesDialog_MultiplePC()
         {
-            OpenFileDialog openModel = new OpenFileDialog();
-            openModel.Multiselect = true;
+            OpenFileDialog openPointCloud = new OpenFileDialog();
+            openPointCloud.Multiselect = true;
 
-            if (openModel.ShowDialog() != DialogResult.OK)
+            if (openPointCloud.ShowDialog() != DialogResult.OK)
                 return;
 
-            if (openModel.FileNames != null && openModel.FileNames.Length > 1)
+            if (openPointCloud.FileNames != null && openPointCloud.FileNames.Length > 1)
             {
                 tabControlImages.SelectTab(0);
-                Model myModel = new Model(openModel.FileNames[0]);
+                
                 PointCloudRenderable pcr = new PointCloudRenderable();
-                pcr.PointCloud = myModel.PointCloud;
+                pcr.PointCloud = new PointCloud(openPointCloud.FileNames[0]);
                 //pcr.PointCloudOpenGL.RotateDegrees(0f, -45f, 0f);
-                IOUtils.ExtractDirectoryAndNameFromFileName(openModel.FileNames[0], out  pcr.PointCloud.FileNameLong, out pcr.PointCloud.Path);
+                IOUtils.ExtractDirectoryAndNameFromFileName(openPointCloud.FileNames[0], out  pcr.PointCloud.FileNameLong, out pcr.PointCloud.Path);
                 //this.OglControl1.GLrender.ReplaceRenderableObject(pcr, true);
                 this.OglControl.GLrender.AddRenderableObject(pcr);
 
-                Model myModel1 = new Model(openModel.FileNames[1]);
+              
                 pcr = new PointCloudRenderable();
-                pcr.PointCloud = myModel1.PointCloud;
-                IOUtils.ExtractDirectoryAndNameFromFileName(openModel.FileNames[1], out  pcr.PointCloud.FileNameLong, out pcr.PointCloud.Path);
+                pcr.PointCloud = new PointCloud(openPointCloud.FileNames[1]);
+                IOUtils.ExtractDirectoryAndNameFromFileName(openPointCloud.FileNames[1], out  pcr.PointCloud.FileNameLong, out pcr.PointCloud.Path);
 
                 // pcr.PointCloudOpenGL.RotateDegrees(0f, -45f, 0f);
                 //pcr.PointCloudOpenGL.Translate(-4f, 0f, 2f);
@@ -732,18 +700,18 @@ namespace PointCloudScanner
 
             tabControlImages.SelectTab(0);
            
-            Model myModel = new Model(fileName1);
+           
             PointCloudRenderable pcr = new PointCloudRenderable();
-            pcr.PointCloud = myModel.PointCloud;
+            pcr.PointCloud = new PointCloud(fileName1);
 
             IOUtils.ExtractDirectoryAndNameFromFileName(fileName1, out pcr.PointCloud.FileNameLong, out  pcr.PointCloud.Path);
             this.OglControl.GLrender.AddRenderableObject(pcr);
 
             //this.OglControl1.GLrender.ReplaceRenderableObject(pcr, true);
 
-            Model myModel1 = new Model(fileName2);
+          
             pcr = new PointCloudRenderable();
-            pcr.PointCloud = myModel1.PointCloud;
+            pcr.PointCloud = new PointCloud(fileName2);
             IOUtils.ExtractDirectoryAndNameFromFileName(fileName2, out  pcr.PointCloud.FileNameLong, out pcr.PointCloud.Path);
 
          
@@ -755,7 +723,7 @@ namespace PointCloudScanner
 
         private void deleteAllPointCloudsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.openGLUC.RemoveAllModels();
+            this.openGLUC.RemoveAllPointClouds();
 
             //this.OglControl.GLrender.RemoveAllModels();
             //this.OglControl.Refresh();
@@ -924,17 +892,17 @@ namespace PointCloudScanner
         }
         private void OpenFilesDialog_SinglePC()
         {
-            OpenFileDialog openModel = new OpenFileDialog();
-            if (openModel.ShowDialog() != DialogResult.OK)
+            OpenFileDialog openPointCloud = new OpenFileDialog();
+            if (openPointCloud.ShowDialog() != DialogResult.OK)
                 return;
 
             tabControlImages.SelectTab(0);
-            PointCloud pc = PointCloud.FromObjFile(openModel.FileName);
+            PointCloud pc = PointCloud.FromObjFile(openPointCloud.FileName);
 
            
             PointCloudRenderable pcr = new PointCloudRenderable();
             pcr.PointCloud = pc;
-            IOUtils.ExtractDirectoryAndNameFromFileName(openModel.FileName, out pc.FileNameLong, out pc.Path);
+            IOUtils.ExtractDirectoryAndNameFromFileName(openPointCloud.FileName, out pc.FileNameLong, out pc.Path);
             
             this.openGLUC.ShowPointCloud_ClearAllOthers(pc);
             this.Refresh();

@@ -33,7 +33,7 @@ namespace PointCloudScanner
             this.checkBoxCutFrame.Checked = PointCloudScannerSettings.CutFrames;
             this.textBoxSaveIfQualityIsBetterThan.Text = PointCloudScannerSettings.SaveImageIfQualityIsBetterThan.ToString();
 
-            this.checkBoxShowOnlyCalibrationModel.Checked = PointCloudScannerSettings.ShowOnlyCalibrationModel;
+            this.checkBoxShowOnlyCalibrationModel.Checked = PointCloudScannerSettings.ShowOnlyCalibrationPointCloud;
 
             this.checkBoxSkeleton.Checked = PointCloudScannerSettings.ShowSkeleton ;
 
@@ -233,8 +233,8 @@ namespace PointCloudScanner
 
         private void checkBoxShowOnlyCalibrationModel_CheckedChanged(object sender, EventArgs e)
         {
-            if (PointCloudScannerSettings.ShowOnlyCalibrationModel != this.checkBoxShowOnlyCalibrationModel.Checked)
-                PointCloudScannerSettings.ShowOnlyCalibrationModel = !PointCloudScannerSettings.ShowOnlyCalibrationModel;
+            if (PointCloudScannerSettings.ShowOnlyCalibrationPointCloud != this.checkBoxShowOnlyCalibrationModel.Checked)
+                PointCloudScannerSettings.ShowOnlyCalibrationPointCloud = !PointCloudScannerSettings.ShowOnlyCalibrationPointCloud;
 
 
             

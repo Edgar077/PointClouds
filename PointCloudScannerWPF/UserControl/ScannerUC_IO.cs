@@ -27,7 +27,7 @@ namespace ScannerWPF
     /// </summary>
     public partial class PointCloudUC 
     {
-        private string pathModels = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Models";
+        private string pathModels = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + GLSettings.PathPointClouds;
         string lastFileOpened;
         private readonly System.IO.FileSystemWatcher _watcher = new System.IO.FileSystemWatcher();
        

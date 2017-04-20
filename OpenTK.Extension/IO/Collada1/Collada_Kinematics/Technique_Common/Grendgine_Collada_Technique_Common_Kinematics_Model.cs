@@ -8,7 +8,7 @@ namespace grendgine_collada
 	[System.SerializableAttribute()]
 	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
 	[System.Xml.Serialization.XmlRootAttribute(ElementName="technique_common", Namespace="http://www.collada.org/2005/11/COLLADASchema", IsNullable=true)]
-	public partial class Grendgine_Collada_Technique_Common_Kinematics_Model : Grendgine_Collada_Technique_Common
+	public partial class Grendgine_Collada_Technique_Common_Kinematics_PointCloud : Grendgine_Collada_Technique_Common
 	{
 		[XmlElement(ElementName = "newparam")]
 		public Grendgine_Collada_New_Param[] New_Param;	

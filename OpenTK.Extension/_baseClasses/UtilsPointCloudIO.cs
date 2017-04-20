@@ -1039,7 +1039,7 @@ namespace OpenTKExtension
 
 
         }
-        
+
         ///// <summary>
         ///// reads the OBJ file ONLY with the special format used also in the write_OBJ method
         ///// </summary>
@@ -1092,7 +1092,7 @@ namespace OpenTKExtension
         //                //ignore empty and comment lines
         //                continue;
         //            }
-                  
+
         //            if (arrStr1[0] == "vn")
         //            {
         //                //ignore vector normals for now
@@ -1117,7 +1117,7 @@ namespace OpenTKExtension
         //                    Vector3 c = new Vector3(color[0], color[1], color[2]);
         //                    Vertex v = new Vertex(vec, c, 0);
         //                    pointCloud.Add(v);
-                           
+
 
 
         //                }
@@ -1133,17 +1133,13 @@ namespace OpenTKExtension
         //    return pointCloud;
 
         //}
-
-        public static PointCloud FromObjFile(string fileOBJ)
+        public static void PointCloudFromObjectFile(PointCloud pc, string fileOBJ)
         {
-            
-
-            PointCloud pc = new PointCloud();
             IOUtils.ExtractDirectoryAndNameFromFileName(fileOBJ, out pc.Name, out pc.Path);
 
             pc.FileNameLong = pc.Path + "\\" + pc.Name;
 
-            
+
             string line = string.Empty;
 
             Vector3 vector;
@@ -1252,7 +1248,7 @@ namespace OpenTKExtension
 
                 }
 
-                
+
             }
             catch (Exception err)
             {
@@ -1270,10 +1266,16 @@ namespace OpenTKExtension
 
             //add texture coordinates!!
             pc.AssignData(vectors, colors, normals, indices, indicesNormals, textureCoords);
-           
+
 
             //this.pointCloudSource.Texture = new Texture(path + "Textures\\AlternatingBrick-ColorMap.png");
             //this.pointCloudSource.InitCubeUVs();
+        }
+        public static PointCloud FromObjFile(string fileOBJ)
+        {
+            
+            PointCloud pc = new PointCloud();
+            PointCloudFromObjectFile(pc, fileOBJ);
 
             return pc;
 

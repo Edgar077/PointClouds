@@ -13,7 +13,7 @@ namespace OpenTKExtension
     public class Vertex2D : List<float>, IVector
     {
         //public float[] Position { get; set; }
-        public int IndexInModel;
+        public int IndexInPointCloud;
         float[] position = new float[2];
 
         public Vertex2D(float x, float y)
@@ -23,7 +23,7 @@ namespace OpenTKExtension
         public Vertex2D(int indexInModel, float x, float y)
         {
             position = new float[] { x, y };
-            IndexInModel = indexInModel;
+            IndexInPointCloud = indexInModel;
         }
         
 

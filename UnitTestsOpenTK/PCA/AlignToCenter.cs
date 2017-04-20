@@ -16,9 +16,8 @@ namespace UnitTestsOpenTK.PrincipalComponentAnalysis
         [Test]
         public void ScannerMan_AlignCenter()
         {
-
-            Model myModel = new Model(pathUnitTests + "\\1.obj");
-            this.pointCloudTarget = myModel.PointCloud;
+            
+            this.pointCloudTarget = new PointCloud(pathUnitTests + "\\1.obj");
             this.pointCloudSource = this.pointCloudTarget.Clone();
 
             this.pointCloudResult = pca.AlignToCenter(pointCloudSource);
@@ -37,9 +36,9 @@ namespace UnitTestsOpenTK.PrincipalComponentAnalysis
             float cubeSizeY = 2;
             int numberOfPoints = 3;
 
-            Model myModel = Example3DModels.Cuboid("Cuboid", cubeSizeX, cubeSizeY, numberOfPoints, System.Drawing.Color.White, null);
+         
 
-            this.pointCloudTarget = myModel.PointCloud;
+            this.pointCloudTarget = ExamplePointClouds.Cuboid("Cuboid", cubeSizeX, cubeSizeY, numberOfPoints, System.Drawing.Color.White, null);
             this.pointCloudSource = this.pointCloudTarget.Clone();
 
             
@@ -58,9 +57,7 @@ namespace UnitTestsOpenTK.PrincipalComponentAnalysis
             float cubeSizeY = 2;
             int numberOfPoints = 3;
 
-            Model myModel = Example3DModels.Cuboid("Cuboid", cubeSizeX, cubeSizeY, numberOfPoints, System.Drawing.Color.White, null);
-
-            this.pointCloudTarget = myModel.PointCloud;
+            this.pointCloudTarget = ExamplePointClouds.Cuboid("Cuboid", cubeSizeX, cubeSizeY, numberOfPoints, System.Drawing.Color.White, null);
             this.pointCloudSource = this.pointCloudTarget.Clone();
 
             PointCloud.RotateDegrees(pointCloudSource, 45, 45, 128);

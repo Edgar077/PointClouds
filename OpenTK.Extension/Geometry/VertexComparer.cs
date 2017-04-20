@@ -9,9 +9,9 @@ namespace OpenTKExtension
     /// <summary>
     /// Compare pointCloud based on their indices in the model
     /// </summary>
-    public class VertexComparerIndexInModel : IComparer<Vertex>
+    public class VertexComparerIndexInPointCloud : IComparer<Vertex>
     {
-        public static readonly VertexComparerIndexInModel IndexInModel = new VertexComparerIndexInModel();
+        public static readonly VertexComparerIndexInPointCloud IndexInPointCloud = new VertexComparerIndexInPointCloud();
 
         public int Compare(Vertex x, Vertex y)
         {

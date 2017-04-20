@@ -5155,7 +5155,7 @@ public partial class alglib
     information which can be used for evaluation of the algorithm properties).
 
     Call to this function modifies RBF model by calculating its centers/radii/
-    weights  and  saving  them  into  RBFModel  structure.  Initially RBFModel
+    weights  and  saving  them  into  RBFPointCloud  structure.  Initially RBFModel
     contain zero coefficients, but after call to this function  we  will  have
     coefficients which were calculated in order to fit our dataset.
 
@@ -14155,7 +14155,7 @@ public partial class alglib
             // * BX, BY store barycentric model nodes
             // * FMatrix is reused (remember - it is at least MxM, what we need)
             //
-            // Model intialization is done in O(M^2). In principle, it can be
+            // PointCloud intialization is done in O(M^2). In principle, it can be
             // done in O(M*log(M)), but before it we solved task with O(N*M^2)
             // complexity, so it is only a small amount of total time spent.
             //
@@ -21266,7 +21266,7 @@ public partial class alglib
         information which can be used for evaluation of the algorithm properties).
 
         Call to this function modifies RBF model by calculating its centers/radii/
-        weights  and  saving  them  into  RBFModel  structure.  Initially RBFModel 
+        weights  and  saving  them  into  RBFPointCloud  structure.  Initially RBFPointCloud 
         contain zero coefficients, but after call to this function  we  will  have
         coefficients which were calculated in order to fit our dataset.
 
@@ -21655,7 +21655,7 @@ public partial class alglib
             }
             
             //
-            // Model is built
+            // PointCloud is built
             //
             s.nc = nc/layerscnt;
             s.rmax = rmax;

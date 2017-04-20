@@ -26,8 +26,9 @@ namespace OpenTKExtension
         //public static string Path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
         public static string Path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetCallingAssembly().Location);
 
-        public static string PathModels = "\\Models";
+        public static string PathPointClouds = "\\PointClouds";
         public static string PathCharacters = "\\Characters";
+        public static string PathUnitTests = "\\PointClouds\\UnitTests";
 
         public static bool ShowAxes;
         

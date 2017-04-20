@@ -24,21 +24,17 @@ namespace Automated.PrincipalComponentAnalysis
         {
            
 
-            Model myModel = new Model(pathUnitTests + "\\KinectFace_1_15000.obj");
-            this.pointCloudSource = myModel.PointCloud;
-
-            
+            pointCloudSource = new PointCloud(pathUnitTests + "\\KinectFace_1_15000.obj");
+           
             //PointCloud.ResizeVerticesTo1(pointCloudSource);
             pca.PCA_OfPointCloud(pointCloudSource);
             pointCloudSource = PCA.RotateToOriginAxes(pointCloudSource);
-
-            myModel.PointCloud = pointCloudSource;
 
 
             //-----------Show in Window
             if (UIMode)
             {
-                this.ShowModel(myModel);
+                this.ShowPointCloud(pointCloudSource);
                
                 
             }
@@ -60,9 +56,9 @@ namespace Automated.PrincipalComponentAnalysis
         public void AlignPCAToOriginAxes_SecondCloud()
         {
           
-            Model model3DTarget = new Model(pathUnitTests + "\\KinectFace_2_15000.obj");
+      
             
-            this.pointCloudSource = model3DTarget.PointCloud;
+            this.pointCloudSource = new PointCloud(pathUnitTests + "\\KinectFace_2_15000.obj");
 
 
             pointCloudResult = PCA.RotateToOriginAxes(pointCloudSource);
@@ -92,10 +88,10 @@ namespace Automated.PrincipalComponentAnalysis
         [Test]
         public void AlignPCAToOriginAxes()
         {
-            Model model3DTarget = new Model(pathUnitTests + "\\KinectFace_1_15000.obj");
-            this.pointCloudSource = model3DTarget.PointCloud;
-            
-        
+    
+            this.pointCloudSource = new PointCloud(pathUnitTests + "\\KinectFace_1_15000.obj");
+
+
             pointCloudResult = PCA.RotateToOriginAxes(pointCloudSource);
 
 
@@ -113,7 +109,7 @@ namespace Automated.PrincipalComponentAnalysis
             //----------------check Result
             double executionTime = Performance_Stop("Execution Time");//on i3_2121 (3.3 GHz)
             Assert.IsTrue(executionTime < 3);
-            float meanDistance = PointCloud.MeanDistance(expectedResultCloud, pointCloudSource.PCAAxesNormalized);
+            float meanDistance = PointCloud.MeanDistance(expectedResultCloud, pointCloudResult.PCAAxesNormalized);
             Assert.IsTrue(this.threshold > meanDistance);
 
 
@@ -123,8 +119,8 @@ namespace Automated.PrincipalComponentAnalysis
         public void Translate()
         {
            
-            Model myModel = new Model(pathUnitTests + "\\KinectFace_1_15000.obj");
-            this.pointCloudTarget = myModel.PointCloud;
+      
+            this.pointCloudTarget = new PointCloud(pathUnitTests + "\\KinectFace_1_15000.obj");
 
             this.pointCloudSource = PointCloud.CloneAll(pointCloudTarget);
             PointCloud.Translate(pointCloudSource, 0, -300, 0);
@@ -143,10 +139,9 @@ namespace Automated.PrincipalComponentAnalysis
         [Test]
         public void Rotate()
         {
-         
-            Model model3DTarget = new Model(pathUnitTests + "\\KinectFace_1_15000.obj");
-            this.pointCloudTarget = model3DTarget.PointCloud;
-            
+      
+            this.pointCloudTarget = new PointCloud(pathUnitTests + "\\KinectFace_1_15000.obj");
+
             this.pointCloudSource = PointCloud.CloneAll(pointCloudTarget);
             PointCloud.RotateDegrees(pointCloudSource, 25, 90, 25);
 
@@ -162,11 +157,11 @@ namespace Automated.PrincipalComponentAnalysis
         {
 
     
-            Model m = new Model(pathUnitTests + "\\KinectFace_1_15000.obj");
+            PointCloud m = new PointCloud (pathUnitTests + "\\KinectFace_1_15000.obj");
             
 
-            Model model3DTarget = new Model(pathUnitTests + "\\KinectFace_1_15000.obj");
-            this.pointCloudTarget = model3DTarget.PointCloud;
+       
+            this.pointCloudTarget = new PointCloud(pathUnitTests + "\\KinectFace_1_15000.obj");
 
             this.pointCloudSource = PointCloud.CloneAll(pointCloudTarget);
             PointCloud.RotateDegrees(pointCloudSource, 60, 60, 0);
@@ -208,8 +203,8 @@ namespace Automated.PrincipalComponentAnalysis
         {
 
        
-            Model model3DTarget = new Model(pathUnitTests + "\\KinectFace_1_15000.obj");
-            this.pointCloudTarget = model3DTarget.PointCloud;
+      
+            this.pointCloudTarget = new PointCloud(pathUnitTests + "\\KinectFace_1_15000.obj");
 
 
             this.pointCloudSource = PointCloud.CloneAll(pointCloudTarget);

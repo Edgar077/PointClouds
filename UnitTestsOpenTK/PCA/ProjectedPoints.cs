@@ -22,10 +22,8 @@ namespace UnitTestsOpenTK.PrincipalComponentAnalysis
             float cubeSizeY = 2;
             int numberOfPoints = 3;
 
-            Model myModel = Example3DModels.Cuboid("Cuboid", cubeSizeX, cubeSizeY, numberOfPoints, System.Drawing.Color.White, null);
 
-
-            this.pointCloudSource = myModel.PointCloud;
+            this.pointCloudSource = ExamplePointClouds.Cuboid("Cuboid", cubeSizeX, cubeSizeY, numberOfPoints, System.Drawing.Color.White, null);
             PointCloud.RotateDegrees(pointCloudSource, 45, 45, 45);
 
             this.pointCloudAddition1 = PointCloud.CloneAll(pointCloudSource);
@@ -47,10 +45,8 @@ namespace UnitTestsOpenTK.PrincipalComponentAnalysis
             float cubeSizeY = 2;
             int numberOfPoints = 3;
 
-            Model myModel = Example3DModels.Cuboid("Cuboid", cubeSizeX, cubeSizeY, numberOfPoints, System.Drawing.Color.White, null);
 
-
-            this.pointCloudSource = myModel.PointCloud;
+            this.pointCloudSource = ExamplePointClouds.Cuboid("Cuboid", cubeSizeX, cubeSizeY, numberOfPoints, System.Drawing.Color.White, null);
             pointCloudSource.ResizeVerticesTo1();
             PointCloud.RotateDegrees(pointCloudSource, 45, 45, 45);
 
@@ -146,10 +142,8 @@ namespace UnitTestsOpenTK.PrincipalComponentAnalysis
             float cubeSizeY = 2;
             int numberOfPoints = 3;
 
-            Model myModel = Example3DModels.Cuboid("Cuboid", cubeSizeX, cubeSizeY, numberOfPoints, System.Drawing.Color.White, null);
-
             
-            this.pointCloudSource = myModel.PointCloud;
+            this.pointCloudSource = ExamplePointClouds.Cuboid("Cuboid", cubeSizeX, cubeSizeY, numberOfPoints, System.Drawing.Color.White, null);
             PointCloud.RotateDegrees(pointCloudSource, 45, 0, 0);
 
 
@@ -193,8 +187,8 @@ namespace UnitTestsOpenTK.PrincipalComponentAnalysis
         {
 
 
-            Model model3DTarget = new Model(pathUnitTests + "\\KinectFace_1_15000.obj");
-            this.pointCloudSource = model3DTarget.PointCloud;
+           
+            this.pointCloudSource = new PointCloud(pathUnitTests + "\\KinectFace_1_15000.obj");
 
             PointCloud.RotateDegrees(pointCloudSource, 60, 60, 90);
             PointCloud.ScaleByFactor(pointCloudSource, 0.9f);
@@ -218,9 +212,7 @@ namespace UnitTestsOpenTK.PrincipalComponentAnalysis
         public void Face()
         {
 
-
-            Model model3DTarget = new Model(pathUnitTests + "\\KinectFace_1_15000.obj");
-            this.pointCloudSource = model3DTarget.PointCloud;
+            this.pointCloudSource = new PointCloud(pathUnitTests + "\\KinectFace_1_15000.obj");
             this.pointCloudAddition1 = pointCloudSource;
 
             pca.PCA_OfPointCloud(pointCloudSource);
@@ -241,8 +233,7 @@ namespace UnitTestsOpenTK.PrincipalComponentAnalysis
         {
 
 
-            Model model3DTarget = new Model(pathUnitTests + "\\KinectFace_1_15000.obj");
-            this.pointCloudSource = model3DTarget.PointCloud;
+            this.pointCloudSource = new PointCloud(pathUnitTests + "\\KinectFace_1_15000.obj");
             PointCloud.RotateDegrees(pointCloudSource, 45, 45, 45);
             //Vertices.RotateVertices(pointCloudSource, 60, 60, 90);
             PointCloud.ScaleByFactor(pointCloudSource, 0.9f);
@@ -266,8 +257,8 @@ namespace UnitTestsOpenTK.PrincipalComponentAnalysis
         {
 
 
-            Model model3DTarget = new Model(pathUnitTests + "\\1.obj");
-            this.pointCloudSource = model3DTarget.PointCloud;
+          
+            this.pointCloudSource = new PointCloud(pathUnitTests + "\\1.obj");
 
 
             this.pointCloudAddition1 = pointCloudSource;
@@ -285,9 +276,7 @@ namespace UnitTestsOpenTK.PrincipalComponentAnalysis
         public void Person_Rotate_Projected()
         {
 
-
-            Model model3DTarget = new Model(pathUnitTests + "\\1.obj");
-            this.pointCloudSource = model3DTarget.PointCloud;
+            this.pointCloudSource = new PointCloud(pathUnitTests + "\\1.obj");
             PointCloud.RotateDegrees(pointCloudSource, 25, 90, 25);
 
 

@@ -21,9 +21,9 @@ namespace UnitTestsOpenTK.PrincipalComponentAnalysis
         [Test]
         public void Rotate()
         {
-            Model model3DTarget = new Model(pathUnitTests + "\\1.obj");
-            this.pointCloudTarget = model3DTarget.PointCloud;
-            
+          
+            this.pointCloudTarget = new PointCloud(pathUnitTests + "\\1.obj");
+
             this.pointCloudSource = PointCloud.CloneAll(pointCloudTarget);
             PointCloud.RotateDegrees(pointCloudSource, 25, 10, 25);
             

@@ -29,9 +29,10 @@ namespace UnitTestsOpenTK.Triangulation
             //DelaunayTri delaunay = new DelaunayTri(myListVectors);
             DelaunayTri delaunay = new DelaunayTri(myListVectors);
 
-            Model myModel = CreateModel("Bunny Delaunay", pointCloudSource, delaunay.Faces.ListFaces);
+          
 
-            ShowModel(myModel);
+            ShowPointCloud(pointCloudSource);
+           
 
         }
         [Test]
@@ -46,9 +47,8 @@ namespace UnitTestsOpenTK.Triangulation
             //DelaunayTri delaunay = new DelaunayTri(myListVectors);
             DelaunayTri_Old delaunay = new DelaunayTri_Old(myListVectors);
 
-            Model myModel = CreateModel("Bunny Delaunay", pointCloudSource, delaunay.Faces.ListFaces);
 
-            ShowModel(myModel);
+            ShowPointCloud(pointCloudSource);
 
         }
        

@@ -298,7 +298,7 @@ namespace OpenTKExtension
             return normal;
         }
        
-        //public static Vector3 CalculateNormal(Model myModel, Triangle t)
+        //public static Vector3 CalculateNormal(PointCloud myModel, Triangle t)
         //{
         //    if (t.IndNormals == null || t.IndNormals.Count == 0)
         //    {

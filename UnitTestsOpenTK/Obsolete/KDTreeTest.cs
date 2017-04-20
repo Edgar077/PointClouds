@@ -17,7 +17,7 @@ namespace UnitTestsOpenTK.NotUsed
 
         public KDTreeTest_ICP()
         {
-            pathUnitTests = AppDomain.CurrentDomain.BaseDirectory + "\\Models\\UnitTests";
+            pathUnitTests = AppDomain.CurrentDomain.BaseDirectory + GLSettings.PathUnitTests;
            
         }
 

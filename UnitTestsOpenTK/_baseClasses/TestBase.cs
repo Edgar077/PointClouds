@@ -54,10 +54,11 @@ namespace UnitTestsOpenTK
         public TestBase()
         {
             pathBin = AppDomain.CurrentDomain.BaseDirectory;
-            pathModels = pathBin + "Models";
-            pathUnitTests = pathBin + "Models\\UnitTests";
-            
-           
+            pathModels = pathBin + GLSettings.PathPointClouds;
+            pathUnitTests = pathBin + GLSettings.PathUnitTests;
+
+
+
         }
       
         protected void Show3PointCloudsInWindow(bool changeColor)
@@ -72,8 +73,11 @@ namespace UnitTestsOpenTK
         {
             TestForm fOTK = new TestForm();
             PointCloud.SetColorToList(pointCloudSource, colorModel1);
-            fOTK.AddVerticesAsModel("Point Cloud", pointCloudSource);
+            pointCloudSource.Name = "Source";
+            fOTK.OpenGL_UControl.OGLControl.GLrender.AddPointCloud(pointCloudSource);
 
+           
+            
 
 
             if (pointCloudResult != null && this.pointCloudResult.Count > 0)
@@ -81,7 +85,7 @@ namespace UnitTestsOpenTK
 
 
                 PointCloud.SetColorToList(pointCloudResult, colorModel2);
-                fOTK.AddVerticesAsModel("Transformed", pointCloudResult);
+                fOTK.AddPointCloud("Transformed", pointCloudResult);
 
             }
 
@@ -91,16 +95,7 @@ namespace UnitTestsOpenTK
 
           
         }
-        protected void ShowModel(Model myModel)
-        {
-            TestForm fOTK = new TestForm();
-
-            fOTK.ShowPointCloud(myModel.PointCloud);
-          
-            GlobalVariables.ShowLastTimeSpan("Show Model");
-            fOTK.ShowDialog();
-
-        }
+      
         protected void ShowPointCloud(PointCloud pc)
         {
             TestForm fOTK = new TestForm();
@@ -117,43 +112,15 @@ namespace UnitTestsOpenTK
 
             pointCloudSource = PointCloud.FromListVector3(listResult);
 
-            Model myModel = new Model();
-            myModel.PointCloud = pointCloudSource;
-
-            ShowModel(myModel);
-
+         
+            ShowPointCloud(pointCloudSource);
         }
      
-        protected void ShowModel_Cube(Model myModel)
-        {
-            TestForm fOTK = new TestForm();
-            
-            
-           // fOTK.ShowModel(myModel);
-            fOTK.ShowPointCloud(myModel.PointCloud);
-
-            GlobalVariables.ShowLastTimeSpan("Show Model");
-            fOTK.ShowDialog();
-
-        }
-        protected void ShowModel_Normals(Model myModel)
-        {
-            TestForm fOTK = new TestForm();
-
-            
-           
-            fOTK.ShowPointCloud(myModel.PointCloud);
-
-            GlobalVariables.ShowLastTimeSpan("Show Model");
-            fOTK.ShowDialog();
-
-
-        }
-    
+   
      
 
 
-        //private void UpateModel_Faces(Model myModel, List<cFace> listFaces)
+        //private void UpateModel_Faces(PointCloud myModel, List<cFace> listFaces)
         //{
         //    List<Triangle> listTriangle = new List<Triangle>();
 
@@ -165,7 +132,7 @@ namespace UnitTestsOpenTK
 
         //        for (int j = 0; j < face.Vertices.Length; j++)
         //        {
-        //            a.IndVertices.Add(face.Vertices[j].IndexInModel);
+        //            a.IndVertices.Add(face.Vertices[j].IndexInPointCloud);
 
         //        }
 
@@ -180,13 +147,7 @@ namespace UnitTestsOpenTK
         //    //myModel.Helper_AdaptNormalsForEachVertex();
         //    myModel.PointCloud.CalculateCentroidBoundingBox();
         //}
-        protected Model CreateModel(string modelName, PointCloud myList, List<cFace> listFaces)
-        {
-            Model myModel = new Model();
-            myModel.PointCloud = myList;
-
-            return myModel;
-        }
+      
 
 
         protected bool CheckResult(float d1, float d2, float threshold)
@@ -201,49 +162,36 @@ namespace UnitTestsOpenTK
         {
 
             PointCloud.SetColorOfListTo(pointCloudSource, Color.Red);
-            Model myModel = new Model();
+            PointCloud myPointCloud = new PointCloud ();
 
-            myModel.PointCloud = pointCloudSource;
-          
-            ShowModel_Cube(myModel);
+            ShowPointCloud(pointCloudSource);
 
         }
         protected void ShowVerticesNormals(List<Vector3> normals)
         {
 
             PointCloud.SetColorOfListTo(pointCloudSource, Color.Red);
-            Model myModel = new Model();
-
-            myModel.PointCloud = pointCloudSource;
-           // myModel.Normals = normals;
-
-
           
-            ShowModel(myModel);
-            //ShowModel_CubeLines(myModel, 1, true);
-
-
+            ShowPointCloud(pointCloudSource);
+            
 
         }
         protected void ShowCubeLinesAndNormals(float cubeSize, List<Vector3> normals)
         {
 
             //PointCloud.SetColorOfListTo(pointCloudSource, Color.Red);
-            Model myModel = new Model();
-
-            myModel.PointCloud = pointCloudSource;
-          //  myModel.Normals = normals;
+            PointCloud myPointCloud = new PointCloud ();
 
 
           
-            ShowModel_Cube(myModel);
+            ShowPointCloud(pointCloudSource);
 
         }
         //protected void ShowCubeNormals(float cubeSize, List<Vector3> normals)
         //{
 
         //    PointCloud.SetColorOfListTo(pointCloudSource, Color.Red);
-        //    Model myModel = new Model("Cube");
+        //    PointCloud myPointCloud = new PointCloud ("Cube");
 
         //    myModel.PointCloud = pointCloudSource;
         //    myModel.Normals = normals;
@@ -263,7 +211,7 @@ namespace UnitTestsOpenTK
 
             fOTK.Show3PointClouds(pointCloudSource, pointCloudTarget, pointCloudResult, changeColor);
             if (pointCloudAddition1 != null)
-                fOTK.AddVerticesAsModel("Original Data", this.pointCloudAddition1);
+                fOTK.AddPointCloud("Original Data", this.pointCloudAddition1);
             fOTK.ShowDialog();
 
 
@@ -292,7 +240,7 @@ namespace UnitTestsOpenTK
             
           
             
-            List<Vector3> listVectors = Example3DModels.Cuboid_Corners_CenteredAt0(1, 2, 1);
+            List<Vector3> listVectors = ExamplePointClouds.Cuboid_Corners_CenteredAt0(1, 2, 1);
            
             this.pointCloudTarget = PointCloud.FromListVector3(listVectors);
 
@@ -304,7 +252,7 @@ namespace UnitTestsOpenTK
         }
         protected void CreateCuboid(float sizeX, float sizeY, float sizeZ)
         {
-            List<Vector3> listVectors = Example3DModels.Cuboid_Corners_CenteredAt0(sizeX, sizeY, sizeZ);
+            List<Vector3> listVectors = ExamplePointClouds.Cuboid_Corners_CenteredAt0(sizeX, sizeY, sizeZ);
             this.pointCloudTarget = PointCloud.FromListVector3(listVectors);
             
             PointCloud.ResetToOriginAxis(pointCloudTarget);
@@ -319,7 +267,7 @@ namespace UnitTestsOpenTK
         protected void CreateCuboid(int numberOfPoints)
         {
            
-            pointCloudTarget = Example3DModels.Cuboid(4, 2, 1, numberOfPoints, numberOfPoints, numberOfPoints);
+            pointCloudTarget = ExamplePointClouds.Cuboid(4, 2, 1, numberOfPoints, numberOfPoints, numberOfPoints);
             pointCloudSource = PointCloud.CloneAll(pointCloudTarget);
             
             pointCloudSource = PointCloud.ResizeAndSort_Distance(pointCloudSource);
@@ -329,7 +277,7 @@ namespace UnitTestsOpenTK
         protected void CreateTileEmpty(int numberOfPoints)
         {
            
-            pointCloudTarget = Example3DModels.CuboidEmpty(4, 2, 1, numberOfPoints, numberOfPoints, numberOfPoints);
+            pointCloudTarget = ExamplePointClouds.CuboidEmpty(4, 2, 1, numberOfPoints, numberOfPoints, numberOfPoints);
            
             this.pointCloudSource = PointCloud.CloneAll(pointCloudTarget);
 
@@ -338,7 +286,7 @@ namespace UnitTestsOpenTK
         {
            
            
-            pointCloudTarget = Example3DModels.Rectangle(4, 2, 2, 2);
+            pointCloudTarget = ExamplePointClouds.Rectangle(4, 2, 2, 2);
           
             this.pointCloudSource = PointCloud.CloneAll(pointCloudTarget);
 
@@ -348,7 +296,7 @@ namespace UnitTestsOpenTK
            
             
 
-            pointCloudTarget = Example3DModels.Rectangle(4, 2, 2, 2);
+            pointCloudTarget = ExamplePointClouds.Rectangle(4, 2, 2, 2);
             PointCloud.Translate(pointCloudTarget, 3, 3, -1);
             this.pointCloudSource = PointCloud.CloneAll(pointCloudTarget);
 
@@ -472,12 +420,12 @@ namespace UnitTestsOpenTK
             fOTK.Show3PointClouds(pointCloudSource, pointCloudTarget, pointCloudResult, false);
             if (this.pointCloudAddition1 != null)
             {
-                fOTK.AddVerticesAsModel("Cube", this.pointCloudAddition1);
+                fOTK.AddPointCloud("Cube", this.pointCloudAddition1);
             }
             if (pointCloudAddition2 != null)
             {
 
-                fOTK.AddVerticesAsModel("Cube Transformed", this.pointCloudAddition2);
+                fOTK.AddPointCloud("Cube Transformed", this.pointCloudAddition2);
             }
             fOTK.ShowDialog();
 

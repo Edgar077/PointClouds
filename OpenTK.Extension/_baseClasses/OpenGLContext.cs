@@ -10,7 +10,7 @@ namespace OpenTKExtension
 {
 
 
-    public class OpenGLContext : IDisposable 
+    public class OpenGLContext : IDisposable
     {
         //camera
         public Camera Camera;
@@ -30,7 +30,7 @@ namespace OpenTKExtension
         Axes axes;
         Grid grid;
         CameraFOV cameraFOV;
-
+        Face face;
 
 
         private bool cameraIsAlignedToObject;
@@ -45,9 +45,10 @@ namespace OpenTKExtension
 
         //RenderableObject objectOld;
         PointCloud PointCloud;
-        
+
 
         private bool isDrawing;
+
         public OpenGLContext(OGLControl myGLControl)
         {
             GLControlInstance = myGLControl;
@@ -72,8 +73,8 @@ namespace OpenTKExtension
             grid.InitializeGL();
 
             cameraFOV = new CameraFOV(0.5f, 5f, 70.6f, 60f);
-
             cameraFOV.InitializeGL();
+
             //initialize text writer for axes labels
             openGLTextwriter = new OpenGLTextWriter();
 
@@ -94,9 +95,9 @@ namespace OpenTKExtension
 
                 fpsCalc.newFrame();
                 UpdateFramesPerSecond();
-                
+
                 GL.Clear(ClearBufferMask.DepthBufferBit | ClearBufferMask.ColorBufferBit);
-                
+
 
 
                 GL.ClearColor(GLSettings.BackColor);
@@ -118,24 +119,12 @@ namespace OpenTKExtension
                     if (AlignCameraToObject || (!cameraIsAlignedToObject && i == 0))
                     {
                         AlignCameraToObject = false;
-                        //System.Diagnostics.Debug.WriteLine("----Align camera to object - on first draw");
-                        //o.PointCloudGL.ResetCentroid(true);
                         Camera.ZNear = Convert.ToSingle(o.PointCloud.BoundingBoxMaxFloat);
-                        //Convert.ToSingle(o.PointCloud.BoundingBoxMinFloat );
                         Camera.PerspectiveUpdate();
 
 
                         this.Camera.Position = new Vector3(0f, 0f, o.PointCloud.BoundingBoxMaxFloat + 5 * this.Camera.ZNear);
-                        //Camera.SetDirection(new Vector3(0, 0, 0));
-
-                        //Vector3 axis = Vector3.UnitY;
-
-                        //this.Camera.Rotate(Convert.ToSingle(Math.PI), axis);
                         cameraIsAlignedToObject = true;
-
-
-
-
 
                     }
 
@@ -150,14 +139,14 @@ namespace OpenTKExtension
                 DrawAdditionalObjects();
 
             }
-            catch(Exception err)
+            catch (Exception err)
             {
                 System.Diagnostics.Debug.WriteLine("GL Draw Error : ");
                 System.Windows.Forms.MessageBox.Show("GL Draw Error: " + err.Message);
             }
             isDrawing = false;
         }
-    
+
         private void DrawAdditionalObjects()
         {
             try
@@ -167,7 +156,7 @@ namespace OpenTKExtension
                     //AdditionalObjectsToDraw.Add(axes);
                     axes.MVP = this.Camera.MVP;
                     axes.Render(PrimitiveType.Lines, PolygonMode.Line);
-                    
+
                 }
                 if (GLSettings.ShowGrid)
                 {
@@ -229,10 +218,24 @@ namespace OpenTKExtension
 
 
         }
-        public void AddModel(Model myModel)
+        //public void AddModel(PointCloud myModel)
+        //{
+        //    PointCloudRenderable pcr = new PointCloudRenderable();
+        //    pcr.PointCloud = myModel.PointCloud;
+
+        //    RenderableObjects.Add(pcr);
+        //    if (GLContextInitialized)
+        //    {
+        //        pcr.InitializeGL();
+        //        Refresh();
+        //    }
+
+
+        //}
+        public void AddPointCloud(PointCloud pc)
         {
             PointCloudRenderable pcr = new PointCloudRenderable();
-            pcr.PointCloud = myModel.PointCloud;
+            pcr.PointCloud = pc;
 
             RenderableObjects.Add(pcr);
             if (GLContextInitialized)
@@ -243,10 +246,10 @@ namespace OpenTKExtension
 
 
         }
-        public void ReplaceModel(Model myModel, bool clearPrevious)
+        public void ReplacePointCloud(PointCloud myPC, bool clearPrevious)
         {
             PointCloudRenderable pcr = new PointCloudRenderable();
-            pcr.PointCloud = myModel.PointCloud;
+            pcr.PointCloud = myPC;
             ReplaceRenderableObject(pcr, clearPrevious);
 
 
@@ -263,7 +266,7 @@ namespace OpenTKExtension
                 RenderableObjects.Clear();
 
             }
-            if(AdditionalObjectsToDraw.Count > 0)
+            if (AdditionalObjectsToDraw.Count > 0)
             {
                 for (int i = 0; i < AdditionalObjectsToDraw.Count; i++)
                 {
@@ -278,30 +281,14 @@ namespace OpenTKExtension
             ClearAll();
             Refresh();
         }
-        //public void RemoveAllModels()
-        //{
-
-        //    for (int i = 0; i < RenderableObjects.Count; i++)
-        //    {
-        //        RenderableObjects[i].Dispose();
-
-        //    }
-        //    RenderableObjects.Clear();
-
-        //    if (GLContextInitialized)
-        //    {
-
-        //        UpdateControl();
-        //    }
-
-        //}
+     
         public void ClearSelectedModel()
         {
             this.RenderableObjects[this.SelectedModelIndex].Dispose();
             this.RenderableObjects.RemoveAt(this.SelectedModelIndex);
-            
 
-            
+
+
 
             Refresh();
         }
@@ -312,7 +299,7 @@ namespace OpenTKExtension
 
                 this.PointCloud = o.PointCloud;
 
-               // if (clearPrevious)
+                // if (clearPrevious)
                 //    ClearAll();
 
                 if (GLContextInitialized)
@@ -414,7 +401,7 @@ namespace OpenTKExtension
         public bool RotateModels(float xAngle, float yAngle)
         {
 
-            
+
             if (SelectedModelIndex < 0)
             {
                 for (int i = 0; i < RenderableObjects.Count; i++)
@@ -441,7 +428,7 @@ namespace OpenTKExtension
             Vector3 v = new Vector3(deltax, deltay, deltaz);
             if (SelectedModelIndex < 0)
             {
-                for(int i = 0; i < RenderableObjects.Count; i++)
+                for (int i = 0; i < RenderableObjects.Count; i++)
                     TranslateModel(i, v);
             }
             else
@@ -478,31 +465,31 @@ namespace OpenTKExtension
         {
             if (deltaz > 0)
             {
-                if (this.Camera.FieldOfView < 2 )
+                if (this.Camera.FieldOfView < 2)
                     this.Camera.FieldOfView *= 2;
 
-                
+
             }
             else
             {
                 this.Camera.FieldOfView /= 2;
             }
             this.Camera.PerspectiveUpdate();
-            
+
 
         }
         public bool CutModel(float deltaz)
         {
 
             RenderableObject o = this.RenderableObjects[0];
-           // System.Diagnostics.Debug.WriteLine("  Vector before: " + o.PointCloudOpenGL.Vectors[0].X.ToString() + " : " + o.PointCloudOpenGL.Vectors[0].Y.ToString());
+            // System.Diagnostics.Debug.WriteLine("  Vector before: " + o.PointCloudOpenGL.Vectors[0].X.ToString() + " : " + o.PointCloudOpenGL.Vectors[0].Y.ToString());
 
 
             Vector3 v = new Vector3(deltaz, deltaz, deltaz);
             o = o.Clone();
             float factorDelete = 0.9f;
-            if(deltaz > 0)
-                return false; 
+            if (deltaz > 0)
+                return false;
             factorDelete = Convert.ToSingle(o.PointCloud.NormSquaredMax * factorDelete);
             List<Vector3> vectorsNew = new List<Vector3>();
             List<Vector3> colorsNew = new List<Vector3>();
@@ -513,22 +500,22 @@ namespace OpenTKExtension
                 float maxNorm = o.PointCloud.Vectors[i].NormSquared();
                 if (maxNorm < factorDelete)
                 {
-                   vectorsNew.Add(o.PointCloud.Vectors[i]);
-                   colorsNew.Add(o.PointCloud.Colors[i]);
-                   indicesNew.Add(o.PointCloud.Indices[i]);
+                    vectorsNew.Add(o.PointCloud.Vectors[i]);
+                    colorsNew.Add(o.PointCloud.Colors[i]);
+                    indicesNew.Add(o.PointCloud.Indices[i]);
 
                 }
-               
-                                
+
+
             }
             System.Diagnostics.Debug.WriteLine("Cut, before : " + o.PointCloud.Vectors.Length.ToString() + " : Factor : " + factorDelete.ToString() + " : after: " + vectorsNew.Count.ToString());
 
-            
+
             o.PointCloud.Vectors = new Vector3[vectorsNew.Count];
             o.PointCloud.Colors = new Vector3[colorsNew.Count];
             o.PointCloud.Indices = new uint[indicesNew.Count];
 
-            for (int i = 0; i < vectorsNew.Count; i++ )
+            for (int i = 0; i < vectorsNew.Count; i++)
             {
                 o.PointCloud.Vectors[i] = vectorsNew[i];
                 o.PointCloud.Colors[i] = colorsNew[i];
@@ -538,7 +525,7 @@ namespace OpenTKExtension
             }
 
             AlignCameraToObject = true;
-            
+
             return true;
 
 
@@ -557,11 +544,11 @@ namespace OpenTKExtension
                 // and unmanaged resources. 
                 if (disposing)
                 {
-                    
-                    for(int i = 0; i < this.RenderableObjects.Count; i++)
+
+                    for (int i = 0; i < this.RenderableObjects.Count; i++)
                     {
                         RenderableObjects[i].Dispose();
-                       
+
                     }
                     RenderableObjects.Clear();
                     for (int i = 0; i < this.AdditionalObjectsToDraw.Count; i++)
@@ -578,82 +565,32 @@ namespace OpenTKExtension
                         cameraFOV.Dispose();
                     if (openGLTextwriter != null)
                         openGLTextwriter.Dispose();
-                   
-                  
+
+
                 }
 
-              
+
                 // Note disposing has been done.
                 disposed = true;
 
             }
         }
-       
-        //public bool CutModel(float deltaz)
-        //{
+        public Face UpdateFace(List<Vector3> pointsFace)
+        {
+            if (this.face == null)
+            {
+                face = new Face(pointsFace);
+                face.InitializeGL();
+            }
+            else
+            {
+                face.Update(pointsFace);
+            }
+            return face;
 
-        //    RenderableObject o = this.RenderableObjects[0];
-        //    // System.Diagnostics.Debug.WriteLine("  Vector before: " + o.PointCloudOpenGL.Vectors[0].X.ToString() + " : " + o.PointCloudOpenGL.Vectors[0].Y.ToString());
-
-
-        //    Vector3 v = new Vector3(deltaz, deltaz, deltaz);
-        //    o = o.Clone();
-        //    float factorDelete = 0.9f;
-        //    if (deltaz > 0)
-        //        return false;
-        //    factorDelete = Convert.ToSingle(o.PointCloud.BoundingBoxMax.MaxCoordinate() * factorDelete);
-        //    List<Vector3> vectorsNew = new List<Vector3>();
-        //    for (int i = 0; i < o.PointCloud.Vectors.Length; i++)
-        //    {
-        //        float maxCoordinate = o.PointCloud.Vectors[i].MaxCoordinate();
-        //        if (maxCoordinate >= 0)
-        //        {
-        //            if (maxCoordinate < factorDelete)
-        //            {
-        //                vectorsNew.Add(o.PointCloud.Vectors[i]);
-        //            }
-        //        }
-        //        else
-        //        {
-        //            if (maxCoordinate > -factorDelete)
-        //            {
-        //                vectorsNew.Add(o.PointCloud.Vectors[i]);
-        //            }
-        //        }
-
-        //    }
-        //    System.Diagnostics.Debug.WriteLine("Cut, before : " + o.PointCloud.Vectors.Length.ToString() + " : Factor : " + factorDelete.ToString() + " : after: " + vectorsNew.Count.ToString());
+        }
 
 
-        //    o.PointCloud.Vectors = new Vector3[vectorsNew.Count];
-        //    for (int i = 0; i < vectorsNew.Count; i++)
-        //    {
-        //        o.PointCloud.Vectors[i] = vectorsNew[i];
-        //    }
-
-        //    AlignCameraToObject = true;
-
-        //    return true;
-
-
-        //}
     }
-  
-    public enum RenderMode
-    {
-        Point,
-        Lines,
-        LineStrip,
-        LinesAdjacency,
-        Wireframe,
-        Triangle,
-        TriangleFan,
-        TriangleStrip,
-        Quads,
-        QuadsStrip,
-        Polygon,
-        Patches
-        
-        
-    }
+
 }

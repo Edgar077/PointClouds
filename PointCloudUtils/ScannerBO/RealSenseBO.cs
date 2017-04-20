@@ -88,7 +88,7 @@ namespace PointCloudUtils
             parentControl = myParentControl;
             openGLPart = new OpenGLPart(this, myParentControl, myOpenGLControl);
             DepthMetaData = new DepthMetaData();
-            PathModels = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Models";
+            PathModels = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + GLSettings.PathPointClouds;
 
 
             try

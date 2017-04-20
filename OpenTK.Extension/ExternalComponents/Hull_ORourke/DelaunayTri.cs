@@ -114,8 +114,8 @@ namespace OpenTKExtension
                 {
                     Flower++;
                     f.lower = true;
-                    System.Diagnostics.Debug.WriteLine("lower face indices: " + f.Vertices[0].IndexInModel + ", " +
-                               f.Vertices[1].IndexInModel + ", " + f.Vertices[2].IndexInModel);
+                    System.Diagnostics.Debug.WriteLine("lower face indices: " + f.Vertices[0].IndexInPointCloud + ", " +
+                               f.Vertices[1].IndexInPointCloud + ", " + f.Vertices[2].IndexInPointCloud);
                 }
                 else f.lower = false;
                 f = f.next;

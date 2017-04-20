@@ -46,9 +46,9 @@ namespace UnitTestsOpenTK.Triangulation
 
                 Triangle t = new Triangle();
                
-                //t.IndVertices.Add(cell.Vertices[0].IndexInModel);
-                //t.IndVertices.Add(cell.Vertices[1].IndexInModel);
-                //t.IndVertices.Add(cell.Vertices[2].IndexInModel);
+                //t.IndVertices.Add(cell.Vertices[0].IndexInPointCloud);
+                //t.IndVertices.Add(cell.Vertices[1].IndexInPointCloud);
+                //t.IndVertices.Add(cell.Vertices[2].IndexInPointCloud);
                 listTriangle.Add(t);
 
                 //myLines.Add(pointCloud[edge.PointIndex1]);
@@ -57,11 +57,8 @@ namespace UnitTestsOpenTK.Triangulation
             }
 
             //-------------------
-            Model myModel = new Model();
-            myModel.PointCloud = pointCloudSource;
-
-
-            ShowModel(myModel);
+           
+            ShowPointCloud(pointCloudSource);
 
         }
          [Test]
@@ -98,12 +95,8 @@ namespace UnitTestsOpenTK.Triangulation
             }
 
             //-------------------
-            Model myModel = new Model();
-            myModel.PointCloud = pointCloudSource;
+            ShowPointCloud(pointCloudSource);
 
-
-            ShowModel(myModel);
-            
         }
        
       

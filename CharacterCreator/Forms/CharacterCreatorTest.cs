@@ -24,7 +24,7 @@ namespace CharacterCreator
         
         public CharacterCreatorTest()
         {
-            pathModels = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Models";
+            pathModels = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + GLSettings.PathPointClouds;
             InitializeComponent();
 
             
@@ -91,7 +91,7 @@ namespace CharacterCreator
         }
         private void triangulate()
         {
-            this.openGLUC1.RemoveAllModels();
+            this.openGLUC1.RemoveAllPointClouds();
 
             PointCloud pc = faceMatcher.Humanoid.ToPointCloud();
             //pc.TriangulateVertices_Rednaxela(0.1f);

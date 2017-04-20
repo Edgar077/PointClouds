@@ -28,12 +28,12 @@ namespace UnitTestsOpenTK.Triangulation
 
              DelaunayTri delaunay = new DelaunayTri(myListVectors);
 
-             Model myModel = CreateModel("Cube Delaunay", pointCloudSource, delaunay.Faces.ListFaces);
-
-             ShowModel(myModel);
 
 
-         }
+            ShowPointCloud(pointCloudSource);
+
+
+        }
          [Test]
          public void Cube_DelaunayOLD_RandomPoints()
          {
@@ -46,12 +46,12 @@ namespace UnitTestsOpenTK.Triangulation
 
              DelaunayTri_Old delaunay = new DelaunayTri_Old(myListVectors);
 
-             Model myModel = CreateModel("Cube Delaunay", pointCloudSource, delaunay.Faces.ListFaces);
-
-             ShowModel(myModel);
 
 
-         }
+            ShowPointCloud(pointCloudSource);
+
+
+        }
          [Test]
          public void Cube_Voronoi_RandomPoints()
          {
@@ -64,12 +64,12 @@ namespace UnitTestsOpenTK.Triangulation
              DelaunayTri delaunay = new DelaunayTri();
              delaunay.Voronoi(myListVectors);
 
-             Model myModel = CreateModel("Cube Voronoi", pointCloudSource, delaunay.Faces.ListFaces);
-
-             ShowModel(myModel);
 
 
-         }
+            ShowPointCloud(pointCloudSource);
+
+
+        }
     
     }
 }

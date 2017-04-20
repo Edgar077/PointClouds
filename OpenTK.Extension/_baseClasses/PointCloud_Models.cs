@@ -28,21 +28,21 @@ namespace OpenTKExtension
         }
         public static PointCloud CreateCube_RegularGrid_Empty(float cubeSize, int numberOfPointsPerPlane)
         {
-            List<Vector3> listVectors = Example3DModels.Cube_RegularGrid_Empty_List(cubeSize, numberOfPointsPerPlane);
+            List<Vector3> listVectors = ExamplePointClouds.Cube_RegularGrid_Empty_List(cubeSize, numberOfPointsPerPlane);
             return FromListVector3(listVectors);
 
 
         }
         public static PointCloud CreateCube_Corners_CenteredAt0(float cubeSizeX)
         {
-            List<Vector3> listVectors = Example3DModels.Cuboid_Corners_CenteredAt0(cubeSizeX, cubeSizeX, cubeSizeX);
+            List<Vector3> listVectors = ExamplePointClouds.Cuboid_Corners_CenteredAt0(cubeSizeX, cubeSizeX, cubeSizeX);
 
             return FromListVector3(listVectors);
 
         }
         public static PointCloud CreateCube_Corners_StartAt0(float cubeSizeX)
         {
-            List<Vector3> listVectors = Example3DModels.Cuboid_Corners_CenteredAt0(cubeSizeX, cubeSizeX, cubeSizeX);
+            List<Vector3> listVectors = ExamplePointClouds.Cuboid_Corners_CenteredAt0(cubeSizeX, cubeSizeX, cubeSizeX);
             PointCloud pc = FromListVector3(listVectors);
             float shiftVectors = cubeSizeX / 2;
             pc.Translate(shiftVectors, shiftVectors, shiftVectors);
@@ -53,7 +53,7 @@ namespace OpenTKExtension
         public static PointCloud CreateCube_RandomPointsOnPlanes(float cubeSize, int numberOfRandomPoints)
         {
 
-            List<Vector3> points = Example3DModels.Cuboid_Corners_CenteredAt0(cubeSize, cubeSize, cubeSize);
+            List<Vector3> points = ExamplePointClouds.Cuboid_Corners_CenteredAt0(cubeSize, cubeSize, cubeSize);
 
             var r = new Random();
 

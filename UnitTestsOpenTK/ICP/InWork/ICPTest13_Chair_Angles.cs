@@ -23,12 +23,12 @@ namespace UnitTestsOpenTK.InWork
            
             this.icp.Reset_RealData();
 
-            Model model3DTarget = new Model(pathUnitTests + "\\G1.obj");
-            this.pointCloudTarget = model3DTarget.PointCloud;
+           
+            this.pointCloudTarget = new PointCloud(pathUnitTests + "\\G1.obj");
             pointCloudTarget = PCA.RotateToOriginAxes(pointCloudTarget);
 
-            Model model3DSource = new Model(pathUnitTests + "\\G2.obj");
-            this.pointCloudSource = model3DSource.PointCloud;
+           
+            this.pointCloudSource = new PointCloud(pathUnitTests + "\\G2.obj");
             pointCloudSource = PCA.RotateToOriginAxes(pointCloudSource);
 
             IterativeClosestPointTransform.Instance.ICPSettings.ICPVersion = ICP_VersionUsed.Zinsser;

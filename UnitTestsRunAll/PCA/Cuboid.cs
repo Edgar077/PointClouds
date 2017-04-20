@@ -23,7 +23,7 @@ namespace Automated.PrincipalComponentAnalysis
        
             
 
-            //this.pointCloudSource = Example3DModels.CreateCube_RegularGrid_Empty(1);
+            //this.pointCloudSource = ExamplePointClouds.CreateCube_RegularGrid_Empty(1);
             this.pointCloudSource = PointCloud.CreateCube_Corners_CenteredAt0(cubeSizeX);
 
             pointCloudSource.ResizeVerticesTo1();

@@ -73,47 +73,43 @@ namespace Automated.KDTree
 
             Assert.IsTrue(tree.MeanDistance == 0);
 
+            //--------------------------
+            GlobalVariables.ResetTime();
+            tree = new KDTreeEricRegina();
+            tree.TakenAlgorithm = taken;
+            tree.Build(pointCloudTarget);
+            GlobalVariables.ShowLastTimeSpan("Build EricRegina :");
+            tree.FindClosestPointCloud_NotParallel(pointCloudSource);
+            GlobalVariables.ShowLastTimeSpan("--> Find EricRegina                :");
+            tree.FindClosestPointCloud_Parallel(pointCloudSource);
+            GlobalVariables.ShowLastTimeSpan("--> Find EricRegina :");
 
+            Assert.IsTrue(tree.MeanDistance == 0);
 
 
 
         }
-        //private void PerformTest_Parallel(bool alsoBruteForce)
+        //private void EricReginaTest(bool taken)
         //{
-
-        //    if (alsoBruteForce)
-        //    {
-        //        //-------------------
-        //        GlobalVariables.ResetTime();
-        //        tree = new KDTreeBruteForce();
-        //        this.pointCloudResult = tree.BuildAndFindClosestPoints(pointCloudSource, pointCloudTarget, false);
-        //        GlobalVariables.ShowLastTimeSpan("BruteForce - Parallel:");
-        //        Assert.IsTrue(tree.MeanDistance == 0);
-        //    }
-
-
-        //    //--------------------------
-        //    GlobalVariables.ResetTime();
-        //    tree = new KDTreeJeremyC();
-        //    this.pointCloudResult = tree.BuildAndFindClosestPoints(pointCloudSource, pointCloudTarget, false);
-        //    GlobalVariables.ShowLastTimeSpan("JeremyC parallel:");
-        //    Assert.IsTrue(tree.MeanDistance == 0);
-
          
-
         //    //--------------------------
         //    GlobalVariables.ResetTime();
-        //    tree = new KDTreeKennell();
-        //    this.pointCloudResult = tree.BuildAndFindClosestPoints(pointCloudSource, pointCloudTarget, false);
-        //    GlobalVariables.ShowLastTimeSpan("Kennell parallel :");
-        //    Assert.IsTrue(tree.MeanDistance == 0);
-            
+        //    tree = new KDTreeEricRegina();
+        //    tree.TakenAlgorithm = taken;
+        //    tree.Build(pointCloudTarget);
+        //    GlobalVariables.ShowLastTimeSpan("Build EricRegina :");
+        //    tree.FindClosestPointCloud_NotParallel(pointCloudSource);
+        //    GlobalVariables.ShowLastTimeSpan("--> Find EricRegina                :");
+        //    tree.FindClosestPointCloud_Parallel(pointCloudSource);
+        //    GlobalVariables.ShowLastTimeSpan("--> Find EricRegina :");
 
+        //    Assert.IsTrue(tree.MeanDistance == 0);
 
 
 
 
         //}
+       
         [Test]
         public void Cube100()
         {

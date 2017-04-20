@@ -22,7 +22,7 @@ namespace OpenTKExtension
         public cVertex PrevVertex, NextVertex;
         public cPointi Point;
         public bool IsEar = false;
-        public int IndexInModel;
+        public int IndexInPointCloud;
         public cEdge Edge;
         public bool IsOnHull;		/* T iff point on hull. */
         public bool IsProcessed;
@@ -31,7 +31,7 @@ namespace OpenTKExtension
         {
             PrevVertex = NextVertex = null;
             Point = new cPointi();
-            IndexInModel = 0;
+            IndexInPointCloud = 0;
             Edge = null;
             IsOnHull = false;
             IsProcessed = false;
@@ -74,7 +74,7 @@ namespace OpenTKExtension
 
         public void PrintVertex3D()
         {
-            System.Diagnostics.Debug.WriteLine("V" + IndexInModel + " = (" + Point.X + ", " + Point.Y + ", " + Point.Z + "); ");
+            System.Diagnostics.Debug.WriteLine("V" + IndexInPointCloud + " = (" + Point.X + ", " + Point.Y + ", " + Point.Z + "); ");
         }
 
         public void PrintVertex3D(int k)

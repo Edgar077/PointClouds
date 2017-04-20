@@ -14,10 +14,17 @@ namespace OpenTKExtension
 
         public Face(List<Vector3> points)
         {
+
             this.pointCloud = new OpenTKExtension.PointCloud(points, null, null, null, null, null);
-            
+
         }
       
+        public void Update(List<Vector3> points)
+        {
+            this.pointCloud = new OpenTKExtension.PointCloud(points, null, null, null, null, null);
+            FillPointCloud();
+            FillIndexBuffer();
+        }
      
         public override void InitializeGL()
         {

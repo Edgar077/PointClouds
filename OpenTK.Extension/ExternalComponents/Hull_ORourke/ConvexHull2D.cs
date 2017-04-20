@@ -48,7 +48,7 @@ namespace OpenTKExtension
             v = list.head;
             for (i = 0; i < list.n; i++)
             {
-                v.IndexInModel = i;
+                v.IndexInPointCloud = i;
                 v = v.NextVertex;
             }
             //*********************
@@ -75,11 +75,11 @@ namespace OpenTKExtension
             /* Initialize stack. */
             top = new cVertexList();
             cVertex v1 = new cVertex(list.head.Point.X, list.head.Point.Y);
-            v1.IndexInModel = list.head.IndexInModel;
+            v1.IndexInPointCloud = list.head.IndexInPointCloud;
             v1.IsProcessed = list.head.IsProcessed;
 
             cVertex v2 = new cVertex(list.head.NextVertex.Point.X, list.head.NextVertex.Point.Y);
-            v2.IndexInModel = list.head.NextVertex.IndexInModel;
+            v2.IndexInPointCloud = list.head.NextVertex.IndexInPointCloud;
             v2.IsProcessed = list.head.NextVertex.IsProcessed;
 
 
@@ -93,7 +93,7 @@ namespace OpenTKExtension
             {
                 cVertex v3 = new cVertex(list.GetElement(i).Point.X, list.GetElement(i).Point.Y);
                 v3.IsProcessed = list.GetElement(i).IsProcessed;
-                v3.IndexInModel = list.GetElement(i).IndexInModel;
+                v3.IndexInPointCloud = list.GetElement(i).IndexInPointCloud;
 
                 if (v1.Point.Left(top.head.PrevVertex.Point, top.head.PrevVertex.PrevVertex.Point, v3.Point))
                 {
@@ -205,7 +205,7 @@ namespace OpenTKExtension
                 else
                 { // points are coincident 
 
-                    if (pi.IndexInModel > pj.IndexInModel)
+                    if (pi.IndexInPointCloud > pj.IndexInPointCloud)
                         pj.IsProcessed = true;
                     else
                         pi.IsProcessed = true;
@@ -244,11 +244,11 @@ namespace OpenTKExtension
             cVertex temp = new cVertex();
 
             temp = new cVertex(first.Point.X, first.Point.Y);
-            temp.IndexInModel = first.IndexInModel;
+            temp.IndexInPointCloud = first.IndexInPointCloud;
             temp.IsProcessed = first.IsProcessed;
 
-            list.ResetVertex(first, second.Point.X, second.Point.Y, second.IndexInModel, second.IsProcessed);
-            list.ResetVertex(second, temp.Point.X, temp.Point.Y, temp.IndexInModel, temp.IsProcessed);
+            list.ResetVertex(first, second.Point.X, second.Point.Y, second.IndexInPointCloud, second.IsProcessed);
+            list.ResetVertex(second, temp.Point.X, temp.Point.Y, temp.IndexInPointCloud, temp.IsProcessed);
 
         }
 

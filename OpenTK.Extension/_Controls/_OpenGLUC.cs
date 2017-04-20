@@ -83,9 +83,9 @@ namespace OpenTKExtension
         {
             //System.Drawing.Color color = System.Drawing.Color.Red;
 
-            //Model Model1 = Example3DModels.Sphere("Sphere", 2, 8, color, (System.Drawing.Bitmap)null);
-            //Model myModel = Model1.ToModel();
-            //ShowModel(myModel);
+            //PointCloud PointCloud1 = ExamplePointClouds.Sphere("Sphere", 2, 8, color, (System.Drawing.Bitmap)null);
+            //PointCloud myPointCloud = PointCloud1.ToPointCloud();
+            //ShowPointCloud(myPointCloud);
             
         }
 
@@ -96,20 +96,14 @@ namespace OpenTKExtension
         {
             string fileName = LoadFileDialog();
             PointCloud pc = PointCloud.FromObjFile(fileName);
-            //Model myModel = new Model(fileName);
+            //PointCloud myPointCloud = new PointCloud(fileName);
             pointCloudFirstAfterLoad = pc;
             //ShowPointCloud(pointCloudFirstAfterLoad);
             ShowPointCloud_ClearAllOthers(pointCloudFirstAfterLoad);
-            //ShowModel(myModel);
+            //ShowPointCloud(myPointCloud);
             
         }
-        //public void LoadModelFromFile(string fileName)
-        //{
-        //    Model myModel = new Model(fileName);
-        //    ShowPointCloud(myModel.PointCloud);
-        //    //ShowModel(myModel);
-
-        //}
+       
         public void LoadPointCloudFromFile(string fileName, bool clearOthers)
         {
             PointCloud pc = PointCloud.FromObjFile(fileName);
@@ -151,18 +145,7 @@ namespace OpenTKExtension
         private void comboModels_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.OGLControl.GLrender.SelectedModelIndex = comboModels.SelectedIndex - 1;
-            //if (comboModels.SelectedText == "All")
-            //{
-            //    comboCameraModel.SelectedText = "Model";
-
-            //}
-            //else
-            //{
-            //    comboCameraModel.SelectedItem = comboCameraModel.Items[0];
-            //    //comboCameraModel.SelectedIndex = 0;
-            //    //SelectedPointCloud
-            //}
-            //comboCameraModel.Invalidate();
+        
         }
 
         private void comboCameraModel_SelectedIndexChanged(object sender, EventArgs e)
@@ -291,7 +274,7 @@ namespace OpenTKExtension
 
         private void toolStripRemoveAllModelsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            RemoveAllModels();
+            RemoveAllPointClouds();
             this.glControl1.GLrender.ClearAllObjects();
 
             this.Refresh();
@@ -388,8 +371,8 @@ namespace OpenTKExtension
         private void convexHullToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            //int indexModel = comboModels.SelectedIndex;
-            //Model3D myModel = GLrender.Models3D[comboModels.SelectedIndex];
+            //int indexPointCloud = comboModels.SelectedIndex;
+            //Model3D myPointCloud = GLrender.Models3D[comboModels.SelectedIndex];
 
 
 
@@ -407,7 +390,7 @@ namespace OpenTKExtension
         {
 
 
-            //Model3D myModel = GLrender.Models3D[comboModels.SelectedIndex];
+            //Model3D myPointCloud = GLrender.Models3D[comboModels.SelectedIndex];
             //CheckNormals(myModel);
             //string path = AppDomain.CurrentDomain.BaseDirectory + "Models";
 
@@ -434,7 +417,7 @@ namespace OpenTKExtension
             //    showNormalsToolStripMenuItem.Text = "Show Normals";
             //    for (int i = 0; i < GLrender.Models3D.Count; i++ )
             //    {
-            //        Model3D myModel = GLrender.Models3D[i];
+            //        Model3D myPointCloud = GLrender.Models3D[i];
             //        myModel.Pointcloud.LinesNormals = null;
             //    }
 
@@ -461,7 +444,7 @@ namespace OpenTKExtension
         private void toolStripCalculateRegistration1_2_Click(object sender, EventArgs e)
         {
             registrationMatrix = this.OGLControl.CalculateRegistrationMatrix1_2();
-            registrationMatrix.Save(GLSettings.Path + GLSettings.PathModels, "registrationMatrix.txt");
+            registrationMatrix.Save(GLSettings.Path + GLSettings.PathPointClouds, "registrationMatrix.txt");
 
 
         }
@@ -470,7 +453,7 @@ namespace OpenTKExtension
             if (pointCloudFirstAfterLoad != null)
             {
                 registrationMatrix = this.OGLControl.CalculateRegistrationMatrix(this.pointCloudFirstAfterLoad);
-                registrationMatrix.Save(GLSettings.Path + GLSettings.PathModels, "registrationMatrix.txt");
+                registrationMatrix.Save(GLSettings.Path + GLSettings.PathPointClouds, "registrationMatrix.txt");
             }
             else
             {
@@ -481,7 +464,7 @@ namespace OpenTKExtension
         private void toolStripAlignUsingRegistrationMatrix_Click(object sender, EventArgs e)
         {
 
-            registrationMatrix.FromFile(GLSettings.Path + GLSettings.PathModels, "registrationMatrix.txt");
+            registrationMatrix.FromFile(GLSettings.Path + GLSettings.PathPointClouds, "registrationMatrix.txt");
             this.OGLControl.AlignFirstModelFromRegistratioMatrix(registrationMatrix);
             this.OGLControl.Refresh();
 
@@ -496,7 +479,7 @@ namespace OpenTKExtension
             ICPLib.IterativeClosestPointTransform icp = new ICPLib.IterativeClosestPointTransform();
             icp.ICPSettings.Prealign_PCA = true;
           
-            pTarget = icp.AlignCloudsFromDirectory_StartFirst(GLSettings.Path + GLSettings.PathModels + "\\Nick", 100);
+            pTarget = icp.AlignCloudsFromDirectory_StartFirst(GLSettings.Path + GLSettings.PathPointClouds + "\\Nick", 100);
 
             SaveResultCloudAndShow(pTarget);
 
@@ -509,12 +492,11 @@ namespace OpenTKExtension
         }
         private void testClouds_SecondIteration()
         {
-            
 
             this.Cursor = Cursors.WaitCursor;
 
             ICPLib.IterativeClosestPointTransform icp = new ICPLib.IterativeClosestPointTransform();
-            pTarget = icp.AlignCloudsFromDirectory_StartFirst(GLSettings.Path + GLSettings.PathModels + "\\Nick\\Result", 10);
+            pTarget = icp.AlignCloudsFromDirectory_StartFirst(GLSettings.Path + GLSettings.PathPointClouds + "\\Nick\\Result", 10);
             SaveResultCloudAndShow(pTarget);
 
             this.Cursor = Cursors.Default;
@@ -584,24 +566,24 @@ namespace OpenTKExtension
             //tabControlImages.SelectTab(0);
 
 
-            Model myModel1 = new Model(GLSettings.Path + GLSettings.PathModels, fileName1);
+            pSource = new PointCloud(GLSettings.Path + GLSettings.PathPointClouds, fileName1);
 
-            pSource = myModel1.PointCloud;
+           
             pointCloudFirstAfterLoad = pSource.Clone();
             //pSource.SetColor(new OpenTK.Vector3(0, 1, 0));
 
             pSource.Name = GLSettings.FileNamePointCloudLast1;
-            pSource.Path = GLSettings.Path + GLSettings.PathModels;
+            pSource.Path = GLSettings.Path + GLSettings.PathPointClouds;
             pSource.FileNameLong = pSource.Path + "\\" + pSource.Name;
 
 
 
-            Model myModel2 = new Model(GLSettings.Path + GLSettings.PathModels, fileName2);
+            pTarget = new PointCloud(GLSettings.Path + GLSettings.PathPointClouds, fileName2);
 
-            pTarget = myModel2.PointCloud;
+          
             //pTarget.SetColor(new OpenTK.Vector3(1, 1, 1));
             pTarget.Name = GLSettings.FileNamePointCloudLast2;
-            pTarget.Path = GLSettings.Path + GLSettings.PathModels;
+            pTarget.Path = GLSettings.Path + GLSettings.PathPointClouds;
             pTarget.FileNameLong = pTarget.Path + "\\" + pTarget.Name;
 
 
@@ -621,7 +603,7 @@ namespace OpenTKExtension
 
             SaveResultCloudAndShow(pointCloudResult);
             this.registrationMatrix = pca.Matrix;
-            registrationMatrix.Save(GLSettings.Path + GLSettings.PathModels, "registrationMatrix.txt");
+            registrationMatrix.Save(GLSettings.Path + GLSettings.PathPointClouds, "registrationMatrix.txt");
 
         }
         private void SaveResultCloudAndShow(PointCloud pointCloudResult)
@@ -690,7 +672,7 @@ namespace OpenTKExtension
             pointCloudResult.AddPointCloud(this.pTarget);
             SaveResultCloudAndShow(pointCloudResult);
             this.registrationMatrix = icp.Matrix;
-            registrationMatrix.Save(GLSettings.Path + GLSettings.PathModels, "registrationMatrix.txt");
+            registrationMatrix.Save(GLSettings.Path + GLSettings.PathPointClouds, "registrationMatrix.txt");
 
         }
 
@@ -718,13 +700,13 @@ namespace OpenTKExtension
                 //first iteration
                 if (pTarget == null)
                 {
-                    pTarget = PointCloud.FromObjFile(GLSettings.Path + GLSettings.PathModels, "Nick\\PointCloudSequence#" + (i).ToString() + ".obj");
+                    pTarget = PointCloud.FromObjFile(GLSettings.Path + GLSettings.PathPointClouds, "Nick\\PointCloudSequence#" + (i).ToString() + ".obj");
 
                 }
 
 
 
-                pSource = PointCloud.FromObjFile(GLSettings.Path + GLSettings.PathModels, "Nick\\PointCloudSequence#" + (i + 1).ToString() + ".obj");
+                pSource = PointCloud.FromObjFile(GLSettings.Path + GLSettings.PathPointClouds, "Nick\\PointCloudSequence#" + (i + 1).ToString() + ".obj");
 
                 //------------------
                 //ICP
@@ -739,7 +721,7 @@ namespace OpenTKExtension
 
 
                 //   this.registrationMatrix = icp.Matrix;
-                //   registrationMatrix.Save(GLSettings.Path + GLSettings.PathModels, "registrationMatrix.txt");
+                //   registrationMatrix.Save(GLSettings.Path + GLSettings.PathPointClouds, "registrationMatrix.txt");
 
 
             }
@@ -774,7 +756,7 @@ namespace OpenTKExtension
                 OpenTKExtension.Triangulation.Mesh m = OpenTKExtension.Triangulation.Mesh.Triangulate(pc, 6);
                 pc.CreateIndicesFromTriangles(m.Triangles);
 
-                RemoveAllModels();
+                RemoveAllPointClouds();
                 this.glControl1.GLrender.ClearAllObjects();
                 ShowPointCloud(pc);
 
@@ -798,7 +780,7 @@ namespace OpenTKExtension
                 //pc.Triangulate_KDTree(10);
                 pc.Triangulate25D(0.01f);
                 
-                RemoveAllModels();
+                RemoveAllPointClouds();
                 this.glControl1.GLrender.ClearAllObjects();
                 ShowPointCloud(pc);
 
@@ -822,7 +804,7 @@ namespace OpenTKExtension
                 PointCloud pointCloudClean = OpenTKExtension.Outliers.ByStandardDeviation(pc, thresholdNeighboursCount, thresholdDistance, out pcWithOutliersMarkedRed);
 
 
-                RemoveAllModels();
+                RemoveAllPointClouds();
                 this.glControl1.GLrender.ClearAllObjects();
                 ShowPointCloud(pcWithOutliersMarkedRed);
               
@@ -840,7 +822,7 @@ namespace OpenTKExtension
         }
         private void toolStripOutliersBatch_Click(object sender, EventArgs e)
         {
-            string directory = GLSettings.Path + GLSettings.PathModels + "\\Nick";
+            string directory = GLSettings.Path + GLSettings.PathPointClouds + "\\Nick";
             string pathResult = directory + "\\clean";
 
             string[] files = IOUtils.FileNamesSorted(directory, "*.obj");
@@ -878,7 +860,7 @@ namespace OpenTKExtension
         }
         private void toolStripTest1_Click_LoadCloud(object sender, EventArgs e)
         {
-            string directory = GLSettings.Path + GLSettings.PathModels + "\\Nick";
+            string directory = GLSettings.Path + GLSettings.PathPointClouds + "\\Nick";
           
             string[] files = IOUtils.FileNamesSorted(directory, "*.obj");
 
@@ -886,12 +868,12 @@ namespace OpenTKExtension
             for (int i = 0; i < files.Length; i++)
             {
                 LoadPointCloudFromFile(files[i], true);
-                //LoadModelFromFile(files[i]);
+                //LoadPointCloudFromFile(files[i]);
             }
             //for (int i = 0; i < 100; i++)
             //{
             //    LoadPointCloudFromFile(files[i], true);
-            //    //LoadModelFromFile(files[i]);
+            //    //LoadPointCloudFromFile(files[i]);
             //}
 
           
