@@ -95,6 +95,7 @@ namespace OpenTKExtension
         private void toolStripLoadPointCloud_Click(object sender, EventArgs e)
         {
             string fileName = LoadFileDialog();
+            if (string.IsNullOrWhiteSpace(fileName)) return;
             PointCloud pc = PointCloud.FromObjFile(fileName);
             //PointCloud myPointCloud = new PointCloud(fileName);
             pointCloudFirstAfterLoad = pc;

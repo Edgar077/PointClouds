@@ -886,7 +886,6 @@ namespace PointCloudScanner
             this.trackBarCutoffFar.ColorUp = colorPack12;
             this.trackBarCutoffFar.FloatValueFont = new System.Drawing.Font("Arial", 6F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.trackBarCutoffFar.FloatValueFontColor = System.Drawing.Color.Red;
-            this.trackBarCutoffFar.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.trackBarCutoffFar.Label = null;
             this.trackBarCutoffFar.LabelAlighnment = System.Drawing.StringAlignment.Center;
             this.trackBarCutoffFar.LabelFont = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Bold);
